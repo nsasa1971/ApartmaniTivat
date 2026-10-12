@@ -30,7 +30,7 @@ export const config = {
   //  - Web3Forms:  provider: 'web3forms', web3formsAccessKey: 'vaš-access-key'
   form: {
     provider: 'formspree', // 'formspree' | 'web3forms'
-    endpoint: '',
+    endpoint: 'https://formspree.io/f/mgaozble',
     web3formsAccessKey: '',
     minFillSeconds: 4, // zaštita od botova: brže slanje od ovoga se odbija
   },

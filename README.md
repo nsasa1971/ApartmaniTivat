@@ -52,7 +52,7 @@ Slanje se podešava u `content.js` → `config.form`:
 
 | Servis | Podešavanje |
 |---|---|
-| **Formspree** | napravi formu na formspree.io, upiši `provider: 'formspree'` i `endpoint: 'https://formspree.io/f/xxxxxxxx'` |
+| **Formspree** *(trenutno podešeno: `mgaozble`)* | napravi formu na formspree.io, upiši `provider: 'formspree'` i `endpoint: 'https://formspree.io/f/xxxxxxxx'` |
 | **Web3Forms** | upiši `provider: 'web3forms'` i `web3formsAccessKey: '<ključ>'` |
 | *(ništa)* | fallback: otvara se `mailto:` sa popunjenim telom poruke (potreban je pravi `contact.email`) |
 
