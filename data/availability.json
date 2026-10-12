@@ -1,0 +1,8 @@
+{
+  "_comment": "Rezervisano za kasnije (nije povezano sa sajtom u ovoj verziji). Ovde će ići zauzeti termini po apartmanu, ručno ili generisano iz iCal kalendara (Booking/Airbnb). Datumi su 'YYYY-MM-DD', odlazak je isključen.",
+  "updated": null,
+  "apartments": {
+    "apartman-1": { "booked": [] },
+    "apartman-2": { "booked": [] }
+  }
+}

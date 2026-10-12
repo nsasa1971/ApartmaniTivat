@@ -1,0 +1,108 @@
+// ============================================================
+//  Build skripta: iz assets/js/content.js generiše
+//   - SEO <head> (title, meta, canonical, Open Graph, JSON-LD) u index.html
+//   - prerender sadržaja (#app) u index.html
+//   - manifest.webmanifest, robots.txt, sitemap.xml
+//  Idempotentna je: menja samo delove između build:* markera.
+// ============================================================
+import { readFile, writeFile } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import * as c from '../assets/js/content.js';
+import { renderApp, hash, esc, isPlaceholder } from '../assets/js/render.js';
+
+const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const file = (p) => path.join(root, p);
+
+const base = c.site.url.replace(/\/+$/, '');
+const abs = (p) => `${base}/${p.replace(/^\/+/, '')}`;
+if (isPlaceholder(base)) {
+  console.warn('⚠  site.url u content.js je još placeholder – canonical, og:image i sitemap nisu pravi.');
+}
+
+// ---------- JSON-LD ----------
+const nonPlaceholder = (v) => (isPlaceholder(v) ? undefined : v);
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'LodgingBusiness',
+  name: c.site.brand,
+  description: c.site.description,
+  url: `${base}/`,
+  image: abs(c.site.ogImage),
+  telephone: c.contact.phone,
+  email: c.contact.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: c.contact.address,
+    addressLocality: c.contact.city,
+    addressCountry: c.contact.country,
+  },
+  sameAs: nonPlaceholder(c.social.instagram) ? [c.social.instagram] : undefined,
+  containsPlace: c.apartments.map((a) => ({
+    '@type': 'Apartment',
+    name: a.name,
+    description: a.description,
+  })),
+};
+const ld = JSON.stringify(jsonLd, null, 2).replace(/</g, '\\u003c');
+
+const head = `<title>${esc(c.site.title)}</title>
+  <meta name="description" content="${esc(c.site.description)}">
+  <meta name="theme-color" content="${esc(c.site.themeColor)}">
+  <link rel="canonical" href="${esc(base)}/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="${esc(c.site.locale)}">
+  <meta property="og:site_name" content="${esc(c.site.brand)}">
+  <meta property="og:title" content="${esc(c.site.title)}">
+  <meta property="og:description" content="${esc(c.site.ogDescription)}">
+  <meta property="og:url" content="${esc(base)}/">
+  <meta property="og:image" content="${esc(abs(c.site.ogImage))}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <script type="application/ld+json">
+${ld}
+  </script>`;
+
+// ---------- index.html ----------
+const replaceBlock = (html, name, inner) => {
+  const re = new RegExp(`(<!-- build:${name} -->)[\\s\\S]*?(<!-- /build:${name} -->)`);
+  if (!re.test(html)) throw new Error(`Marker build:${name} ne postoji u index.html`);
+  return html.replace(re, (_, a, b) => `${a}\n${inner}\n  ${b}`);
+};
+
+let html = await readFile(file('index.html'), 'utf8');
+const app = renderApp();
+html = replaceBlock(html, 'head', `  ${head}`);
+html = replaceBlock(html, 'app', `  <div id="app" data-hash="${hash(app)}">${app}  </div>`);
+await writeFile(file('index.html'), html);
+
+// ---------- manifest ----------
+const manifest = {
+  name: c.site.title,
+  short_name: c.site.brand,
+  start_url: './',
+  display: 'standalone',
+  background_color: '#ffffff',
+  theme_color: c.site.themeColor,
+  icons: [
+    { src: 'assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
+    { src: 'assets/img/icon-512.png', sizes: '512x512', type: 'image/png' },
+  ],
+};
+await writeFile(file('manifest.webmanifest'), JSON.stringify(manifest, null, 2) + '\n');
+
+// ---------- robots + sitemap ----------
+await writeFile(file('robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`);
+const urls = [`${base}/`, `${base}/${c.footer.privacyHref}`];
+await writeFile(
+  file('sitemap.xml'),
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
+    .map((u) => `  <url><loc>${esc(u)}</loc></url>`)
+    .join('\n')}\n</urlset>\n`
+);
+
+console.log('✓ meta, prerender, manifest, robots.txt i sitemap.xml generisani');
