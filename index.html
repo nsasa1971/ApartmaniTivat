@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[NAZIV BRENDA] – Apartmani u Tivtu</title>
+  <meta name="description" content="[KRATAK OPIS – 150 do 160 karaktera: apartmani za odmor u Tivtu, blizina mora, kapacitet, direktna rezervacija.]">
+  <link rel="canonical" href="https://[VAŠ-DOMEN]/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="[NAZIV BRENDA] – Apartmani u Tivtu">
+  <meta property="og:description" content="[KRATAK OPIS]">
+  <meta property="og:image" content="https://[VAŠ-DOMEN]/assets/img/og.jpg">
+  <link rel="icon" href="assets/img/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Spinnaker&display=swap" rel="stylesheet">
+
+  <!-- Tailwind (CDN za razvoj; Claude Code prebacuje na build – vidi prompt) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        container: { center: true, padding: '1rem' },
+        extend: {
+          colors: {
+            ink: '#191B18',          // glavni tekst, naslovi, dugmad
+            charcoal: '#404040',     // tamne sekcije
+            night: '#141513',        // footer
+            mist: '#EAEAEA',         // svetle sekcije
+            body: '#4E524C',         // tekst citata
+            shadow: '#555754',
+            midtone: '#9C9F9B',
+            forest: '#042E28',       // zeleni akcenat iz teme
+            btn: '#292829',          // dugme "Pretraži"
+            line: '#F1F1F1',         // ivice booking trake
+          },
+          fontFamily: {
+            display: ['Spinnaker', 'sans-serif'],
+            sans: ['Lato', 'sans-serif'],
+          },
+          maxWidth: { page: '1140px' },
+        },
+      },
+    };
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Spinnaker', sans-serif; line-height: 2; color: #191B18; }
+    .img-muted { filter: saturate(.18); transition: filter .4s ease; }
+    .group:hover .img-muted, .img-muted:hover { filter: saturate(1); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.is-visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+
+<body class="bg-white antialiased">
+
+  <!-- ============ HEADER ============ -->
+  <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
+    <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2">
+      <a href="#top" class="shrink-0" aria-label="[NAZIV BRENDA] – početna">
+        <img src="https://placehold.co/211x100/ffffff/191B18?text=LOGO" width="211" height="100" alt="[NAZIV BRENDA]" class="h-16 w-auto md:h-20">
+      </a>
+
+      <nav class="hidden lg:block" aria-label="Glavna navigacija">
+        <ul class="flex items-center">
+          <li><a href="#top" class="px-[13px] py-[11px] hover:opacity-60">Početna</a></li>
+          <li><a href="#smestaj" class="px-[13px] py-[11px] hover:opacity-60">Smeštaj</a></li>
+          <li><a href="#plaze" class="px-[13px] py-[11px] hover:opacity-60">Plaže</a></li>
+          <li><a href="#hrana" class="px-[13px] py-[11px] hover:opacity-60">Hrana</a></li>
+          <li><a href="#znamenitosti" class="px-[13px] py-[11px] hover:opacity-60">Znamenitosti</a></li>
+          <li><a href="#galerija" class="px-[13px] py-[11px] hover:opacity-60">Galerija</a></li>
+          <li><a href="#kontakt" class="px-[13px] py-[11px] hover:opacity-60">Kontakt</a></li>
+        </ul>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="https://instagram.com/[NALOG]" target="_blank" rel="noopener" aria-label="Instagram"
+           class="hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] text-white hover:opacity-90 sm:flex">
+          <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg>
+        </a>
+        <a href="#rezervacija" data-book-url class="bg-ink px-6 py-3 font-sans text-sm font-bold uppercase tracking-wide text-white transition hover:bg-charcoal">Rezerviši</a>
+        <button id="menu-toggle" class="lg:hidden" aria-label="Meni" aria-expanded="false" aria-controls="mobile-menu">
+          <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="Mobilna navigacija">
+      <ul class="mx-auto max-w-page divide-y divide-line px-4">
+        <li><a href="#top" class="block py-3">Početna</a></li>
+        <li><a href="#smestaj" class="block py-3">Smeštaj</a></li>
+        <li><a href="#plaze" class="block py-3">Plaže</a></li>
+        <li><a href="#hrana" class="block py-3">Hrana</a></li>
+        <li><a href="#znamenitosti" class="block py-3">Znamenitosti</a></li>
+        <li><a href="#galerija" class="block py-3">Galerija</a></li>
+        <li><a href="#kontakt" class="block py-3">Kontakt</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="relative flex min-h-[250px] items-center bg-cover bg-center py-12 md:min-h-[320px] md:pb-[130px] md:pt-[100px]"
+             style="background-image:url('https://placehold.co/1920x900/555754/ffffff?text=HERO+FOTOGRAFIJA')">
+      <div class="absolute inset-0 bg-[linear-gradient(112deg,#404040FA_100%,transparent_100%)] md:bg-[linear-gradient(90deg,#404040FA_2%,#F2295B00_42%)]"></div>
+
+      <div class="container relative max-w-page">
+        <div class="max-w-xl text-center text-white md:pl-3 md:pr-[70px] md:text-left">
+          <span class="mb-[30px] ml-10 hidden h-24 w-px bg-white/70 md:block"></span>
+          <p class="mb-4 text-lg md:text-xl">[Podnaslov – npr. Apartmani u Tivtu]</p>
+          <h1 class="mb-[30px] font-display text-[46px] leading-[65px] tracking-[1px] text-white md:text-[54px]">[NAZIV BRENDA]</h1>
+          <p class="text-base md:text-xl">[Jedna do dve rečenice o apartmanima: lokacija, atmosfera, kome su namenjeni. Tekst iz originala je potpuno zamenjen.]</p>
+        </div>
+
+        <!-- Booking traka -->
+        <form id="booking-form" class="mt-12 max-w-[1000px] rounded-[25px] bg-white p-3 text-ink shadow-xl md:rounded-[55px] md:px-5 md:py-2"
+              data-fallback-url="#rezervacija" novalidate>
+          <div class="grid gap-2 md:grid-cols-[1fr_1fr_1fr_auto] md:items-center">
+            <label class="flex items-center gap-3 rounded-full px-2 py-2">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#0E878C]/20 bg-[#0E878C]/10" aria-hidden="true">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>
+              </span>
+              <span class="flex flex-col">
+                <span class="text-sm font-bold leading-4 text-[#053133]">Dolazak</span>
+                <input type="date" name="checkin" id="checkin" class="bg-transparent text-sm text-[#053133]/60 outline-none" required>
+              </span>
+            </label>
+
+            <label class="flex items-center gap-3 rounded-full px-2 py-2">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#0E878C]/20 bg-[#0E878C]/10" aria-hidden="true">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>
+              </span>
+              <span class="flex flex-col">
+                <span class="text-sm font-bold leading-4 text-[#053133]">Odlazak</span>
+                <input type="date" name="checkout" id="checkout" class="bg-transparent text-sm text-[#053133]/60 outline-none" required>
+              </span>
+            </label>
+
+            <div class="flex items-center gap-3 rounded-full px-2 py-2">
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#0E878C]/20 bg-[#0E878C]/10" aria-hidden="true">
+                <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg>
+              </span>
+              <span class="flex flex-col">
+                <span class="text-sm font-bold leading-4 text-[#053133]">Gosti</span>
+                <span class="flex items-center gap-3 text-sm text-[#053133]/60">
+                  <button type="button" data-guests="-1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#053133] text-[#053133] leading-none" aria-label="Manje gostiju">−</button>
+                  <output id="guests-output" aria-live="polite">2</output>
+                  <button type="button" data-guests="1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#053133] text-[#053133] leading-none" aria-label="Više gostiju">+</button>
+                </span>
+              </span>
+              <input type="hidden" name="guests" id="guests" value="2">
+            </div>
+
+            <button type="submit" class="h-[52px] rounded-full bg-btn px-8 font-sans text-base font-bold text-white transition hover:bg-ink">Pretraži</button>
+          </div>
+          <p id="booking-error" class="hidden px-3 pt-1 text-sm text-red-600" role="alert"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- ============ UVOD (overlap slika + tekst) ============ -->
+    <section id="smestaj" class="overflow-hidden bg-mist py-10 md:mb-[200px] md:py-0">
+      <div class="container max-w-page">
+        <div class="grid items-center md:grid-cols-2">
+          <div class="reveal order-2 md:order-1 md:mb-[-130px] md:mt-[130px]">
+            <img src="https://placehold.co/605x806/9C9F9B/ffffff?text=FOTO+1" width="605" height="806" loading="lazy" alt="[Opis fotografije]"
+                 class="mx-auto w-[70%] md:mx-0 md:mr-[50px] md:w-[calc(100%-50px)]">
+          </div>
+          <div class="order-1 mb-6 text-center md:order-2 md:mb-0 md:pl-[50px] md:pt-20 md:text-left">
+            <h3 class="mb-[25px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">[Naslov sekcije]</h3>
+            <p class="mb-[30px] font-sans text-sm leading-loose text-ink md:text-lg">[Dva do tri rečenice o apartmanima – stil, komfor, pogled, kapacitet. Zameniti sopstvenim tekstom.]</p>
+            <a href="#rezervacija" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg">Saznaj više <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ GALERIJA ============ -->
+    <section id="galerija" class="md:pt-0">
+      <div class="container max-w-page">
+        <div class="grid grid-cols-2 gap-0 md:grid-cols-3" data-gallery>
+          <!-- ponoviti 6 puta; href = velika slika, img = thumbnail -->
+          <a href="https://placehold.co/1240x827/555754/ffffff?text=Galerija+1" class="group block overflow-hidden" data-lightbox>
+            <img src="https://placehold.co/394x394/9C9F9B/ffffff?text=1" width="394" height="394" loading="lazy" alt="[Opis 1]" class="img-muted aspect-square w-full object-cover">
+          </a>
+          <a href="https://placehold.co/1240x827/555754/ffffff?text=Galerija+2" class="group block overflow-hidden" data-lightbox>
+            <img src="https://placehold.co/394x394/9C9F9B/ffffff?text=2" width="394" height="394" loading="lazy" alt="[Opis 2]" class="img-muted aspect-square w-full object-cover">
+          </a>
+          <a href="https://placehold.co/1240x827/555754/ffffff?text=Galerija+3" class="group block overflow-hidden" data-lightbox>
+            <img src="https://placehold.co/394x394/9C9F9B/ffffff?text=3" width="394" height="394" loading="lazy" alt="[Opis 3]" class="img-muted aspect-square w-full object-cover">
+          </a>
+          <a href="https://placehold.co/1240x827/555754/ffffff?text=Galerija+4" class="group block overflow-hidden" data-lightbox>
+            <img src="https://placehold.co/394x394/9C9F9B/ffffff?text=4" width="394" height="394" loading="lazy" alt="[Opis 4]" class="img-muted aspect-square w-full object-cover">
+          </a>
+          <a href="https://placehold.co/1240x827/555754/ffffff?text=Galerija+5" class="group block overflow-hidden" data-lightbox>
+            <img src="https://placehold.co/394x394/9C9F9B/ffffff?text=5" width="394" height="394" loading="lazy" alt="[Opis 5]" class="img-muted aspect-square w-full object-cover">
+          </a>
+          <a href="https://placehold.co/1240x827/555754/ffffff?text=Galerija+6" class="group block overflow-hidden" data-lightbox>
+            <img src="https://placehold.co/394x394/9C9F9B/ffffff?text=6" width="394" height="394" loading="lazy" alt="[Opis 6]" class="img-muted aspect-square w-full object-cover">
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TEKST + SLIKA (svetla) ============ -->
+    <section class="py-[50px] md:py-[150px] md:pb-[150px] md:pt-[170px]">
+      <div class="container max-w-page">
+        <div class="grid items-center gap-8 md:grid-cols-2">
+          <div class="reveal text-center md:pr-[50px] md:text-left">
+            <h3 class="mb-[30px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">[Naslov – npr. Mir i privatnost]</h3>
+            <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">[Dve rečenice – npr. opis lokacije, terase, pogleda i kapaciteta (do X osoba).]</p>
+            <a href="#rezervacija" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-60 md:text-lg">Saznaj više <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="reveal md:p-[10px] md:pl-[60px]">
+            <img src="https://placehold.co/1240x827/9C9F9B/ffffff?text=FOTO+2" width="1240" height="827" loading="lazy" alt="[Opis]" class="w-full">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ UTISCI GOSTIJU ============ -->
+    <section class="relative bg-charcoal py-[25px] md:py-[100px]">
+      <div class="absolute inset-0 bg-[#EBEBEB]"></div>
+      <div class="container relative max-w-page">
+        <div class="grid gap-6 md:grid-cols-2 md:gap-10">
+          <!-- ponoviti karticu -->
+          <article class="reveal bg-white p-4 md:mx-0 md:p-[60px]">
+            <h3 class="mb-5 font-display text-[23px] leading-10 text-ink">[Naslov utiska]</h3>
+            <div class="mb-3 flex gap-1 text-[#e0b84a]" role="img" aria-label="5 od 5 zvezdica">★★★★★</div>
+            <p class="font-sans text-base italic leading-8 text-body">[Citat gosta – 2 do 4 rečenice. Koristiti samo prave recenzije uz dozvolu gosta.]</p>
+            <div class="mt-6 flex items-center gap-4">
+              <img src="https://placehold.co/80x80/EAEAEA/9C9F9B?text=%F0%9F%91%A4" width="48" height="48" loading="lazy" alt="" class="h-12 w-12 rounded-full object-cover">
+              <span class="font-display text-[22px] text-ink">[Ime gosta]</span>
+            </div>
+          </article>
+
+          <article class="reveal bg-white p-4 md:p-[60px]">
+            <h3 class="mb-5 font-display text-[23px] leading-10 text-ink">[Naslov utiska]</h3>
+            <div class="mb-3 flex gap-1 text-[#e0b84a]" role="img" aria-label="5 od 5 zvezdica">★★★★★</div>
+            <p class="font-sans text-base italic leading-8 text-body">[Citat gosta – 2 do 4 rečenice.]</p>
+            <div class="mt-6 flex items-center gap-4">
+              <img src="https://placehold.co/80x80/EAEAEA/9C9F9B?text=%F0%9F%91%A4" width="48" height="48" loading="lazy" alt="" class="h-12 w-12 rounded-full object-cover">
+              <span class="font-display text-[22px] text-ink">[Ime gosta]</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TAMNA SEKCIJA (tekst + slika sa ofsetom) ============ -->
+    <section class="py-[30px] md:py-[100px]">
+      <div class="container max-w-page">
+        <div class="grid items-center bg-charcoal md:grid-cols-2">
+          <div class="reveal p-[30px] text-center text-white md:py-[67px] md:pl-[50px] md:pr-[35px] md:text-left">
+            <h3 class="mb-[25px] font-display text-[25px] leading-[39px] text-white md:text-[30px]">[Naslov – npr. Odmor na dva koraka od mora]</h3>
+            <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">[Dve rečenice – npr. za koga je smeštaj idealan i šta je u blizini.]</p>
+            <a href="#plaze" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-70 md:text-lg">Saznaj više <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="reveal p-5 md:p-0">
+            <img src="https://placehold.co/2500x1667/9C9F9B/ffffff?text=FOTO+3" width="2500" height="1667" loading="lazy" alt="[Opis]"
+                 class="w-full object-cover md:ml-[50px] md:-my-[50px] md:h-[415px] md:w-[calc(100%-50px)] md:pt-[78px]">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PLAŽE (kartice) ============ -->
+    <section id="plaze" class="mb-[50px] bg-mist py-[50px] md:mb-[160px] md:pb-[100px] md:pt-[100px]">
+      <div class="container max-w-page">
+        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">Plaže koje vredi posetiti</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          <!-- ponoviti karticu -->
+          <a href="#" class="group reveal block">
+            <img src="https://placehold.co/1024x768/9C9F9B/ffffff?text=PLAZA+1" width="1024" height="768" loading="lazy" alt="[Naziv plaže]" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">[Naziv plaže 1]</p>
+          </a>
+          <a href="#" class="group reveal block">
+            <img src="https://placehold.co/1024x768/9C9F9B/ffffff?text=PLAZA+2" width="1024" height="768" loading="lazy" alt="[Naziv plaže]" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">[Naziv plaže 2]</p>
+          </a>
+          <a href="#" class="group reveal block">
+            <img src="https://placehold.co/1024x768/9C9F9B/ffffff?text=PLAZA+3" width="1024" height="768" loading="lazy" alt="[Naziv plaže]" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">[Naziv plaže 3]</p>
+          </a>
+        </div>
+
+        <!-- Opciono: isti obrazac za Hranu i Znamenitosti (u originalu skriveno) -->
+        <div id="hrana" class="hidden"></div>
+        <div id="znamenitosti" class="hidden"></div>
+      </div>
+    </section>
+
+    <!-- ============ REZERVACIJA / KONTAKT ============ -->
+    <section id="rezervacija" class="container max-w-page pb-12 text-center">
+      <h2 class="mb-4 font-display text-[30px] md:text-[46px]">[Naslov poziva na rezervaciju]</h2>
+      <p class="mx-auto mb-6 max-w-xl font-sans text-lg">[Kratak tekst – direktna rezervacija, najbolja cena, odgovor u roku od X sati.]</p>
+      <a href="#" data-book-url class="inline-block bg-ink px-[90px] py-5 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal">Rezerviši direktno</a>
+    </section>
+
+    <!-- ============ MAPA ============ -->
+    <section aria-label="Lokacija" class="relative z-[1]">
+      <iframe title="Mapa – Tivat" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              class="block h-[440px] w-full border-0 md:h-[440px]"
+              src="https://www.google.com/maps?q=Tivat,Montenegro&output=embed"></iframe>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer id="kontakt" class="bg-night text-white">
+    <div class="container max-w-page py-16">
+      <div class="grid gap-10 text-center md:grid-cols-4 md:text-left">
+        <div>
+          <h5 class="mb-4 font-display text-[26px] text-white">O nama</h5>
+          <p class="font-sans text-sm leading-7 text-white/80">[Kratak opis brenda – 2 do 3 rečenice.]</p>
+        </div>
+        <ul class="font-sans text-sm leading-8 text-white/80">
+          <li><a href="#top" class="hover:text-white">Početna</a></li>
+          <li><a href="#smestaj" class="hover:text-white">Smeštaj</a></li>
+          <li><a href="#plaze" class="hover:text-white">Plaže</a></li>
+        </ul>
+        <ul class="font-sans text-sm leading-8 text-white/80">
+          <li><a href="#hrana" class="hover:text-white">Hrana</a></li>
+          <li><a href="#znamenitosti" class="hover:text-white">Znamenitosti</a></li>
+          <li><a href="#kontakt" class="hover:text-white">Kontakt</a></li>
+        </ul>
+        <div class="flex flex-col items-center gap-4 md:items-start">
+          <h5 class="font-display text-[26px] text-white">Pratite nas</h5>
+          <a href="https://instagram.com/[NALOG]" target="_blank" rel="noopener" aria-label="Instagram"
+             class="flex h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] hover:opacity-90">
+            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg>
+          </a>
+          <a href="#" data-book-url class="bg-white px-8 py-3 font-sans text-sm font-bold uppercase text-ink transition hover:bg-mist">Rezerviši</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-white/10">
+      <div class="container flex max-w-page flex-col items-center justify-between gap-2 py-5 font-sans text-sm text-white/60 md:flex-row">
+        <a href="/politika-privatnosti" class="hover:text-white">Politika privatnosti</a>
+        <p>© <span data-year>2026</span> [NAZIV BRENDA]. Sva prava zadržana.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Galerija">
+    <button id="lb-close" class="absolute right-5 top-5 text-4xl leading-none text-white" aria-label="Zatvori">×</button>
+    <button id="lb-prev" class="absolute left-4 text-5xl text-white" aria-label="Prethodna">‹</button>
+    <img id="lb-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] object-contain">
+    <button id="lb-next" class="absolute right-4 text-5xl text-white" aria-label="Sledeća">›</button>
+  </div>
+
+  <!-- Povratak na vrh -->
+  <a id="scroll-up" href="#top" aria-label="Na vrh"
+     class="fixed bottom-5 right-5 z-40 hidden h-11 w-11 items-center justify-center bg-ink text-white hover:bg-charcoal">↑</a>
+
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
