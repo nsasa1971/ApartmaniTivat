@@ -24,17 +24,11 @@ jobs:
           node-version: 22
           cache: npm
       - run: npm ci
-      - run: npm run build
-      - name: Sastavi folder za objavu
-        run: |
-          mkdir _site
-          cp index.html politika-privatnosti.html manifest.webmanifest robots.txt sitemap.xml _site/
-          cp -r assets data _site/
-          [ -f CNAME ] && cp CNAME _site/ || true
+      - run: npm run build:site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: dist
 
   deploy:
     needs: build

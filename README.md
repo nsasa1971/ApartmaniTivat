@@ -71,7 +71,11 @@ Slanje se podešava u `content.js` → `config.form`:
 
 Zaštita od botova: skriveno honeypot polje i minimalno vreme popunjavanja (`minFillSeconds`). Validacija i poruke grešaka su na srpskom (`assets/js/booking.js`). Nema sopstvenog backenda.
 
-## Deploy (GitHub Pages)
+## Deploy (Netlify)
+
+`netlify.toml` je podešen: build komanda `npm run build:site`, objavljuje se samo folder `dist/` (index, stranica politike, `assets`, `data`, sitemap, robots, manifest). U Netlify-u ne treba ništa ručno podešavati osim da production grana bude `main`. Domen: Netlify → Domain management → Add a domain, a `site.url` u `content.js` postaviti na isti domen.
+
+## Deploy (GitHub Pages, alternativa)
 
 Workflow `.github/workflows/deploy.yml` na svaki push na `main` pokreće `npm ci && npm run build` i objavljuje sajt na GitHub Pages.
 

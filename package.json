@@ -9,7 +9,9 @@
     "build:css": "tailwindcss -c tailwind.config.cjs -i src/input.css -o assets/css/style.css --minify",
     "build:meta": "node scripts/build-meta.mjs",
     "build": "npm run build:css && npm run build:meta",
-    "images": "node scripts/optimize-images.mjs"
+    "images": "node scripts/optimize-images.mjs",
+    "package": "node scripts/package-site.mjs",
+    "build:site": "npm run build && npm run package"
   },
   "devDependencies": {
     "sharp": "^0.35.5",
