@@ -57,6 +57,14 @@ Skripta rekurzivno smanjuje najdužu stranicu na 1600 px (po potrebi `--max`), s
 
 Zatim iz `optimized/` izaberi slike, preimenuj ih prema tabeli u `assets/img/README.md` i kopiraj u `assets/img/`. Cilj je do ~250 KB po slici.
 
+### Galerija i hero
+
+```bash
+npm run gallery -- putanja/do/foldera-sa-6-slika     # pravi gallery-1..6.jpg (1240×827) i thumb-1..6.jpg (394×394) u assets/img
+npm run images -- folder-sa-hero-slikom hero-gotovo --crop 1920x900   # zatim preimenuj u hero.jpg
+```
+Slike u folderu nazovi `1.jpg` … `6.jpg` da odrediš redoslijed u galeriji. Posle kopiranja pokreni `npm run build`.
+
 ## Forma za upit (`#rezervacija`)
 
 Rezervacije idu preko sopstvene forme za upit. Booking traka u hero sekciji na „Pretraži“ skroluje do forme i popunjava dolazak, odlazak i broj gostiju.
