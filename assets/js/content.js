@@ -135,11 +135,15 @@ export const pricing = {
   disclaimer: 'Cijene su informativne. Tačnu ponudu pošaljite preko forme za upit.',
 };
 
-// ---------- Galerija (6 slika; thumb 394×394, full 1240×827) ----------
-export const gallery = [1, 2, 3, 4, 5, 6].map((n) => ({
+// ---------- Galerija (thumb 394×394, full 1240×827) ----------
+// Broj slika: promijeni GALLERY_COUNT i pokreni `npm run gallery` sa istim brojem slika.
+// Opise (alt) upiši u galleryAlts po redoslijedu slika, npr. 'Dnevna soba – Holiday home Olive'.
+const GALLERY_COUNT = 15;
+const galleryAlts = [];
+export const gallery = Array.from({ length: GALLERY_COUNT }, (_, i) => i + 1).map((n) => ({
   full: `assets/img/gallery-${n}.jpg`,
   thumb: `assets/img/thumb-${n}.jpg`,
-  alt: `[Opis ${n}]`,
+  alt: galleryAlts[n - 1] ?? `[Opis ${n}]`,
 }));
 
 // ---------- Tekst + slika (svijetla sekcija) ----------

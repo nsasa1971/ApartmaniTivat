@@ -60,10 +60,10 @@ Zatim iz `optimized/` izaberi slike, preimenuj ih prema tabeli u `assets/img/REA
 ### Galerija i hero
 
 ```bash
-npm run gallery -- putanja/do/foldera-sa-6-slika     # pravi gallery-1..6.jpg (1240×827) i thumb-1..6.jpg (394×394) u assets/img
+npm run gallery -- putanja/do/foldera-sa-slikama     # pravi gallery-N.jpg (1240×827) i thumb-N.jpg (394×394) u assets/img
 npm run images -- folder-sa-hero-slikom hero-gotovo --crop 1920x900   # zatim preimenuj u hero.jpg
 ```
-Slike u folderu nazovi `1.jpg` … `6.jpg` da odrediš redoslijed u galeriji. Posle kopiranja pokreni `npm run build`.
+Slike u folderu nazovi `1.jpg`, `2.jpg`, … da odrediš redoslijed u galeriji; njihov broj mora odgovarati `GALLERY_COUNT` u `assets/js/content.js` (trenutno 15). Posle kopiranja pokreni `npm run build`.
 
 ## Forma za upit (`#rezervacija`)
 
