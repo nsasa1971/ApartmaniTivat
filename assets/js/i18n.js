@@ -16,7 +16,8 @@ export const languages = [
 export const i18n = {
   sr: {
     'nav.home': 'Početna',
-    'nav.stay': 'Smeštaj',
+    'nav.stay': 'Apartmani',
+    'nav.prices': 'Cijene',
     'nav.beaches': 'Plaže',
     'nav.food': 'Hrana',
     'nav.sights': 'Znamenitosti',
@@ -41,7 +42,8 @@ export const i18n = {
   },
   en: {
     'nav.home': 'Home',
-    'nav.stay': 'Accommodation',
+    'nav.stay': 'Apartments',
+    'nav.prices': 'Prices',
     'nav.beaches': 'Beaches',
     'nav.food': 'Food',
     'nav.sights': 'Sights',
@@ -66,7 +68,8 @@ export const i18n = {
   },
   ru: {
     'nav.home': 'Главная',
-    'nav.stay': 'Размещение',
+    'nav.stay': 'Апартаменты',
+    'nav.prices': 'Цены',
     'nav.beaches': 'Пляжи',
     'nav.food': 'Еда',
     'nav.sights': 'Достопримечательности',

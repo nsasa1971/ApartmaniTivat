@@ -29,8 +29,8 @@ const jsonLd = {
   description: c.site.description,
   url: `${base}/`,
   image: abs(c.site.ogImage),
-  telephone: c.contact.phone,
-  email: c.contact.email,
+  telephone: nonPlaceholder(c.contact.phone),
+  email: nonPlaceholder(c.contact.email),
   address: {
     '@type': 'PostalAddress',
     streetAddress: c.contact.address,
@@ -41,7 +41,8 @@ const jsonLd = {
   containsPlace: c.apartments.map((a) => ({
     '@type': 'Apartment',
     name: a.name,
-    description: a.description,
+    description: a.summary,
+    floorSize: a.area ? { '@type': 'QuantitativeValue', value: parseFloat(a.area), unitCode: 'MTK' } : undefined,
   })),
 };
 const ld = JSON.stringify(jsonLd, null, 2).replace(/</g, '\\u003c');

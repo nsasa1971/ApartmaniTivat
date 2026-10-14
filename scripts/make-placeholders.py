@@ -36,6 +36,11 @@ for i in range(1, 7):
     make(f'thumb-{i}.jpg', 394, 394, '#9C9F9B', '#ffffff', str(i))
 for i in range(1, 4):
     make(f'beach-{i}.jpg', 1024, 768, '#9C9F9B', '#ffffff', f'PLAZA {i}')
+for i in range(1, 4):
+    make(f'apartman-{i}.jpg', 1024, 768, '#9C9F9B', '#ffffff', f'APARTMAN {i}')
+    make(f'sight-{i}.jpg', 1024, 768, '#9C9F9B', '#ffffff', f'ZNAMENITOST {i}')
+for i in range(1, 6):
+    make(f'food-{i}.jpg', 1024, 768, '#9C9F9B', '#ffffff', f'JELO {i}')
 make('og.jpg', 1200, 630, '#404040', '#ffffff', 'OG 1200x630')
 make('avatar.png', 80, 80, '#EAEAEA', '#9C9F9B', '?', 'PNG')
 make('logo.png', 211, 100, '#ffffff', '#191B18', 'LOGO', 'PNG')

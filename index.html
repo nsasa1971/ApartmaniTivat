@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- build:head -->
-  <title>[NAZIV BRENDA] – Apartmani u Tivtu</title>
-  <meta name="description" content="[KRATAK OPIS – 150 do 160 karaktera: apartmani za odmor u Tivtu, blizina mora, kapacitet, direktna rezervacija.]">
+  <title>Tivat Garden Homes – Apartmani u Tivtu</title>
+  <meta name="description" content="Holiday home Olive, Lavanda i Lemoni u Tivtu: mediteranski ambijent među maslinama, plaža oko 300 m, Porto Montenegro oko 1 km. Pošaljite upit za boravak.">
   <meta name="theme-color" content="#191B18">
   <link rel="canonical" href="https://[VAŠ-DOMEN]/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="sr_ME">
-  <meta property="og:site_name" content="[NAZIV BRENDA]">
-  <meta property="og:title" content="[NAZIV BRENDA] – Apartmani u Tivtu">
-  <meta property="og:description" content="[KRATAK OPIS]">
+  <meta property="og:site_name" content="Tivat Garden Homes">
+  <meta property="og:title" content="Tivat Garden Homes – Apartmani u Tivtu">
+  <meta property="og:description" content="Apartmani u Tivtu: Holiday home Olive, Lavanda i Lemoni – mediteranski ambijent među maslinama.">
   <meta property="og:url" content="https://[VAŠ-DOMEN]/">
   <meta property="og:image" content="https://[VAŠ-DOMEN]/assets/img/og.jpg">
   <meta property="og:image:width" content="1200">
@@ -25,28 +25,47 @@
 {
   "@context": "https://schema.org",
   "@type": "LodgingBusiness",
-  "name": "[NAZIV BRENDA]",
-  "description": "[KRATAK OPIS – 150 do 160 karaktera: apartmani za odmor u Tivtu, blizina mora, kapacitet, direktna rezervacija.]",
+  "name": "Tivat Garden Homes",
+  "description": "Holiday home Olive, Lavanda i Lemoni u Tivtu: mediteranski ambijent među maslinama, plaža oko 300 m, Porto Montenegro oko 1 km. Pošaljite upit za boravak.",
   "url": "https://[VAŠ-DOMEN]/",
   "image": "https://[VAŠ-DOMEN]/assets/img/og.jpg",
-  "telephone": "[+382 XX XXX XXX]",
-  "email": "[email@vas-domen.me]",
+  "telephone": "+38269506646",
   "address": {
     "@type": "PostalAddress",
-    "streetAddress": "[Ulica i broj]",
+    "streetAddress": "Bonići I bb",
     "addressLocality": "Tivat",
     "addressCountry": "ME"
   },
   "containsPlace": [
     {
       "@type": "Apartment",
-      "name": "[Apartman 1]",
-      "description": "[Kratak opis apartmana 1]"
+      "name": "Holiday home Olive",
+      "description": "Dvije odvojene spavaće sobe, svaka sa bračnim krevetom. Dnevna soba sa sofom, potpuno opremljena kuhinja i kupatilo.",
+      "floorSize": {
+        "@type": "QuantitativeValue",
+        "value": 50,
+        "unitCode": "MTK"
+      }
     },
     {
       "@type": "Apartment",
-      "name": "[Apartman 2]",
-      "description": "[Kratak opis apartmana 2]"
+      "name": "Holiday home Lavanda",
+      "description": "Jedna velika spavaća soba sa bračnim krevetom i sofom. Dnevna soba sa velikom ugaonom garniturom na razvlačenje, potpuno opremljena kuhinja i kupatilo.",
+      "floorSize": {
+        "@type": "QuantitativeValue",
+        "value": 60,
+        "unitCode": "MTK"
+      }
+    },
+    {
+      "@type": "Apartment",
+      "name": "Holiday home Lemoni",
+      "description": "Jedna velika spavaća soba sa bračnim krevetom i sofom. Dnevna soba sa velikom ugaonom garniturom na razvlačenje, potpuno opremljena kuhinja i kupatilo.",
+      "floorSize": {
+        "@type": "QuantitativeValue",
+        "value": 60,
+        "unitCode": "MTK"
+      }
     }
   ]
 }
@@ -65,30 +84,33 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="1pray4s">
+  <div id="app" data-hash="1mamq3g">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
-    <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2">
-      <a href="#top" class="shrink-0" aria-label="[NAZIV BRENDA]">
-        <img src="assets/img/logo.png" width="211" height="100" alt="[NAZIV BRENDA]" class="h-16 w-auto md:h-20">
+    <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
+      <a href="#top" class="shrink-0" aria-label="Tivat Garden Homes">
+        <img src="assets/img/logo.png" width="211" height="100" alt="Tivat Garden Homes" class="h-16 w-auto md:h-20 lg:h-16 xl:h-20">
       </a>
 
       <nav class="hidden lg:block" aria-label="Glavna navigacija">
         <ul class="flex items-center">
-          <li><a href="#top" data-i18n="nav.home" class="px-[13px] py-[11px] hover:opacity-60">Početna</a></li>
-          <li><a href="#smestaj" data-i18n="nav.stay" class="px-[13px] py-[11px] hover:opacity-60">Smeštaj</a></li>
-          <li><a href="#plaze" data-i18n="nav.beaches" class="px-[13px] py-[11px] hover:opacity-60">Plaže</a></li>
-          <li><a href="#galerija" data-i18n="nav.gallery" class="px-[13px] py-[11px] hover:opacity-60">Galerija</a></li>
-          <li><a href="#kontakt" data-i18n="nav.contact" class="px-[13px] py-[11px] hover:opacity-60">Kontakt</a></li>
+          <li><a href="#top" data-i18n="nav.home" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Početna</a></li>
+          <li><a href="#apartmani" data-i18n="nav.stay" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Apartmani</a></li>
+          <li><a href="#cijene" data-i18n="nav.prices" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Cijene</a></li>
+          <li><a href="#galerija" data-i18n="nav.gallery" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Galerija</a></li>
+          <li><a href="#plaze" data-i18n="nav.beaches" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Plaže</a></li>
+          <li><a href="#znamenitosti" data-i18n="nav.sights" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Znamenitosti</a></li>
+          <li><a href="#hrana" data-i18n="nav.food" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Hrana</a></li>
+          <li><a href="#kontakt" data-i18n="nav.contact" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Kontakt</a></li>
         </ul>
       </nav>
 
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 lg:gap-3 xl:gap-4">
         <div class="hidden items-center lg:flex" role="group" data-i18n-aria="aria.language" aria-label="Jezik">
           <button type="button" data-lang="sr" aria-pressed="true" lang="sr" title="Srpski" class="px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">SR</button><button type="button" data-lang="en" aria-pressed="false" lang="en" title="English" class="px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">EN</button><button type="button" data-lang="ru" aria-pressed="false" lang="ru" title="Русский" class="px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">RU</button>
         </div>
-        <a href="https://instagram.com/[NALOG]" target="_blank" rel="noopener" aria-label="Instagram" class="hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] text-white hover:opacity-90 sm:flex"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg></a>
+        <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" aria-label="Instagram" class="hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] text-white hover:opacity-90 sm:flex lg:hidden xl:flex"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg></a>
         <a href="#rezervacija" data-i18n="btn.book" class="bg-ink px-6 py-3 font-sans text-sm font-bold uppercase tracking-wide text-white transition hover:bg-charcoal">Rezerviši</a>
         <button id="menu-toggle" type="button" class="lg:hidden" data-i18n-aria="aria.menu" aria-label="Meni" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -99,9 +121,12 @@
     <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="Mobilna navigacija">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
         <li><a href="#top" data-i18n="nav.home" class="block py-3">Početna</a></li>
-        <li><a href="#smestaj" data-i18n="nav.stay" class="block py-3">Smeštaj</a></li>
-        <li><a href="#plaze" data-i18n="nav.beaches" class="block py-3">Plaže</a></li>
+        <li><a href="#apartmani" data-i18n="nav.stay" class="block py-3">Apartmani</a></li>
+        <li><a href="#cijene" data-i18n="nav.prices" class="block py-3">Cijene</a></li>
         <li><a href="#galerija" data-i18n="nav.gallery" class="block py-3">Galerija</a></li>
+        <li><a href="#plaze" data-i18n="nav.beaches" class="block py-3">Plaže</a></li>
+        <li><a href="#znamenitosti" data-i18n="nav.sights" class="block py-3">Znamenitosti</a></li>
+        <li><a href="#hrana" data-i18n="nav.food" class="block py-3">Hrana</a></li>
         <li><a href="#kontakt" data-i18n="nav.contact" class="block py-3">Kontakt</a></li>
         <li class="flex items-center gap-1 py-2" role="group" data-i18n-aria="aria.language" aria-label="Jezik">
           <button type="button" data-lang="sr" aria-pressed="true" lang="sr" title="Srpski" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">SR</button><button type="button" data-lang="en" aria-pressed="false" lang="en" title="English" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">EN</button><button type="button" data-lang="ru" aria-pressed="false" lang="ru" title="Русский" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">RU</button>
@@ -120,9 +145,9 @@
       <div class="container relative max-w-page">
         <div class="max-w-xl text-center text-white md:pl-3 md:pr-[70px] md:text-left">
           <span class="mb-[30px] ml-10 hidden h-24 w-px bg-white/70 md:block" aria-hidden="true"></span>
-          <p class="mb-4 text-lg md:text-xl">[Podnaslov – npr. Apartmani u Tivtu]</p>
-          <h1 class="mb-[30px] font-display text-[46px] leading-[65px] tracking-[1px] text-white md:text-[54px]">[NAZIV BRENDA]</h1>
-          <p class="text-base md:text-xl">[Jedna do dve rečenice o apartmanima: lokacija, atmosfera, kome su namenjeni. Tekst iz originala je potpuno zamenjen.]</p>
+          <p class="mb-4 text-lg md:text-xl">Apartmani u Tivtu</p>
+          <h1 class="mb-[30px] font-display text-[46px] leading-[65px] tracking-[1px] text-white md:text-[54px]">Tivat Garden Homes</h1>
+          <p class="text-base md:text-xl">Holiday home Olive, Holiday home Lavanda i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.</p>
         </div>
 
         <!-- Booking traka: popunjava formu za upit (#rezervacija) -->
@@ -173,11 +198,87 @@
                  class="mx-auto w-[70%] md:mx-0 md:mr-[50px] md:w-[calc(100%-50px)]">
           </div>
           <div class="order-1 mb-6 text-center md:order-2 md:mb-0 md:pl-[50px] md:pt-20 md:text-left">
-            <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">[Naslov sekcije]</h2>
-            <p class="mb-[30px] font-sans text-sm leading-loose text-ink md:text-lg">[Dva do tri rečenice o apartmanima – stil, komfor, pogled, kapacitet. Zameniti sopstvenim tekstom.]</p>
-            <a href="#rezervacija" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
+            <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">Odlična lokacija i dobra povezanost</h2>
+            <p class="mb-[30px] font-sans text-sm leading-loose text-ink md:text-lg">U neposrednoj blizini su autobuska stanica i taxi stajalište, a aerodrom je lako dostupan. Plaža je udaljena oko 300 m, dva velika marketa oko 50 m, restoran oko 70 m, a Porto Montenegro oko 1 km.</p>
+            <a href="#apartmani" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
         </div>
+      </div>
+    </section>
+
+    <section id="apartmani" class="py-[50px] md:pb-[100px] md:pt-0">
+      <div class="container max-w-page">
+        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">Apartmani</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          <article class="group reveal block">
+            <img src="assets/img/apartman-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Opis fotografije – Holiday home Olive]" class="img-muted w-full">
+            <h3 class="mt-[5px] font-sans text-lg text-black">Holiday home Olive</h3>
+            <p class="font-sans text-sm font-bold text-ink">50 m² · 2–4 osobe</p>
+            <p class="mt-2 font-sans text-sm leading-7 text-body">Dvije odvojene spavaće sobe, svaka sa bračnim krevetom. Dnevna soba sa sofom, potpuno opremljena kuhinja i kupatilo.</p>
+            <ul class="mt-2 font-sans text-sm leading-7 text-body">
+              <li>TV, internet i dva klima uređaja</li>
+              <li>Poseban ulaz i terasa</li>
+              <li>Prostrano dvorište u hladu maslina sa vanjskim roštiljem</li>
+              <li>Parking</li>
+            </ul>
+          </article>
+          <article class="group reveal block">
+            <img src="assets/img/apartman-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Opis fotografije – Holiday home Lavanda]" class="img-muted w-full">
+            <h3 class="mt-[5px] font-sans text-lg text-black">Holiday home Lavanda</h3>
+            <p class="font-sans text-sm font-bold text-ink">60 m² · 2–4 osobe</p>
+            <p class="mt-2 font-sans text-sm leading-7 text-body">Jedna velika spavaća soba sa bračnim krevetom i sofom. Dnevna soba sa velikom ugaonom garniturom na razvlačenje, potpuno opremljena kuhinja i kupatilo.</p>
+            <ul class="mt-2 font-sans text-sm leading-7 text-body">
+              <li>TV, internet i dva klima uređaja</li>
+              <li>Poseban ulaz i terasa</li>
+              <li>Prostrano dvorište u hladu maslina sa vanjskim roštiljem</li>
+              <li>Parking</li>
+            </ul>
+          </article>
+          <article class="group reveal block">
+            <img src="assets/img/apartman-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Opis fotografije – Holiday home Lemoni]" class="img-muted w-full">
+            <h3 class="mt-[5px] font-sans text-lg text-black">Holiday home Lemoni</h3>
+            <p class="font-sans text-sm font-bold text-ink">60 m² · 2–4 osobe</p>
+            <p class="mt-2 font-sans text-sm leading-7 text-body">Jedna velika spavaća soba sa bračnim krevetom i sofom. Dnevna soba sa velikom ugaonom garniturom na razvlačenje, potpuno opremljena kuhinja i kupatilo.</p>
+            <ul class="mt-2 font-sans text-sm leading-7 text-body">
+              <li>TV, internet i dva klima uređaja</li>
+              <li>Poseban ulaz i terasa</li>
+              <li>Prostrano dvorište u hladu maslina sa vanjskim roštiljem</li>
+              <li>Parking</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="cijene" class="bg-mist py-[50px] md:py-[100px]">
+      <div class="container max-w-page text-center">
+        <h2 class="mb-12 font-display text-[30px] leading-tight text-[#2B2B2B]">Cijene</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          <div class="reveal bg-white p-6 md:p-10">
+            <h3 class="font-display text-[23px] leading-10 text-ink">Van glavne sezone</h3>
+            <p class="min-h-7 font-sans text-sm text-body"></p>
+            <p class="mt-3 font-display text-[46px] leading-tight text-ink">100 €</p>
+            <p class="font-sans text-sm text-body">po danu</p>
+          </div>
+          <div class="reveal bg-white p-6 md:p-10">
+            <h3 class="font-display text-[23px] leading-10 text-ink">Od 01.06. do 01.09.</h3>
+            <p class="min-h-7 font-sans text-sm text-body"></p>
+            <p class="mt-3 font-display text-[46px] leading-tight text-ink">120 €</p>
+            <p class="font-sans text-sm text-body">po danu</p>
+          </div>
+          <div class="reveal bg-white p-6 md:p-10">
+            <h3 class="font-display text-[23px] leading-10 text-ink">Novogodišnji praznici</h3>
+            <p class="min-h-7 font-sans text-sm text-body">31.12., 01.01. i 02.01.</p>
+            <p class="mt-3 font-display text-[46px] leading-tight text-ink">120 €</p>
+            <p class="font-sans text-sm text-body">po danu</p>
+          </div>
+        </div>
+        <p class="mt-8 font-sans text-base text-ink">Cijene važe po apartmanu.</p>
+        <ul class="mx-auto mt-4 max-w-2xl font-sans text-base text-ink">
+          <li>Za boravak od 10 dana i više popust 10%.</li>
+          <li>Za boravak od mjesec dana povoljnija cijena, popust do 20%.</li>
+        </ul>
+        <p class="mt-6 font-sans text-sm text-body">Cijene su informativne. Tačnu ponudu pošaljite preko forme za upit.</p>
       </div>
     </section>
 
@@ -210,9 +311,9 @@
       <div class="container max-w-page">
         <div class="grid items-center gap-8 md:grid-cols-2">
           <div class="reveal text-center md:pr-[50px] md:text-left">
-            <h2 class="mb-[30px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">[Naslov – npr. Mir i privatnost]</h2>
-            <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">[Dve rečenice – npr. opis lokacije, terase, pogleda i kapaciteta (do X osoba).]</p>
-            <a href="#rezervacija" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-60 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
+            <h2 class="mb-[30px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">Mediteranski ambijent među maslinama</h2>
+            <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora, strogog centra grada i svih važnih sadržaja.</p>
+            <a href="#apartmani" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-60 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
           <div class="reveal md:p-[10px] md:pl-[60px]">
             <img src="assets/img/foto2.jpg" width="1240" height="827" loading="lazy" decoding="async" alt="[Opis]" class="w-full">
@@ -251,8 +352,8 @@
       <div class="container max-w-page">
         <div class="grid items-center bg-charcoal md:grid-cols-2">
           <div class="reveal p-[30px] text-center text-white md:py-[67px] md:pl-[50px] md:pr-[35px] md:text-left">
-            <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-white md:text-[30px]">[Naslov – npr. Odmor na dva koraka od mora]</h2>
-            <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">[Dve rečenice – npr. za koga je smeštaj idealan i šta je u blizini.]</p>
+            <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-white md:text-[30px]">Za kraći i duži boravak</h2>
+            <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">Blizina mora, strogog centra grada i svih važnih sadržaja čini apartmane odličnim izborom za kraći i duži boravak.</p>
             <a href="#plaze" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-70 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
           <div class="reveal p-5 md:p-0">
@@ -265,27 +366,81 @@
 
     <section id="plaze" class="mb-[50px] bg-mist py-[50px] md:mb-[160px] md:pb-[100px] md:pt-[100px]">
       <div class="container max-w-page">
-        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">Plaže koje vredi posetiti</h2>
+        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">Plaže koje vrijedi posjetiti</h2>
         <div class="grid gap-6 md:grid-cols-3">
           <div class="group reveal block">
-            <img src="assets/img/beach-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Naziv plaže]" class="img-muted w-full">
-            <p class="mt-[5px] font-sans text-lg text-black">[Naziv plaže 1]</p>
+            <img src="assets/img/beach-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Kaluman" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Kaluman</p>
+            <p class="font-sans text-sm leading-7 text-body">Mirna plaža u okolini Tivta, pogodna za kupanje i opuštanje uz more.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/beach-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Naziv plaže]" class="img-muted w-full">
-            <p class="mt-[5px] font-sans text-lg text-black">[Naziv plaže 2]</p>
+            <img src="assets/img/beach-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Plavi horizonti" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Plavi horizonti</p>
+            <p class="font-sans text-sm leading-7 text-body">Pješčana plaža u zaštićenoj uvali na poluostrvu Luštica, poznata po bistrom moru.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/beach-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Naziv plaže]" class="img-muted w-full">
-            <p class="mt-[5px] font-sans text-lg text-black">[Naziv plaže 3]</p>
+            <img src="assets/img/beach-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Jaz" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Jaz</p>
+            <p class="font-sans text-sm leading-7 text-body">Prostrana plaža kod Budve sa šljunkom i pijeskom, poznata po živoj atmosferi i vodenim sportovima.</p>
+          </div>
+        </div>
+        <div id="znamenitosti" class="mt-16">
+          <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">Znamenitosti u okolini</h2>
+          <div class="grid gap-6 md:grid-cols-3">
+          <div class="group reveal block">
+            <img src="assets/img/sight-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Tivat – Porto Montenegro i centar" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Tivat – Porto Montenegro i centar</p>
+            <p class="font-sans text-sm leading-7 text-body">Opuštena šetnja uz more, marina Porto Montenegro sa jahtama i kafići, restorani i prodavnice u centru grada.</p>
+          </div>
+          <div class="group reveal block">
+            <img src="assets/img/sight-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Kotor" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Kotor</p>
+            <p class="font-sans text-sm leading-7 text-body">Stari grad Kotor poznat je po kamenim ulicama, trgovima i gradskim zidinama, a iznad njega se uzdižu planine. Idealan je za dnevni izlet i šetnju.</p>
+          </div>
+          <div class="group reveal block">
+            <img src="assets/img/sight-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Budva" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Budva</p>
+            <p class="font-sans text-sm leading-7 text-body">Budva je poznata po starom gradu, plažama i živom ljetnjem životu. Dobra je za izlet u kojem se kombinuju šetnja, kupanje i izlazak.</p>
+          </div>
+          </div>
+        </div>
+        <div id="hrana" class="mt-16">
+          <h2 class="mb-4 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">Mediteranska kuhinja</h2>
+          <p class="mx-auto mb-12 max-w-xl text-center font-sans text-base text-body">Crnogorsko primorje poznato je po jednostavnoj mediteranskoj kuhinji zasnovanoj na svježoj ribi, maslinovom ulju i domaćim specijalitetima.</p>
+          <div class="grid gap-6 md:grid-cols-3">
+          <div class="group reveal block">
+            <img src="assets/img/food-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Riba na žaru" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Riba na žaru</p>
+            <p class="font-sans text-sm leading-7 text-body">Svježa riba pečena na žaru, uz maslinovo ulje i limun.</p>
+          </div>
+          <div class="group reveal block">
+            <img src="assets/img/food-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Crni rižoto" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Crni rižoto</p>
+            <p class="font-sans text-sm leading-7 text-body">Rižoto od sipe, tamne boje od sipinog mastila, čest izbor na primorju.</p>
+          </div>
+          <div class="group reveal block">
+            <img src="assets/img/food-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Brudet" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Brudet</p>
+            <p class="font-sans text-sm leading-7 text-body">Tradicionalno jelo od ribe krčkane u sosu od paradajza i maslinovog ulja.</p>
+          </div>
+          <div class="group reveal block">
+            <img src="assets/img/food-4.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Pršut i sir" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Pršut i sir</p>
+            <p class="font-sans text-sm leading-7 text-body">Domaći pršut i sir, klasična hladna zakuska uz čašu vina.</p>
+          </div>
+          <div class="group reveal block">
+            <img src="assets/img/food-5.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Maslinovo ulje i masline" class="img-muted w-full">
+            <p class="mt-[5px] font-sans text-lg text-black">Maslinovo ulje i masline</p>
+            <p class="font-sans text-sm leading-7 text-body">Masline i maslinovo ulje su osnova mediteranske trpeze.</p>
+          </div>
           </div>
         </div>
       </div>
     </section>
 
     <section id="rezervacija" class="container max-w-page pb-12 text-center">
-      <h2 class="mb-4 font-display text-[30px] md:text-[46px]">[Naslov poziva na rezervaciju]</h2>
-      <p class="mx-auto mb-6 max-w-xl font-sans text-lg">[Kratak tekst – direktna rezervacija, najbolja cena, odgovor u roku od X sati.]</p>
+      <h2 class="mb-4 font-display text-[30px] md:text-[46px]">Pošaljite upit za rezervaciju</h2>
+      <p class="mx-auto mb-6 max-w-xl font-sans text-lg">Izaberite termin, broj gostiju i apartman, a mi ćemo vam se javiti.</p>
 
       <div class="mt-10 grid gap-12 md:grid-cols-[2fr_1fr] md:gap-16">
         <form id="inquiry-form" class="relative text-left" novalidate aria-label="Forma za upit">
@@ -338,8 +493,9 @@
               <label for="apartment" class="mb-1 block font-sans text-sm font-bold">Apartman</label>
               <select id="apartment" name="apartment" class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E878C] aria-[invalid=true]:border-red-600">
                 <option value="">Bez preferencije</option>
-                <option value="apartman-1">[Apartman 1]</option>
-                <option value="apartman-2">[Apartman 2]</option>
+                <option value="olive">Holiday home Olive</option>
+                <option value="lavanda">Holiday home Lavanda</option>
+                <option value="lemoni">Holiday home Lemoni</option>
               </select>
               <p id="apartment-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="apartment"></p>
             </div>
@@ -372,11 +528,11 @@
         <aside class="text-center md:text-left" aria-label="Direktni kontakt">
           <h3 class="mb-4 font-display text-[23px] leading-10 text-ink">Direktni kontakt</h3>
           <ul class="space-y-1 font-sans text-base" data-contacts>
-            <li><span class="font-bold">Telefon:</span> [+382 XX XXX XXX]</li>
-            <li><span class="font-bold">Email:</span> [email@vas-domen.me]</li>
-            <li><span class="font-bold">WhatsApp:</span> [+382XXXXXXXX]</li>
-            <li><span class="font-bold">Viber:</span> [+382XXXXXXXX]</li>
-            <li><span class="font-bold">Adresa:</span> [Ulica i broj], Tivat</li>
+            <li><span class="font-bold">Telefon:</span> <a href="tel:+38269506646" class="underline hover:opacity-60">+382 69 506 646</a></li>
+            <li><span class="font-bold">Email:</span> [EMAIL]</li>
+            <li><span class="font-bold">WhatsApp:</span> <a href="https://wa.me/38269506646" target="_blank" rel="noopener" class="underline hover:opacity-60">+38269506646</a></li>
+            <li><span class="font-bold">Viber:</span> <a href="viber://chat?number=%2B38269506646" class="underline hover:opacity-60">+38269506646</a></li>
+            <li><span class="font-bold">Adresa:</span> Bonići I bb, Tivat, Crna Gora</li>
           </ul>
         </aside>
       </div>
@@ -385,7 +541,7 @@
     <section aria-label="Lokacija" class="relative z-[1]">
       <iframe title="Mapa – Tivat" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               class="block h-[440px] w-full border-0 md:h-[440px]"
-              src="https://www.google.com/maps?q=Tivat%2CMontenegro&output=embed"></iframe>
+              src="https://www.google.com/maps?q=Boni%C4%87i%2C%20Tivat%2C%20Crna%20Gora&output=embed"></iframe>
     </section>
   </main>
 
@@ -395,20 +551,24 @@
       <div class="grid gap-10 text-center md:grid-cols-4 md:text-left">
         <div>
           <h2 data-i18n="footer.about" class="mb-4 font-display text-[26px] text-white">O nama</h2>
-          <p class="font-sans text-sm leading-7 text-white/80">[Kratak opis brenda – 2 do 3 rečenice.]</p>
+          <p class="font-sans text-sm leading-7 text-white/80">Holiday home Olive, Lavanda i Lemoni nalaze se na odličnoj lokaciji u Tivtu. Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora i strogog centra grada.</p>
+          <p class="mt-3 font-sans text-sm leading-7 text-white/80">Bonići I bb, Tivat, Crna Gora<br><a href="tel:+38269506646" class="hover:text-white">+382 69 506 646</a></p>
         </div>
         <ul class="font-sans text-sm leading-8 text-white/80">
           <li><a href="#top" data-i18n="nav.home" class="hover:text-white">Početna</a></li>
-          <li><a href="#smestaj" data-i18n="nav.stay" class="hover:text-white">Smeštaj</a></li>
-          <li><a href="#plaze" data-i18n="nav.beaches" class="hover:text-white">Plaže</a></li>
+          <li><a href="#apartmani" data-i18n="nav.stay" class="hover:text-white">Apartmani</a></li>
+          <li><a href="#cijene" data-i18n="nav.prices" class="hover:text-white">Cijene</a></li>
+          <li><a href="#galerija" data-i18n="nav.gallery" class="hover:text-white">Galerija</a></li>
         </ul>
         <ul class="font-sans text-sm leading-8 text-white/80">
-          <li><a href="#galerija" data-i18n="nav.gallery" class="hover:text-white">Galerija</a></li>
+          <li><a href="#plaze" data-i18n="nav.beaches" class="hover:text-white">Plaže</a></li>
+          <li><a href="#znamenitosti" data-i18n="nav.sights" class="hover:text-white">Znamenitosti</a></li>
+          <li><a href="#hrana" data-i18n="nav.food" class="hover:text-white">Hrana</a></li>
           <li><a href="#kontakt" data-i18n="nav.contact" class="hover:text-white">Kontakt</a></li>
         </ul>
         <div class="flex flex-col items-center gap-4 md:items-start">
           <h2 data-i18n="footer.follow" class="font-display text-[26px] text-white">Pratite nas</h2>
-          <a href="https://instagram.com/[NALOG]" target="_blank" rel="noopener" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] hover:opacity-90"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg></a>
+          <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] hover:opacity-90"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg></a>
           <a href="#rezervacija" data-i18n="btn.book" class="bg-white px-8 py-3 font-sans text-sm font-bold uppercase text-ink transition hover:bg-mist">Rezerviši</a>
         </div>
       </div>
@@ -417,7 +577,7 @@
     <div class="border-t border-white/10">
       <div class="container flex max-w-page flex-col items-center justify-between gap-2 py-5 font-sans text-sm text-white/70 md:flex-row">
         <a href="politika-privatnosti.html" data-i18n="footer.privacy" class="hover:text-white">Politika privatnosti</a>
-        <p>© <span data-year>2026</span> [NAZIV BRENDA]. Sva prava zadržana.</p>
+        <p>© <span data-year>2026</span> Tivat Garden Homes. Sva prava zadržana.</p>
       </div>
     </div>
   </footer>

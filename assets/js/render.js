@@ -37,11 +37,12 @@ export function navItems() {
   const { food, sights } = c.extraSections;
   return [
     { key: 'nav.home', href: '#top' },
-    { key: 'nav.stay', href: '#smestaj' },
-    { key: 'nav.beaches', href: '#plaze' },
-    ...(food.enabled ? [{ key: 'nav.food', href: `#${food.id}` }] : []),
-    ...(sights.enabled ? [{ key: 'nav.sights', href: `#${sights.id}` }] : []),
+    { key: 'nav.stay', href: `#${c.apartmentsSection.id}` },
+    { key: 'nav.prices', href: `#${c.pricing.id}` },
     { key: 'nav.gallery', href: '#galerija' },
+    { key: 'nav.beaches', href: '#plaze' },
+    ...(sights.enabled ? [{ key: 'nav.sights', href: `#${sights.id}` }] : []),
+    ...(food.enabled ? [{ key: 'nav.food', href: `#${food.id}` }] : []),
     { key: 'nav.contact', href: '#kontakt' },
   ];
 }
@@ -62,22 +63,22 @@ function header() {
   const nav = navItems();
   return `
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
-    <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2">
+    <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
       <a href="#top" class="shrink-0" aria-label="${esc(c.site.brand)}">
-        <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-16 w-auto md:h-20">
+        <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-16 w-auto md:h-20 lg:h-16 xl:h-20">
       </a>
 
       <nav class="hidden lg:block" aria-label="Glavna navigacija">
         <ul class="flex items-center">
-          ${nav.map((n) => `<li><a href="${n.href}" ${i(n.key)} class="px-[13px] py-[11px] hover:opacity-60">${t(n.key)}</a></li>`).join('\n          ')}
+          ${nav.map((n) => `<li><a href="${n.href}" ${i(n.key)} class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">${t(n.key)}</a></li>`).join('\n          ')}
         </ul>
       </nav>
 
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-4 lg:gap-3 xl:gap-4">
         <div class="hidden items-center lg:flex" role="group" data-i18n-aria="aria.language" aria-label="${t('aria.language')}">
           ${langButtons('px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4')}
         </div>
-        ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] text-white hover:opacity-90 sm:flex')}
+        ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] text-white hover:opacity-90 sm:flex lg:hidden xl:flex')}
         <a href="${BOOK_HREF}" ${i('btn.book')} class="bg-ink px-6 py-3 font-sans text-sm font-bold uppercase tracking-wide text-white transition hover:bg-charcoal">${t('btn.book')}</a>
         <button id="menu-toggle" type="button" class="lg:hidden" data-i18n-aria="aria.menu" aria-label="${t('aria.menu')}" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -167,6 +168,60 @@ function intro() {
             ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg')}
           </div>
         </div>
+      </div>
+    </section>`;
+}
+
+// ---------- Apartmani (kartice) ----------
+function apartments() {
+  const a = c.apartmentsSection;
+  return `
+    <section id="${esc(a.id)}" class="py-[50px] md:pb-[100px] md:pt-0">
+      <div class="container max-w-page">
+        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(a.title)}</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          ${c.apartments
+            .map(
+              (ap) => `<article class="group reveal block">
+            <img src="${esc(ap.image.src)}" width="${ap.image.width}" height="${ap.image.height}" loading="lazy" decoding="async" alt="${esc(ap.image.alt)}" class="img-muted w-full">
+            <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.name)}</h3>
+            <p class="font-sans text-sm font-bold text-ink">${esc(ap.area)} · ${esc(ap.guests)}</p>
+            <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
+            <ul class="mt-2 font-sans text-sm leading-7 text-body">
+              ${ap.features.map((f) => `<li>${esc(f)}</li>`).join('\n              ')}
+            </ul>
+          </article>`
+            )
+            .join('\n          ')}
+        </div>
+      </div>
+    </section>`;
+}
+
+// ---------- Cijene ----------
+function pricing() {
+  const p = c.pricing;
+  return `
+    <section id="${esc(p.id)}" class="bg-mist py-[50px] md:py-[100px]">
+      <div class="container max-w-page text-center">
+        <h2 class="mb-12 font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(p.title)}</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          ${p.items
+            .map(
+              (it) => `<div class="reveal bg-white p-6 md:p-10">
+            <h3 class="font-display text-[23px] leading-10 text-ink">${esc(it.label)}</h3>
+            <p class="min-h-7 font-sans text-sm text-body">${esc(it.note)}</p>
+            <p class="mt-3 font-display text-[46px] leading-tight text-ink">${esc(it.price)}</p>
+            <p class="font-sans text-sm text-body">${esc(it.unit)}</p>
+          </div>`
+            )
+            .join('\n          ')}
+        </div>
+        <p class="mt-8 font-sans text-base text-ink">${esc(p.basis)}</p>
+        <ul class="mx-auto mt-4 max-w-2xl font-sans text-base text-ink">
+          ${p.discounts.map((d) => `<li>${esc(d)}</li>`).join('\n          ')}
+        </ul>
+        <p class="mt-6 font-sans text-sm text-body">${esc(p.disclaimer)}</p>
       </div>
     </section>`;
 }
@@ -261,7 +316,9 @@ const cards = (items) =>
     .map((p) => {
       const inner = `
             <img src="${esc(p.image.src)}" width="${p.image.width}" height="${p.image.height}" loading="lazy" decoding="async" alt="${esc(p.image.alt)}" class="img-muted w-full">
-            <p class="mt-[5px] font-sans text-lg text-black">${esc(p.name)}</p>`;
+            <p class="mt-[5px] font-sans text-lg text-black">${esc(p.name)}</p>${
+              p.desc ? `\n            <p class="font-sans text-sm leading-7 text-body">${esc(p.desc)}</p>` : ''
+            }`;
       return p.link
         ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" class="group reveal block">${inner}\n          </a>`
         : `<div class="group reveal block">${inner}\n          </div>`;
@@ -274,7 +331,9 @@ function beaches() {
     .map(
       (s) => `
         <div id="${esc(s.id)}" class="mt-16">
-          <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(s.title)}</h2>
+          <h2 class="${s.intro ? 'mb-4' : 'mb-12'} text-center font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(s.title)}</h2>${
+            s.intro ? `\n          <p class="mx-auto mb-12 max-w-xl text-center font-sans text-base text-body">${esc(s.intro)}</p>` : ''
+          }
           <div class="grid gap-6 md:grid-cols-3">
           ${cards(s.items)}
           </div>
@@ -297,12 +356,14 @@ const digits = (v) => String(v).replace(/[^\d]/g, '');
 export function contactLinks() {
   const k = c.contact;
   return [
-    { id: 'phone', label: 'Telefon', value: k.phone, href: `tel:${String(k.phone).replace(/[^\d+]/g, '')}` },
+    { id: 'phone', label: 'Telefon', value: k.phoneDisplay || k.phone, href: `tel:${String(k.phone).replace(/[^\d+]/g, '')}` },
     { id: 'email', label: 'Email', value: k.email, href: `mailto:${k.email}` },
     { id: 'whatsapp', label: 'WhatsApp', value: k.whatsapp, href: `https://wa.me/${digits(k.whatsapp)}` },
     { id: 'viber', label: 'Viber', value: k.viber, href: `viber://chat?number=%2B${digits(k.viber)}` },
-  ];
+  ].filter((l) => l.value);
 }
+
+export const fullAddress = () => [c.contact.address, c.contact.city, c.contact.countryName].filter(Boolean).join(', ');
 
 // ---------- Rezervacija: forma za upit + direktni kontakti ----------
 function reservation() {
@@ -381,7 +442,7 @@ function reservation() {
                   : `<li><span class="font-bold">${k.label}:</span> <a href="${esc(k.href)}"${k.id === 'whatsapp' ? ' target="_blank" rel="noopener"' : ''} class="underline hover:opacity-60">${esc(k.value)}</a></li>`
               )
               .join('\n            ')}
-            <li><span class="font-bold">Adresa:</span> ${esc(c.contact.address)}, ${esc(c.contact.city)}</li>
+            <li><span class="font-bold">Adresa:</span> ${esc(fullAddress())}</li>
           </ul>
         </aside>
       </div>
@@ -394,7 +455,7 @@ function map() {
     <section aria-label="Lokacija" class="relative z-[1]">
       <iframe title="Mapa – ${esc(c.contact.city)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               class="block h-[440px] w-full border-0 md:h-[440px]"
-              src="https://www.google.com/maps?q=${encodeURIComponent(c.contact.city + ',Montenegro')}&output=embed"></iframe>
+              src="https://www.google.com/maps?q=${encodeURIComponent(c.contact.mapQuery)}&output=embed"></iframe>
     </section>`;
 }
 
@@ -413,6 +474,11 @@ function footer() {
         <div>
           <h2 ${i('footer.about')} class="mb-4 font-display text-[26px] text-white">${t('footer.about')}</h2>
           <p class="font-sans text-sm leading-7 text-white/80">${esc(c.footer.about)}</p>
+          <p class="mt-3 font-sans text-sm leading-7 text-white/80">${esc(fullAddress())}${
+            c.contact.phone
+              ? `<br><a href="tel:${esc(String(c.contact.phone).replace(/[^\d+]/g, ''))}" class="hover:text-white">${esc(c.contact.phoneDisplay || c.contact.phone)}</a>`
+              : ''
+          }</p>
         </div>
         ${list(nav.slice(0, half))}
         ${list(nav.slice(half))}
@@ -457,6 +523,8 @@ ${header()}
     <div id="top"></div>
 ${hero()}
 ${intro()}
+${apartments()}
+${pricing()}
 ${gallery()}
 ${feature()}
 ${reviews()}

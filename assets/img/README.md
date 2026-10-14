@@ -12,6 +12,9 @@ Preporuka: JPG kvalitet ~75–82 (ili WebP uz izmenu ekstenzije u `assets/js/con
 | `foto2.jpg` | 1240×827 | Sekcija tekst + slika |
 | `foto3.jpg` | 2500×1667 | Tamna sekcija (slika sa ofsetom) |
 | `beach-1.jpg` … `beach-3.jpg` | 1024×768 | Kartice plaža (i opcionih sekcija Hrana/Znamenitosti) |
+| `apartman-1.jpg` … `apartman-3.jpg` | 1024×768 | Kartice apartmana (Olive, Lavanda, Lemoni) |
+| `sight-1.jpg` … `sight-3.jpg` | 1024×768 | Znamenitosti u okolini |
+| `food-1.jpg` … `food-5.jpg` | 1024×768 | Mediteranska kuhinja |
 | `og.jpg` | 1200×630 | Slika za deljenje (Open Graph) |
 | `logo.png` | 211×100 | Logo u zaglavlju |
 | `favicon.png` | 64×64 | Favicon |
