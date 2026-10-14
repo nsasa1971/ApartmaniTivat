@@ -53,7 +53,9 @@ npm run images -- putanja/do/foldera-sa-originalima            # izlaz: ./optimi
 npm run images -- putanja/do/originala optimized --max 1600 --quality 78
 ```
 
-Skripta rekurzivno smanjuje najdužu stranicu na 1600 px (po potrebi `--max`), skida metapodatke (GPS i sl.), poštuje rotaciju i čuva strukturu foldera; originali se ne mijenjaju. Zatim iz `optimized/` izaberi slike, preimenuj ih prema tabeli u `assets/img/README.md` i kopiraj u `assets/img/`. Cilj je do ~250 KB po slici.
+Skripta rekurzivno smanjuje najdužu stranicu na 1600 px (po potrebi `--max`), skida metapodatke (GPS i sl.), poštuje rotaciju i čuva strukturu foldera; originali se ne mijenjaju. Za tačne dimenzije dodaj `--crop`, npr. `--crop 1024x768` (kartice apartmana i plaža), `--crop 1240x827` (galerija), `--crop 394x394` (sličice), `--crop 1920x900` (hero); izlaz stavi u poseban folder: `npm run images -- originali izlaz-kartice --crop 1024x768`.
+
+Zatim iz `optimized/` izaberi slike, preimenuj ih prema tabeli u `assets/img/README.md` i kopiraj u `assets/img/`. Cilj je do ~250 KB po slici.
 
 ## Forma za upit (`#rezervacija`)
 

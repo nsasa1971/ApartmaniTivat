@@ -8,6 +8,7 @@
 //  - poštuje EXIF rotaciju, skida metapodatke (GPS i sl.), čuva strukturu foldera
 //  - najduža stranica se smanjuje na --max piksela (nikad se ne uvećava)
 //  - izlaz je uvijek .jpg (mozjpeg); podrazumijevani izlaz je ./optimized (nije u gitu)
+//  - opciono --crop 1024x768 siječe sliku na tačne dimenzije (centrirano, pametan izbor kadra)
 //  Originali se ne mijenjaju.
 // ============================================================
 import { readdir, mkdir, stat } from 'node:fs/promises';
@@ -24,10 +25,21 @@ const opt = (name, def) => {
 };
 const max = opt('max', 1600);
 const quality = opt('quality', 78);
+const cropIdx = args.indexOf('--crop');
+let crop = null;
+if (cropIdx !== -1) {
+  const m = /^(\d+)x(\d+)$/i.exec(args[cropIdx + 1] ?? '');
+  if (!m) {
+    console.error('--crop očekuje dimenzije, npr. --crop 1024x768');
+    process.exit(1);
+  }
+  crop = { width: Number(m[1]), height: Number(m[2]) };
+  args.splice(cropIdx, 2);
+}
 const [input, output = 'optimized'] = args;
 
 if (!input) {
-  console.error('Upotreba: npm run images -- <ulazni-folder> [izlazni-folder] [--max 1600] [--quality 78]');
+  console.error('Upotreba: npm run images -- <ulazni-folder> [izlazni-folder] [--max 1600] [--quality 78] [--crop ŠxV]');
   process.exit(1);
 }
 
@@ -55,7 +67,11 @@ for await (const file of walk(inRoot)) {
     await mkdir(path.dirname(dest), { recursive: true });
     await sharp(file, { limitInputPixels: false })
       .rotate()
-      .resize({ width: max, height: max, fit: 'inside', withoutEnlargement: true })
+      .resize(
+        crop
+          ? { ...crop, fit: 'cover', position: sharp.strategy.attention, withoutEnlargement: false }
+          : { width: max, height: max, fit: 'inside', withoutEnlargement: true }
+      )
       .flatten({ background: '#ffffff' })
       .jpeg({ quality, mozjpeg: true, progressive: true })
       .toFile(dest);
