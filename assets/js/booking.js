@@ -3,21 +3,13 @@
 // ============================================================
 import { config, contact, apartments, site } from './content.js';
 import { isPlaceholder } from './render.js';
+import { todayLocal, addDays, isAnyFree } from './availability.js';
+import { loadAvailability } from './availability-data.js';
+import { saveInquiry } from './inquiry-client.js';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-// ---------- datumi (lokalno vreme za "danas", UTC aritmetika za pomeranje) ----------
-const pad = (n) => String(n).padStart(2, '0');
-const todayLocal = () => {
-  const d = new Date();
-  return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
-};
-const addDays = (dateStr, n) => {
-  const [y, m, d] = dateStr.split('-').map(Number);
-  const dt = new Date(Date.UTC(y, m - 1, d + n));
-  return dt.toISOString().slice(0, 10);
-};
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ---------- poruke (srpski, latinica) ----------
@@ -30,6 +22,7 @@ const MSG = {
   checkinPast: 'Datum dolaska ne može biti u prošlosti.',
   checkoutEmpty: 'Izaberite datum odlaska.',
   checkoutOrder: 'Datum odlaska mora biti posle datuma dolaska.',
+  notFree: 'Izabrani termin nije slobodan. Izaberite druge datume.',
   guests: (min, max) => `Broj gostiju mora biti između ${min} i ${max}.`,
   consent: 'Morate prihvatiti politiku privatnosti da biste poslali upit.',
   sending: 'Šalje se…',
@@ -39,6 +32,13 @@ const MSG = {
   mailto: (email) => `Otvaramo vaš email program sa popunjenim upitom. Ako se ništa ne desi, pošaljite poruku na ${email}.`,
   noTarget: 'Slanje forme još nije podešeno. Kontaktirajte nas direktno (podaci pored forme).',
 };
+
+/** Da li je termin slobodan? Bez apartmana: dovoljno je da je slobodan bar jedan. Ako kalendar nije dostupan, ne blokira. */
+async function isTermFree(apartmentId, from, to) {
+  const map = await loadAvailability();
+  if (!map) return true;
+  return isAnyFree(map, apartmentId ? [apartmentId] : apartments.map((a) => a.id), from, to);
+}
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^\+?[0-9][0-9\s().\-/]{5,}$/;
@@ -82,12 +82,13 @@ function initStrip(inquiry) {
     errorEl.classList.remove('hidden');
   };
 
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     errorEl.classList.add('hidden');
 
     if (!checkin.value || !checkout.value) return showError('Izaberite datum dolaska i odlaska.');
     if (checkout.value <= checkin.value) return showError(MSG.checkoutOrder);
+    if (!(await isTermFree('', checkin.value, checkout.value))) return showError(MSG.notFree);
 
     // Bez spoljnog sajta: prenesi izbor u formu za upit i skroluj do nje
     if (inquiry) {
@@ -181,6 +182,7 @@ function initInquiry() {
       checkin: el.checkin.value,
       checkout: el.checkout.value,
       guests: el.guests.value,
+      apartmentId: apt ? apt.id : '',
       apartment: apt ? apt.name : '',
       message: el.message.value.trim(),
     };
@@ -268,11 +270,24 @@ function initInquiry() {
     const data = collect();
     const m = mode();
 
+    // termin mora biti slobodan (kalendar iz Firestore-a; ako nije dostupan, ne blokira)
+    submitBtn.disabled = true;
+    showStatus(MSG.sending, 'info');
+    const free = await isTermFree(data.apartmentId, data.checkin, data.checkout);
+    submitBtn.disabled = false;
+    if (!free) {
+      statusEl.classList.add('hidden');
+      setError('checkout', MSG.notFree);
+      el.checkout.focus();
+      return;
+    }
+
     if (m === 'mailto') {
       if (isPlaceholder(contact.email)) {
         showStatus(MSG.noTarget, 'error');
         return;
       }
+      saveInquiry(data).catch((err) => console.warn('Upit nije upisan u bazu:', err.message));
       showStatus(MSG.mailto(contact.email), 'ok');
       window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject(data))}&body=${encodeURIComponent(summary(data))}`;
       return;
@@ -282,7 +297,12 @@ function initInquiry() {
     submitBtn.setAttribute('aria-busy', 'true');
     showStatus(MSG.sending, 'info');
     try {
-      await send(data);
+      // email (Formspree) i upis u Firestore (sanduče upita u /admin) idu paralelno;
+      // dovoljno je da uspije jedan od njih – upit je stigao do vlasnice
+      const [mailRes, dbRes] = await Promise.allSettled([send(data), saveInquiry(data)]);
+      if (mailRes.status === 'rejected') console.warn('Formspree nije uspio:', mailRes.reason);
+      if (dbRes.status === 'rejected') console.warn('Upis upita u bazu nije uspio:', dbRes.reason);
+      if (mailRes.status === 'rejected' && !(dbRes.status === 'fulfilled' && dbRes.value === true)) throw mailRes.reason;
       showStatus(MSG.success, 'ok');
       form.reset();
       el.guests.value = config.defaultGuests;
@@ -299,11 +319,12 @@ function initInquiry() {
   return {
     form,
     /** popunjava polja iz booking trake */
-    fill({ checkin, checkout, guests }) {
+    fill({ checkin, checkout, guests, apartmentId }) {
+      if (apartmentId !== undefined) el.apartment.value = apartmentId;
       el.checkin.value = checkin;
       el.checkout.min = addDays(checkin, 1);
       el.checkout.value = checkout;
-      el.guests.value = guests;
+      if (guests !== undefined) el.guests.value = guests;
       showErrors({});
     },
   };
@@ -312,4 +333,14 @@ function initInquiry() {
 export function initBooking() {
   const inquiry = initInquiry();
   initStrip(inquiry);
+  // kalendar dostupnosti učitavamo tek kad posjetilac počne da popunjava termin
+  ['#booking-form', '#inquiry-form'].forEach((sel) => $(sel)?.addEventListener('focusin', () => loadAvailability(), { once: true }));
+  // izbor termina u kalendaru dostupnosti (availability-widget.js) popunjava formu za upit
+  window.addEventListener('tgh:select-range', (e) => {
+    if (!inquiry) return;
+    const { apartmentId, from, to } = e.detail;
+    inquiry.fill({ apartmentId, checkin: from, checkout: to });
+    $('#rezervacija')?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+    inquiry.form.elements.fullname.focus({ preventScroll: true });
+  });
 }

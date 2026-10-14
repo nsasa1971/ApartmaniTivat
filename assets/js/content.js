@@ -267,6 +267,14 @@ export const extraSections = {
   },
 };
 
+// ---------- Dostupnost (kalendar zauzetih termina; čita se iz Firebase-a, vidi README) ----------
+// Sekcija se prikazuje samo kad je Firebase podešen (assets/js/firebase-config.js).
+export const availability = {
+  id: 'dostupnost',
+  title: 'Dostupnost',
+  text: 'Izaberite apartman i datume dolaska i odlaska da vidite koji su termini slobodni, pa pošaljite upit.',
+};
+
 // ---------- Sekcija rezervacije / upita ----------
 export const booking = {
   title: 'Pošaljite upit za rezervaciju',
