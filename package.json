@@ -11,7 +11,8 @@
     "build": "npm run build:css && npm run build:meta",
     "images": "node scripts/optimize-images.mjs",
     "package": "node scripts/package-site.mjs",
-    "build:site": "npm run build && npm run package"
+    "build:site": "npm run build && npm run package",
+    "gallery": "node scripts/make-gallery.mjs"
   },
   "devDependencies": {
     "sharp": "^0.35.5",
