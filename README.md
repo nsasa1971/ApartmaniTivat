@@ -44,6 +44,19 @@ Tekstovi u uglastim zagradama `[...]` su placeholderi. Meni, dugmad i oznake na 
 
 Stavljaju se u `assets/img/`. Tačna imena i dimenzije su u [`assets/img/README.md`](assets/img/README.md).
 
+### Veliki originali (npr. 1,6 GB)
+
+Originale **ne stavljaj u repo**. Drži ih van projekta (ili u folderu `originals/`, koji je u `.gitignore`) i smanji ih skriptom:
+
+```bash
+npm run images -- putanja/do/foldera-sa-originalima            # izlaz: ./optimized
+npm run images -- putanja/do/originala optimized --max 1600 --quality 78
+```
+
+Skripta rekurzivno smanjuje najdužu stranicu na 1600 px (po potrebi `--max`), skida metapodatke (GPS i sl.), poštuje rotaciju i čuva strukturu foldera; originali se ne mijenjaju. Za tačne dimenzije dodaj `--crop`, npr. `--crop 1024x768` (kartice apartmana i plaža), `--crop 1240x827` (galerija), `--crop 394x394` (sličice), `--crop 1920x900` (hero); izlaz stavi u poseban folder: `npm run images -- originali izlaz-kartice --crop 1024x768`.
+
+Zatim iz `optimized/` izaberi slike, preimenuj ih prema tabeli u `assets/img/README.md` i kopiraj u `assets/img/`. Cilj je do ~250 KB po slici.
+
 ## Forma za upit (`#rezervacija`)
 
 Rezervacije idu preko sopstvene forme za upit. Booking traka u hero sekciji na „Pretraži“ skroluje do forme i popunjava dolazak, odlazak i broj gostiju.
@@ -58,7 +71,11 @@ Slanje se podešava u `content.js` → `config.form`:
 
 Zaštita od botova: skriveno honeypot polje i minimalno vreme popunjavanja (`minFillSeconds`). Validacija i poruke grešaka su na srpskom (`assets/js/booking.js`). Nema sopstvenog backenda.
 
-## Deploy (GitHub Pages)
+## Deploy (Netlify)
+
+`netlify.toml` je podešen: build komanda `npm run build:site`, objavljuje se samo folder `dist/` (index, stranica politike, `assets`, `data`, sitemap, robots, manifest). U Netlify-u ne treba ništa ručno podešavati osim da production grana bude `main`. Domen: Netlify → Domain management → Add a domain, a `site.url` u `content.js` postaviti na isti domen.
+
+## Deploy (GitHub Pages, alternativa)
 
 Workflow `.github/workflows/deploy.yml` na svaki push na `main` pokreće `npm ci && npm run build` i objavljuje sajt na GitHub Pages.
 
