@@ -5,3 +5,7 @@ node_modules/
 .env.*
 dist/
 .cache/
+
+# Originalne fotografije i izlaz skripte za slike (ne ide u git)
+originals/
+optimized/

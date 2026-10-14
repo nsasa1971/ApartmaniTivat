@@ -8,9 +8,11 @@
     "dev": "tailwindcss -c tailwind.config.cjs -i src/input.css -o assets/css/style.css --watch",
     "build:css": "tailwindcss -c tailwind.config.cjs -i src/input.css -o assets/css/style.css --minify",
     "build:meta": "node scripts/build-meta.mjs",
-    "build": "npm run build:css && npm run build:meta"
+    "build": "npm run build:css && npm run build:meta",
+    "images": "node scripts/optimize-images.mjs"
   },
   "devDependencies": {
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.17"
   }
 }
