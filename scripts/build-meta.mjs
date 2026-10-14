@@ -40,7 +40,7 @@ const jsonLd = {
   sameAs: nonPlaceholder(c.social.instagram) ? [c.social.instagram] : undefined,
   containsPlace: c.apartments.map((a) => ({
     '@type': 'Apartment',
-    name: a.name,
+    name: a.fullName ?? a.name,
     description: a.summary,
     floorSize: a.area ? { '@type': 'QuantitativeValue', value: parseFloat(a.area), unitCode: 'MTK' } : undefined,
   })),

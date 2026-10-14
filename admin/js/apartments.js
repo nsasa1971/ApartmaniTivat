@@ -1,9 +1,9 @@
 // Apartmani – početne vrijednosti (seed u Firestore `apartments` ako ne postoje).
 // id mora odgovarati ID-jevima u assets/js/content.js i u firestore.rules.
 export const DEFAULT_APARTMENTS = [
-  { id: 'olive', naziv: 'Holiday home Olive', kapacitet: 4 },
-  { id: 'lavanda', naziv: 'Holiday home Lavanda', kapacitet: 4 },
-  { id: 'lemoni', naziv: 'Holiday home Lemoni', kapacitet: 4 },
+  { id: 'olive', naziv: 'Olive', kapacitet: 4 },
+  { id: 'lavanda', naziv: 'Lavanda', kapacitet: 4 },
+  { id: 'lemoni', naziv: 'Lemoni', kapacitet: 4 },
 ];
 
 export const SOURCES = {

@@ -6,7 +6,7 @@
 import { isFirebaseConfigured } from './firebase-config.js';
 import { loadAvailability } from './availability-data.js';
 import { apartments } from './content.js';
-import { monthGrid, monthLabel, shiftMonth, todayLocal, addDays, isRangeFree, formatDate, bookedDaySet } from './availability.js';
+import { monthGrid, monthLabel, shiftMonth, todayLocal, addDays, isRangeFree, formatRange, bookedDaySet } from './availability.js';
 
 const MSG_NOT_FREE = 'Izabrani termin nije slobodan. Izaberite druge datume.';
 
@@ -68,7 +68,7 @@ function mount(section, map) {
       .join('');
     const ready = state.from && state.to;
     send.classList.toggle('hidden', !ready);
-    if (ready) msg.textContent = `Izabrano: ${formatDate(state.from)} – ${formatDate(state.to)}`;
+    if (ready) msg.textContent = `Izabrano: ${formatRange(state.from, state.to)}`;
   };
 
   const say = (text) => (msg.textContent = text);

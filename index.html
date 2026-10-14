@@ -84,7 +84,7 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="1k4c8kn">
+  <div id="app" data-hash="drw6iv">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
@@ -185,6 +185,7 @@
 
             <button type="submit" data-i18n="btn.search" class="h-[52px] rounded-full bg-btn px-8 font-sans text-base font-bold text-white transition hover:bg-ink">Pretraži</button>
           </div>
+          <p id="booking-range" class="hidden px-3 pt-1 text-sm font-bold text-[#053133]" aria-live="polite"></p>
           <p id="booking-error" class="hidden px-3 pt-1 text-sm text-red-600" role="alert"></p>
         </form>
       </div>
@@ -538,6 +539,7 @@
               <input type="date" id="inq-checkout" name="checkout" required class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E878C] aria-[invalid=true]:border-red-600">
               <p id="inq-checkout-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="inq-checkout"></p>
             </div>
+            <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#053133] md:col-span-2 md:-mt-2" aria-live="polite"></p>
             
             <div>
               <label for="inq-guests" class="mb-1 block font-sans text-sm font-bold">Broj gostiju *</label>
@@ -549,9 +551,9 @@
               <label for="apartment" class="mb-1 block font-sans text-sm font-bold">Apartman</label>
               <select id="apartment" name="apartment" class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E878C] aria-[invalid=true]:border-red-600">
                 <option value="">Bez preferencije</option>
-                <option value="olive">Holiday home Olive</option>
-                <option value="lavanda">Holiday home Lavanda</option>
-                <option value="lemoni">Holiday home Lemoni</option>
+                <option value="olive">Olive</option>
+                <option value="lavanda">Lavanda</option>
+                <option value="lemoni">Lemoni</option>
               </select>
               <p id="apartment-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="apartment"></p>
             </div>

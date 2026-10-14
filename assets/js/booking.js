@@ -3,7 +3,7 @@
 // ============================================================
 import { config, contact, apartments, site } from './content.js';
 import { isPlaceholder } from './render.js';
-import { todayLocal, addDays, isAnyFree } from './availability.js';
+import { todayLocal, addDays, isAnyFree, formatRange } from './availability.js';
 import { loadAvailability } from './availability-data.js';
 import { saveInquiry } from './inquiry-client.js';
 
@@ -64,6 +64,16 @@ function initStrip(inquiry) {
     if (!checkout.value || checkout.value < minOut) checkout.value = minOut;
   });
 
+  // datum riječima ispod trake (native polje datuma prikazuje format po jeziku pregledača)
+  const rangeEl = $('#booking-range');
+  const showRange = () => {
+    const t = formatRange(checkin.value, checkout.value);
+    rangeEl.textContent = t;
+    rangeEl.classList.toggle('hidden', !t);
+  };
+  checkin.addEventListener('change', showRange);
+  checkout.addEventListener('change', showRange);
+
   let guests = config.defaultGuests;
   const renderGuests = () => {
     guestsOut.textContent = guests;
@@ -120,6 +130,17 @@ function initInquiry() {
     el.checkout.min = minOut;
     if (!el.checkout.value || el.checkout.value < minOut) el.checkout.value = minOut;
   });
+
+  // datum riječima ispod polja (interno ostaje YYYY-MM-DD)
+  const rangeEl = $('#inq-range', form);
+  const showRange = () => {
+    const t = formatRange(el.checkin.value, el.checkout.value);
+    rangeEl.textContent = t;
+    rangeEl.classList.toggle('hidden', !t);
+  };
+  el.checkin.addEventListener('change', showRange);
+  el.checkout.addEventListener('change', showRange);
+  form.addEventListener('reset', () => setTimeout(showRange, 0));
 
   const setError = (name, text) => {
     const first = el[name];
@@ -325,6 +346,7 @@ function initInquiry() {
       el.checkout.min = addDays(checkin, 1);
       el.checkout.value = checkout;
       if (guests !== undefined) el.guests.value = guests;
+      showRange();
       showErrors({});
     },
   };

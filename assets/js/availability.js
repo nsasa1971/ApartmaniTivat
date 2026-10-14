@@ -8,6 +8,7 @@
 const pad = (n) => String(n).padStart(2, '0');
 
 export const MONTHS = ['januar', 'februar', 'mart', 'april', 'maj', 'jun', 'jul', 'avgust', 'septembar', 'oktobar', 'novembar', 'decembar'];
+export const SHORT_MONTHS = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec'];
 export const WEEKDAYS = ['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'];
 
 /** Današnji datum po lokalnom vremenu uređaja. */
@@ -44,6 +45,21 @@ export const formatDate = (iso) => {
   const [y, m, d] = iso.split('-');
   return `${d}.${m}.${y}.`;
 };
+
+/** "5. nov 2026." – mjesec je napisan riječju da se ne može pomiješati sa danom. */
+export const formatDateLong = (iso) => {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${d}. ${SHORT_MONTHS[m - 1]} ${y}.`;
+};
+
+/** 1 noćenje, 2–4 noćenja, 5+ noćenja, 21 noćenje … */
+export const nightsLabel = (n) => `${n} ${n % 10 === 1 && n % 100 !== 11 ? 'noćenje' : 'noćenja'}`;
+
+/** "5. nov 2026. – 9. nov 2026., 4 noćenja" (prazan string ako datumi nisu ispravni). */
+export const formatRange = (from, to) =>
+  isValidISO(from) && isValidISO(to) && to > from
+    ? `${formatDateLong(from)} – ${formatDateLong(to)}, ${nightsLabel(nightsBetween(from, to))}`
+    : '';
 
 export const monthLabel = (y, m) => `${MONTHS[m]} ${y}.`;
 export const shiftMonth = ({ y, m }, delta) => {

@@ -142,6 +142,7 @@ function hero() {
 
             <button type="submit" ${i('btn.search')} class="h-[52px] rounded-full bg-btn px-8 font-sans text-base font-bold text-white transition hover:bg-ink">${t('btn.search')}</button>
           </div>
+          <p id="booking-range" class="hidden px-3 pt-1 text-sm font-bold text-[#053133]" aria-live="polite"></p>
           <p id="booking-error" class="hidden px-3 pt-1 text-sm text-red-600" role="alert"></p>
         </form>
       </div>
@@ -184,7 +185,7 @@ function apartments() {
             .map(
               (ap) => `<article class="group reveal block">
             <img src="${esc(ap.image.src)}" width="${ap.image.width}" height="${ap.image.height}" loading="lazy" decoding="async" alt="${esc(ap.image.alt)}" class="img-muted w-full">
-            <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.name)}</h3>
+            <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.fullName ?? ap.name)}</h3>
             <p class="font-sans text-sm font-bold text-ink">${esc(ap.area)} · ${esc(ap.guests)}</p>
             <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
             <ul class="mt-2 font-sans text-sm leading-7 text-body">
@@ -378,7 +379,7 @@ function availabilitySection() {
           <div class="flex gap-2" role="group" aria-label="Apartman">
             ${c.apartments
               .map(
-                (ap, i) => `<button type="button" data-avail-apt="${esc(ap.id)}" aria-pressed="${i === 0}" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(ap.name.replace('Holiday home ', ''))}</button>`
+                (ap, i) => `<button type="button" data-avail-apt="${esc(ap.id)}" aria-pressed="${i === 0}" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(ap.name)}</button>`
               )
               .join('')}
           </div>
@@ -435,6 +436,7 @@ function reservation() {
             </fieldset>
             ${field('inq-checkin', 'Dolazak *', `<input type="date" id="inq-checkin" name="checkin" required class="${inputCls}">`)}
             ${field('inq-checkout', 'Odlazak *', `<input type="date" id="inq-checkout" name="checkout" required class="${inputCls}">`)}
+            <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#053133] md:col-span-2 md:-mt-2" aria-live="polite"></p>
             ${field('inq-guests', 'Broj gostiju *', `<input type="number" id="inq-guests" name="guests" min="${minGuests}" max="${maxGuests}" step="1" value="${defaultGuests}" inputmode="numeric" required class="${inputCls}">`)}
             ${field(
               'apartment',

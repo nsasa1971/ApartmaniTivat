@@ -76,7 +76,7 @@ export const intro = {
 };
 
 // ---------- Apartmani (kartice + izbor u formi za upit) ----------
-// id se koristi u formi i u data/availability.json.
+// id se koristi u formi, u Firestore-u i u firestore.rules.
 // Opis i sadržaj prepisani iz teksta klijenta.
 export const apartmentsSection = {
   id: 'apartmani',
@@ -90,7 +90,8 @@ const lavandaLemoniSummary =
 export const apartments = [
   {
     id: 'olive',
-    name: 'Holiday home Olive',
+    name: 'Olive', // kratki naziv: forma, select, kalendar, admin
+    fullName: 'Holiday home Olive', // puni naziv: samo u opisima na sajtu
     area: '50 m²',
     guests: '2–4 osobe',
     summary:
@@ -100,7 +101,8 @@ export const apartments = [
   },
   {
     id: 'lavanda',
-    name: 'Holiday home Lavanda',
+    name: 'Lavanda', // kratki naziv: forma, select, kalendar, admin
+    fullName: 'Holiday home Lavanda', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
     guests: '2–4 osobe',
     summary: lavandaLemoniSummary,
@@ -109,7 +111,8 @@ export const apartments = [
   },
   {
     id: 'lemoni',
-    name: 'Holiday home Lemoni',
+    name: 'Lemoni', // kratki naziv: forma, select, kalendar, admin
+    fullName: 'Holiday home Lemoni', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
     guests: '2–4 osobe',
     summary: lavandaLemoniSummary, // isti raspored i sadržaj kao Lavanda

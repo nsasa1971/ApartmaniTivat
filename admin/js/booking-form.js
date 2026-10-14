@@ -1,5 +1,5 @@
 // Forma rezervacije (nova / izmjena / prihvatanje upita) sa validacijom.
-import { findConflicts, formatDate, addDays, nightsBetween, isValidISO } from '../../assets/js/availability.js';
+import { findConflicts, formatDateLong, formatRange, addDays, isValidISO } from '../../assets/js/availability.js';
 import { SOURCES } from './apartments.js';
 import { $, esc, openDialog } from './ui.js';
 
@@ -34,8 +34,8 @@ export function openBookingForm({ booking = null, prefill = {}, apartments, book
           <option value="">— izaberite apartman —</option>
           ${apartments.map((a) => opt(a.id, a.naziv, a.id === v.apartmentId)).join('')}</select>`)}
         <div class="grid grid-cols-2 gap-3">
-          ${field('bf-from', 'Dolazak *', `<input id="bf-from" name="from" type="date" value="${esc(v.from ?? '')}" class="${inputCls}">`)}
-          ${field('bf-to', 'Odlazak *', `<input id="bf-to" name="to" type="date" value="${esc(v.to ?? '')}" class="${inputCls}">`)}
+          ${field('bf-from', 'Dolazak *', `<input id="bf-from" name="from" type="date" value="${esc(v.from ?? '')}" class="${inputCls}"><p id="bf-from-long" class="pt-1 font-sans text-sm font-bold text-[#053133]"></p>`)}
+          ${field('bf-to', 'Odlazak *', `<input id="bf-to" name="to" type="date" value="${esc(v.to ?? '')}" class="${inputCls}"><p id="bf-to-long" class="pt-1 font-sans text-sm font-bold text-[#053133]"></p>`)}
         </div>
         <p id="bf-info" class="-mt-2 font-sans text-sm text-body"></p>
         <p id="bf-conflict" class="hidden border-l-4 border-red-600 bg-red-50 p-3 font-sans text-sm text-red-800" role="alert"></p>
@@ -84,17 +84,16 @@ export function openBookingForm({ booking = null, prefill = {}, apartments, book
 
   const refresh = () => {
     el.from.value && !el.to.value && (el.to.value = addDays(el.from.value, 1));
-    const info = $('#bf-info', dlg);
-    info.textContent =
-      isValidISO(el.from.value) && isValidISO(el.to.value) && el.to.value > el.from.value
-        ? `Broj noćenja: ${nightsBetween(el.from.value, el.to.value)}`
-        : '';
+    // datum riječima (mjesec je napisan) – da se ne pomiješa mjesec i dan; interno ostaje YYYY-MM-DD
+    $('#bf-from-long', dlg).textContent = isValidISO(el.from.value) ? formatDateLong(el.from.value) : '';
+    $('#bf-to-long', dlg).textContent = isValidISO(el.to.value) ? formatDateLong(el.to.value) : '';
+    $('#bf-info', dlg).textContent = formatRange(el.from.value, el.to.value);
     const cs = conflictsNow();
     const box = $('#bf-conflict', dlg);
     box.classList.toggle('hidden', !cs.length);
     box.innerHTML = cs.length
       ? `<strong>Termin se preklapa</strong> sa postojećom rezervacijom: ${cs
-          .map((c) => `${esc(c.guestName)} (${formatDate(c.from)} – ${formatDate(c.to)})`)
+          .map((c) => `${esc(c.guestName)} (${formatDateLong(c.from)} – ${formatDateLong(c.to)})`)
           .join('; ')}. Izaberite druge datume ili prvo izmijenite postojeću rezervaciju.`
       : '';
     $('#bf-block', dlg).classList.toggle('hidden', el.source.value !== 'direct');

@@ -42,7 +42,7 @@ const dbp = () => firestore({ persistent: true });
 
 /** Upisuje apartmane koji ne postoje; vraća listu (iz baze + podrazumijevani). */
 export async function ensureApartments() {
-  const { db, collection, doc, getDocs, setDoc } = await dbp();
+  const { db, collection, doc, getDocs, setDoc, updateDoc } = await dbp();
   let existing = [];
   try {
     existing = (await getDocs(collection(db, 'apartments'))).docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -51,6 +51,15 @@ export async function ensureApartments() {
   }
   const have = new Set(existing.map((a) => a.id));
   for (const a of DEFAULT_APARTMENTS) {
+    const old = existing.find((x) => x.id === a.id);
+    if (old && old.naziv !== a.naziv) {
+      // ujednačen naziv (Olive / Lavanda / Lemoni) – ispravi i ranije upisan "Holiday home …"
+      try {
+        await updateDoc(doc(db, 'apartments', a.id), { naziv: a.naziv });
+      } catch (e) {
+        console.warn('Naziv apartmana nije ažuriran:', e.message);
+      }
+    }
     if (!have.has(a.id)) {
       try {
         await setDoc(doc(db, 'apartments', a.id), { naziv: a.naziv, kapacitet: a.kapacitet });
@@ -60,7 +69,11 @@ export async function ensureApartments() {
       }
     }
   }
-  return DEFAULT_APARTMENTS.map((a) => ({ ...a, ...(existing.find((x) => x.id === a.id) ?? {}) }));
+  // naziv uvijek iz koda (jedinstven izvor), kapacitet iz baze ako postoji
+  return DEFAULT_APARTMENTS.map((a) => {
+    const d = existing.find((x) => x.id === a.id);
+    return { ...a, kapacitet: Number.isInteger(d?.kapacitet) ? d.kapacitet : a.kapacitet };
+  });
 }
 
 // ---------- pretplate (realtime + offline keš) ----------

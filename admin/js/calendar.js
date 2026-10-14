@@ -10,7 +10,7 @@ export function renderCalendar({ apartments, bookings, aptId, month, today }) {
   const tabs = apartments
     .map(
       (a) => `<button type="button" data-apt="${esc(a.id)}" aria-pressed="${a.id === aptId}"
-        class="min-h-12 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(a.naziv.replace('Holiday home ', ''))}</button>`
+        class="min-h-12 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(a.naziv)}</button>`
     )
     .join('');
 

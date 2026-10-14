@@ -1,5 +1,5 @@
 // Liste: nadolazeće rezervacije i sanduče upita (HTML; događaje obrađuje app.js).
-import { addDays, formatDate, nightsBetween } from '../../assets/js/availability.js';
+import { addDays, formatDateLong, nightsLabel, nightsBetween } from '../../assets/js/availability.js';
 import { SOURCES } from './apartments.js';
 import { esc } from './ui.js';
 
@@ -17,7 +17,7 @@ const bookingCard = (b, apartments) => {
           <span class="shrink-0 px-2 py-0.5 font-sans text-xs font-bold ${s.cls}">${s.label}</span>
         </span>
         <span class="mt-1 block font-sans text-sm">${esc(aptName(apartments, b.apartmentId))}</span>
-        <span class="block font-sans text-base font-bold">${formatDate(b.from)} – ${formatDate(b.to)} <span class="font-normal">(${nightsBetween(b.from, b.to)} noć., ${b.guests} gost.)</span></span>
+        <span class="block font-sans text-base font-bold">${formatDateLong(b.from)} – ${formatDateLong(b.to)} <span class="font-normal">(${nightsLabel(nightsBetween(b.from, b.to))}, ${b.guests} gost.)</span></span>
         ${warn ? '<span class="mt-2 inline-block bg-red-600 px-2 py-0.5 font-sans text-xs font-bold text-white">Nije blokirano na Bookingu</span>' : ''}
       </button>
       ${warn ? `<div class="border-t border-line px-4 pb-3 pt-2"><button type="button" data-block="${esc(b.id)}" class="min-h-11 w-full bg-[#053133] px-4 font-sans text-sm font-bold text-white">Označi kao blokirano na Bookingu</button></div>` : ''}
@@ -84,7 +84,7 @@ const inquiryCard = (q, apartments) => {
         <span class="shrink-0 px-2 py-0.5 font-sans text-xs font-bold ${cls}">${label}</span>
       </div>
       <p class="font-sans text-sm text-body">${tsLabel(q.createdAt)}</p>
-      <p class="mt-1 font-sans text-base font-bold">${formatDate(q.from)} – ${formatDate(q.to)} <span class="font-normal">(${nightsBetween(q.from, q.to)} noć., ${q.guests} gost.)</span></p>
+      <p class="mt-1 font-sans text-base font-bold">${formatDateLong(q.from)} – ${formatDateLong(q.to)} <span class="font-normal">(${nightsLabel(nightsBetween(q.from, q.to))}, ${q.guests} gost.)</span></p>
       <p class="font-sans text-sm">${q.apartmentId ? esc(aptName(apartments, q.apartmentId)) : 'Bez preferencije apartmana'}</p>
       <p class="font-sans text-sm">${esc(q.email)}${q.phone ? ' · ' + esc(q.phone) : ''}${q.messengers ? ' · ' + esc(q.messengers) : ''}</p>
       ${q.message ? `<p class="mt-2 whitespace-pre-line border-l-4 border-line pl-3 font-sans text-sm">${esc(q.message)}</p>` : ''}
