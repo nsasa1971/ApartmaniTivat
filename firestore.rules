@@ -1,0 +1,74 @@
+rules_version = '2';
+
+// ============================================================
+//  Firestore pravila – Tivat Garden Homes
+//  Lijepe se u Firebase konzoli: Firestore Database → Rules → Publish
+//  (ili `firebase deploy --only firestore:rules` ako koristiš Firebase CLI).
+//
+//  OBAVEZNO: u funkciji isOwner() ispod zamijeni tekst u navodnicima UID-om vlasnice
+//  (Firebase konzola → Authentication → Users → kolona "User UID").
+// ============================================================
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- pomoćne funkcije ----------
+    function isOwner() {
+      // Ovdje se upisuje UID vlasnice. Može više UID-ova: ['uid1', 'uid2'].
+      return request.auth != null && request.auth.uid in ['UPISI_UID_VLASNICE'];
+    }
+
+    function isDate(v) {
+      return v is string && v.matches('^[0-9]{4}-[0-9]{2}-[0-9]{2}$');
+    }
+
+    // ---------- apartmani: javno čitanje, pisanje samo vlasnica ----------
+    match /apartments/{id} {
+      allow read: if true;
+      allow write: if isOwner();
+    }
+
+    // ---------- rezervacije: PRIVATNO (lični podaci gostiju) ----------
+    match /bookings/{id} {
+      allow read, write: if isOwner();
+    }
+
+    // ---------- dostupnost: JAVNO čitanje, samo datumi (nikakvi lični podaci) ----------
+    match /availability/{id} {
+      allow read: if true;
+      allow create, update: if isOwner()
+        && request.resource.data.keys().hasOnly(['apartmentId', 'from', 'to', 'bookingId'])
+        && request.resource.data.keys().hasAll(['apartmentId', 'from', 'to', 'bookingId'])
+        && request.resource.data.apartmentId is string
+        && request.resource.data.bookingId is string
+        && isDate(request.resource.data.from)
+        && isDate(request.resource.data.to)
+        && request.resource.data.to > request.resource.data.from;
+      allow delete: if isOwner();
+    }
+
+    // ---------- upiti sa sajta: javno SAMO create (strogo validirano), ostalo vlasnica ----------
+    match /inquiries/{id} {
+      allow create: if request.resource.data.keys().hasOnly(
+            ['guestName', 'email', 'phone', 'messengers', 'apartmentId', 'from', 'to', 'guests', 'message', 'status', 'createdAt'])
+        && request.resource.data.keys().hasAll(
+            ['guestName', 'email', 'phone', 'messengers', 'apartmentId', 'from', 'to', 'guests', 'message', 'status', 'createdAt'])
+        && request.resource.data.guestName is string
+        && request.resource.data.guestName.size() >= 1 && request.resource.data.guestName.size() <= 100
+        && request.resource.data.email is string
+        && request.resource.data.email.size() >= 5 && request.resource.data.email.size() <= 200
+        && request.resource.data.email.matches('^[^@ ]+@[^@ ]+[.][^@ ]+$')
+        && request.resource.data.phone is string && request.resource.data.phone.size() <= 40
+        && request.resource.data.messengers is string && request.resource.data.messengers.size() <= 40
+        && request.resource.data.apartmentId in ['', 'olive', 'lavanda', 'lemoni']
+        && isDate(request.resource.data.from)
+        && isDate(request.resource.data.to)
+        && request.resource.data.to > request.resource.data.from
+        && request.resource.data.guests is int
+        && request.resource.data.guests >= 1 && request.resource.data.guests <= 20
+        && request.resource.data.message is string && request.resource.data.message.size() <= 2000
+        && request.resource.data.status == 'new'
+        && request.resource.data.createdAt == request.time;
+      allow read, update, delete: if isOwner();
+    }
+  }
+}
