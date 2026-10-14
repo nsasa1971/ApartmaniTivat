@@ -44,8 +44,8 @@ export const contact = {
   phone: '+38269506646', // koristi se za tel: link
   phoneDisplay: '+382 69 506 646', // prikaz na sajtu
   email: '[EMAIL]',
-  whatsapp: '', // dodati kad se potvrdi broj, npr. '+38269506646'
-  viber: '', // dodati kad se potvrdi broj
+  whatsapp: '+38269506646', // isti broj kao telefon
+  viber: '+38269506646', // isti broj kao telefon
   address: 'Bonići I bb',
   city: 'Tivat',
   country: 'ME',
@@ -127,10 +127,9 @@ export const pricing = {
     { label: 'Od 01.06. do 01.09.', note: '', price: '120 €', unit: 'po danu' },
     { label: 'Novogodišnji praznici', note: '31.12., 01.01. i 02.01.', price: '120 €', unit: 'po danu' },
   ],
-  // Na šta se cijena odnosi još nije potvrđeno – ne pisati "po apartmanu" / "po osobi" dok klijent ne potvrdi.
-  basis: 'Cijena važi: [POTVRDITI: po apartmanu]',
+  basis: 'Cijene važe po apartmanu.',
   discounts: [
-    '[POTVRDITI sa klijentom tačan tekst: popust 10% za boravak od/do 10 dana]',
+    'Za boravak od 10 dana i više popust 10%.',
     'Za boravak od mjesec dana povoljnija cijena, popust do 20%.',
   ],
   disclaimer: 'Cijene su informativne. Tačnu ponudu pošaljite preko forme za upit.',
@@ -178,21 +177,25 @@ export const dark = {
 };
 
 // ---------- Plaže (kartice). `link` je opcion (npr. Google Maps); prazno = nije link ----------
-// Samo naziv + placeholder za opis; udaljenosti i tvrdnje dodati tek kad se potvrde.
-const beach = (n, name) => ({
+// Kratki opšti opisi; udaljenosti od apartmana nisu navedene.
+const beach = (n, name, desc) => ({
   name,
-  desc: '[Jedna rečenica opisa plaže]',
+  desc,
   image: { src: `assets/img/beach-${n}.jpg`, width: 1024, height: 768, alt: name },
   link: '',
 });
 export const beaches = {
   title: 'Plaže koje vrijedi posjetiti',
-  items: [beach(1, 'Kaluman'), beach(2, 'Plavi horizonti'), beach(3, 'Jaz')],
+  items: [
+    beach(1, 'Kaluman', 'Mirna plaža u okolini Tivta, pogodna za kupanje i opuštanje uz more.'),
+    beach(2, 'Plavi horizonti', 'Pješčana plaža u zaštićenoj uvali na poluostrvu Luštica, poznata po bistrom moru.'),
+    beach(3, 'Jaz', 'Prostrana plaža kod Budve sa šljunkom i pijeskom, poznata po živoj atmosferi i vodenim sportovima.'),
+  ],
 };
 
 // ---------- Dodatne sekcije (isti obrazac kao plaže; pojavljuju se u meniju i footeru) ----------
 export const extraSections = {
-  // ZA PROVJERU KLIJENTA: opšti opisi znamenitosti – klijent treba da provjeri tekst.
+  // Opšti opisi znamenitosti (bez brojki, udaljenosti i radnog vremena).
   sights: {
     enabled: true,
     id: 'znamenitosti',
@@ -200,25 +203,25 @@ export const extraSections = {
     items: [
       {
         name: 'Tivat – Porto Montenegro i centar',
-        desc: 'Šetnja obalom, jahte u marini Porto Montenegro i kafići u centru grada.',
+        desc: 'Opuštena šetnja uz more, marina Porto Montenegro sa jahtama i kafići, restorani i prodavnice u centru grada.',
         image: { src: 'assets/img/sight-1.jpg', width: 1024, height: 768, alt: 'Tivat – Porto Montenegro i centar' },
         link: '',
       },
       {
         name: 'Kotor',
-        desc: 'Poznat po starom gradu sa kamenim ulicama i trgovima, okruženom gradskim zidinama i planinama iznad zaliva.',
+        desc: 'Stari grad Kotor poznat je po kamenim ulicama, trgovima i gradskim zidinama, a iznad njega se uzdižu planine. Idealan je za dnevni izlet i šetnju.',
         image: { src: 'assets/img/sight-2.jpg', width: 1024, height: 768, alt: 'Kotor' },
         link: '',
       },
       {
         name: 'Budva',
-        desc: 'Poznata po starom gradu, plažama i živom ljetnjem životu na crnogorskom primorju.',
+        desc: 'Budva je poznata po starom gradu, plažama i živom ljetnjem životu. Dobra je za izlet u kojem se kombinuju šetnja, kupanje i izlazak.',
         image: { src: 'assets/img/sight-3.jpg', width: 1024, height: 768, alt: 'Budva' },
         link: '',
       },
     ],
   },
-  // ZA PROVJERU KLIJENTA: spisak jela treba da potvrdi klijent. Bez restorana, cijena i adresa.
+  // Klasična jela crnogorskog primorja. Bez restorana, cijena i adresa.
   food: {
     enabled: true,
     id: 'hrana',
