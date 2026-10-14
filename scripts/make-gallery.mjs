@@ -1,13 +1,15 @@
 // ============================================================
 //  Pravi galeriju za sajt iz 6 izabranih fotografija.
 //  Upotreba:  npm run gallery -- <folder-sa-fotografijama>
-//  - uzima prvih 6 slika po abecednom redu (nazovi ih 1.jpg … 6.jpg da odrediš redoslijed)
-//  - upisuje assets/img/gallery-1..6.jpg (1240×827) i thumb-1..6.jpg (394×394)
+//  - uzima sve slike iz foldera po brojčanom redu (1.jpg, 2.jpg, … 15.jpg – broj određuje redoslijed)
+//  - upisuje assets/img/gallery-N.jpg (1240×827) i thumb-N.jpg (394×394)
+//  - broj slika treba da odgovara GALLERY_COUNT u assets/js/content.js
 //  - poštuje rotaciju, skida metapodatke; originali se ne mijenjaju
 // ============================================================
 import { readdir } from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
+import { gallery } from '../assets/js/content.js';
 
 const input = process.argv[2];
 if (!input) {
@@ -18,10 +20,12 @@ if (!input) {
 const EXT = new Set(['.jpg', '.jpeg', '.png', '.webp', '.tif', '.tiff']);
 const files = (await readdir(input))
   .filter((f) => EXT.has(path.extname(f).toLowerCase()))
-  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-  .slice(0, 6);
+  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
-if (files.length < 6) console.warn(`Upozorenje: pronađeno je samo ${files.length} slika (potrebno 6).`);
+if (files.length !== gallery.length)
+  console.warn(
+    `Upozorenje: u folderu je ${files.length} slika, a content.js (GALLERY_COUNT) očekuje ${gallery.length}. Uskladi ih.`
+  );
 
 const out = path.resolve('assets/img');
 for (const [i, f] of files.entries()) {
