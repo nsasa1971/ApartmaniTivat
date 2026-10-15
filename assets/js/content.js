@@ -67,13 +67,12 @@ export const hero = {
   // Slider: prva je `image`, ostale se učitavaju iza nje (slika koja ne postoji se preskoči).
   slides: [
     'assets/img/gallery-13.jpg',
-    'assets/img/gallery-16.jpg',
     'assets/img/gallery-17.jpg',
     'assets/img/gallery-18.jpg',
   ],
   subtitle: 'Apartmani u Tivtu',
   title: 'Tivat Garden Homes',
-  text: 'Holiday home Olive, Holiday home Lavande i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.',
+  text: 'Apartmani Olive, Lavande i Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.',
 };
 
 export const logo = { src: 'assets/img/logo.png', width: 288, height: 288 };

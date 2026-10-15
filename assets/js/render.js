@@ -100,53 +100,50 @@ function header() {
 // ---------- Hero + booking traka ----------
 function hero() {
   const h = c.hero;
+  const boxCls = 'flex min-w-0 flex-col justify-center rounded-2xl border border-ink/10 bg-white px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:border-ink/25';
+  const labelCls = 'flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest';
   const field = (id, label, key) => `
-            <label class="flex items-center gap-3 rounded-full px-2 py-2">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#34493A]/20 bg-[#34493A]/10" aria-hidden="true">${calIcon}</span>
-              <span class="flex flex-col">
-                <span ${i(key)} class="text-sm font-bold leading-4 text-[#243528]">${t(key)}</span>
-                <input type="date" name="${id}" id="${id}" class="bg-transparent text-sm text-[#243528]/70 outline-none focus-visible:ring-2 focus-visible:ring-[#34493A]" required>
-              </span>
+            <label class="${boxCls}">
+              <span class="${labelCls}">${calIcon}<span ${i(key)}>${t(key)}</span></span>
+              <input type="date" name="${id}" id="${id}" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
             </label>`;
+  const stepBtn = 'flex h-8 w-8 items-center justify-center rounded-full bg-mist text-lg leading-none text-ink transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest';
   return `
     <section class="relative flex min-h-[250px] items-center py-12 md:min-h-[320px] md:pb-[130px] md:pt-[100px]">
       <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" class="absolute inset-0 overflow-hidden">
         <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
       </div>
-      <div class="absolute inset-0 bg-[#34493A]/70 md:bg-transparent md:bg-[linear-gradient(90deg,#34493AFA_2%,#F2295B00_42%)]"></div>
-      <div data-hero-dots class="absolute right-4 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3 md:right-8" role="group" aria-label="Slike"></div>
+      <div class="absolute inset-0 bg-[#1F2F25]/65 md:bg-transparent md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
+      <div data-hero-dots class="absolute left-1/2 top-4 z-10 flex -translate-x-1/2 gap-3 md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="Slike"></div>
 
       <div class="container relative max-w-page">
-        <div class="max-w-xl text-center text-white [text-shadow:0_1px_4px_rgba(0,0,0,.45)] md:pl-3 md:pr-[70px] md:text-left md:[text-shadow:none]">
+        <div class="max-w-3xl text-center text-white [text-shadow:0_1px_4px_rgba(0,0,0,.45)] md:pl-3 md:text-left">
           <span class="mb-[30px] ml-10 hidden h-24 w-px bg-white/70 md:block" aria-hidden="true"></span>
-          <p class="mb-4 text-lg md:text-xl">${esc(h.subtitle)}</p>
-          <h1 class="mb-[30px] font-display text-[46px] leading-[65px] tracking-[1px] text-white md:text-[54px]">${esc(h.title)}</h1>
-          <p class="text-base md:text-xl">${esc(h.text)}</p>
+          <p class="mb-3 text-lg md:text-xl">${esc(h.subtitle)}</p>
+          <h1 class="mb-6 whitespace-nowrap font-display text-[clamp(30px,8.6vw,76px)] leading-[1.15] tracking-[1px] text-white">${esc(h.title)}</h1>
+          <p class="max-w-xl text-base md:text-xl">${esc(h.text)}</p>
         </div>
 
         <!-- Booking traka: popunjava formu za upit (#rezervacija) -->
-        <form id="booking-form" class="mt-12 max-w-[1000px] rounded-[25px] bg-white p-3 text-ink shadow-xl md:rounded-[55px] md:px-5 md:py-2" aria-label="Pretraga termina" novalidate>
-          <div class="grid gap-2 md:grid-cols-[1fr_1fr_1fr_auto] md:items-center">
+        <form id="booking-form" class="mt-10 max-w-[980px] rounded-3xl border border-white/50 bg-white/90 p-3 text-ink shadow-[0_24px_60px_-18px_rgba(0,0,0,.55)] backdrop-blur-md md:p-4" aria-label="Pretraga termina" novalidate>
+          <div class="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto]">
             ${field('checkin', 'Dolazak', 'booking.checkin')}
             ${field('checkout', 'Odlazak', 'booking.checkout')}
 
-            <div class="flex items-center gap-3 rounded-full px-2 py-2" role="group" aria-labelledby="guests-label">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#34493A]/20 bg-[#34493A]/10" aria-hidden="true">${guestsIcon}</span>
-              <span class="flex flex-col">
-                <span id="guests-label" ${i('booking.guests')} class="text-sm font-bold leading-4 text-[#243528]">${t('booking.guests')}</span>
-                <span class="flex items-center gap-3 text-sm text-[#243528]/70">
-                  <button type="button" data-guests="-1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#243528] leading-none text-[#243528] focus-visible:ring-2 focus-visible:ring-[#34493A]" aria-label="Manje gostiju">−</button>
-                  <output id="guests-output" aria-live="polite">${c.config.defaultGuests}</output>
-                  <button type="button" data-guests="1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#243528] leading-none text-[#243528] focus-visible:ring-2 focus-visible:ring-[#34493A]" aria-label="Više gostiju">+</button>
-                </span>
+            <div class="${boxCls}" role="group" aria-labelledby="guests-label">
+              <span id="guests-label" class="${labelCls}">${guestsIcon}<span ${i('booking.guests')}>${t('booking.guests')}</span></span>
+              <span class="mt-1 flex items-center justify-between gap-3">
+                <button type="button" data-guests="-1" class="${stepBtn}" aria-label="Manje gostiju">−</button>
+                <output id="guests-output" class="min-w-[1.5ch] text-center text-base font-bold" aria-live="polite">${c.config.defaultGuests}</output>
+                <button type="button" data-guests="1" class="${stepBtn}" aria-label="Više gostiju">+</button>
               </span>
               <input type="hidden" name="guests" id="guests" value="${c.config.defaultGuests}">
             </div>
 
-            <button type="submit" ${i('btn.search')} class="h-[52px] rounded-full bg-btn px-8 font-sans text-base font-bold text-white transition hover:bg-ink">${t('btn.search')}</button>
+            <button type="submit" class="flex min-h-[56px] items-center justify-center gap-2 rounded-2xl bg-btn px-8 font-sans text-base font-bold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-ink md:min-w-[170px]"><span ${i('btn.search')}>${t('btn.search')}</span>${arrow}</button>
           </div>
-          <p id="booking-range" class="hidden px-3 pt-1 text-sm font-bold text-[#243528]" aria-live="polite"></p>
-          <p id="booking-error" class="hidden px-3 pt-1 text-sm text-red-600" role="alert"></p>
+          <p id="booking-range" class="hidden px-2 pt-2 text-sm font-bold text-forest" aria-live="polite"></p>
+          <p id="booking-error" class="hidden px-2 pt-2 text-sm text-red-600" role="alert"></p>
         </form>
       </div>
     </section>`;
@@ -525,8 +522,9 @@ function footer() {
   return `
   <footer id="kontakt" class="bg-night text-white">
     <div class="container max-w-page py-16">
-      <div class="grid gap-10 text-center md:grid-cols-4 md:text-left">
+      <div class="grid gap-10 text-center md:grid-cols-[minmax(0,22rem)_auto_auto_auto] md:justify-between md:gap-x-10 md:text-left">
         <div>
+          <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" loading="lazy" class="mx-auto mb-5 h-28 w-28 md:mx-0">
           <h2 ${i('footer.about')} class="mb-4 font-display text-[26px] text-white">${t('footer.about')}</h2>
           <p class="font-sans text-sm leading-7 text-white/80">${esc(c.footer.about)}</p>
           <p class="mt-3 font-sans text-sm leading-7 text-white/80">${esc(fullAddress())}${
