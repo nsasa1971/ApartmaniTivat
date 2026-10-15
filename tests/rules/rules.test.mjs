@@ -5,8 +5,12 @@ import { initializeTestEnvironment, assertFails, assertSucceeds } from '@firebas
 import { doc, getDoc, setDoc, addDoc, collection, getDocs, deleteDoc, updateDoc, serverTimestamp, writeBatch } from 'firebase/firestore';
 
 const OWNER = 'test-owner-uid';
-// u testu zamjenjujemo placeholder UID-om vlasnice
-const rules = fs.readFileSync(new URL('../../firestore.rules', import.meta.url), 'utf8').replaceAll('UPISI_UID_VLASNICE', OWNER);
+const OWNER2 = 'test-second-owner-uid';
+// u testu zamjenjujemo UID iz ownerUids() sa dva test UID-a (provjera da lista radi sa više vlasnica)
+const rules = fs
+  .readFileSync(new URL('../../firestore.rules', import.meta.url), 'utf8')
+  .replace("return ['PTsPq8QOzFa1VUN9A5ekLPHzK6I3'];", `return ['${OWNER}', '${OWNER2}'];`);
+if (!rules.includes(OWNER2)) throw new Error('ownerUids() u firestore.rules nije u očekivanom obliku');
 
 let env;
 before(async () => {
@@ -16,6 +20,7 @@ after(() => env.cleanup());
 beforeEach(() => env.clearFirestore());
 
 const owner = () => env.authenticatedContext(OWNER).firestore();
+const owner2 = () => env.authenticatedContext(OWNER2).firestore();
 const other = () => env.authenticatedContext('somebody-else').firestore();
 const anon = () => env.unauthenticatedContext().firestore();
 
@@ -35,6 +40,12 @@ test('bookings su privatne', async () => {
   await assertFails(setDoc(doc(anon(), 'bookings/b2'), booking));
   await assertFails(setDoc(doc(other(), 'bookings/b2'), booking));
   await assertSucceeds(setDoc(doc(owner(), 'bookings/b2'), booking));
+});
+
+test('više vlasnica: oba UID-a iz liste imaju pristup, ostali ne', async () => {
+  await assertSucceeds(setDoc(doc(owner(), 'bookings/m1'), booking));
+  await assertSucceeds(getDoc(doc(owner2(), 'bookings/m1')));
+  await assertFails(getDoc(doc(other(), 'bookings/m1')));
 });
 
 test('availability: javno čitanje, pisanje samo vlasnica, samo datumi', async () => {
