@@ -160,7 +160,7 @@ function hero() {
             </div>`;
   return `
     <section class="relative flex min-h-[calc(100svh-96px)] items-center py-12 md:min-h-[calc(100svh-112px)] md:py-16 lg:min-h-[calc(100svh-96px)] xl:min-h-[calc(100svh-112px)]">
-      <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" data-aria-slide="${esc(t('aria.slide', { n: '{n}', m: '{m}' }))}" class="absolute inset-0 overflow-hidden">
+      <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" data-aria-slide="${esc(t('aria.slide', { n: '{n}', m: '{m}' }))}" class="absolute inset-0 isolate overflow-hidden">
         <picture>${h.mobileSrc ? `<source media="(max-width: 767px)" srcset="${esc(h.mobileSrc)}">` : ''}
           <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
         </picture>
