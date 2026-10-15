@@ -90,11 +90,9 @@ export const apartmentsSection = {
 };
 
 const lavandaLemoniText = (naziv) =>
-  `Holiday home ${naziv} je prostran apartman od 60 m², namijenjen za 2 do 4 osobe. Sastoji se od jedne velike sobe sa bračnim krevetom i sofom, dnevnog boravka sa velikom ugaonom garniturom na razvlačenje, kupatila i potpuno opremljene kuhinje. Apartman ima poseban ulaz, terasu i prostrano dvorište u hladu maslina, sa vanjskim roštiljem, idealno za odmor i druženje. Moderan i funkcionalan raspored pruža gostima privatnost i udobnost tokom cijelog boravka.`;
+  `Holiday home ${naziv} je prostran apartman od 60 m², namijenjen za 2 do 4 osobe. Sastoji se od jedne velike sobe sa bračnim krevetom i sofom, dnevnog boravka sa velikom ugaonom garniturom na razvlačenje, kupatila i potpuno opremljene kuhinje. Gostima su na raspolaganju TV, internet i dva klima uređaja. Apartman ima poseban ulaz, terasu i prostrano dvorište u hladu maslina, sa vanjskim roštiljem, idealno za odmor i druženje. Moderan i funkcionalan raspored pruža gostima privatnost i udobnost tokom cijelog boravka.`;
 
 // Lavanda i Lemoni imaju isti raspored i sadržaj.
-// NAPOMENA: tekst klijenta za Lavandu/Lemoni ne pominje TV, internet i klima uređaje, ali su navedeni
-// u ranijem opisu klijenta – ostavljeno u listi; potvrditi sa klijentom.
 const lavandaLemoniFeatures = [
   'Spavaća soba sa bračnim krevetom i sofom',
   'Dnevna soba sa velikom ugaonom garniturom na razvlačenje',
