@@ -161,7 +161,9 @@ function hero() {
   return `
     <section class="relative flex min-h-[calc(100svh-96px)] items-center py-12 md:min-h-[calc(100svh-112px)] md:py-16 lg:min-h-[calc(100svh-96px)] xl:min-h-[calc(100svh-112px)]">
       <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" data-aria-slide="${esc(t('aria.slide', { n: '{n}', m: '{m}' }))}" class="absolute inset-0 overflow-hidden">
-        <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+        <picture>${h.mobileSrc ? `<source media="(max-width: 767px)" srcset="${esc(h.mobileSrc)}">` : ''}
+          <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+        </picture>
       </div>
       <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,40,31,.38)_0%,rgba(26,40,31,.5)_100%)] md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
       <div data-hero-dots class="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-3 md:bottom-auto md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="${esc(t('aria.slides'))}"></div>

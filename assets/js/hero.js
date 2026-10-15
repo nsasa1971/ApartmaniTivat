@@ -38,6 +38,7 @@ function createWater(section, host) {
   const canvas = document.createElement('canvas');
   canvas.setAttribute('aria-hidden', 'true');
   canvas.className = 'absolute inset-0 h-full w-full';
+  canvas.style.zIndex = '999'; // uvijek iznad slika koje slider dovodi na vrh (inače efekat nestane poslije prve promjene)
   canvas.style.display = 'none';
   const gl = canvas.getContext('webgl', { alpha: false, antialias: false, powerPreference: 'low-power' });
   if (!gl) return null;
@@ -114,6 +115,13 @@ function createWater(section, host) {
     cur = new Float32Array(gw * gh);
     prev = new Float32Array(gw * gh);
     normals = new Uint8Array(gw * gh * 4);
+    // neutralna ravan (nagib 0): 127/128 se u shaderu čita kao ~0; nule bi pomjerile cijelu sliku i ivice
+    for (let o = 0; o < normals.length; o += 4) {
+      normals[o] = 128;
+      normals[o + 1] = 128;
+      normals[o + 2] = 127;
+      normals[o + 3] = 255;
+    }
     energy = 0;
   };
 
@@ -147,8 +155,8 @@ function createWater(section, host) {
         const i = y * gw + x, o = i * 4;
         const nx = Math.max(-1, Math.min(1, (cur[i + 1] - cur[i - 1]) * SLOPE_GAIN));
         const ny = Math.max(-1, Math.min(1, (cur[i + gw] - cur[i - gw]) * SLOPE_GAIN));
-        normals[o] = 127.5 + nx * 127.5;
-        normals[o + 1] = 127.5 + ny * 127.5;
+        normals[o] = 128 + nx * 127;
+        normals[o + 1] = 128 + ny * 127;
         normals[o + 2] = 127;
         normals[o + 3] = 255;
       }
@@ -195,7 +203,7 @@ function createWater(section, host) {
     const r = section.getBoundingClientRect();
     cssW = Math.max(1, r.width);
     cssH = Math.max(1, r.height);
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(window.devicePixelRatio || 1, 2); // oštrina na telefonima
     canvas.width = Math.round(cssW * dpr);
     canvas.height = Math.round(cssH * dpr);
     reset();
@@ -230,6 +238,13 @@ function createWater(section, host) {
   };
   section.addEventListener('pointermove', onMove, { passive: true });
   section.addEventListener('pointerdown', onDown, { passive: true });
+  // na telefonu pregledač prekida pointer događaje čim počne skrolovanje; touchmove nastavlja da stiže
+  const touchPoint = (e) => {
+    const tp = e.touches[0];
+    return tp && { clientX: tp.clientX, clientY: tp.clientY, timeStamp: e.timeStamp };
+  };
+  section.addEventListener('touchmove', (e) => { const p = touchPoint(e); if (p) onMove(p); }, { passive: true });
+  section.addEventListener('touchend', () => { last = null; }, { passive: true });
   section.addEventListener('pointerleave', () => { last = null; }, { passive: true });
 
   canvas.addEventListener('webglcontextlost', (e) => {
