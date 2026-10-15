@@ -2,6 +2,7 @@ import { renderApp, hash } from './render.js';
 import { defaultLang, applyLanguage, languages } from './i18n.js';
 import { initBooking } from './booking.js';
 import { initLightbox } from './lightbox.js';
+import { initAvailability } from './availability-widget.js';
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -73,6 +74,7 @@ $$('.reveal').forEach((el) => io.observe(el));
 // ============ BOOKING TRAKA + FORMA ZA UPIT, LIGHTBOX ============
 initBooking();
 initLightbox();
+initAvailability();
 
 // ============ FOOTER GODINA ============
 $$('[data-year]').forEach((el) => (el.textContent = new Date().getFullYear()));

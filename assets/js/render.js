@@ -142,6 +142,7 @@ function hero() {
 
             <button type="submit" ${i('btn.search')} class="h-[52px] rounded-full bg-btn px-8 font-sans text-base font-bold text-white transition hover:bg-ink">${t('btn.search')}</button>
           </div>
+          <p id="booking-range" class="hidden px-3 pt-1 text-sm font-bold text-[#053133]" aria-live="polite"></p>
           <p id="booking-error" class="hidden px-3 pt-1 text-sm text-red-600" role="alert"></p>
         </form>
       </div>
@@ -184,7 +185,7 @@ function apartments() {
             .map(
               (ap) => `<article class="group reveal block">
             <img src="${esc(ap.image.src)}" width="${ap.image.width}" height="${ap.image.height}" loading="lazy" decoding="async" alt="${esc(ap.image.alt)}" class="img-muted w-full">
-            <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.name)}</h3>
+            <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.fullName ?? ap.name)}</h3>
             <p class="font-sans text-sm font-bold text-ink">${esc(ap.area)} · ${esc(ap.guests)}</p>
             <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
             <ul class="mt-2 font-sans text-sm leading-7 text-body">
@@ -365,6 +366,44 @@ export function contactLinks() {
 
 export const fullAddress = () => [c.contact.address, c.contact.city, c.contact.countryName].filter(Boolean).join(', ');
 
+// ---------- Dostupnost (popunjava availability-widget.js; sakrivena dok Firebase ne odgovori) ----------
+function availabilitySection() {
+  const a = c.availability;
+  return `
+    <div id="dostupnost-anchor" aria-hidden="true"></div>
+    <section id="${esc(a.id)}" class="hidden bg-mist py-[50px] md:py-[100px]" aria-labelledby="dostupnost-title">
+      <div class="container max-w-page text-center">
+        <h2 id="dostupnost-title" class="mb-4 font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(a.title)}</h2>
+        <p class="mx-auto mb-8 max-w-xl font-sans text-lg">${esc(a.text)}</p>
+        <div class="mx-auto max-w-md bg-white p-4 md:p-6">
+          <div class="flex gap-2" role="group" aria-label="Apartman">
+            ${c.apartments
+              .map(
+                (ap, i) => `<button type="button" data-avail-apt="${esc(ap.id)}" aria-pressed="${i === 0}" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(ap.name)}</button>`
+              )
+              .join('')}
+          </div>
+          <div class="mt-4 flex items-center justify-between">
+            <button type="button" data-avail-month="-1" aria-label="Prethodni mjesec" class="h-11 w-11 border border-ink text-2xl disabled:opacity-30">‹</button>
+            <h3 id="avail-month" class="font-display text-[22px] capitalize" aria-live="polite"></h3>
+            <button type="button" data-avail-month="1" aria-label="Sljedeći mjesec" class="h-11 w-11 border border-ink text-2xl">›</button>
+          </div>
+          <div class="mt-3 grid grid-cols-7 gap-px text-center font-sans text-xs font-bold text-body" aria-hidden="true">
+            ${['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'].map((d) => `<div>${d}</div>`).join('')}
+          </div>
+          <div id="avail-grid" class="mt-1 grid grid-cols-7 gap-px bg-line"></div>
+          <p class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-sm">
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 border border-line bg-white"></span>Slobodno</span>
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-charcoal"></span>Zauzeto</span>
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#0E878C]"></span>Vaš izbor</span>
+          </p>
+          <p id="avail-msg" class="mt-3 min-h-6 font-sans text-sm" role="status" aria-live="polite"></p>
+          <button type="button" id="avail-send" class="mt-2 hidden w-full bg-ink px-6 py-4 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal">Pošalji upit za ovaj termin</button>
+        </div>
+      </div>
+    </section>`;
+}
+
 // ---------- Rezervacija: forma za upit + direktni kontakti ----------
 function reservation() {
   const b = c.booking;
@@ -397,6 +436,7 @@ function reservation() {
             </fieldset>
             ${field('inq-checkin', 'Dolazak *', `<input type="date" id="inq-checkin" name="checkin" required class="${inputCls}">`)}
             ${field('inq-checkout', 'Odlazak *', `<input type="date" id="inq-checkout" name="checkout" required class="${inputCls}">`)}
+            <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#053133] md:col-span-2 md:-mt-2" aria-live="polite"></p>
             ${field('inq-guests', 'Broj gostiju *', `<input type="number" id="inq-guests" name="guests" min="${minGuests}" max="${maxGuests}" step="1" value="${defaultGuests}" inputmode="numeric" required class="${inputCls}">`)}
             ${field(
               'apartment',
@@ -530,6 +570,7 @@ ${feature()}
 ${reviews()}
 ${dark()}
 ${beaches()}
+${availabilitySection()}
 ${reservation()}
 ${map()}
   </main>

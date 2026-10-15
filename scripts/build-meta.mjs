@@ -40,7 +40,7 @@ const jsonLd = {
   sameAs: nonPlaceholder(c.social.instagram) ? [c.social.instagram] : undefined,
   containsPlace: c.apartments.map((a) => ({
     '@type': 'Apartment',
-    name: a.name,
+    name: a.fullName ?? a.name,
     description: a.summary,
     floorSize: a.area ? { '@type': 'QuantitativeValue', value: parseFloat(a.area), unitCode: 'MTK' } : undefined,
   })),
@@ -97,7 +97,7 @@ const manifest = {
 await writeFile(file('manifest.webmanifest'), JSON.stringify(manifest, null, 2) + '\n');
 
 // ---------- robots + sitemap ----------
-await writeFile(file('robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${base}/sitemap.xml\n`);
+await writeFile(file('robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${base}/sitemap.xml\n`);
 const urls = [`${base}/`, `${base}/${c.footer.privacyHref}`];
 await writeFile(
   file('sitemap.xml'),
