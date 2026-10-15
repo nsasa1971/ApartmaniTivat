@@ -194,7 +194,7 @@ function apartments() {
             <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.fullName ?? ap.name)}</h3>
             <p class="font-sans text-sm font-bold text-ink">${esc(ap.area)} · ${esc(ap.guests)}</p>
             <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
-            <ul class="mt-2 list-disc pl-5 font-sans text-sm leading-7 text-body">
+            <ul class="mt-auto list-disc pl-5 pt-2 font-sans text-sm leading-7 text-body">
               ${ap.features.map((f) => `<li>${esc(f)}</li>`).join('\n              ')}
             </ul>
           </article>`
@@ -327,12 +327,13 @@ const cards = (items) =>
               p.desc ? `\n            <p class="font-sans text-sm leading-7 text-body">${esc(p.desc)}</p>` : ''
             }${
               p.highlights?.length
-                ? `\n            <ul class="mt-2 list-disc pl-5 font-sans text-sm leading-7 text-body">${p.highlights.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`
+                ? `\n            <ul class="mt-auto list-disc pl-5 pt-2 font-sans text-sm leading-7 text-body">${p.highlights.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`
                 : ''
             }`;
+      const layout = p.highlights?.length ? 'flex flex-col' : 'block';
       return p.link
-        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" class="group reveal block">${inner}\n          </a>`
-        : `<div class="group reveal block">${inner}\n          </div>`;
+        ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" class="group reveal ${layout}">${inner}\n          </a>`
+        : `<div class="group reveal ${layout}">${inner}\n          </div>`;
     })
     .join('\n          ');
 
