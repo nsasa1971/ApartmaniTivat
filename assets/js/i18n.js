@@ -97,10 +97,24 @@ const T = {
 
   // datum, apartmani
   'f.pickDate': ['Izaberite datum', 'Choose a date', 'Выберите дату'],
+  'apt.photosAll': ['Sve fotografije ({n})', 'All photos ({n})', 'Все фотографии ({n})'],
+  'apt.photo': ['{name} – fotografija {n}', '{name} – photo {n}', '{name} – фото {n}'],
   'apt.ac': ['Klima', 'A/C', 'Кондиционер'],
   'apt.wifi': ['Internet', 'Wi-Fi', 'Wi-Fi'],
   'apt.tv': ['TV', 'TV', 'ТВ'],
   'apt.parking': ['Parking', 'Parking', 'Парковка'],
+
+  // blog
+  'nav.blog': ['Savjeti', 'Tips', 'Советы'],
+  'blog.title': ['Savjeti za boravak u Tivtu', 'Travel tips for Tivat', 'Советы для отдыха в Тивате'],
+  'blog.read': ['Pročitaj članak', 'Read article', 'Читать статью'],
+  'blog.all': ['Svi članci', 'All articles', 'Все статьи'],
+  'blog.related': ['Pročitajte i', 'Read next', 'Читайте также'],
+  'blog.ctaTitle': ['Planirate odmor u Tivtu?', 'Planning a holiday in Tivat?', 'Планируете отдых в Тивате?'],
+  'blog.ctaText': ['Provjerite slobodne termine u apartmanima Olive, Lavande i Lemoni i pošaljite upit.', 'Check the available dates in the Olive, Lavande and Lemoni apartments and send an inquiry.', 'Проверьте свободные даты в апартаментах Olive, Lavande и Lemoni и отправьте запрос.'],
+  'blog.ctaButton': ['Provjeri slobodne termine', 'Check availability', 'Проверить свободные даты'],
+  'blog.home': ['Početna', 'Home', 'Главная'],
+  'blog.stay': ['Apartmani', 'Apartments', 'Апартаменты'],
 
   // utisci
   'review.source': ['Recenzija sa Google Maps-a', 'Review on Google Maps', 'Отзыв на Google Maps'],

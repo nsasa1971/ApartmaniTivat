@@ -7,8 +7,10 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 export function initLightbox() {
   const lb = $('#lightbox');
   const lbImg = $('#lb-img');
-  const items = $$('[data-lightbox]');
-  if (!lb || !items.length) return;
+  const all = $$('[data-lightbox]');
+  if (!lb || !all.length) return;
+  // slike se grupišu po data-group (glavna galerija = 'main'); strelice listaju samo slike iz iste grupe
+  let items = all;
 
   const closeBtn = $('#lb-close');
   const prevBtn = $('#lb-prev');
@@ -22,7 +24,7 @@ export function initLightbox() {
     current = (i + items.length) % items.length;
     const link = items[current];
     lbImg.src = link.href;
-    lbImg.alt = $('img', link)?.alt ?? '';
+    lbImg.alt = link.dataset.alt ?? $('img', link)?.alt ?? '';
   };
 
   const isOpen = () => !lb.classList.contains('hidden');
@@ -44,10 +46,12 @@ export function initLightbox() {
     lastTrigger?.focus(); // vraćanje fokusa na sliku koja je otvorila lightbox
   };
 
-  items.forEach((a, i) =>
+  all.forEach((a) =>
     a.addEventListener('click', (e) => {
       e.preventDefault();
-      open(i, a);
+      const group = a.dataset.group ?? 'main';
+      items = all.filter((x) => (x.dataset.group ?? 'main') === group);
+      open(items.indexOf(a), a);
     })
   );
   closeBtn.addEventListener('click', close);
