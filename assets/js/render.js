@@ -54,6 +54,7 @@ export function navItems() {
 
 const flagSvg = (code, uid) => {
   const body = {
+    me: '<rect width="24" height="16" fill="#D4AF37"/><rect x=".9" y=".9" width="22.2" height="14.2" fill="#C40308"/><path d="M12 3.6c-.6 0-1 .4-1 1 0 .3.1.5.3.7-.9.2-1.7.8-2.3 1.6L7.2 5.6l.3 1.8 1.5 1c-.2.5-.3 1-.3 1.6 0 1.7.9 3 2.2 3.6h2.2c1.3-.6 2.2-1.9 2.2-3.6 0-.6-.1-1.1-.3-1.6l1.5-1 .3-1.8-1.8 1.3c-.6-.8-1.4-1.4-2.3-1.6.2-.2.3-.4.3-.7 0-.6-.4-1-1-1z" fill="#D4AF37"/>',
     rs: '<rect width="24" height="16" fill="#C6363C"/><rect y="5.33" width="24" height="10.67" fill="#0C4076"/><rect y="10.67" width="24" height="5.33" fill="#fff"/>',
     ru: '<rect width="24" height="16" fill="#fff"/><rect y="5.33" width="24" height="10.67" fill="#0039A6"/><rect y="10.67" width="24" height="5.33" fill="#D52B1E"/>',
     gb: `<clipPath id="fc-${uid}"><rect width="24" height="16"/></clipPath><g clip-path="url(#fc-${uid})"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" stroke-width="1.6"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="3.2"/></g>`,
