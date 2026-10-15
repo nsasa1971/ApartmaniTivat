@@ -100,6 +100,20 @@ export const translations = {
       text: 'The apartments offer a calm and pleasant Mediterranean setting surrounded by olive trees, close to the sea, the town centre and all the important amenities.',
       image: { alt: 'Yard with a terrace in the shade of grapevines' },
     },
+    reviews: [
+      {
+        title: 'A perfect ten!',
+        text: 'A perfect ten! Staying at this accommodation was one of the best experiences we\'ve ever had. The accommodation is even more beautiful in person than in the pictures – spotlessly clean, modern and in a great location. The attention to detail is incredible, from the comfort of the bed to the little things that make the stay enjoyable. The hosts welcomed us extremely warmly and made us feel right at home. Our sincere recommendation for anyone looking for the perfect vacation!',
+      },
+      {
+        title: 'Feels like home, on vacation',
+        text: 'If you like to feel at home but in your vacation this the place. Large apartment, new, clean, lots of things like decorations, kitchen equipped read to make your meals, comfortable beds and so... To sum - we totally recommend this place',
+      },
+      {
+        title: 'Beautiful apartment',
+        text: 'Beautiful apartment and very kind hosts, no one will regret being a guest of these good people.',
+      },
+    ],
     dark: {
       title: 'For short and long stays',
       text: 'Being close to the sea, the town centre and all the important amenities makes the apartments an excellent choice for both short and longer stays.',
@@ -253,6 +267,20 @@ export const translations = {
       text: 'Апартаменты предлагают спокойную и приятную средиземноморскую обстановку среди оливковых деревьев, рядом с морем, центром города и всей необходимой инфраструктурой.',
       image: { alt: 'Двор с террасой в тени виноградной лозы' },
     },
+    reviews: [
+      {
+        title: 'Твёрдая десятка!',
+        text: 'Твёрдая десятка! Проживание здесь стало одним из лучших впечатлений в нашей жизни. В реальности жильё ещё красивее, чем на фотографиях: безупречно чистое, современное и в отличном месте. Внимание к деталям поразительное — от удобства кровати до мелочей, которые делают отдых приятным. Хозяева встретили нас очень тепло и сделали так, чтобы мы чувствовали себя как дома. Искренне рекомендуем всем, кто ищет идеальный отпуск!',
+      },
+      {
+        title: 'Как дома, но в отпуске',
+        text: 'Если вы любите чувствовать себя как дома, но в отпуске, — это то самое место. Большой, новый, чистый апартамент, много приятных мелочей вроде декора, оборудованная кухня, где можно готовить, удобные кровати и многое другое… Короче говоря, мы однозначно рекомендуем это место.',
+      },
+      {
+        title: 'Прекрасный апартамент',
+        text: 'Прекрасный апартамент и очень добрые хозяева — никто не пожалеет, что остановился у этих хороших людей.',
+      },
+    ],
     dark: {
       title: 'Для коротких и длительных поездок',
       text: 'Близость моря, центра города и всей необходимой инфраструктуры делает апартаменты отличным выбором как для короткого, так и для длительного отдыха.',

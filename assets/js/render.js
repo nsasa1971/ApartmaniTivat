@@ -298,20 +298,27 @@ function feature() {
 
 // ---------- Utisci ----------
 function reviews() {
+  const many = c.reviews.length > 2;
   return `
     <section class="relative bg-charcoal py-[25px] md:py-[100px]">
       <div class="absolute inset-0 bg-[#F4EFE2]"></div>
       <div class="container relative max-w-page">
-        <div class="grid gap-6 md:grid-cols-2 md:gap-10">
+        <div class="grid gap-6 ${many ? 'md:grid-cols-3 md:gap-8' : 'md:grid-cols-2 md:gap-10'}">
           ${c.reviews
             .map(
-              (r) => `<article class="reveal bg-white p-4 md:p-[60px]">
-            <h3 class="mb-5 font-display text-[23px] leading-10 text-ink">${esc(r.title)}</h3>
+              (r) => `<article class="reveal flex flex-col bg-white p-5 ${many ? 'md:p-8' : 'md:p-[60px]'}">
+            <h3 class="mb-4 font-display text-[23px] leading-8 text-ink">${esc(r.title)}</h3>
             <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="${esc(t('aria.stars', { n: r.rating }))}">${'★'.repeat(r.rating)}</div>
             <p class="font-sans text-base italic leading-8 text-body">${esc(r.text)}</p>
-            <div class="mt-6 flex items-center gap-4">
+            <div class="mt-auto flex items-center gap-4 pt-6">
               <img src="${esc(r.avatar)}" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
-              <span class="font-display text-[22px] text-ink">${esc(r.name)}</span>
+              <span class="min-w-0">
+                <span class="block font-display text-[22px] leading-7 text-ink">${esc(r.name)}</span>${
+                  r.source
+                    ? `\n                <a href="${esc(r.source)}" target="_blank" rel="noopener" class="font-sans text-sm text-body underline hover:opacity-60">${esc(t('review.source'))}</a>`
+                    : ''
+                }
+              </span>
             </div>
           </article>`
             )
