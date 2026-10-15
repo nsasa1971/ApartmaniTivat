@@ -218,7 +218,7 @@ const beach = (n, name, desc) => ({
 export const beaches = {
   title: 'Plaže koje vrijedi posjetiti',
   items: [
-    beach(1, 'Kaluman', 'Mirna plaža u okolini Tivta, pogodna za kupanje i opuštanje uz more.'),
+    beach(1, 'Kalardovo', 'Mirna plaža u Tivtu, pogodna za kupanje i opuštanje uz more.'),
     beach(2, 'Plavi horizonti', 'Pješčana plaža u zaštićenoj uvali na poluostrvu Luštica, poznata po bistrom moru.'),
     beach(3, 'Jaz', 'Prostrana plaža kod Budve sa šljunkom i pijeskom, poznata po živoj atmosferi i vodenim sportovima.'),
   ],
