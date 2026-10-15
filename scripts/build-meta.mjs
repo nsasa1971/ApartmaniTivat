@@ -37,6 +37,7 @@ const jsonLd = {
     addressLocality: c.contact.city,
     addressCountry: c.contact.country,
   },
+  geo: c.contact.lat && c.contact.lng ? { '@type': 'GeoCoordinates', latitude: c.contact.lat, longitude: c.contact.lng } : undefined,
   sameAs: nonPlaceholder(c.social.instagram) ? [c.social.instagram] : undefined,
   containsPlace: c.apartments.map((a) => ({
     '@type': 'Apartment',

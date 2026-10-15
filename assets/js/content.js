@@ -50,7 +50,11 @@ export const contact = {
   city: 'Tivat',
   country: 'ME',
   countryName: 'Crna Gora',
-  mapQuery: 'Bonići, Tivat, Crna Gora',
+  mapQuery: 'Bonići, Tivat, Crna Gora', // rezerva ako koordinate nisu upisane
+  // Tačna lokacija apartmana (iz Google Maps linka koji je dao vlasnik; Plus code CPC6+PJ)
+  lat: 42.4217772,
+  lng: 18.7115365,
+  mapUrl: 'https://maps.app.goo.gl/cu2iycnPNwBE63Pe6',
 };
 
 export const social = {
