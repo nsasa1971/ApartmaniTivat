@@ -53,9 +53,9 @@ function mount(section, map) {
         const inSel = state.from && iso >= state.from && iso < (state.to ?? addDays(state.from, 1));
         const isEnd = state.to && iso === state.to;
         const cls = inSel
-          ? 'bg-[#0E878C] text-white font-bold'
+          ? 'bg-[#34493A] text-white font-bold'
           : isEnd
-            ? 'bg-white text-ink ring-2 ring-inset ring-[#0E878C] font-bold'
+            ? 'bg-white text-ink ring-2 ring-inset ring-[#34493A] font-bold'
             : taken
               ? 'bg-charcoal text-white'
               : past

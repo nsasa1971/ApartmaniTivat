@@ -14,11 +14,11 @@ export const site = {
   url: 'https://[VAŠ-DOMEN]',
   title: 'Tivat Garden Homes – Apartmani u Tivtu',
   description:
-    'Holiday home Olive, Lavanda i Lemoni u Tivtu: mediteranski ambijent među maslinama, plaža oko 300 m, Porto Montenegro oko 1 km. Pošaljite upit za boravak.',
-  ogDescription: 'Apartmani u Tivtu: Holiday home Olive, Lavanda i Lemoni – mediteranski ambijent među maslinama.',
+    'Holiday home Olive, Lavande i Lemoni u Tivtu: mediteranski ambijent među maslinama, plaža oko 300 m, Porto Montenegro oko 1 km. Pošaljite upit za boravak.',
+  ogDescription: 'Apartmani u Tivtu: Holiday home Olive, Lavande i Lemoni – mediteranski ambijent među maslinama.',
   ogImage: 'assets/img/og.jpg', // 1200×630
   locale: 'sr_ME',
-  themeColor: '#191B18',
+  themeColor: '#34493A',
 };
 
 // ---------- Konfiguracija ponašanja ----------
@@ -64,12 +64,19 @@ export const social = {
 // ---------- Hero ----------
 export const hero = {
   image: { src: 'assets/img/hero.jpg', width: 1920, height: 900 },
+  // Slider: prva je `image`, ostale se učitavaju iza nje (slika koja ne postoji se preskoči).
+  slides: [
+    'assets/img/gallery-13.jpg',
+    'assets/img/gallery-16.jpg',
+    'assets/img/gallery-17.jpg',
+    'assets/img/gallery-18.jpg',
+  ],
   subtitle: 'Apartmani u Tivtu',
   title: 'Tivat Garden Homes',
-  text: 'Holiday home Olive, Holiday home Lavanda i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.',
+  text: 'Holiday home Olive, Holiday home Lavande i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.',
 };
 
-export const logo = { src: 'assets/img/logo.png', width: 211, height: 100 };
+export const logo = { src: 'assets/img/logo.png', width: 288, height: 288 };
 
 // ---------- Uvodna sekcija (slika preklapa sekciju) ----------
 export const intro = {
@@ -77,7 +84,7 @@ export const intro = {
   title: 'Odlična lokacija i dobra povezanost',
   // Pasusi se razdvajaju praznim redom (\n\n).
   text:
-    'Holiday home Olive, Holiday home Lavanda i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, sa veoma dobrom saobraćajnom povezanošću. U neposrednoj blizini nalaze se autobuska stanica i taxi stajalište, dok je aerodrom lako dostupan.\n\nPlaža je udaljena oko 300 m, dva velika marketa oko 50 m, restoran oko 70 m, dok je Porto Montenegro udaljen oko 1 km.',
+    'Holiday home Olive, Holiday home Lavande i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, sa veoma dobrom saobraćajnom povezanošću. U neposrednoj blizini nalaze se autobuska stanica i taxi stajalište, dok je aerodrom lako dostupan.\n\nPlaža je udaljena oko 300 m, dva velika marketa oko 50 m, restoran oko 70 m, dok je Porto Montenegro udaljen oko 1 km.',
   href: '#apartmani',
 };
 
@@ -92,7 +99,7 @@ export const apartmentsSection = {
 const lavandaLemoniText = (naziv) =>
   `Holiday home ${naziv} je prostran apartman od 60 m², namijenjen za 2 do 4 osobe. Sastoji se od jedne velike sobe sa bračnim krevetom i sofom, dnevnog boravka sa velikom ugaonom garniturom na razvlačenje, kupatila i potpuno opremljene kuhinje. Gostima su na raspolaganju TV, internet i dva klima uređaja. Apartman ima poseban ulaz, terasu i prostrano dvorište u hladu maslina, sa vanjskim roštiljem, idealno za odmor i druženje. Moderan i funkcionalan raspored pruža gostima privatnost i udobnost tokom cijelog boravka.`;
 
-// Lavanda i Lemoni imaju isti raspored i sadržaj.
+// Lavande i Lemoni imaju isti raspored i sadržaj.
 const lavandaLemoniFeatures = [
   'Spavaća soba sa bračnim krevetom i sofom',
   'Dnevna soba sa velikom ugaonom garniturom na razvlačenje',
@@ -123,13 +130,13 @@ export const apartments = [
   },
   {
     id: 'lavanda',
-    name: 'Lavanda', // kratki naziv: forma, select, kalendar, admin
-    fullName: 'Holiday home Lavanda', // puni naziv: samo u opisima na sajtu
+    name: 'Lavande', // kratki naziv: forma, select, kalendar, admin
+    fullName: 'Holiday home Lavande', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
     guests: '2–4 osobe',
-    summary: lavandaLemoniText('Lavanda'),
+    summary: lavandaLemoniText('Lavande'),
     features: lavandaLemoniFeatures,
-    image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Lavanda]' },
+    image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Lavande]' },
   },
   {
     id: 'lemoni',
@@ -232,20 +239,40 @@ export const extraSections = {
     title: 'Znamenitosti u okolini',
     items: [
       {
-        name: 'Tivat – Porto Montenegro i centar',
-        desc: 'Opuštena šetnja uz more, marina Porto Montenegro sa jahtama i kafići, restorani i prodavnice u centru grada.',
-        image: { src: 'assets/img/sight-1.jpg', width: 1024, height: 768, alt: 'Tivat – Porto Montenegro i centar' },
+        name: 'Tivat',
+        desc: 'Tivat je najmirniji grad u zalivu, idealan za spor tempo odmora. Šetnica uz more vodi pored plaža, kafića i restorana, a marina Porto Montenegro, sa jahtama i elegantnim šetalištem, okuplja goste iz cijelog svijeta. Za ljubitelje prirode tu su Solila, zaštićeno stanište ptica, i Ostrvo cvijeća pored obale.',
+        highlights: [
+          'Porto Montenegro i njegovo šetalište',
+          'Šetalište uz more i gradski park',
+          'Solila (ornitološki rezervat)',
+          'Ostrvo cvijeća',
+        ],
+        image: { src: 'assets/img/sight-1.jpg', width: 1024, height: 768, alt: 'Tivat' },
         link: '',
       },
       {
         name: 'Kotor',
-        desc: 'Stari grad Kotor poznat je po kamenim ulicama, trgovima i gradskim zidinama, a iznad njega se uzdižu planine. Idealan je za dnevni izlet i šetnju.',
+        desc: 'Stari grad Kotor smješten je ispod strmih planina na kraju zaliva i spada među najbolje očuvane srednjovjekovne gradove Mediterana. Uske kamene ulice, trgovi i crkve čuvaju vijekove istorije, a katedrala Svetog Tripuna dominira centrom. Za najljepši pogled na zaliv popnite se na tvrđavu Sveti Ivan iznad grada, najbolje u ranim jutarnjim ili poslijepodnevnim satima.',
+        highlights: [
+          'Stari grad Kotor (UNESCO)',
+          'Katedrala Svetog Tripuna',
+          'Bedemi i tvrđava Sveti Ivan',
+          'Šetnja uz zaliv',
+          'Vožnja od apartmana: oko 15 minuta',
+        ],
         image: { src: 'assets/img/sight-2.jpg', width: 1024, height: 768, alt: 'Kotor' },
         link: '',
       },
       {
         name: 'Budva',
-        desc: 'Budva je poznata po starom gradu, plažama i živom ljetnjem životu. Dobra je za izlet u kojem se kombinuju šetnja, kupanje i izlazak.',
+        desc: 'Budva spaja istoriju i zabavu: Stari grad sa kamenim ulicama i Citadelom smješten je na poluostrvu uz more, a oko njega se redaju plaže poput Mogrena i Slovenske plaže. Uveče grad oživi kafićima, restoranima i muzikom. Iz Budve se lako stiže do Svetog Stefana, čuvenog ostrva-hotela, koje se najljepše vidi sa vidikovca iznad njega.',
+        highlights: [
+          'Stari grad i Citadela',
+          'Plaže Mogren i Slovenska plaža',
+          'Šetalište uz more i večernji život',
+          'Pogled na Sveti Stefan',
+          'Vožnja od apartmana: oko 30 minuta',
+        ],
         image: { src: 'assets/img/sight-3.jpg', width: 1024, height: 768, alt: 'Budva' },
         link: '',
       },
@@ -311,6 +338,6 @@ export const booking = {
 // ---------- Footer ----------
 export const footer = {
   about:
-    'Holiday home Olive, Lavanda i Lemoni nalaze se na odličnoj lokaciji u Tivtu. Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora i strogog centra grada.',
+    'Holiday home Olive, Lavande i Lemoni nalaze se na odličnoj lokaciji u Tivtu. Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora i strogog centra grada.',
   privacyHref: 'politika-privatnosti.html',
 };

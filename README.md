@@ -109,7 +109,7 @@ Nije potreban nijedan Firestore indeks (svi upiti koriste jedan filter).
 ```bash
 npm run build:site     # ili samo push na main – Netlify gradi sam
 ```
-Otvorite `https://<vaš-domen>/admin/`, prijavite se, i apartmani (Olive, Lavanda, Lemoni, kapacitet 4) se sami upišu u Firestore pri prvoj prijavi. `/admin` nije u sitemap-u, ima `noindex` i `Disallow` u `robots.txt`.
+Otvorite `https://<vaš-domen>/admin/`, prijavite se, i apartmani (Olive, Lavande, Lemoni, kapacitet 4) se sami upišu u Firestore pri prvoj prijavi. `/admin` nije u sitemap-u, ima `noindex` i `Disallow` u `robots.txt`.
 
 ### 4. Instalacija na telefon
 

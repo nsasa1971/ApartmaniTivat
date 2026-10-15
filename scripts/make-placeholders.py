@@ -43,7 +43,6 @@ for i in range(1, 6):
     make(f'food-{i}.jpg', 1024, 768, '#9C9F9B', '#ffffff', f'JELO {i}')
 make('og.jpg', 1200, 630, '#404040', '#ffffff', 'OG 1200x630')
 make('avatar.png', 80, 80, '#EAEAEA', '#9C9F9B', '?', 'PNG')
-make('logo.png', 211, 100, '#ffffff', '#191B18', 'LOGO', 'PNG')
 make('favicon.png', 64, 64, '#191B18', '#ffffff', 'A', 'PNG')
 make('icon-192.png', 192, 192, '#191B18', '#ffffff', 'A', 'PNG')
 make('icon-512.png', 512, 512, '#191B18', '#ffffff', 'A', 'PNG')

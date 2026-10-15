@@ -53,7 +53,7 @@ export async function ensureApartments() {
   for (const a of DEFAULT_APARTMENTS) {
     const old = existing.find((x) => x.id === a.id);
     if (old && old.naziv !== a.naziv) {
-      // ujednačen naziv (Olive / Lavanda / Lemoni) – ispravi i ranije upisan "Holiday home …"
+      // ujednačen naziv (Olive / Lavande / Lemoni) – ispravi i ranije upisan "Holiday home …"
       try {
         await updateDoc(doc(db, 'apartments', a.id), { naziv: a.naziv });
       } catch (e) {
