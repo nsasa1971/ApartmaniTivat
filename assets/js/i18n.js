@@ -92,6 +92,9 @@ const T = {
   'avail.pickOut': ['Sada izaberite dan odlaska.', 'Now choose your check-out day.', 'Теперь выберите день выезда.'],
   'avail.notFree': ['Izabrani termin nije slobodan. Izaberite druge datume.', 'The selected dates are not available. Please choose other dates.', 'Выбранные даты недоступны. Выберите другие даты.'],
 
+  // utisci
+  'review.source': ['Recenzija sa Google Maps-a', 'Review on Google Maps', 'Отзыв на Google Maps'],
+
   // forma za upit
   'f.name': ['Ime i prezime *', 'Full name *', 'Имя и фамилия *'],
   'f.email': ['Email *', 'Email *', 'Email *'],

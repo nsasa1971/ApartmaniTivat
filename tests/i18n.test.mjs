@@ -18,6 +18,9 @@ test('prevodi sadržaja imaju iste liste kao osnovni sadržaj', () => {
     const c = localizedContent(lang);
     assert.equal(c.apartments.length, base.apartments.length);
     c.apartments.forEach((a, i) => assert.equal(a.features.length, base.apartments[i].features.length, `${lang} apartman ${i} features`));
+    assert.equal(c.reviews.length, base.reviews.length);
+    assert.equal(c.reviews[0].name, base.reviews[0].name); // imena i izvor se ne prevode
+    assert.equal(c.reviews[0].source, base.reviews[0].source);
     assert.equal(c.beaches.items.length, base.beaches.items.length);
     assert.equal(c.pricing.items.length, base.pricing.items.length);
     assert.equal(c.pricing.discounts.length, base.pricing.discounts.length);

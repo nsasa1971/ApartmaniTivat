@@ -185,21 +185,32 @@ export const feature = {
   image: { src: 'assets/img/foto2.jpg', width: 1240, height: 827, alt: 'Dvorište sa terasom u hladu vinove loze' },
 };
 
-// ---------- Utisci gostiju (koristiti samo prave recenzije uz dozvolu gosta) ----------
+// ---------- Utisci gostiju (Google Maps recenzije za Holiday home Olive; koristiti samo prave recenzije) ----------
+// Srpski tekst je prevod: izvorni jezici su bosanski (Sasa), engleski (Shamai) i hrvatski (Losmi).
 export const reviews = [
   {
-    title: '[Naslov utiska]',
+    title: 'Desetka!',
     rating: 5,
-    text: '[Citat gosta – 2 do 4 rečenice. Koristiti samo prave recenzije uz dozvolu gosta.]',
-    name: '[Ime gosta]',
-    avatar: 'assets/img/avatar.png',
+    text: 'Desetka! Boravak u ovom smještaju bio je jedno od najboljih iskustava koja smo ikada imali. Smještaj je u stvarnosti još ljepši nego na slikama – besprijekorno čist, moderan i na odličnoj lokaciji. Pažnja posvećena detaljima je nevjerovatna, od udobnosti kreveta do sitnica koje boravak čine prijatnim. Domaćini su nas dočekali izuzetno toplo i učinili da se osjećamo kao kod kuće. Iskrena preporuka svima koji traže savršen odmor!',
+    name: 'Sasa Nikolic',
+    avatar: 'assets/img/avatar-1.png',
+    source: 'https://maps.app.goo.gl/iFh2TooFZ2Z1pUmX8',
   },
   {
-    title: '[Naslov utiska]',
+    title: 'Kao kod kuće, a na odmoru',
     rating: 5,
-    text: '[Citat gosta – 2 do 4 rečenice.]',
-    name: '[Ime gosta]',
-    avatar: 'assets/img/avatar.png',
+    text: 'Ako volite da se osjećate kao kod kuće, ali na odmoru, ovo je pravo mjesto. Veliki, novi i čist apartman, pun sitnica poput dekoracije, opremljena kuhinja spremna za pripremu obroka, udobni kreveti i još mnogo toga… Ukratko – potpuno preporučujemo ovo mjesto.',
+    name: 'Shamai Keidar',
+    avatar: 'assets/img/avatar-2.png',
+    source: 'https://maps.app.goo.gl/Gyu7YP66JkcsRpAZ8',
+  },
+  {
+    title: 'Prelijep apartman',
+    rating: 5,
+    text: 'Prelijep apartman i veoma ljubazni domaćini, niko neće požaliti što je bio gost ovih dobrih ljudi.',
+    name: 'Losmi Losmic',
+    avatar: 'assets/img/avatar-3.png',
+    source: 'https://maps.app.goo.gl/geiKQ2PBEDsXqkeVA',
   },
 ];
 
