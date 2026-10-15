@@ -485,7 +485,11 @@ function reservation() {
                   : `<li><span class="font-bold">${k.label}:</span> <a href="${esc(k.href)}"${k.id === 'whatsapp' ? ' target="_blank" rel="noopener"' : ''} class="underline hover:opacity-60">${esc(k.value)}</a></li>`
               )
               .join('\n            ')}
-            <li><span class="font-bold">Adresa:</span> ${esc(fullAddress())}</li>
+            <li><span class="font-bold">Adresa:</span> ${
+              c.contact.mapUrl
+                ? `<a href="${esc(c.contact.mapUrl)}" target="_blank" rel="noopener" class="underline hover:opacity-60">${esc(fullAddress())}</a>`
+                : esc(fullAddress())
+            }</li>
           </ul>
         </aside>
       </div>
@@ -498,7 +502,7 @@ function map() {
     <section aria-label="Lokacija" class="relative z-[1]">
       <iframe title="Mapa – ${esc(c.contact.city)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               class="block h-[440px] w-full border-0 md:h-[440px]"
-              src="https://www.google.com/maps?q=${encodeURIComponent(c.contact.mapQuery)}&output=embed"></iframe>
+              src="https://www.google.com/maps?q=${encodeURIComponent(c.contact.lat && c.contact.lng ? `${c.contact.lat},${c.contact.lng}` : c.contact.mapQuery)}&z=17&output=embed"></iframe>
     </section>`;
 }
 
