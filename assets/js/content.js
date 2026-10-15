@@ -18,7 +18,7 @@ export const site = {
   ogDescription: 'Apartmani u Tivtu: Holiday home Olive, Lavanda i Lemoni – mediteranski ambijent među maslinama.',
   ogImage: 'assets/img/og.jpg', // 1200×630
   locale: 'sr_ME',
-  themeColor: '#191B18',
+  themeColor: '#145C5C',
 };
 
 // ---------- Konfiguracija ponašanja ----------
@@ -69,7 +69,7 @@ export const hero = {
   text: 'Holiday home Olive, Holiday home Lavanda i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.',
 };
 
-export const logo = { src: 'assets/img/logo.png', width: 211, height: 100 };
+export const logo = { src: 'assets/img/logo.png', width: 640, height: 369 };
 
 // ---------- Uvodna sekcija (slika preklapa sekciju) ----------
 export const intro = {

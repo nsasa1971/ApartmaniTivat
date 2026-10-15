@@ -65,7 +65,7 @@ function header() {
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
     <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
       <a href="#top" class="shrink-0" aria-label="${esc(c.site.brand)}">
-        <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-16 w-auto md:h-20 lg:h-16 xl:h-20">
+        <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-[72px] w-auto md:h-24 lg:h-[72px] xl:h-24">
       </a>
 
       <nav class="hidden lg:block" aria-label="Glavna navigacija">
@@ -78,7 +78,7 @@ function header() {
         <div class="hidden items-center lg:flex" role="group" data-i18n-aria="aria.language" aria-label="${t('aria.language')}">
           ${langButtons('px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4')}
         </div>
-        ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] text-white hover:opacity-90 sm:flex lg:hidden xl:flex')}
+        ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#143A3A] text-white hover:opacity-90 sm:flex lg:hidden xl:flex')}
         <a href="${BOOK_HREF}" ${i('btn.book')} class="bg-ink px-6 py-3 font-sans text-sm font-bold uppercase tracking-wide text-white transition hover:bg-charcoal">${t('btn.book')}</a>
         <button id="menu-toggle" type="button" class="lg:hidden" data-i18n-aria="aria.menu" aria-label="${t('aria.menu')}" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
@@ -102,16 +102,16 @@ function hero() {
   const h = c.hero;
   const field = (id, label, key) => `
             <label class="flex items-center gap-3 rounded-full px-2 py-2">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#0E878C]/20 bg-[#0E878C]/10" aria-hidden="true">${calIcon}</span>
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#145C5C]/20 bg-[#145C5C]/10" aria-hidden="true">${calIcon}</span>
               <span class="flex flex-col">
-                <span ${i(key)} class="text-sm font-bold leading-4 text-[#053133]">${t(key)}</span>
-                <input type="date" name="${id}" id="${id}" class="bg-transparent text-sm text-[#053133]/70 outline-none focus-visible:ring-2 focus-visible:ring-[#0E878C]" required>
+                <span ${i(key)} class="text-sm font-bold leading-4 text-[#0F3E3E]">${t(key)}</span>
+                <input type="date" name="${id}" id="${id}" class="bg-transparent text-sm text-[#0F3E3E]/70 outline-none focus-visible:ring-2 focus-visible:ring-[#145C5C]" required>
               </span>
             </label>`;
   return `
     <section class="relative flex min-h-[250px] items-center py-12 md:min-h-[320px] md:pb-[130px] md:pt-[100px]">
       <img src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
-      <div class="absolute inset-0 bg-[#404040]/70 md:bg-transparent md:bg-[linear-gradient(90deg,#404040FA_2%,#F2295B00_42%)]"></div>
+      <div class="absolute inset-0 bg-[#1B4F4F]/70 md:bg-transparent md:bg-[linear-gradient(90deg,#1B4F4FFA_2%,#F2295B00_42%)]"></div>
 
       <div class="container relative max-w-page">
         <div class="max-w-xl text-center text-white [text-shadow:0_1px_4px_rgba(0,0,0,.45)] md:pl-3 md:pr-[70px] md:text-left md:[text-shadow:none]">
@@ -128,13 +128,13 @@ function hero() {
             ${field('checkout', 'Odlazak', 'booking.checkout')}
 
             <div class="flex items-center gap-3 rounded-full px-2 py-2" role="group" aria-labelledby="guests-label">
-              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#0E878C]/20 bg-[#0E878C]/10" aria-hidden="true">${guestsIcon}</span>
+              <span class="flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-[#145C5C]/20 bg-[#145C5C]/10" aria-hidden="true">${guestsIcon}</span>
               <span class="flex flex-col">
-                <span id="guests-label" ${i('booking.guests')} class="text-sm font-bold leading-4 text-[#053133]">${t('booking.guests')}</span>
-                <span class="flex items-center gap-3 text-sm text-[#053133]/70">
-                  <button type="button" data-guests="-1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#053133] leading-none text-[#053133] focus-visible:ring-2 focus-visible:ring-[#0E878C]" aria-label="Manje gostiju">−</button>
+                <span id="guests-label" ${i('booking.guests')} class="text-sm font-bold leading-4 text-[#0F3E3E]">${t('booking.guests')}</span>
+                <span class="flex items-center gap-3 text-sm text-[#0F3E3E]/70">
+                  <button type="button" data-guests="-1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#0F3E3E] leading-none text-[#0F3E3E] focus-visible:ring-2 focus-visible:ring-[#145C5C]" aria-label="Manje gostiju">−</button>
                   <output id="guests-output" aria-live="polite">${c.config.defaultGuests}</output>
-                  <button type="button" data-guests="1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#053133] leading-none text-[#053133] focus-visible:ring-2 focus-visible:ring-[#0E878C]" aria-label="Više gostiju">+</button>
+                  <button type="button" data-guests="1" class="flex h-5 w-5 items-center justify-center rounded-full border-2 border-[#0F3E3E] leading-none text-[#0F3E3E] focus-visible:ring-2 focus-visible:ring-[#145C5C]" aria-label="Više gostiju">+</button>
                 </span>
               </span>
               <input type="hidden" name="guests" id="guests" value="${c.config.defaultGuests}">
@@ -142,7 +142,7 @@ function hero() {
 
             <button type="submit" ${i('btn.search')} class="h-[52px] rounded-full bg-btn px-8 font-sans text-base font-bold text-white transition hover:bg-ink">${t('btn.search')}</button>
           </div>
-          <p id="booking-range" class="hidden px-3 pt-1 text-sm font-bold text-[#053133]" aria-live="polite"></p>
+          <p id="booking-range" class="hidden px-3 pt-1 text-sm font-bold text-[#0F3E3E]" aria-live="polite"></p>
           <p id="booking-error" class="hidden px-3 pt-1 text-sm text-red-600" role="alert"></p>
         </form>
       </div>
@@ -182,7 +182,7 @@ function apartments() {
   return `
     <section id="${esc(a.id)}" class="py-[50px] md:pb-[100px] md:pt-0">
       <div class="container max-w-page">
-        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(a.title)}</h2>
+        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#12302F]">${esc(a.title)}</h2>
         <div class="grid gap-6 md:grid-cols-3">
           ${c.apartments
             .map(
@@ -208,7 +208,7 @@ function pricing() {
   return `
     <section id="${esc(p.id)}" class="bg-mist py-[50px] md:py-[100px]">
       <div class="container max-w-page text-center">
-        <h2 class="mb-12 font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(p.title)}</h2>
+        <h2 class="mb-12 font-display text-[30px] leading-tight text-[#12302F]">${esc(p.title)}</h2>
         <div class="grid gap-6 md:grid-cols-3">
           ${p.items
             .map(
@@ -272,14 +272,14 @@ function feature() {
 function reviews() {
   return `
     <section class="relative bg-charcoal py-[25px] md:py-[100px]">
-      <div class="absolute inset-0 bg-[#EBEBEB]"></div>
+      <div class="absolute inset-0 bg-[#EEF3EF]"></div>
       <div class="container relative max-w-page">
         <div class="grid gap-6 md:grid-cols-2 md:gap-10">
           ${c.reviews
             .map(
               (r) => `<article class="reveal bg-white p-4 md:p-[60px]">
             <h3 class="mb-5 font-display text-[23px] leading-10 text-ink">${esc(r.title)}</h3>
-            <div class="mb-3 flex gap-1 text-[#e0b84a]" role="img" aria-label="${r.rating} od 5 zvezdica">${'★'.repeat(r.rating)}</div>
+            <div class="mb-3 flex gap-1 text-[#F6CB1F]" role="img" aria-label="${r.rating} od 5 zvezdica">${'★'.repeat(r.rating)}</div>
             <p class="font-sans text-base italic leading-8 text-body">${esc(r.text)}</p>
             <div class="mt-6 flex items-center gap-4">
               <img src="${esc(r.avatar)}" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
@@ -335,7 +335,7 @@ function beaches() {
     .map(
       (s) => `
         <div id="${esc(s.id)}" class="mt-16">
-          <h2 class="${s.intro ? 'mb-4' : 'mb-12'} text-center font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(s.title)}</h2>${
+          <h2 class="${s.intro ? 'mb-4' : 'mb-12'} text-center font-display text-[30px] leading-tight text-[#12302F]">${esc(s.title)}</h2>${
             s.intro ? `\n          <p class="mx-auto mb-12 max-w-xl text-center font-sans text-base text-body">${esc(s.intro)}</p>` : ''
           }
           <div class="grid gap-6 md:grid-cols-3">
@@ -347,7 +347,7 @@ function beaches() {
   return `
     <section id="plaze" class="mb-[50px] bg-mist py-[50px] md:mb-[160px] md:pb-[100px] md:pt-[100px]">
       <div class="container max-w-page">
-        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(c.beaches.title)}</h2>
+        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#12302F]">${esc(c.beaches.title)}</h2>
         <div class="grid gap-6 ${c.beaches.items.length === 4 ? 'md:grid-cols-2' : 'md:grid-cols-3'}">
           ${cards(c.beaches.items)}
         </div>${extras}
@@ -376,7 +376,7 @@ function availabilitySection() {
     <div id="dostupnost-anchor" aria-hidden="true"></div>
     <section id="${esc(a.id)}" class="hidden bg-mist py-[50px] md:py-[100px]" aria-labelledby="dostupnost-title">
       <div class="container max-w-page text-center">
-        <h2 id="dostupnost-title" class="mb-4 font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(a.title)}</h2>
+        <h2 id="dostupnost-title" class="mb-4 font-display text-[30px] leading-tight text-[#12302F]">${esc(a.title)}</h2>
         <p class="mx-auto mb-8 max-w-xl font-sans text-lg">${esc(a.text)}</p>
         <div class="mx-auto max-w-md bg-white p-4 md:p-6">
           <div class="flex gap-2" role="group" aria-label="Apartman">
@@ -398,7 +398,7 @@ function availabilitySection() {
           <p class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-sm">
             <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 border border-line bg-white"></span>Slobodno</span>
             <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-charcoal"></span>Zauzeto</span>
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#0E878C]"></span>Vaš izbor</span>
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#145C5C]"></span>Vaš izbor</span>
           </p>
           <p id="avail-msg" class="mt-3 min-h-6 font-sans text-sm" role="status" aria-live="polite"></p>
           <button type="button" id="avail-send" class="mt-2 hidden w-full bg-ink px-6 py-4 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal">Pošalji upit za ovaj termin</button>
@@ -412,7 +412,7 @@ function reservation() {
   const b = c.booking;
   const { minGuests, maxGuests, defaultGuests } = c.config;
   const inputCls =
-    'min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#0E878C] aria-[invalid=true]:border-red-600';
+    'min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#145C5C] aria-[invalid=true]:border-red-600';
   const field = (id, label, control, extra = '') => `
             <div${extra}>
               <label for="${id}" class="mb-1 block font-sans text-sm font-bold">${label}</label>
@@ -439,7 +439,7 @@ function reservation() {
             </fieldset>
             ${field('inq-checkin', 'Dolazak *', `<input type="date" id="inq-checkin" name="checkin" required class="${inputCls}">`)}
             ${field('inq-checkout', 'Odlazak *', `<input type="date" id="inq-checkout" name="checkout" required class="${inputCls}">`)}
-            <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#053133] md:col-span-2 md:-mt-2" aria-live="polite"></p>
+            <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#0F3E3E] md:col-span-2 md:-mt-2" aria-live="polite"></p>
             ${field('inq-guests', 'Broj gostiju *', `<input type="number" id="inq-guests" name="guests" min="${minGuests}" max="${maxGuests}" step="1" value="${defaultGuests}" inputmode="numeric" required class="${inputCls}">`)}
             ${field(
               'apartment',
@@ -531,7 +531,7 @@ function footer() {
         ${list(nav.slice(half))}
         <div class="flex flex-col items-center gap-4 md:items-start">
           <h2 ${i('footer.follow')} class="font-display text-[26px] text-white">${t('footer.follow')}</h2>
-          ${instagram('flex h-9 w-9 items-center justify-center rounded-[10%] bg-[#262626] hover:opacity-90')}
+          ${instagram('flex h-9 w-9 items-center justify-center rounded-[10%] bg-[#143A3A] hover:opacity-90')}
           <a href="${BOOK_HREF}" ${i('btn.book')} class="bg-white px-8 py-3 font-sans text-sm font-bold uppercase text-ink transition hover:bg-mist">${t('btn.book')}</a>
         </div>
       </div>
