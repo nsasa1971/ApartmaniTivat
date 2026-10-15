@@ -99,7 +99,7 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="yyw4qe">
+  <div id="app" data-hash="hke393">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
@@ -150,15 +150,16 @@
       </div>
     </div>
 
-    <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="Mobilna navigacija">
+    <nav id="mobile-menu" class="hidden max-h-[calc(100svh-96px)] overflow-y-auto border-t border-line bg-white lg:hidden" aria-label="Mobilna navigacija">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
-        <li><a href="#top" class="block py-3">Početna</a></li>
-        <li><a href="#apartmani" class="block py-3">Apartmani</a></li>
-        <li><a href="#cijene" class="block py-3">Cijene</a></li>
-        <li><a href="#galerija" class="block py-3">Galerija</a></li>
-        <li class="py-3"><span class="block font-sans text-xs font-bold uppercase tracking-[.14em] text-forest">Okolina</span>
-          <ul class="mt-1 ml-1 border-l border-line pl-4"><li><a href="#plaze" class="block py-2.5">Plaže</a></li><li><a href="#znamenitosti" class="block py-2.5">Znamenitosti</a></li><li><a href="#hrana" class="block py-2.5">Hrana</a></li><li><a href="/blog/" class="block py-2.5">Savjeti</a></li></ul></li>
-        <li><a href="#kontakt" class="block py-3">Kontakt</a></li>
+        <li><a href="#top" class="block py-2.5">Početna</a></li>
+        <li><a href="#apartmani" class="block py-2.5">Apartmani</a></li>
+        <li><a href="#cijene" class="block py-2.5">Cijene</a></li>
+        <li><a href="#galerija" class="block py-2.5">Galerija</a></li>
+        <li>
+          <button type="button" data-acc aria-expanded="false" class="flex w-full items-center justify-between py-2.5 text-left">Okolina<svg class="h-4 w-4 text-ink/60 transition-transform" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg></button>
+          <ul class="mb-2 hidden grid-cols-2 gap-2"><li><a href="#plaze" class="block rounded-lg bg-mist px-3 py-2.5 text-center font-sans text-sm">Plaže</a></li><li><a href="#znamenitosti" class="block rounded-lg bg-mist px-3 py-2.5 text-center font-sans text-sm">Znamenitosti</a></li><li><a href="#hrana" class="block rounded-lg bg-mist px-3 py-2.5 text-center font-sans text-sm">Hrana</a></li><li><a href="/blog/" class="block rounded-lg bg-mist px-3 py-2.5 text-center font-sans text-sm">Savjeti</a></li></ul></li>
+        <li><a href="#kontakt" class="block py-2.5">Kontakt</a></li>
         <li class="flex items-center gap-1 py-2" role="group" aria-label="Jezik">
           <button type="button" data-lang="sr" aria-pressed="true" lang="sr" title="Crnogorski" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">CG</button><button type="button" data-lang="en" aria-pressed="false" lang="en" title="English" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">EN</button><button type="button" data-lang="ru" aria-pressed="false" lang="ru" title="Русский" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">RU</button>
         </li>
