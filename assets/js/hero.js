@@ -346,7 +346,7 @@ export function initHero() {
     slides.forEach((_, k) => {
       const b = document.createElement('button');
       b.type = 'button';
-      b.setAttribute('aria-label', `Slika ${k + 1} od ${slides.length}`);
+      b.setAttribute('aria-label', (root.dataset.ariaSlide || 'Slika {n} od {m}').replace('{n}', k + 1).replace('{m}', slides.length));
       b.className = 'h-2.5 w-2.5 rounded-full border border-white/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white';
       b.addEventListener('click', () => show(k));
       dotsBox.appendChild(b);

@@ -1,5 +1,6 @@
 import { renderApp, hash } from './render.js';
 import { defaultLang, applyLanguage, languages } from './i18n.js';
+import { localizedContent } from './content.i18n.js';
 import { initBooking } from './booking.js';
 import { initLightbox } from './lightbox.js';
 import { initAvailability } from './availability-widget.js';
@@ -8,26 +9,53 @@ import { initHero } from './hero.js';
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 
-// ============ SADRŽAJ: sekcije se generišu iz content.js ============
-// build skripta već upisuje isti HTML u index.html (SEO, brz prvi prikaz).
-// Ovde se HTML ponovo generiše samo ako se content.js promenio posle builda.
-const app = $('#app');
-const html = renderApp();
-if (app.dataset.hash !== hash(html)) app.innerHTML = html;
-
-// ============ JEZIK ============
+// ============ JEZIK + SADRŽAJ: sekcije se generišu iz content.js (+ content.i18n.js) ============
+// build skripta već upisuje isti HTML (srpski) u index.html (SEO, brz prvi prikaz).
+// Za srpski se HTML ponovo generiše samo ako se content.js promijenio posle builda;
+// za en/ru se sadržaj uvijek renderuje na izabranom jeziku (izbor se pamti, promjena = osvježavanje).
 const storage = {
   get: (k) => { try { return localStorage.getItem(k); } catch { return null; } },
   set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* privatni režim */ } },
 };
 const supported = languages.map((l) => l.code);
-const setLang = (lang) => {
-  const applied = applyLanguage(lang, app);
-  storage.set('lang', applied);
-};
 const saved = storage.get('lang');
-if (saved && saved !== defaultLang && supported.includes(saved)) setLang(saved);
-$$('[data-lang]').forEach((btn) => btn.addEventListener('click', () => setLang(btn.dataset.lang)));
+const lang = saved && supported.includes(saved) ? saved : defaultLang;
+
+const app = $('#app');
+const html = renderApp(lang);
+if (lang !== defaultLang || app.dataset.hash !== hash(html)) app.innerHTML = html;
+applyLanguage(lang, app);
+if (lang !== defaultLang) document.title = localizedContent(lang).site.title;
+document.documentElement.classList.remove('lang-pending');
+
+// ----- padajuća lista jezika -----
+const langToggle = $('#lang-toggle');
+const langList = $('#lang-list');
+const setLangOpen = (open) => {
+  langList.classList.toggle('hidden', !open);
+  langToggle.setAttribute('aria-expanded', String(open));
+};
+langToggle.addEventListener('click', (e) => {
+  e.stopPropagation();
+  setLangOpen(langList.classList.contains('hidden'));
+});
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('[data-lang-menu]')) setLangOpen(false);
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && !langList.classList.contains('hidden')) {
+    setLangOpen(false);
+    langToggle.focus();
+  }
+});
+$$('[data-lang]').forEach((btn) =>
+  btn.addEventListener('click', () => {
+    setLangOpen(false);
+    if (btn.dataset.lang === lang) return;
+    storage.set('lang', btn.dataset.lang);
+    window.location.reload();
+  })
+);
 
 // ============ HEADER: senka pri skrolu + mobilni meni ============
 const header = $('#header');
@@ -59,6 +87,20 @@ document.addEventListener('keydown', (e) => {
     menuBtn.focus();
   }
 });
+
+// ============ "REZERVIŠI" vodi na kalendar dostupnosti ============
+$$('[data-book]').forEach((a) =>
+  a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const smooth = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    closeMenu();
+    $('#dostupnost-anchor')?.scrollIntoView({ behavior: smooth });
+    // kalendar se učitava tek kad mu se približimo; ako ne stigne (Firebase nedostupan), idi na formu za upit
+    setTimeout(() => {
+      if ($('#dostupnost')?.classList.contains('hidden')) $('#rezervacija')?.scrollIntoView({ behavior: smooth });
+    }, 3000);
+  })
+);
 
 // ============ REVEAL ANIMACIJE ============
 const io = new IntersectionObserver(

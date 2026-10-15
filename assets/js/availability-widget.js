@@ -6,9 +6,9 @@
 import { isFirebaseConfigured } from './firebase-config.js';
 import { loadAvailability } from './availability-data.js';
 import { apartments } from './content.js';
+import { t } from './i18n.js';
 import { monthGrid, monthLabel, shiftMonth, todayLocal, addDays, isRangeFree, formatRange, bookedDaySet } from './availability.js';
 
-const MSG_NOT_FREE = 'Izabrani termin nije slobodan. Izaberite druge datume.';
 
 export function initAvailability() {
   const section = document.getElementById('dostupnost');
@@ -61,51 +61,51 @@ function mount(section, map) {
               : past
                 ? 'bg-white text-midtone'
                 : 'bg-white text-ink hover:bg-mist';
-        const state_ = taken ? 'zauzeto' : past ? 'prošlo' : 'slobodno';
+        const state_ = taken ? t('avail.takenLower') : past ? t('avail.past') : t('avail.freeLower');
         return `<button type="button" data-day="${iso}" ${past ? 'disabled' : ''} aria-label="${day}. ${monthLabel(Number(iso.slice(0, 4)), Number(iso.slice(5, 7)) - 1)} – ${state_}"
           class="flex aspect-square min-h-10 items-center justify-center font-sans text-base ${cls}">${day}</button>`;
       })
       .join('');
     const ready = state.from && state.to;
     send.classList.toggle('hidden', !ready);
-    if (ready) msg.textContent = `Izabrano: ${formatRange(state.from, state.to)}`;
+    if (ready) msg.textContent = t('avail.chosen', { range: formatRange(state.from, state.to) });
   };
 
   const say = (text) => (msg.textContent = text);
 
   section.addEventListener('click', (e) => {
-    const t = e.target.closest('button');
-    if (!t) return;
-    if (t.dataset.availApt) {
-      state.apt = t.dataset.availApt;
+    const btn = e.target.closest('button');
+    if (!btn) return;
+    if (btn.dataset.availApt) {
+      state.apt = btn.dataset.availApt;
       state.from = state.to = null;
-      section.querySelectorAll('[data-avail-apt]').forEach((b) => b.setAttribute('aria-pressed', String(b === t)));
+      section.querySelectorAll('[data-avail-apt]').forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
       say('');
       render();
-    } else if (t.dataset.availMonth) {
-      state.month = shiftMonth(state.month, Number(t.dataset.availMonth));
+    } else if (btn.dataset.availMonth) {
+      state.month = shiftMonth(state.month, Number(btn.dataset.availMonth));
       render();
-    } else if (t.dataset.day) {
-      const day = t.dataset.day;
+    } else if (btn.dataset.day) {
+      const day = btn.dataset.day;
       const booked = bookedDaySet(map.get(state.apt) ?? []);
       if (!state.from || state.to || day <= state.from) {
         // prvi klik: dolazak
         state.to = null;
         if (booked.has(day)) {
           state.from = null;
-          say(MSG_NOT_FREE);
+          say(t('avail.notFree'));
         } else {
           state.from = day;
-          say('Sada izaberite dan odlaska.');
+          say(t('avail.pickOut'));
         }
       } else if (isRangeFree(map, state.apt, state.from, day)) {
         state.to = day;
       } else {
         state.from = state.to = null;
-        say(MSG_NOT_FREE);
+        say(t('avail.notFree'));
       }
       render();
-    } else if (t.id === 'avail-send' && state.from && state.to) {
+    } else if (btn.id === 'avail-send' && state.from && state.to) {
       window.dispatchEvent(new CustomEvent('tgh:select-range', { detail: { apartmentId: state.apt, from: state.from, to: state.to } }));
     }
   });

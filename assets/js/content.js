@@ -79,7 +79,7 @@ export const logo = { src: 'assets/img/logo.png', width: 288, height: 288 };
 
 // ---------- Uvodna sekcija (slika preklapa sekciju) ----------
 export const intro = {
-  image: { src: 'assets/img/foto1.jpg', width: 605, height: 806, alt: '[Opis fotografije]' },
+  image: { src: 'assets/img/foto1.jpg', width: 605, height: 806, alt: 'Šetalište uz more u Tivtu' },
   title: 'Odlična lokacija i dobra povezanost',
   // Pasusi se razdvajaju praznim redom (\n\n).
   text:
@@ -125,7 +125,7 @@ export const apartments = [
       'Poseban ulaz, terasa, prostrano dvorište u hladu maslina sa vanjskim roštiljem',
       'Parking',
     ],
-    image: { src: 'assets/img/apartman-1.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Olive]' },
+    image: { src: 'assets/img/apartman-1.jpg', width: 1024, height: 768, alt: 'Dnevna soba – Holiday home Olive' },
   },
   {
     id: 'lavanda',
@@ -135,7 +135,7 @@ export const apartments = [
     guests: '2–4 osobe',
     summary: lavandaLemoniText('Lavande'),
     features: lavandaLemoniFeatures,
-    image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Lavande]' },
+    image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768, alt: 'Dnevna soba i kuhinja – Holiday home Lavande' },
   },
   {
     id: 'lemoni',
@@ -145,7 +145,7 @@ export const apartments = [
     guests: '2–4 osobe',
     summary: lavandaLemoniText('Lemoni'),
     features: lavandaLemoniFeatures,
-    image: { src: 'assets/img/apartman-3.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Lemoni]' },
+    image: { src: 'assets/img/apartman-3.jpg', width: 1024, height: 768, alt: 'Kuhinja – Holiday home Lemoni' },
   },
 ];
 
@@ -182,7 +182,7 @@ export const feature = {
   title: 'Mediteranski ambijent među maslinama',
   text: 'Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora, strogog centra grada i svih važnih sadržaja.',
   href: '#apartmani',
-  image: { src: 'assets/img/foto2.jpg', width: 1240, height: 827, alt: '[Opis]' },
+  image: { src: 'assets/img/foto2.jpg', width: 1240, height: 827, alt: 'Dvorište sa terasom u hladu vinove loze' },
 };
 
 // ---------- Utisci gostiju (koristiti samo prave recenzije uz dozvolu gosta) ----------
@@ -208,7 +208,7 @@ export const dark = {
   title: 'Za kraći i duži boravak',
   text: 'Blizina mora, strogog centra grada i svih važnih sadržaja čini apartmane odličnim izborom kako za kraći, tako i za duži boravak.',
   href: '#plaze',
-  image: { src: 'assets/img/foto3.jpg', width: 2500, height: 1667, alt: '[Opis]' },
+  image: { src: 'assets/img/foto3.jpg', width: 1240, height: 827, alt: 'Dnevni boravak sa kuhinjom' },
 };
 
 // ---------- Plaže (kartice). `link` je opcion (npr. Google Maps); prazno = nije link ----------

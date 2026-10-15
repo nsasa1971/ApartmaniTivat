@@ -62,6 +62,7 @@ const head = `<title>${esc(c.site.title)}</title>
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
