@@ -59,9 +59,13 @@ const head = `<title>${esc(c.site.title)}</title>
   <meta property="og:description" content="${esc(c.site.ogDescription)}">
   <meta property="og:url" content="${esc(base)}/">
   <meta property="og:image" content="${esc(abs(c.site.ogImage))}">
+  <meta property="og:image:secure_url" content="${esc(abs(c.site.ogImage))}">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="${esc(c.site.brand)}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="${esc(abs(c.site.ogImage))}">
   <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/icon-192.png">
