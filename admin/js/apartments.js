@@ -2,7 +2,7 @@
 // id mora odgovarati ID-jevima u assets/js/content.js i u firestore.rules.
 export const DEFAULT_APARTMENTS = [
   { id: 'olive', naziv: 'Olive', kapacitet: 4 },
-  { id: 'lavanda', naziv: 'Lavanda', kapacitet: 4 },
+  { id: 'lavanda', naziv: 'Lavande', kapacitet: 4 },
   { id: 'lemoni', naziv: 'Lemoni', kapacitet: 4 },
 ];
 

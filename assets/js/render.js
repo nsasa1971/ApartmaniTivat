@@ -110,8 +110,11 @@ function hero() {
             </label>`;
   return `
     <section class="relative flex min-h-[250px] items-center py-12 md:min-h-[320px] md:pb-[130px] md:pt-[100px]">
-      <img src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+      <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" class="absolute inset-0 overflow-hidden">
+        <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+      </div>
       <div class="absolute inset-0 bg-[#34493A]/70 md:bg-transparent md:bg-[linear-gradient(90deg,#34493AFA_2%,#F2295B00_42%)]"></div>
+      <div data-hero-dots class="absolute right-4 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3 md:right-8" role="group" aria-label="Slike"></div>
 
       <div class="container relative max-w-page">
         <div class="max-w-xl text-center text-white [text-shadow:0_1px_4px_rgba(0,0,0,.45)] md:pl-3 md:pr-[70px] md:text-left md:[text-shadow:none]">
