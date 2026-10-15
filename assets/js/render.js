@@ -431,6 +431,7 @@ export function contactLinks() {
   const k = c.contact;
   return [
     { id: 'phone', label: t('contact.phone'), value: k.phoneDisplay || k.phone, href: `tel:${String(k.phone).replace(/[^\d+]/g, '')}` },
+    { id: 'phone2', label: t('contact.phone'), value: k.phoneDisplay2 || k.phone2, href: `tel:${String(k.phone2 || '').replace(/[^\d+]/g, '')}` },
     { id: 'email', label: 'Email', value: k.email, href: `mailto:${k.email}` },
     { id: 'whatsapp', label: 'WhatsApp', value: k.whatsapp, href: `https://wa.me/${digits(k.whatsapp)}` },
     { id: 'viber', label: 'Viber', value: k.viber, href: `viber://chat?number=%2B${digits(k.viber)}` },
@@ -604,9 +605,15 @@ function footer() {
           <h2 class="mb-4 font-display text-[26px] text-white">${t('footer.about')}</h2>
           <p class="font-sans text-sm leading-7 text-white/80">${esc(c.footer.about)}</p>
           <p class="mt-3 font-sans text-sm leading-7 text-white/80">${esc(fullAddress())}${
-            c.contact.phone
-              ? `<br><a href="tel:${esc(String(c.contact.phone).replace(/[^\d+]/g, ''))}" class="hover:text-white">${esc(c.contact.phoneDisplay || c.contact.phone)}</a>`
-              : ''
+            [
+              [c.contact.phone, c.contact.phoneDisplay],
+              [c.contact.phone2, c.contact.phoneDisplay2],
+            ]
+              .filter(([p]) => p)
+              .map(([p, d]) => `<br><a href="tel:${esc(String(p).replace(/[^\d+]/g, ''))}" class="hover:text-white">${esc(d || p)}</a>`)
+              .join('')
+          }${
+            isPlaceholder(c.contact.email) ? '' : `<br><a href="mailto:${esc(c.contact.email)}" class="hover:text-white">${esc(c.contact.email)}</a>`
           }</p>
         </div>
         ${list(nav.slice(0, half))}
