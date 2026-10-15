@@ -50,7 +50,7 @@ export const translations = {
       title: 'Great location and easy access',
       text:
         'Holiday home Olive, Holiday home Lavande and Holiday home Lemoni are in a great location in Tivat with very good transport connections. The bus station and a taxi stand are close by, and the airport is easy to reach.\n\nThe beach is about 300 m away, two large supermarkets about 50 m, a restaurant about 70 m, and Porto Montenegro about 1 km.',
-      image: { alt: 'Seaside promenade in Tivat' },
+      image: { alt: 'Porto Montenegro in Tivat' },
     },
     apartmentsSection: { title: 'Apartments' },
     apartments: [
@@ -217,7 +217,7 @@ export const translations = {
       title: 'Отличное расположение и удобная транспортная доступность',
       text:
         'Holiday home Olive, Holiday home Lavande и Holiday home Lemoni расположены в отличном месте в Тивате с очень хорошим транспортным сообщением. Рядом находятся автовокзал и стоянка такси, а до аэропорта легко добраться.\n\nДо пляжа около 300 м, до двух больших супермаркетов около 50 м, до ресторана около 70 м, а до Порто Монтенегро около 1 км.',
-      image: { alt: 'Набережная в Тивате' },
+      image: { alt: 'Порто Монтенегро в Тивате' },
     },
     apartmentsSection: { title: 'Апартаменты' },
     apartments: [

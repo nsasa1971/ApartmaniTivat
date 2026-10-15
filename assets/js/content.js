@@ -84,7 +84,7 @@ export const logo = { src: 'assets/img/logo.png', width: 288, height: 288 };
 
 // ---------- Uvodna sekcija (slika preklapa sekciju) ----------
 export const intro = {
-  image: { src: 'assets/img/foto1.jpg', width: 605, height: 806, alt: 'Šetalište uz more u Tivtu' },
+  image: { src: 'assets/img/foto1.jpg', width: 605, height: 806, alt: 'Porto Montenegro u Tivtu' },
   title: 'Odlična lokacija i dobra povezanost',
   // Pasusi se razdvajaju praznim redom (\n\n).
   text:
