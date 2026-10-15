@@ -71,7 +71,9 @@ export const logo = { src: 'assets/img/logo.png', width: 211, height: 100 };
 export const intro = {
   image: { src: 'assets/img/foto1.jpg', width: 605, height: 806, alt: '[Opis fotografije]' },
   title: 'Odlična lokacija i dobra povezanost',
-  text: 'U neposrednoj blizini su autobuska stanica i taxi stajalište, a aerodrom je lako dostupan. Plaža je udaljena oko 300 m, dva velika marketa oko 50 m, restoran oko 70 m, a Porto Montenegro oko 1 km.',
+  // Pasusi se razdvajaju praznim redom (\n\n).
+  text:
+    'Holiday home Olive, Holiday home Lavanda i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, sa veoma dobrom saobraćajnom povezanošću. U neposrednoj blizini nalaze se autobuska stanica i taxi stajalište, dok je aerodrom lako dostupan.\n\nPlaža je udaljena oko 300 m, dva velika marketa oko 50 m, restoran oko 70 m, dok je Porto Montenegro udaljen oko 1 km.',
   href: '#apartmani',
 };
 
@@ -83,9 +85,20 @@ export const apartmentsSection = {
   title: 'Apartmani',
 };
 
-const yard = 'Prostrano dvorište u hladu maslina sa vanjskim roštiljem';
-const lavandaLemoniSummary =
-  'Jedna velika spavaća soba sa bračnim krevetom i sofom. Dnevna soba sa velikom ugaonom garniturom na razvlačenje, potpuno opremljena kuhinja i kupatilo.';
+const lavandaLemoniText = (naziv) =>
+  `Holiday home ${naziv} je prostran apartman od 60 m², namijenjen za 2 do 4 osobe. Sastoji se od jedne velike sobe sa bračnim krevetom i sofom, dnevnog boravka sa velikom ugaonom garniturom na razvlačenje, kupatila i potpuno opremljene kuhinje. Apartman ima poseban ulaz, terasu i prostrano dvorište u hladu maslina, sa vanjskim roštiljem, idealno za odmor i druženje. Moderan i funkcionalan raspored pruža gostima privatnost i udobnost tokom cijelog boravka.`;
+
+// Lavanda i Lemoni imaju isti raspored i sadržaj.
+// NAPOMENA: tekst klijenta za Lavandu/Lemoni ne pominje TV, internet i klima uređaje, ali su navedeni
+// u ranijem opisu klijenta – ostavljeno u listi; potvrditi sa klijentom.
+const lavandaLemoniFeatures = [
+  'Spavaća soba sa bračnim krevetom i sofom',
+  'Dnevna soba sa velikom ugaonom garniturom na razvlačenje',
+  'Potpuno opremljena kuhinja i kupatilo',
+  'TV, internet i dva klima uređaja',
+  'Poseban ulaz, terasa i prostrano dvorište u hladu maslina sa vanjskim roštiljem',
+  'Parking',
+];
 
 export const apartments = [
   {
@@ -95,8 +108,15 @@ export const apartments = [
     area: '50 m²',
     guests: '2–4 osobe',
     summary:
-      'Dvije odvojene spavaće sobe, svaka sa bračnim krevetom. Dnevna soba sa sofom, potpuno opremljena kuhinja i kupatilo.',
-    features: ['TV, internet i dva klima uređaja', 'Poseban ulaz i terasa', yard, 'Parking'],
+      'Holiday home Olive je komforan apartman površine 50 m², kapaciteta od 2 do 4 osobe. Raspolaže sa dvije odvojene spavaće sobe, od kojih svaka ima bračni krevet. Posebno je izdvojen dnevni boravak sa potpuno opremljenom kuhinjom, kao i kupatilo. Gostima su na raspolaganju TV, internet i dva klima uređaja. Apartman ima poseban ulaz, terasu, prostrano dvorište u hladu maslina sa vanjskim roštiljem i obezbjeđen parking, što ga čini odličnim izborom za parove, porodice i duži boravak.',
+    features: [
+      'Dvije odvojene spavaće sobe sa bračnim krevetom',
+      'Dnevna soba sa sofom',
+      'Potpuno opremljena kuhinja i kupatilo',
+      'TV, internet i dva klima uređaja',
+      'Poseban ulaz, terasa, prostrano dvorište u hladu maslina sa vanjskim roštiljem',
+      'Parking',
+    ],
     image: { src: 'assets/img/apartman-1.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Olive]' },
   },
   {
@@ -105,8 +125,8 @@ export const apartments = [
     fullName: 'Holiday home Lavanda', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
     guests: '2–4 osobe',
-    summary: lavandaLemoniSummary,
-    features: ['TV, internet i dva klima uređaja', 'Poseban ulaz i terasa', yard, 'Parking'],
+    summary: lavandaLemoniText('Lavanda'),
+    features: lavandaLemoniFeatures,
     image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Lavanda]' },
   },
   {
@@ -115,8 +135,8 @@ export const apartments = [
     fullName: 'Holiday home Lemoni', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
     guests: '2–4 osobe',
-    summary: lavandaLemoniSummary, // isti raspored i sadržaj kao Lavanda
-    features: ['TV, internet i dva klima uređaja', 'Poseban ulaz i terasa', yard, 'Parking'],
+    summary: lavandaLemoniText('Lemoni'),
+    features: lavandaLemoniFeatures,
     image: { src: 'assets/img/apartman-3.jpg', width: 1024, height: 768, alt: '[Opis fotografije – Holiday home Lemoni]' },
   },
 ];
@@ -124,7 +144,7 @@ export const apartments = [
 // ---------- Cijene ----------
 export const pricing = {
   id: 'cijene',
-  title: 'Cijene',
+  title: 'Cijene i pogodnosti',
   items: [
     { label: 'Van glavne sezone', note: '', price: '100 €', unit: 'po danu' },
     { label: 'Od 01.06. do 01.09.', note: '', price: '120 €', unit: 'po danu' },
@@ -132,8 +152,8 @@ export const pricing = {
   ],
   basis: 'Cijene važe po apartmanu.',
   discounts: [
-    'Za boravak od 10 dana i više popust 10%.',
-    'Za boravak od mjesec dana povoljnija cijena, popust do 20%.',
+    'Za boravak od 10 dana i više moguć je popust od 10%.',
+    'Za boravak od mjesec dana moguća je povoljnija cijena, popust do 20%.',
   ],
   disclaimer: 'Cijene su informativne. Tačnu ponudu pošaljite preko forme za upit.',
 };
@@ -178,7 +198,7 @@ export const reviews = [
 // ---------- Tamna sekcija (tekst + slika sa ofsetom) ----------
 export const dark = {
   title: 'Za kraći i duži boravak',
-  text: 'Blizina mora, strogog centra grada i svih važnih sadržaja čini apartmane odličnim izborom za kraći i duži boravak.',
+  text: 'Blizina mora, strogog centra grada i svih važnih sadržaja čini apartmane odličnim izborom kako za kraći, tako i za duži boravak.',
   href: '#plaze',
   image: { src: 'assets/img/foto3.jpg', width: 2500, height: 1667, alt: '[Opis]' },
 };

@@ -165,7 +165,10 @@ function intro() {
           </div>
           <div class="order-1 mb-6 text-center md:order-2 md:mb-0 md:pl-[50px] md:pt-20 md:text-left">
             <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">${esc(s.title)}</h2>
-            <p class="mb-[30px] font-sans text-sm leading-loose text-ink md:text-lg">${esc(s.text)}</p>
+            ${s.text
+              .split('\n\n')
+              .map((t, i, all) => `<p class="${i === all.length - 1 ? 'mb-[30px]' : 'mb-4'} font-sans text-sm leading-loose text-ink md:text-lg">${esc(t)}</p>`)
+              .join('\n            ')}
             ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg')}
           </div>
         </div>
@@ -188,7 +191,7 @@ function apartments() {
             <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.fullName ?? ap.name)}</h3>
             <p class="font-sans text-sm font-bold text-ink">${esc(ap.area)} · ${esc(ap.guests)}</p>
             <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
-            <ul class="mt-2 font-sans text-sm leading-7 text-body">
+            <ul class="mt-2 list-disc pl-5 font-sans text-sm leading-7 text-body">
               ${ap.features.map((f) => `<li>${esc(f)}</li>`).join('\n              ')}
             </ul>
           </article>`
