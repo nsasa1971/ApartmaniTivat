@@ -94,6 +94,18 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// ----- mobilni meni: "Okolina" je harmonika (zatvorena dok se ne dotakne) -----
+$$('[data-acc]').forEach((btn) =>
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') !== 'true';
+    btn.setAttribute('aria-expanded', String(open));
+    const list = btn.nextElementSibling;
+    list.classList.toggle('hidden', !open);
+    list.classList.toggle('grid', open);
+    btn.querySelector('svg').classList.toggle('rotate-180', open);
+  })
+);
+
 // ----- padajući meni "Okolina" (otvara se prelaskom miša ili fokusom; ovdje se samo ažurira aria-expanded) -----
 $$('[data-nav-menu]').forEach((m) => {
   const btn = $('button', m);

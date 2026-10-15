@@ -140,14 +140,15 @@ function header() {
       </div>
     </div>
 
-    <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="${esc(t('aria.mobileNav'))}">
+    <nav id="mobile-menu" class="hidden max-h-[calc(100svh-96px)] overflow-y-auto border-t border-line bg-white lg:hidden" aria-label="${esc(t('aria.mobileNav'))}">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
         ${nav
           .map((n) =>
             n.children
-              ? `<li class="py-3"><span class="block font-sans text-xs font-bold uppercase tracking-[.14em] text-forest">${t(n.key)}</span>
-          <ul class="mt-1 ml-1 border-l border-line pl-4">${n.children.map((ch) => `<li><a href="${ch.href}" class="block py-2.5">${t(ch.key)}</a></li>`).join('')}</ul></li>`
-              : `<li><a href="${n.href}" class="block py-3">${t(n.key)}</a></li>`
+              ? `<li>
+          <button type="button" data-acc aria-expanded="false" class="flex w-full items-center justify-between py-2.5 text-left">${t(n.key)}<svg class="h-4 w-4 text-ink/60 transition-transform" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg></button>
+          <ul class="mb-2 hidden grid-cols-2 gap-2">${n.children.map((ch) => `<li><a href="${ch.href}" class="block rounded-lg bg-mist px-3 py-2.5 text-center font-sans text-sm">${t(ch.key)}</a></li>`).join('')}</ul></li>`
+              : `<li><a href="${n.href}" class="block py-2.5">${t(n.key)}</a></li>`
           )
           .join('\n        ')}
         <li class="flex items-center gap-1 py-2" role="group" aria-label="${esc(t('aria.language'))}">
