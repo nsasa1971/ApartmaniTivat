@@ -1,5 +1,113 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url><loc>https://apartmanigardentivat.netlify.app/</loc></url>
   <url><loc>https://apartmanigardentivat.netlify.app/politika-privatnosti.html</loc></url>
+  <url><loc>https://apartmanigardentivat.netlify.app/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/en/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/ru/blog/</loc>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/blog/najljepse-plaze-u-blizini-tivta.html</loc><lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/najljepse-plaze-u-blizini-tivta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/best-beaches-near-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/luchshie-plyazhi-okolo-tivata.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/najljepse-plaze-u-blizini-tivta.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/en/blog/best-beaches-near-tivat.html</loc><lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/najljepse-plaze-u-blizini-tivta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/best-beaches-near-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/luchshie-plyazhi-okolo-tivata.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/najljepse-plaze-u-blizini-tivta.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/ru/blog/luchshie-plyazhi-okolo-tivata.html</loc><lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/najljepse-plaze-u-blizini-tivta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/best-beaches-near-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/luchshie-plyazhi-okolo-tivata.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/najljepse-plaze-u-blizini-tivta.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/blog/kotor-izlet-iz-tivta.html</loc><lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/kotor-izlet-iz-tivta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/day-trip-to-kotor-from-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/poezdka-v-kotor-iz-tivata.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/kotor-izlet-iz-tivta.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/en/blog/day-trip-to-kotor-from-tivat.html</loc><lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/kotor-izlet-iz-tivta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/day-trip-to-kotor-from-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/poezdka-v-kotor-iz-tivata.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/kotor-izlet-iz-tivta.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/ru/blog/poezdka-v-kotor-iz-tivata.html</loc><lastmod>2026-10-16</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/kotor-izlet-iz-tivta.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/day-trip-to-kotor-from-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/poezdka-v-kotor-iz-tivata.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/kotor-izlet-iz-tivta.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/blog/tivat-porto-montenegro-solila.html</loc><lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/tivat-porto-montenegro-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/tivat-porto-montenegro-and-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/tivat-porto-montenegro-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/tivat-porto-montenegro-solila.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/en/blog/tivat-porto-montenegro-and-solila.html</loc><lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/tivat-porto-montenegro-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/tivat-porto-montenegro-and-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/tivat-porto-montenegro-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/tivat-porto-montenegro-solila.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/ru/blog/tivat-porto-montenegro-solila.html</loc><lastmod>2026-10-17</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/tivat-porto-montenegro-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/tivat-porto-montenegro-and-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/tivat-porto-montenegro-solila.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/tivat-porto-montenegro-solila.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/blog/sta-jesti-na-crnogorskom-primorju.html</loc><lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/sta-jesti-na-crnogorskom-primorju.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/what-to-eat-on-the-montenegrin-coast.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/chto-poprobovat-na-chernogorskom-poberezhe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/sta-jesti-na-crnogorskom-primorju.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/en/blog/what-to-eat-on-the-montenegrin-coast.html</loc><lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/sta-jesti-na-crnogorskom-primorju.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/what-to-eat-on-the-montenegrin-coast.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/chto-poprobovat-na-chernogorskom-poberezhe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/sta-jesti-na-crnogorskom-primorju.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/ru/blog/chto-poprobovat-na-chernogorskom-poberezhe.html</loc><lastmod>2026-10-18</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/sta-jesti-na-crnogorskom-primorju.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/what-to-eat-on-the-montenegrin-coast.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/chto-poprobovat-na-chernogorskom-poberezhe.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/sta-jesti-na-crnogorskom-primorju.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/blog/porodicni-odmor-u-tivtu.html</loc><lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/porodicni-odmor-u-tivtu.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/family-holiday-in-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/semeynyy-otdykh-v-tivate.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/porodicni-odmor-u-tivtu.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/en/blog/family-holiday-in-tivat.html</loc><lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/porodicni-odmor-u-tivtu.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/family-holiday-in-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/semeynyy-otdykh-v-tivate.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/porodicni-odmor-u-tivtu.html"/>
+  </url>
+  <url><loc>https://apartmanigardentivat.netlify.app/ru/blog/semeynyy-otdykh-v-tivate.html</loc><lastmod>2026-10-19</lastmod>
+    <xhtml:link rel="alternate" hreflang="sr-Latn-ME" href="https://apartmanigardentivat.netlify.app/blog/porodicni-odmor-u-tivtu.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://apartmanigardentivat.netlify.app/en/blog/family-holiday-in-tivat.html"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://apartmanigardentivat.netlify.app/ru/blog/semeynyy-otdykh-v-tivate.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://apartmanigardentivat.netlify.app/blog/porodicni-odmor-u-tivtu.html"/>
+  </url>
 </urlset>

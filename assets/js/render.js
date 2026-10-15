@@ -7,6 +7,7 @@ import * as base from './content.js';
 import { localizedContent } from './content.i18n.js';
 import { t, languages, setLang, getLang } from './i18n.js';
 import { weekdays } from './availability.js';
+import { posts, blogIndexPath, postPath } from './blog-content.js';
 
 // sadržaj na trenutnom jeziku (postavlja ga renderApp)
 let c = base;
@@ -223,6 +224,38 @@ function intro() {
     </section>`;
 }
 
+// ---------- Galerija apartmana: 4 sličice ispod glavne slike (+N na posljednjoj), sve slike u lightbox-u ----------
+function aptGallery(ap) {
+  const photos = ap.photos ?? [];
+  if (!photos.length) return '';
+  const shown = photos.slice(0, 4);
+  const rest = photos.length - shown.length;
+  const alt = (i) => t('apt.photo', { name: ap.fullName ?? ap.name, n: i + 1 });
+  const link = (p, i, inner, cls) =>
+    `<a href="${esc(p.full)}" data-lightbox data-group="${esc(ap.id)}" data-alt="${esc(alt(i))}" class="${cls}" aria-label="${esc(i === shown.length - 1 && rest > 0 ? t('apt.photosAll', { n: photos.length }) : alt(i))}">${inner}</a>`;
+  return `
+            <ul class="mt-2 grid grid-cols-4 gap-2">
+              ${shown
+                .map(
+                  (p, i) => `<li>${link(
+                    p,
+                    i,
+                    `<img src="${esc(p.thumb)}" width="300" height="225" loading="lazy" decoding="async" alt="" class="aspect-[4/3] w-full object-cover transition group-hover:opacity-90">${
+                      i === shown.length - 1 && rest > 0
+                        ? `<span class="absolute inset-0 flex items-center justify-center bg-ink/55 font-sans text-base font-bold text-white">+${rest}</span>`
+                        : ''
+                    }`,
+                    'group relative block overflow-hidden rounded-lg'
+                  )}</li>`
+                )
+                .join('\n              ')}
+            </ul>
+            <span hidden>${photos
+              .slice(shown.length)
+              .map((p, k) => link(p, shown.length + k, '', 'hidden'))
+              .join('')}</span>`;
+}
+
 // ---------- Apartmani (kartice) ----------
 function apartments() {
   const a = c.apartmentsSection;
@@ -235,6 +268,7 @@ function apartments() {
             .map(
               (ap) => `<article class="group reveal block">
             <img src="${esc(ap.image.src)}" width="${ap.image.width}" height="${ap.image.height}" loading="lazy" decoding="async" alt="${esc(ap.image.alt)}" class="img-muted w-full">
+            ${aptGallery(ap)}
             <h3 class="mt-5 font-sans text-xl font-bold text-ink">${esc(ap.fullName ?? ap.name)}</h3>
             <ul class="mt-4 grid grid-cols-3 gap-2">
               ${[
@@ -445,6 +479,31 @@ export function contactLinks() {
 
 export const fullAddress = () => [c.contact.address, c.contact.city, c.contact.countryName].filter(Boolean).join(', ');
 
+// ---------- Savjeti (blog): tri najnovija članka, interni linkovi ka stranicama bloga ----------
+function blogSection() {
+  const lang = getLang();
+  return `
+    <section id="savjeti" class="py-[50px] md:py-[100px]">
+      <div class="container max-w-page">
+        <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#1F2F25]">${t('blog.title')}</h2>
+        <div class="grid gap-6 md:grid-cols-3">
+          ${posts
+            .slice(0, 3)
+            .map(
+              (p) => `<article class="group reveal flex flex-col">
+            <a href="${postPath(p, lang)}" class="block overflow-hidden"><img src="${esc(p.image.src)}" width="${p.image.width}" height="${p.image.height}" loading="lazy" decoding="async" alt="${esc(p[lang].imageAlt)}" class="img-muted w-full"></a>
+            <h3 class="mt-5 font-sans text-xl font-bold leading-snug text-ink"><a href="${postPath(p, lang)}" class="hover:opacity-70">${esc(p[lang].title)}</a></h3>
+            <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(p[lang].excerpt)}</p>
+            <a href="${postPath(p, lang)}" class="mt-3 font-sans text-sm font-bold text-ink hover:opacity-70">${t('blog.read')} ${arrow}</a>
+          </article>`
+            )
+            .join('\n          ')}
+        </div>
+        <p class="mt-10 text-center"><a href="${blogIndexPath(lang)}" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg">${t('blog.all')} ${arrow}</a></p>
+      </div>
+    </section>`;
+}
+
 // ---------- Dostupnost (popunjava availability-widget.js; sakrivena dok Firebase ne odgovori) ----------
 function availabilitySection() {
   const a = c.availability;
@@ -595,7 +654,7 @@ function map() {
 
 // ---------- Footer ----------
 function footer() {
-  const nav = navItems();
+  const nav = [...navItems(), { key: 'nav.blog', href: blogIndexPath(getLang()) }];
   const half = Math.ceil(nav.length / 2);
   const list = (items) =>
     `<ul class="font-sans text-sm leading-8 text-white/80">
@@ -673,6 +732,7 @@ ${feature()}
 ${reviews()}
 ${dark()}
 ${beaches()}
+${blogSection()}
 ${availabilitySection()}
 ${reservation()}
 ${map()}

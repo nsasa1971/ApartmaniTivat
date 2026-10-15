@@ -40,6 +40,24 @@ Sve na jednom mestu: **`assets/js/content.js`**
 
 Tekstovi u uglastim zagradama `[...]` su placeholderi. Meni, dugmad i oznake na tri jezika (sr/en/ru) su u **`assets/js/i18n.js`** (prevedeni su samo navigacija i dugmad; ostali tekstovi ostaju na jeziku iz `content.js`). Tekst politike privatnosti: `politika-privatnosti.html`.
 
+## Galerija po apartmanu (`npm run apt-photos`)
+
+Svaki apartman može imati svoju galeriju: 4 sličice ispod glavne slike kartice (+N na posljednjoj), a klik otvara sve fotografije u lightbox-u (listaju se samo slike tog apartmana).
+
+1. Napravi folder npr. `apartmani-slike` sa podfolderima `olive`, `lavande` i `lemoni` i u njih stavi fotografije (redoslijed = abecedni/brojčani redoslijed imena: `1.jpg`, `2.jpg`, `10.jpg`...).
+2. Pokreni `npm run apt-photos -- apartmani-slike`. Skripta smanjuje slike (do 1600 px, sličice 600×450) u `assets/img/apartments/<apartman>/` i upisuje spisak u `assets/js/apartment-photos.js` (ne uređuje se ručno).
+3. `npm run build`, pa commit i push (`assets/img/apartments`, `assets/js/apartment-photos.js`, `index.html`). Folder `apartmani-slike` se ne šalje u git.
+
+Apartman bez fotografija jednostavno nema galeriju. Ponovno pokretanje zamjenjuje slike samo za apartmane čiji je podfolder u folderu.
+
+## Blog / savjeti (SEO)
+
+- Članci su u `assets/js/blog-content.js` (crnogorski, engleski, ruski; blokovi `['p', ...]`, `['h2', ...]`, `['ul', [...]]`). Svaki članak ima svoju stranicu po jeziku: `/blog/<slug>.html`, `/en/blog/<slug>.html`, `/ru/blog/<slug>.html`, uz spisak na `/blog/`, `/en/blog/` i `/ru/blog/`.
+- `npm run build` generiše te stranice (`blog/`, `en/`, `ru/`), `sitemap.xml` sa `hreflang` oznakama i podatke za Google (Article). Generisani fajlovi se šalju u git kao i `index.html`.
+- Novi članak: dodaj objekat u `posts` (slika iz `assets/img/`, tri jezika sa `slug`, `title`, `description` do 170 znakova, `excerpt`, `imageAlt`, `body`), pokreni `npm run build` i `npm test`.
+- Početna prikazuje tri najnovija članka (sekcija "Savjeti"), a footer ima link na blog.
+- Činjenice u člancima (vrijeme vožnje, opisi plaža i znamenitosti) preuzete su iz sadržaja sajta; prije objave ih pregleda vlasnik.
+
 ## Jezici (crnogorski, engleski, ruski)
 
 - Izbor jezika je padajuća lista sa zastavama u zaglavlju; izbor se pamti u pregledaču, a promjena osvježava stranicu.

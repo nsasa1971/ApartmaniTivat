@@ -18,6 +18,12 @@ const storage = {
   set: (k, v) => { try { localStorage.setItem(k, v); } catch { /* privatni režim */ } },
 };
 const supported = languages.map((l) => l.code);
+// link sa bloga (npr. /?lang=en) postavlja jezik i čisti adresu
+const qLang = new URLSearchParams(window.location.search).get('lang');
+if (qLang && supported.includes(qLang)) {
+  storage.set('lang', qLang);
+  window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+}
 const saved = storage.get('lang');
 const lang = saved && supported.includes(saved) ? saved : defaultLang;
 

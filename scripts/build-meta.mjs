@@ -6,10 +6,13 @@
 //  Idempotentna je: menja samo delove između build:* markera.
 // ============================================================
 import { readFile, writeFile } from 'node:fs/promises';
+import { mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import * as c from '../assets/js/content.js';
 import { renderApp, hash, esc, isPlaceholder } from '../assets/js/render.js';
+import { posts, blogLangs, blogIndexPath, postPath } from '../assets/js/blog-content.js';
+import { renderBlogIndexPage, renderPostPage } from '../assets/js/blog-render.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const file = (p) => path.join(root, p);
@@ -104,12 +107,31 @@ await writeFile(file('manifest.webmanifest'), JSON.stringify(manifest, null, 2) 
 
 // ---------- robots + sitemap ----------
 await writeFile(file('robots.txt'), `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${base}/sitemap.xml\n`);
-const urls = [`${base}/`, `${base}/${c.footer.privacyHref}`];
+// ---------- blog: spisak i članci na sva tri jezika ----------
+const HREFLANG = { sr: 'sr-Latn-ME', en: 'en', ru: 'ru' };
+const writePage = async (urlPath, html) => {
+  const out = file(urlPath.endsWith('/') ? `${urlPath.slice(1)}index.html` : urlPath.slice(1));
+  await mkdir(path.dirname(out), { recursive: true });
+  await writeFile(out, html);
+};
+for (const lang of blogLangs) {
+  await writePage(blogIndexPath(lang), renderBlogIndexPage(lang, base));
+  for (const post of posts) await writePage(postPath(post, lang), renderPostPage(post, lang, base));
+}
+
+const alt = (pathFor) =>
+  [...blogLangs.map((l) => `    <xhtml:link rel="alternate" hreflang="${HREFLANG[l]}" href="${esc(base + pathFor(l))}"/>`), `    <xhtml:link rel="alternate" hreflang="x-default" href="${esc(base + pathFor('sr'))}"/>`].join('\n');
+const entries = [
+  `  <url><loc>${esc(`${base}/`)}</loc></url>`,
+  `  <url><loc>${esc(`${base}/${c.footer.privacyHref}`)}</loc></url>`,
+  ...blogLangs.map((l) => `  <url><loc>${esc(base + blogIndexPath(l))}</loc>\n${alt(blogIndexPath)}\n  </url>`),
+  ...posts.flatMap((post) =>
+    blogLangs.map((l) => `  <url><loc>${esc(base + postPath(post, l))}</loc><lastmod>${post.date}</lastmod>\n${alt((x) => postPath(post, x))}\n  </url>`)
+  ),
+];
 await writeFile(
   file('sitemap.xml'),
-  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls
-    .map((u) => `  <url><loc>${esc(u)}</loc></url>`)
-    .join('\n')}\n</urlset>\n`
+  `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n${entries.join('\n')}\n</urlset>\n`
 );
 
-console.log('✓ meta, prerender, manifest, robots.txt i sitemap.xml generisani');
+console.log(`✓ meta, prerender, manifest, robots.txt, sitemap.xml i blog (${posts.length * blogLangs.length + blogLangs.length} stranica) generisani`);

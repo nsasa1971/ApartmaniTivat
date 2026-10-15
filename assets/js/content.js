@@ -5,6 +5,8 @@
 //  Posle izmjene: osvježi stranicu (dev) ili pokreni `npm run build`.
 // ============================================================
 
+import { apartmentPhotos } from './apartment-photos.js';
+
 // ---------- Osnovne informacije o sajtu (koriste se i za SEO/meta) ----------
 export const site = {
   brand: 'Tivat Garden Homes',
@@ -129,6 +131,7 @@ export const apartments = [
       'Parking',
     ],
     image: { src: 'assets/img/apartman-1.jpg', width: 1024, height: 768, alt: 'Dnevna soba – Holiday home Olive' },
+    photos: apartmentPhotos.olive, // galerija apartmana: `npm run apt-photos`
   },
   {
     id: 'lavanda',
@@ -139,6 +142,7 @@ export const apartments = [
     summary: lavandaLemoniText('Lavande'),
     features: lavandaLemoniFeatures,
     image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768, alt: 'Dnevna soba i kuhinja – Holiday home Lavande' },
+    photos: apartmentPhotos.lavanda,
   },
   {
     id: 'lemoni',
@@ -149,6 +153,7 @@ export const apartments = [
     summary: lavandaLemoniText('Lemoni'),
     features: lavandaLemoniFeatures,
     image: { src: 'assets/img/apartman-3.jpg', width: 1024, height: 768, alt: 'Kuhinja – Holiday home Lemoni' },
+    photos: apartmentPhotos.lemoni,
   },
 ];
 
