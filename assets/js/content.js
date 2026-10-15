@@ -43,7 +43,9 @@ export const config = {
 export const contact = {
   phone: '+38269506646', // koristi se za tel: link
   phoneDisplay: '+382 69 506 646', // prikaz na sajtu
-  email: '[EMAIL]',
+  phone2: '+38263216588', // drugi broj (tel: link)
+  phoneDisplay2: '+382 63 216 588',
+  email: 'baukbiljana@gmail.com',
   whatsapp: '+38269506646', // isti broj kao telefon
   viber: '+38269506646', // isti broj kao telefon
   address: 'Bonići I bb',
@@ -58,7 +60,7 @@ export const contact = {
 };
 
 export const social = {
-  instagram: 'https://instagram.com/[INSTAGRAM]',
+  instagram: 'https://www.instagram.com/olive_lavande_lemoni_holiday/',
 };
 
 // ---------- Hero ----------
