@@ -81,7 +81,8 @@
   <!-- Fontovi su self-hostovani (assets/fonts), @font-face je u src/input.css -->
   <link rel="preload" href="assets/fonts/spinnaker-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/lato-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/img/hero.jpg" as="image" fetchpriority="high">
+  <link rel="preload" href="assets/img/hero-mobile.jpg" as="image" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" href="assets/img/hero.jpg" as="image" media="(min-width: 768px)" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="modulepreload" href="assets/js/main.js">
   <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
@@ -90,7 +91,7 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="os76x9">
+  <div id="app" data-hash="vo0pvb">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
@@ -157,7 +158,9 @@
 
     <section class="relative flex min-h-[calc(100svh-96px)] items-center py-12 md:min-h-[calc(100svh-112px)] md:py-16 lg:min-h-[calc(100svh-96px)] xl:min-h-[calc(100svh-112px)]">
       <div data-hero data-slides="[&quot;assets/img/gallery-13.jpg&quot;,&quot;assets/img/gallery-17.jpg&quot;,&quot;assets/img/gallery-18.jpg&quot;]" data-aria-slide="Slika {n} od {m}" class="absolute inset-0 overflow-hidden">
-        <img data-hero-slide src="assets/img/hero.jpg" width="1920" height="900" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+        <picture><source media="(max-width: 767px)" srcset="assets/img/hero-mobile.jpg">
+          <img data-hero-slide src="assets/img/hero.jpg" width="1920" height="900" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+        </picture>
       </div>
       <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,40,31,.38)_0%,rgba(26,40,31,.5)_100%)] md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
       <div data-hero-dots class="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-3 md:bottom-auto md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="Slike"></div>
