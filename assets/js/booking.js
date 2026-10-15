@@ -269,7 +269,7 @@ function initInquiry() {
       .join('\n\n'),
   });
 
-  const subject = (d) => `Upit za smeštaj ${d.checkin} – ${d.checkout} (${site.brand})`;
+  const subject = (d) => `Upit za smještaj ${d.checkin} – ${d.checkout} (${site.brand})`;
 
   // ---------- slanje ----------
   const fc = config.form;

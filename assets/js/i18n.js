@@ -1,20 +1,23 @@
 // ============================================================
-//  PREVODI INTERFEJSA (sr / en / ru)
+//  PREVODI INTERFEJSA (crnogorski / engleski / ruski; interni kodovi sr / en / ru)
 //  Ovdje su dugmad, navigacija, labele formi i poruke. Dugi tekstovi sekcija
-//  (opisi apartmana, plaža...) su u content.js (srpski) i content.i18n.js (en, ru).
-//  Svaki unos: 'kljuc': [srpski, engleski, ruski]. U tekstu se mogu koristiti {n}, {m}, {link}...
+//  (opisi apartmana, plaža...) su u content.js (crnogorski) i content.i18n.js (en, ru).
+//  Svaki unos: 'kljuc': [crnogorski, engleski, ruski]. U tekstu se mogu koristiti {n}, {m}, {link}...
 //  Novi jezik: dodaj ga u `languages`, u LANG_INDEX i dopiši treću/četvrtu vrijednost u unose.
 // ============================================================
 
 export const defaultLang = 'sr';
 
 export const languages = [
-  { code: 'sr', label: 'SR', name: 'Srpski', flag: 'rs' },
+  { code: 'sr', label: 'CG', name: 'Crnogorski', flag: 'me' }, // interni kod ostaje 'sr' (sačuvan izbor posjetilaca)
   { code: 'en', label: 'EN', name: 'English', flag: 'gb' },
   { code: 'ru', label: 'RU', name: 'Русский', flag: 'ru' },
 ];
 
 const LANG_INDEX = { sr: 0, en: 1, ru: 2 };
+
+// vrijednost atributa lang na <html> (crnogorski, latinica)
+const LANG_TAGS = { sr: 'sr-Latn-ME', en: 'en', ru: 'ru' };
 
 const T = {
   // navigacija
@@ -35,7 +38,7 @@ const T = {
   'btn.sendRange': ['Pošalji upit za ovaj termin', 'Send an inquiry for these dates', 'Отправить запрос на эти даты'],
   'btn.close': ['Zatvori', 'Close', 'Закрыть'],
   'btn.prev': ['Prethodna', 'Previous', 'Назад'],
-  'btn.next': ['Sledeća', 'Next', 'Вперёд'],
+  'btn.next': ['Sljedeća', 'Next', 'Вперёд'],
   'btn.top': ['Na vrh', 'Back to top', 'Наверх'],
 
   // aria / pristupačnost
@@ -153,7 +156,7 @@ export const setLang = (lang) => {
   return current;
 };
 
-/** Prevod ključa; ako ga nema u izabranom jeziku, koristi srpski. `vars` mijenja {n}, {max}... u tekstu. */
+/** Prevod ključa; ako ga nema u izabranom jeziku, koristi crnogorski. `vars` mijenja {n}, {max}... u tekstu. */
 export const t = (key, vars, lang = current) => {
   let s = i18n[lang]?.[key] ?? i18n[defaultLang][key] ?? key;
   if (vars) for (const [k, v] of Object.entries(vars)) s = s.replaceAll(`{${k}}`, v);
@@ -163,7 +166,7 @@ export const t = (key, vars, lang = current) => {
 /** Postavlja atribut lang na <html> i stanje dugmadi za jezik. */
 export function applyLanguage(lang, root = document) {
   const code = setLang(lang);
-  document.documentElement.lang = code;
+  document.documentElement.lang = LANG_TAGS[code] ?? code;
   root.querySelectorAll('[data-lang]').forEach((btn) => {
     btn.setAttribute('aria-pressed', String(btn.dataset.lang === code));
   });
