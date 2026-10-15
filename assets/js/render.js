@@ -44,19 +44,29 @@ const guestsIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke=
 
 
 // ---------- Navigacija ----------
-export function navItems() {
+/** Glavni meni: 6 stavki; Plaže, Znamenitosti, Hrana i Savjeti (blog) su u padajućem "Okolina". */
+export function navTree() {
   const { food, sights } = c.extraSections;
   return [
     { key: 'nav.home', href: '#top' },
     { key: 'nav.stay', href: `#${c.apartmentsSection.id}` },
     { key: 'nav.prices', href: `#${c.pricing.id}` },
     { key: 'nav.gallery', href: '#galerija' },
-    { key: 'nav.beaches', href: '#plaze' },
-    ...(sights.enabled ? [{ key: 'nav.sights', href: `#${sights.id}` }] : []),
-    ...(food.enabled ? [{ key: 'nav.food', href: `#${food.id}` }] : []),
+    {
+      key: 'nav.around',
+      children: [
+        { key: 'nav.beaches', href: '#plaze' },
+        ...(sights.enabled ? [{ key: 'nav.sights', href: `#${sights.id}` }] : []),
+        ...(food.enabled ? [{ key: 'nav.food', href: `#${food.id}` }] : []),
+        { key: 'nav.blog', href: blogIndexPath(getLang()) },
+      ],
+    },
     { key: 'nav.contact', href: '#kontakt' },
   ];
 }
+
+/** Ravna lista svih stavki (footer). */
+export const navItems = () => navTree().flatMap((n) => n.children ?? [n]);
 
 const flagSvg = (code, uid) => {
   const body = {
@@ -95,7 +105,7 @@ const instagram = (cls) =>
 
 // ---------- Header ----------
 function header() {
-  const nav = navItems();
+  const nav = navTree();
   return `
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
     <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
@@ -105,7 +115,18 @@ function header() {
 
       <nav class="hidden lg:block" aria-label="${esc(t('aria.mainNav'))}">
         <ul class="flex items-center">
-          ${nav.map((n) => `<li><a href="${n.href}" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">${t(n.key)}</a></li>`).join('\n          ')}
+          ${nav
+            .map((n) =>
+              n.children
+                ? `<li class="group relative" data-nav-menu>
+            <button type="button" aria-haspopup="true" aria-expanded="false" class="inline-flex items-center gap-1 px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">${t(n.key)}<svg class="h-3 w-3 text-ink/60" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg></button>
+            <ul class="absolute left-0 top-full z-[60] hidden min-w-[200px] overflow-hidden rounded-xl border border-ink/10 bg-white py-1 shadow-xl group-focus-within:block group-hover:block">
+              ${n.children.map((ch) => `<li><a href="${ch.href}" class="block px-5 py-2.5 font-sans text-base hover:bg-mist">${t(ch.key)}</a></li>`).join('\n              ')}
+            </ul>
+          </li>`
+                : `<li><a href="${n.href}" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">${t(n.key)}</a></li>`
+            )
+            .join('\n          ')}
         </ul>
       </nav>
 
@@ -121,7 +142,14 @@ function header() {
 
     <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="${esc(t('aria.mobileNav'))}">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
-        ${nav.map((n) => `<li><a href="${n.href}" class="block py-3">${t(n.key)}</a></li>`).join('\n        ')}
+        ${nav
+          .map((n) =>
+            n.children
+              ? `<li class="py-3"><span class="block font-sans text-xs font-bold uppercase tracking-[.14em] text-forest">${t(n.key)}</span>
+          <ul class="mt-1 ml-1 border-l border-line pl-4">${n.children.map((ch) => `<li><a href="${ch.href}" class="block py-2.5">${t(ch.key)}</a></li>`).join('')}</ul></li>`
+              : `<li><a href="${n.href}" class="block py-3">${t(n.key)}</a></li>`
+          )
+          .join('\n        ')}
         <li class="flex items-center gap-1 py-2" role="group" aria-label="${esc(t('aria.language'))}">
           ${languages
             .map(
@@ -654,7 +682,7 @@ function map() {
 
 // ---------- Footer ----------
 function footer() {
-  const nav = [...navItems(), { key: 'nav.blog', href: blogIndexPath(getLang()) }];
+  const nav = navItems();
   const half = Math.ceil(nav.length / 2);
   const list = (items) =>
     `<ul class="font-sans text-sm leading-8 text-white/80">

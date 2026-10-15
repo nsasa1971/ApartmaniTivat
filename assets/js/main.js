@@ -94,6 +94,16 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+// ----- padajući meni "Okolina" (otvara se prelaskom miša ili fokusom; ovdje se samo ažurira aria-expanded) -----
+$$('[data-nav-menu]').forEach((m) => {
+  const btn = $('button', m);
+  const set = (v) => btn.setAttribute('aria-expanded', String(v));
+  m.addEventListener('mouseenter', () => set(true));
+  m.addEventListener('mouseleave', () => set(m.matches(':focus-within')));
+  m.addEventListener('focusin', () => set(true));
+  m.addEventListener('focusout', () => set(m.matches(':hover')));
+});
+
 // ============ "REZERVIŠI" vodi na kalendar dostupnosti ============
 $$('[data-book]').forEach((a) =>
   a.addEventListener('click', (e) => {

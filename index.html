@@ -99,7 +99,7 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="1kqyiy1">
+  <div id="app" data-hash="yyw4qe">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
@@ -110,14 +110,20 @@
 
       <nav class="hidden lg:block" aria-label="Glavna navigacija">
         <ul class="flex items-center">
-          <li><a href="#top" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Početna</a></li>
-          <li><a href="#apartmani" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Apartmani</a></li>
-          <li><a href="#cijene" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Cijene</a></li>
-          <li><a href="#galerija" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Galerija</a></li>
-          <li><a href="#plaze" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Plaže</a></li>
-          <li><a href="#znamenitosti" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Znamenitosti</a></li>
-          <li><a href="#hrana" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Hrana</a></li>
-          <li><a href="#kontakt" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Kontakt</a></li>
+          <li><a href="#top" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">Početna</a></li>
+          <li><a href="#apartmani" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">Apartmani</a></li>
+          <li><a href="#cijene" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">Cijene</a></li>
+          <li><a href="#galerija" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">Galerija</a></li>
+          <li class="group relative" data-nav-menu>
+            <button type="button" aria-haspopup="true" aria-expanded="false" class="inline-flex items-center gap-1 px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">Okolina<svg class="h-3 w-3 text-ink/60" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg></button>
+            <ul class="absolute left-0 top-full z-[60] hidden min-w-[200px] overflow-hidden rounded-xl border border-ink/10 bg-white py-1 shadow-xl group-focus-within:block group-hover:block">
+              <li><a href="#plaze" class="block px-5 py-2.5 font-sans text-base hover:bg-mist">Plaže</a></li>
+              <li><a href="#znamenitosti" class="block px-5 py-2.5 font-sans text-base hover:bg-mist">Znamenitosti</a></li>
+              <li><a href="#hrana" class="block px-5 py-2.5 font-sans text-base hover:bg-mist">Hrana</a></li>
+              <li><a href="/blog/" class="block px-5 py-2.5 font-sans text-base hover:bg-mist">Savjeti</a></li>
+            </ul>
+          </li>
+          <li><a href="#kontakt" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">Kontakt</a></li>
         </ul>
       </nav>
 
@@ -150,9 +156,8 @@
         <li><a href="#apartmani" class="block py-3">Apartmani</a></li>
         <li><a href="#cijene" class="block py-3">Cijene</a></li>
         <li><a href="#galerija" class="block py-3">Galerija</a></li>
-        <li><a href="#plaze" class="block py-3">Plaže</a></li>
-        <li><a href="#znamenitosti" class="block py-3">Znamenitosti</a></li>
-        <li><a href="#hrana" class="block py-3">Hrana</a></li>
+        <li class="py-3"><span class="block font-sans text-xs font-bold uppercase tracking-[.14em] text-forest">Okolina</span>
+          <ul class="mt-1 ml-1 border-l border-line pl-4"><li><a href="#plaze" class="block py-2.5">Plaže</a></li><li><a href="#znamenitosti" class="block py-2.5">Znamenitosti</a></li><li><a href="#hrana" class="block py-2.5">Hrana</a></li><li><a href="/blog/" class="block py-2.5">Savjeti</a></li></ul></li>
         <li><a href="#kontakt" class="block py-3">Kontakt</a></li>
         <li class="flex items-center gap-1 py-2" role="group" aria-label="Jezik">
           <button type="button" data-lang="sr" aria-pressed="true" lang="sr" title="Crnogorski" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">CG</button><button type="button" data-lang="en" aria-pressed="false" lang="en" title="English" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">EN</button><button type="button" data-lang="ru" aria-pressed="false" lang="ru" title="Русский" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">RU</button>
@@ -824,8 +829,8 @@
         <ul class="font-sans text-sm leading-8 text-white/80">
           <li><a href="#znamenitosti" class="hover:text-white">Znamenitosti</a></li>
           <li><a href="#hrana" class="hover:text-white">Hrana</a></li>
-          <li><a href="#kontakt" class="hover:text-white">Kontakt</a></li>
           <li><a href="/blog/" class="hover:text-white">Savjeti</a></li>
+          <li><a href="#kontakt" class="hover:text-white">Kontakt</a></li>
         </ul>
         <div class="flex flex-col items-center gap-4 md:items-start">
           <h2 class="font-display text-[26px] text-white">Pratite nas</h2>
