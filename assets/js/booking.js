@@ -155,7 +155,7 @@ function initInquiry() {
 
   const showStatus = (text, kind) => {
     statusEl.textContent = text;
-    statusEl.className = `mt-4 font-sans text-base ${kind === 'error' ? 'text-red-600' : kind === 'ok' ? 'text-[#0F3E3E]' : 'text-body'}`;
+    statusEl.className = `mt-4 font-sans text-base ${kind === 'error' ? 'text-red-600' : kind === 'ok' ? 'text-[#243528]' : 'text-body'}`;
   };
 
   /** Vraća objekat grešaka { polje: poruka } */

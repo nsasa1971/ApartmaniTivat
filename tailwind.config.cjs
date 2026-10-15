@@ -5,17 +5,18 @@ module.exports = {
     container: { center: true, padding: '1rem' },
     extend: {
       colors: {
-        ink: '#12302F',          // glavni tekst, naslovi, dugmad (tamna petrol)
-        charcoal: '#1B4F4F',     // tamne sekcije
-        night: '#0B2524',        // footer
-        mist: '#EEF3EF',         // svetle sekcije
-        body: '#4A5A57',         // tekst citata
-        shadow: '#4F6360',
-        midtone: '#9FB0AB',
-        forest: '#145C5C',       // glavna boja logotipa (petrol zelena)
-        lemon: '#F6CB1F',        // limun iz logotipa (akcenat)
-        btn: '#145C5C',          // dugme "Pretraži"
-        line: '#E6EEEA',         // ivice booking trake
+        ink: '#1F2F25',          // glavni tekst, naslovi, dugmad (tamnozelena)
+        charcoal: '#34493A',     // tamne sekcije
+        night: '#16221A',        // footer
+        mist: '#F4EFE2',         // svetle sekcije
+        body: '#4F5A50',         // tekst citata
+        shadow: '#566057',
+        midtone: '#A5AD9F',
+        forest: '#34493A',       // glavna boja logotipa (tamnozelena)
+        lemon: '#F4CC4C',        // limun iz logotipa (akcenat)
+        lavender: '#A58FB5',     // lavanda iz logotipa (akcenat)
+        btn: '#34493A',          // dugme "Pretraži"
+        line: '#ECE6D6',         // ivice booking trake
       },
       fontFamily: {
         display: ['Spinnaker', 'sans-serif'],

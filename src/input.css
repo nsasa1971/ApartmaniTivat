@@ -59,7 +59,7 @@
 
 /* ============ Osnova ============ */
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-body { font-family: 'Spinnaker', sans-serif; line-height: 2; color: #12302F; }
+body { font-family: 'Spinnaker', sans-serif; line-height: 2; color: #1F2F25; }
 
 .img-muted { filter: saturate(.18); transition: filter .4s ease; }
 .group:hover .img-muted, .img-muted:hover { filter: saturate(1); }
