@@ -437,7 +437,7 @@ function availabilitySection() {
           <div id="avail-grid" class="mt-1 grid grid-cols-7 gap-px bg-line"></div>
           <p class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-sm">
             <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 border border-line bg-white"></span>${t('avail.free')}</span>
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-charcoal"></span>${t('avail.taken')}</span>
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#E0D9C8]"></span>${t('avail.taken')}</span>
             <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#34493A]"></span>${t('avail.yours')}</span>
           </p>
           <p id="avail-msg" class="mt-3 min-h-6 font-sans text-sm" role="status" aria-live="polite"></p>
