@@ -348,7 +348,7 @@ function beaches() {
     <section id="plaze" class="mb-[50px] bg-mist py-[50px] md:mb-[160px] md:pb-[100px] md:pt-[100px]">
       <div class="container max-w-page">
         <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#2B2B2B]">${esc(c.beaches.title)}</h2>
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="grid gap-6 ${c.beaches.items.length === 4 ? 'md:grid-cols-2' : 'md:grid-cols-3'}">
           ${cards(c.beaches.items)}
         </div>${extras}
       </div>
