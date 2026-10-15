@@ -93,7 +93,7 @@ export const translations = {
         'A 10% discount is possible for stays of 10 days or more.',
         'For a stay of a month, a better price is possible, with a discount of up to 20%.',
       ],
-      disclaimer: 'Prices are for information only. Please use the inquiry form to get an exact quote.',
+      disclaimer: 'Prices are approximate and may vary depending on the dates and length of stay. We confirm the final price for your dates after your inquiry – send an inquiry and we will get back to you.',
     },
     feature: {
       title: 'Mediterranean atmosphere among olive trees',
@@ -260,7 +260,7 @@ export const translations = {
         'При проживании от 10 суток возможна скидка 10%.',
         'При проживании в течение месяца возможна более выгодная цена — скидка до 20%.',
       ],
-      disclaimer: 'Цены носят информационный характер. Точное предложение запросите через форму.',
+      disclaimer: 'Цены ориентировочные и могут отличаться в зависимости от дат и срока проживания. Окончательную стоимость для ваших дат мы подтверждаем после запроса — отправьте запрос, и мы свяжемся с вами.',
     },
     feature: {
       title: 'Средиземноморская атмосфера среди олив',

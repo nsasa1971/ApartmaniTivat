@@ -95,6 +95,13 @@ const T = {
   'avail.pickOut': ['Sada izaberite dan odlaska.', 'Now choose your check-out day.', 'Теперь выберите день выезда.'],
   'avail.notFree': ['Izabrani termin nije slobodan. Izaberite druge datume.', 'The selected dates are not available. Please choose other dates.', 'Выбранные даты недоступны. Выберите другие даты.'],
 
+  // datum, apartmani
+  'f.pickDate': ['Izaberite datum', 'Choose a date', 'Выберите дату'],
+  'apt.ac': ['Klima', 'A/C', 'Кондиционер'],
+  'apt.wifi': ['Internet', 'Wi-Fi', 'Wi-Fi'],
+  'apt.tv': ['TV', 'TV', 'ТВ'],
+  'apt.parking': ['Parking', 'Parking', 'Парковка'],
+
   // utisci
   'review.source': ['Recenzija sa Google Maps-a', 'Review on Google Maps', 'Отзыв на Google Maps'],
 

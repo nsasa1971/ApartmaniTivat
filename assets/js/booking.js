@@ -3,7 +3,7 @@
 // ============================================================
 import { config, contact, apartments, site } from './content.js';
 import { isPlaceholder } from './render.js';
-import { todayLocal, addDays, isAnyFree, formatRange } from './availability.js';
+import { todayLocal, addDays, isAnyFree, formatRange, formatDateLong, isValidISO } from './availability.js';
 import { loadAvailability } from './availability-data.js';
 import { saveInquiry } from './inquiry-client.js';
 import { t, getLang } from './i18n.js';
@@ -26,6 +26,27 @@ async function isTermFree(apartmentId, from, to) {
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^\+?[0-9][0-9\s().\-/]{5,}$/;
 
+// ---------- datumi: tekst na jeziku sajta umjesto formata koji pregledač/telefon nameće ----------
+const syncDate = (input) => {
+  const d = $(`[data-date-display="${input.id}"]`);
+  if (!d) return;
+  const has = isValidISO(input.value);
+  d.textContent = has ? formatDateLong(input.value) : t('f.pickDate');
+  d.classList.toggle('opacity-60', !has);
+};
+const syncDates = () => $$('input[data-date]').forEach(syncDate);
+function initDateInputs() {
+  $$('input[data-date]').forEach((input) => {
+    input.addEventListener('input', () => syncDate(input));
+    input.addEventListener('change', () => syncDate(input));
+    // na računaru klik bilo gdje na polju otvara izbornik datuma
+    input.addEventListener('click', () => {
+      try { input.showPicker?.(); } catch { /* već otvoren ili nije dozvoljeno */ }
+    });
+  });
+  syncDates();
+}
+
 // ============ BOOKING TRAKA ============
 function initStrip(inquiry) {
   const form = $('#booking-form');
@@ -43,6 +64,7 @@ function initStrip(inquiry) {
     const minOut = addDays(checkin.value, 1);
     checkout.min = minOut;
     if (!checkout.value || checkout.value < minOut) checkout.value = minOut;
+    syncDates();
   });
 
   // datum riječima ispod trake (native polje datuma prikazuje format po jeziku pregledača)
@@ -144,6 +166,7 @@ function initInquiry() {
     const minOut = addDays(el.checkin.value, 1);
     el.checkout.min = minOut;
     if (!el.checkout.value || el.checkout.value < minOut) el.checkout.value = minOut;
+    syncDates();
   });
 
   // datum riječima ispod polja (interno ostaje YYYY-MM-DD)
@@ -155,7 +178,7 @@ function initInquiry() {
   };
   el.checkin.addEventListener('change', showRange);
   el.checkout.addEventListener('change', showRange);
-  form.addEventListener('reset', () => setTimeout(showRange, 0));
+  form.addEventListener('reset', () => setTimeout(() => { showRange(); syncDates(); }, 0));
 
   const toggleChildren = () => {
     const has = Number(el.children.value) > 0;
@@ -397,6 +420,7 @@ function initInquiry() {
         el.crib.checked = !!crib;
       }
       toggleChildren();
+      syncDates();
       showRange();
       showErrors({});
     },
@@ -404,6 +428,7 @@ function initInquiry() {
 }
 
 export function initBooking() {
+  initDateInputs();
   const inquiry = initInquiry();
   initStrip(inquiry);
   // kalendar dostupnosti učitavamo tek kad posjetilac počne da popunjava termin

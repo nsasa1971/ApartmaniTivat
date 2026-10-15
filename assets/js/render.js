@@ -34,6 +34,11 @@ const arrow = '<span aria-hidden="true">→</span>';
 
 const igIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg>`;
 const calIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>`;
+const areaIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H4v5M15 20h5v-5M4 4l6 6M20 20l-6-6"/></svg>`;
+const acIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5 12 6.5l2.5-2M9.5 19.5 12 17.5l2.5 2"/></svg>`;
+const wifiIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5a11 11 0 0 1 15 0M7.5 12.8a6.5 6.5 0 0 1 9 0M10.3 16a2.3 2.3 0 0 1 3.4 0"/><circle cx="12" cy="19" r=".6" fill="currentColor"/></svg>`;
+const tvIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`;
+const parkingIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 16.5V8h3.2a2.6 2.6 0 0 1 0 5.2H10"/></svg>`;
 const guestsIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg>`;
 
 
@@ -137,7 +142,10 @@ function hero() {
   const field = (id, key) => `
             <label class="${boxCls}">
               <span class="${labelCls}">${calIcon}<span>${t(key)}</span></span>
-              <input type="date" name="${id}" id="${id}" lang="${getLang()}" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
+              <span class="relative mt-1 block">
+                <span data-date-display="${id}" class="block text-base font-bold text-ink">${t('f.pickDate')}</span>
+                <input type="date" name="${id}" id="${id}" data-date lang="${getLang()}" class="absolute inset-0 h-full w-full cursor-pointer opacity-0" required>
+              </span>
             </label>`;
   const stepBtn = 'flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg leading-none text-ink shadow-sm transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest';
   const stepper = (name, key, value) => `
@@ -225,9 +233,20 @@ function apartments() {
             .map(
               (ap) => `<article class="group reveal block">
             <img src="${esc(ap.image.src)}" width="${ap.image.width}" height="${ap.image.height}" loading="lazy" decoding="async" alt="${esc(ap.image.alt)}" class="img-muted w-full">
-            <h3 class="mt-[5px] font-sans text-lg text-black">${esc(ap.fullName ?? ap.name)}</h3>
-            <p class="font-sans text-sm font-bold text-ink">${esc(ap.area)} · ${esc(ap.guests)}</p>
-            <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
+            <h3 class="mt-5 font-sans text-xl font-bold text-ink">${esc(ap.fullName ?? ap.name)}</h3>
+            <ul class="mt-3 flex flex-wrap gap-2">
+              ${[
+                [areaIcon, ap.area],
+                [guestsIcon, ap.guests],
+                [acIcon, t('apt.ac')],
+                [wifiIcon, t('apt.wifi')],
+                [tvIcon, t('apt.tv')],
+                [parkingIcon, t('apt.parking')],
+              ]
+                .map(([icon, label]) => `<li class="inline-flex items-center gap-1.5 rounded-full bg-mist px-3 py-1 font-sans text-sm text-ink">${icon}<span>${esc(label)}</span></li>`)
+                .join('\n              ')}
+            </ul>
+            <p class="mt-4 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
             <ul class="mt-auto list-disc pl-5 pt-2 font-sans text-sm leading-7 text-body">
               ${ap.features.map((f) => `<li>${esc(f)}</li>`).join('\n              ')}
             </ul>
@@ -463,6 +482,11 @@ function reservation() {
   const maxChildren = maxGuests - 1;
   const inputCls =
     'min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600';
+  // datum: nevidljivo native polje (otvara izbornik datuma) + tekst na jeziku sajta
+  const dateBox = (id, name) => `<span class="relative flex min-h-[50px] w-full items-center border border-midtone bg-white px-4 py-3 font-sans text-base text-ink focus-within:border-ink focus-within:ring-2 focus-within:ring-[#34493A] has-[[aria-invalid=true]]:border-red-600">
+                <span data-date-display="${id}" class="block">${t('f.pickDate')}</span>
+                <input type="date" id="${id}" name="${name}" data-date lang="${getLang()}" required class="absolute inset-0 h-full w-full cursor-pointer opacity-0">
+              </span>`;
   const field = (id, label, control, extra = '') => `
             <div${extra}>
               <label for="${id}" class="mb-1 block font-sans text-sm font-bold">${label}</label>
@@ -487,8 +511,8 @@ function reservation() {
                 <label class="inline-flex items-center gap-2"><input type="checkbox" name="messengers" value="Viber" class="h-4 w-4 accent-ink"> Viber</label>
               </div>
             </fieldset>
-            ${field('inq-checkin', t('f.checkin'), `<input type="date" id="inq-checkin" name="checkin" lang="${getLang()}" required class="${inputCls}">`)}
-            ${field('inq-checkout', t('f.checkout'), `<input type="date" id="inq-checkout" name="checkout" lang="${getLang()}" required class="${inputCls}">`)}
+            ${field('inq-checkin', t('f.checkin'), dateBox('inq-checkin', 'checkin'))}
+            ${field('inq-checkout', t('f.checkout'), dateBox('inq-checkout', 'checkout'))}
             <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#243528] md:col-span-2 md:-mt-2" aria-live="polite"></p>
             ${field('inq-guests', t('f.adults'), `<input type="number" id="inq-guests" name="guests" min="1" max="${maxGuests}" step="1" value="${defaultGuests}" inputmode="numeric" required class="${inputCls}">`)}
             ${field('inq-children', t('f.children'), `<input type="number" id="inq-children" name="children" min="0" max="${maxChildren}" step="1" value="0" inputmode="numeric" class="${inputCls}">`)}
