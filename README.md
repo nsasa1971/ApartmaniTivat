@@ -91,14 +91,14 @@ Dashboard za vlasnicu: kalendar po apartmanu, rezervacije, sanduče upita sa saj
 3. **Authentication → Users → Add user**: unesite email i lozinku vlasnice. Kopirajte **User UID** iz tabele.
 4. **Build → Firestore Database → Create database** → izaberite lokaciju (npr. `eur3 (europe-west)`) i *production mode*.
 5. **Project settings (zupčanik) → General → Your apps → `</>` (Web)** → registrujte aplikaciju (Hosting nije potreban) i kopirajte `firebaseConfig`.
-6. Upišite te vrijednosti u `assets/js/firebase-config.js`. Web konfiguracija je javna po dizajnu; nikada u repo ne stavljajte service account ključ.
+6. Upišite te vrijednosti u `assets/js/firebase-config.js` (već upisano za projekat `apartmani-tivat`). Web konfiguracija je javna po dizajnu; nikada u repo ne stavljajte service account ključ.
 7. **Authentication → Settings → Authorized domains** → dodajte domen sajta (npr. `apartmanigardentivat.netlify.app` i `apartmanigardentivat.com`).
 
 ### 2. Pravila (Firestore → Rules)
 
-1. Otvorite `firestore.rules` u repou i u funkciji `isOwner()` zamijenite `UPISI_UID_VLASNICE` UID-om iz koraka 3 (može više UID-ova: `['uid1', 'uid2']`).
-2. U Firebase konzoli: **Firestore Database → Rules** → obrišite postojeći tekst, zalijepite cijeli sadržaj `firestore.rules` → **Publish**.
-   *(Opciono, Firebase CLI: `npx firebase-tools login`, pa `npx firebase-tools deploy --only firestore:rules --project <ID-projekta>`.)*
+1. UID-ovi vlasnica upisuju se u `firestore.rules`, u funkciji `ownerUids()` (lista). Trenutno je upisan UID test korisnika. Kad dodate vlasnicu, dodajte njen UID u istu listu: `return ['UID_1', 'UID_2'];`.
+2. U Firebase konzoli: **Firestore Database → Rules** → obrišite postojeći tekst, zalijepite cijeli sadržaj `firestore.rules` → **Publish**. (Pravila u konzoli se ne ažuriraju sama iz repoa – svaku izmjenu `firestore.rules` treba ponovo zalijepiti.)
+   *(Opciono, Firebase CLI: `npx firebase-tools login`, pa `npx firebase-tools deploy --only firestore:rules --project apartmani-tivat`.)*
 
 Šta pravila garantuju: `bookings` (lični podaci gostiju) vidi i piše samo vlasnica; `availability` je javno za čitanje ali sadrži samo `apartmentId`, `from`, `to`, `bookingId` (i vlasnici je zabranjeno da upiše išta drugo); `inquiries` javnost može samo da **kreira** (strogo validirano: dozvoljena polja, tipovi, dužine, `status` mora biti `new`), a čita/mijenja/briše samo vlasnica; `apartments` je javno za čitanje.
 
