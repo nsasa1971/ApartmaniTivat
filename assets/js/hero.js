@@ -85,10 +85,17 @@ function createWater(section, host) {
   const normalTex = newTexture(2);
   const imageTex = new Map(); // HTMLImageElement -> WebGLTexture
 
+  // tekstura slike se pravi unaprijed (prepare), a ne usred prelaza
   const textureFor = (img) => {
     let t = imageTex.get(img);
     if (!t) {
-      t = newTexture(0);
+      t = gl.createTexture();
+      gl.activeTexture(gl.TEXTURE3); // posebna jedinica, da ne remeti teksture koje se crtaju
+      gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, img);
       imageTex.set(img, t);
     }
@@ -165,10 +172,12 @@ function createWater(section, host) {
     if (gl.isContextLost() || !imgA || !imgA.naturalWidth) return;
     const b = imgB && imgB.naturalWidth ? imgB : imgA;
     gl.viewport(0, 0, canvas.width, canvas.height);
+    const texA = textureFor(imgA);
+    const texB = textureFor(b);
     gl.activeTexture(gl.TEXTURE0);
-    gl.bindTexture(gl.TEXTURE_2D, textureFor(imgA));
+    gl.bindTexture(gl.TEXTURE_2D, texA);
     gl.activeTexture(gl.TEXTURE1);
-    gl.bindTexture(gl.TEXTURE_2D, textureFor(b));
+    gl.bindTexture(gl.TEXTURE_2D, texB);
     gl.activeTexture(gl.TEXTURE2);
     gl.bindTexture(gl.TEXTURE_2D, normalTex);
     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gw, gh, 0, gl.RGBA, gl.UNSIGNED_BYTE, normals);
@@ -243,6 +252,7 @@ function createWater(section, host) {
     needsFrame: () => energy > IDLE_ENERGY,
     tick: () => { if (energy > IDLE_ENERGY || last) step(); },
     draw,
+    prepare: (img) => { if (!gl.isContextLost() && img.naturalWidth) textureFor(img); },
     hide: () => { canvas.style.display = 'none'; },
   };
   return api;
@@ -287,7 +297,7 @@ export function initHero() {
     let a = slides[index];
     let b = null;
     if (transition) {
-      mix = ease(Math.min(1, (t - transition.t0) / FADE_MS));
+      mix = ease(Math.max(0, Math.min(1, (t - transition.t0) / FADE_MS)));
       a = slides[transition.from];
       b = slides[transition.to];
       if (mix >= 1) {
@@ -318,11 +328,25 @@ export function initHero() {
     });
   };
 
+  let layer = 1;
+  let settleTimer = null;
   const show = (to) => {
     if (to === index || to < 0 || to >= slides.length) return;
     const from = index;
     index = to;
-    slides.forEach((s, k) => { s.style.opacity = k === to ? '1' : '0'; });
+    // nova slika se pojavljuje IZNAD stare (stara ostaje potpuno vidljiva dok se prelaz ne završi),
+    // pa pozadina ne probija kroz dvije poluprozirne slike (to je davalo "blic")
+    slides[to].style.zIndex = String(++layer);
+    slides[to].style.opacity = '1';
+    clearTimeout(settleTimer);
+    settleTimer = setTimeout(() => {
+      slides.forEach((s, k) => {
+        if (k === index) return;
+        s.style.transition = 'none';
+        s.style.opacity = '0';
+        requestAnimationFrame(() => { s.style.transition = fadeStyle; });
+      });
+    }, FADE_MS + 100);
     if (water) {
       transition = { from, to, t0: performance.now() };
       schedule();
@@ -373,13 +397,14 @@ export function initHero() {
     imgs.filter(Boolean).forEach((img) => {
       slides.push(img);
       root.insertBefore(img, root.querySelector('canvas'));
+      water?.prepare(img); // tekstura se šalje na grafičku unaprijed, da prelaz ne zastane
     });
     buildDots();
     restart();
   });
 
   // prvi frame čim je prva slika spremna
-  const start = () => { buildDots(); schedule(); if (water) render(performance.now()); };
+  const start = () => { water?.prepare(first); buildDots(); schedule(); if (water) render(performance.now()); };
   if (first.complete && first.naturalWidth) start();
   else first.addEventListener('load', start, { once: true });
 

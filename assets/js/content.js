@@ -163,7 +163,8 @@ export const pricing = {
     'Za boravak od 10 dana i više moguć je popust od 10%.',
     'Za boravak od mjesec dana moguća je povoljnija cijena, popust do 20%.',
   ],
-  disclaimer: 'Cijene su informativne. Tačnu ponudu pošaljite preko forme za upit.',
+  disclaimer:
+    'Cijene su orijentacione i mogu se razlikovati zavisno od termina i dužine boravka. Konačnu cijenu za vaš termin potvrđujemo nakon upita – pošaljite upit i javićemo vam se.',
 };
 
 // ---------- Galerija (thumb 394×394, full 1240×827) ----------
