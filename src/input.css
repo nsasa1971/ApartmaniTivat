@@ -58,6 +58,9 @@
 }
 
 /* ============ Osnova ============ */
+/* dok se sadržaj ne renderuje na izabranom jeziku (sprječava treptanje srpskog teksta) */
+.lang-pending #app { visibility: hidden; }
+
 html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 body { font-family: 'Spinnaker', sans-serif; line-height: 2; color: #1F2F25; }
 

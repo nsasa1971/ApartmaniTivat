@@ -18,6 +18,7 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
+  <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -89,7 +90,7 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="8799dk">
+  <div id="app" data-hash="kvix68">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
@@ -100,24 +101,35 @@
 
       <nav class="hidden lg:block" aria-label="Glavna navigacija">
         <ul class="flex items-center">
-          <li><a href="#top" data-i18n="nav.home" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Početna</a></li>
-          <li><a href="#apartmani" data-i18n="nav.stay" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Apartmani</a></li>
-          <li><a href="#cijene" data-i18n="nav.prices" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Cijene</a></li>
-          <li><a href="#galerija" data-i18n="nav.gallery" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Galerija</a></li>
-          <li><a href="#plaze" data-i18n="nav.beaches" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Plaže</a></li>
-          <li><a href="#znamenitosti" data-i18n="nav.sights" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Znamenitosti</a></li>
-          <li><a href="#hrana" data-i18n="nav.food" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Hrana</a></li>
-          <li><a href="#kontakt" data-i18n="nav.contact" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">Kontakt</a></li>
+          <li><a href="#top" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Početna</a></li>
+          <li><a href="#apartmani" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Apartmani</a></li>
+          <li><a href="#cijene" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Cijene</a></li>
+          <li><a href="#galerija" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Galerija</a></li>
+          <li><a href="#plaze" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Plaže</a></li>
+          <li><a href="#znamenitosti" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Znamenitosti</a></li>
+          <li><a href="#hrana" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Hrana</a></li>
+          <li><a href="#kontakt" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">Kontakt</a></li>
         </ul>
       </nav>
 
-      <div class="flex items-center gap-4 lg:gap-3 xl:gap-4">
-        <div class="hidden items-center lg:flex" role="group" data-i18n-aria="aria.language" aria-label="Jezik">
-          <button type="button" data-lang="sr" aria-pressed="true" lang="sr" title="Srpski" class="px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">SR</button><button type="button" data-lang="en" aria-pressed="false" lang="en" title="English" class="px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">EN</button><button type="button" data-lang="ru" aria-pressed="false" lang="ru" title="Русский" class="px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">RU</button>
+      <div class="flex items-center gap-2 sm:gap-4 lg:gap-3 xl:gap-4">
+        
+        <div class="relative" data-lang-menu>
+          <button type="button" id="lang-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-list" aria-label="Jezik: Srpski"
+                  class="flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-white px-3 font-sans text-sm transition hover:border-ink/40">
+            <span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#C6363C"/><rect y="5.33" width="24" height="10.67" fill="#0C4076"/><rect y="10.67" width="24" height="5.33" fill="#fff"/></svg></span>
+            <span class="hidden sm:inline">SR</span>
+            <svg class="h-3 w-3 text-ink/60" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>
+          </button>
+          <ul id="lang-list" role="listbox" aria-label="Jezik" class="absolute right-0 z-[60] mt-2 hidden w-48 overflow-hidden rounded-xl border border-ink/10 bg-white py-1 shadow-xl">
+            <li role="presentation"><button type="button" role="option" data-lang="sr" lang="sr" aria-selected="true" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold"><span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#C6363C"/><rect y="5.33" width="24" height="10.67" fill="#0C4076"/><rect y="10.67" width="24" height="5.33" fill="#fff"/></svg></span><span>Srpski</span></button></li>
+            <li role="presentation"><button type="button" role="option" data-lang="en" lang="en" aria-selected="false" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold"><span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true"><clipPath id="fc-en"><rect width="24" height="16"/></clipPath><g clip-path="url(#fc-en)"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" stroke-width="1.6"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="3.2"/></g></svg></span><span>English</span></button></li>
+            <li role="presentation"><button type="button" role="option" data-lang="ru" lang="ru" aria-selected="false" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold"><span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect y="5.33" width="24" height="10.67" fill="#0039A6"/><rect y="10.67" width="24" height="5.33" fill="#D52B1E"/></svg></span><span>Русский</span></button></li>
+          </ul>
         </div>
         <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" aria-label="Instagram" class="hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#2A3D2F] text-white hover:opacity-90 sm:flex lg:hidden xl:flex"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg></a>
-        <a href="#rezervacija" data-i18n="btn.book" class="bg-ink px-6 py-3 font-sans text-sm font-bold uppercase tracking-wide text-white transition hover:bg-charcoal">Rezerviši</a>
-        <button id="menu-toggle" type="button" class="lg:hidden" data-i18n-aria="aria.menu" aria-label="Meni" aria-expanded="false" aria-controls="mobile-menu">
+        <a href="#dostupnost-anchor" data-book class="bg-ink px-3 py-3 font-sans text-xs font-bold uppercase tracking-wide sm:px-6 sm:text-sm text-white transition hover:bg-charcoal">Rezerviši</a>
+        <button id="menu-toggle" type="button" class="lg:hidden" aria-label="Meni" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         </button>
       </div>
@@ -125,17 +137,14 @@
 
     <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="Mobilna navigacija">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
-        <li><a href="#top" data-i18n="nav.home" class="block py-3">Početna</a></li>
-        <li><a href="#apartmani" data-i18n="nav.stay" class="block py-3">Apartmani</a></li>
-        <li><a href="#cijene" data-i18n="nav.prices" class="block py-3">Cijene</a></li>
-        <li><a href="#galerija" data-i18n="nav.gallery" class="block py-3">Galerija</a></li>
-        <li><a href="#plaze" data-i18n="nav.beaches" class="block py-3">Plaže</a></li>
-        <li><a href="#znamenitosti" data-i18n="nav.sights" class="block py-3">Znamenitosti</a></li>
-        <li><a href="#hrana" data-i18n="nav.food" class="block py-3">Hrana</a></li>
-        <li><a href="#kontakt" data-i18n="nav.contact" class="block py-3">Kontakt</a></li>
-        <li class="flex items-center gap-1 py-2" role="group" data-i18n-aria="aria.language" aria-label="Jezik">
-          <button type="button" data-lang="sr" aria-pressed="true" lang="sr" title="Srpski" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">SR</button><button type="button" data-lang="en" aria-pressed="false" lang="en" title="English" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">EN</button><button type="button" data-lang="ru" aria-pressed="false" lang="ru" title="Русский" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">RU</button>
-        </li>
+        <li><a href="#top" class="block py-3">Početna</a></li>
+        <li><a href="#apartmani" class="block py-3">Apartmani</a></li>
+        <li><a href="#cijene" class="block py-3">Cijene</a></li>
+        <li><a href="#galerija" class="block py-3">Galerija</a></li>
+        <li><a href="#plaze" class="block py-3">Plaže</a></li>
+        <li><a href="#znamenitosti" class="block py-3">Znamenitosti</a></li>
+        <li><a href="#hrana" class="block py-3">Hrana</a></li>
+        <li><a href="#kontakt" class="block py-3">Kontakt</a></li>
       </ul>
     </nav>
   </header>
@@ -143,49 +152,62 @@
   <main id="main">
     <div id="top"></div>
 
-    <section class="relative flex min-h-[250px] items-center py-12 md:min-h-[320px] md:pb-[130px] md:pt-[100px]">
-      <div data-hero data-slides="[&quot;assets/img/gallery-13.jpg&quot;,&quot;assets/img/gallery-17.jpg&quot;,&quot;assets/img/gallery-18.jpg&quot;]" class="absolute inset-0 overflow-hidden">
+    <section class="relative flex min-h-[calc(100svh-96px)] items-center py-12 md:min-h-[calc(100svh-112px)] md:py-16 lg:min-h-[calc(100svh-96px)] xl:min-h-[calc(100svh-112px)]">
+      <div data-hero data-slides="[&quot;assets/img/gallery-13.jpg&quot;,&quot;assets/img/gallery-17.jpg&quot;,&quot;assets/img/gallery-18.jpg&quot;]" data-aria-slide="Slika {n} od {m}" class="absolute inset-0 overflow-hidden">
         <img data-hero-slide src="assets/img/hero.jpg" width="1920" height="900" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
       </div>
-      <div class="absolute inset-0 bg-[#1F2F25]/65 md:bg-transparent md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
-      <div data-hero-dots class="absolute left-1/2 top-4 z-10 flex -translate-x-1/2 gap-3 md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="Slike"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,40,31,.38)_0%,rgba(26,40,31,.5)_100%)] md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
+      <div data-hero-dots class="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-3 md:bottom-auto md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="Slike"></div>
 
       <div class="container relative max-w-page">
-        <div class="max-w-3xl text-center text-white [text-shadow:0_1px_4px_rgba(0,0,0,.45)] md:pl-3 md:text-left">
+        <div class="max-w-3xl text-center text-white [text-shadow:0_1px_6px_rgba(0,0,0,.55)] md:pl-3 md:text-left">
           <span class="mb-[30px] ml-10 hidden h-24 w-px bg-white/70 md:block" aria-hidden="true"></span>
           <p class="mb-3 text-lg md:text-xl">Apartmani u Tivtu</p>
           <h1 class="mb-6 whitespace-nowrap font-display text-[clamp(30px,8.6vw,76px)] leading-[1.15] tracking-[1px] text-white">Tivat Garden Homes</h1>
-          <p class="max-w-xl text-base md:text-xl">Apartmani Olive, Lavande i Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.</p>
+          <p class="mx-auto max-w-xl text-base md:mx-0 md:text-xl">Apartmani Olive, Lavande i Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.</p>
         </div>
 
-        <!-- Booking traka: popunjava formu za upit (#rezervacija) -->
-        <form id="booking-form" class="mt-10 max-w-[980px] rounded-3xl border border-white/50 bg-white/90 p-3 text-ink shadow-[0_24px_60px_-18px_rgba(0,0,0,.55)] backdrop-blur-md md:p-4" aria-label="Pretraga termina" novalidate>
-          <div class="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto]">
+        <!-- Booking traka (samo desktop): popunjava formu za upit (#rezervacija) -->
+        <form id="booking-form" class="mt-10 hidden max-w-[1040px] rounded-3xl border border-white/40 bg-white/50 p-3 text-ink shadow-[0_24px_60px_-18px_rgba(0,0,0,.55)] backdrop-blur-xl md:block md:p-4" aria-label="Pretraga termina" novalidate>
+          <div class="grid gap-3 md:grid-cols-[1.2fr_1.2fr_1fr_1fr_auto]">
             
-            <label class="flex min-w-0 flex-col justify-center rounded-2xl border border-ink/10 bg-white px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:border-ink/25">
-              <span class="flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg><span data-i18n="booking.checkin">Dolazak</span></span>
-              <input type="date" name="checkin" id="checkin" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
+            <label class="flex min-w-0 flex-col justify-center rounded-2xl border border-white/60 bg-white/75 px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:bg-white/90">
+              <span class="flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg><span>Dolazak</span></span>
+              <input type="date" name="checkin" id="checkin" lang="sr" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
             </label>
             
-            <label class="flex min-w-0 flex-col justify-center rounded-2xl border border-ink/10 bg-white px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:border-ink/25">
-              <span class="flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg><span data-i18n="booking.checkout">Odlazak</span></span>
-              <input type="date" name="checkout" id="checkout" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
+            <label class="flex min-w-0 flex-col justify-center rounded-2xl border border-white/60 bg-white/75 px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:bg-white/90">
+              <span class="flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg><span>Odlazak</span></span>
+              <input type="date" name="checkout" id="checkout" lang="sr" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
             </label>
-
-            <div class="flex min-w-0 flex-col justify-center rounded-2xl border border-ink/10 bg-white px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:border-ink/25" role="group" aria-labelledby="guests-label">
-              <span id="guests-label" class="flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg><span data-i18n="booking.guests">Gosti</span></span>
+            
+            <div class="flex min-w-0 flex-col justify-center rounded-2xl border border-white/60 bg-white/75 px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:bg-white/90" role="group" aria-labelledby="adults-label">
+              <span id="adults-label" class="flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg><span>Odrasli</span></span>
               <span class="mt-1 flex items-center justify-between gap-3">
-                <button type="button" data-guests="-1" class="flex h-8 w-8 items-center justify-center rounded-full bg-mist text-lg leading-none text-ink transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest" aria-label="Manje gostiju">−</button>
-                <output id="guests-output" class="min-w-[1.5ch] text-center text-base font-bold" aria-live="polite">2</output>
-                <button type="button" data-guests="1" class="flex h-8 w-8 items-center justify-center rounded-full bg-mist text-lg leading-none text-ink transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest" aria-label="Više gostiju">+</button>
+                <button type="button" data-step="adults" data-dir="-1" class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg leading-none text-ink shadow-sm transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest" aria-label="Odrasli – Manje">−</button>
+                <output id="adults-output" class="min-w-[1.5ch] text-center text-base font-bold" aria-live="polite">2</output>
+                <button type="button" data-step="adults" data-dir="1" class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg leading-none text-ink shadow-sm transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest" aria-label="Odrasli – Više">+</button>
               </span>
-              <input type="hidden" name="guests" id="guests" value="2">
+              <input type="hidden" name="adults" id="adults" value="2">
             </div>
-
-            <button type="submit" class="flex min-h-[56px] items-center justify-center gap-2 rounded-2xl bg-btn px-8 font-sans text-base font-bold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-ink md:min-w-[170px]"><span data-i18n="btn.search">Pretraži</span><span aria-hidden="true">→</span></button>
+            
+            <div class="flex min-w-0 flex-col justify-center rounded-2xl border border-white/60 bg-white/75 px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:bg-white/90" role="group" aria-labelledby="children-label">
+              <span id="children-label" class="flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg><span>Djeca</span></span>
+              <span class="mt-1 flex items-center justify-between gap-3">
+                <button type="button" data-step="children" data-dir="-1" class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg leading-none text-ink shadow-sm transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest" aria-label="Djeca – Manje">−</button>
+                <output id="children-output" class="min-w-[1.5ch] text-center text-base font-bold" aria-live="polite">0</output>
+                <button type="button" data-step="children" data-dir="1" class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg leading-none text-ink shadow-sm transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest" aria-label="Djeca – Više">+</button>
+              </span>
+              <input type="hidden" name="children" id="children" value="0">
+            </div>
+            <button type="submit" class="flex min-h-[56px] items-center justify-center gap-2 rounded-2xl bg-btn px-8 font-sans text-base font-bold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-ink md:min-w-[150px]"><span>Pretraži</span><span aria-hidden="true">→</span></button>
+          </div>
+          <div id="strip-extra" class="mt-3 hidden flex-wrap items-center gap-x-6 gap-y-3 rounded-2xl border border-white/60 bg-white/60 px-4 py-3">
+            <div id="strip-ages" class="flex flex-wrap items-center gap-3"></div>
+            <label class="inline-flex items-center gap-2 font-sans text-sm font-bold text-ink"><input type="checkbox" id="strip-crib" class="h-4 w-4 accent-forest"> Treba mi krevetac za bebu</label>
           </div>
           <p id="booking-range" class="hidden px-2 pt-2 text-sm font-bold text-forest" aria-live="polite"></p>
-          <p id="booking-error" class="hidden px-2 pt-2 text-sm text-red-600" role="alert"></p>
+          <p id="booking-error" class="hidden px-2 pt-2 text-sm text-red-700" role="alert"></p>
         </form>
       </div>
     </section>
@@ -194,14 +216,14 @@
       <div class="container max-w-page">
         <div class="grid items-center md:grid-cols-2">
           <div class="reveal order-2 md:order-1 md:mb-[-130px] md:mt-[130px]">
-            <img src="assets/img/foto1.jpg" width="605" height="806" loading="lazy" decoding="async" alt="[Opis fotografije]"
+            <img src="assets/img/foto1.jpg" width="605" height="806" loading="lazy" decoding="async" alt="Šetalište uz more u Tivtu"
                  class="mx-auto w-[70%] md:mx-0 md:mr-[50px] md:w-[calc(100%-50px)]">
           </div>
           <div class="order-1 mb-6 text-center md:order-2 md:mb-0 md:pl-[50px] md:pt-20 md:text-left">
             <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">Odlična lokacija i dobra povezanost</h2>
             <p class="mb-4 font-sans text-sm leading-loose text-ink md:text-lg">Holiday home Olive, Holiday home Lavande i Holiday home Lemoni nalaze se na odličnoj lokaciji u Tivtu, sa veoma dobrom saobraćajnom povezanošću. U neposrednoj blizini nalaze se autobuska stanica i taxi stajalište, dok je aerodrom lako dostupan.</p>
             <p class="mb-[30px] font-sans text-sm leading-loose text-ink md:text-lg">Plaža je udaljena oko 300 m, dva velika marketa oko 50 m, restoran oko 70 m, dok je Porto Montenegro udaljen oko 1 km.</p>
-            <a href="#apartmani" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
+            <a href="#apartmani" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg"><span>Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
         </div>
       </div>
@@ -212,7 +234,7 @@
         <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#1F2F25]">Apartmani</h2>
         <div class="grid gap-6 md:grid-cols-3">
           <article class="group reveal block">
-            <img src="assets/img/apartman-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Opis fotografije – Holiday home Olive]" class="img-muted w-full">
+            <img src="assets/img/apartman-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Dnevna soba – Holiday home Olive" class="img-muted w-full">
             <h3 class="mt-[5px] font-sans text-lg text-black">Holiday home Olive</h3>
             <p class="font-sans text-sm font-bold text-ink">50 m² · 2–4 osobe</p>
             <p class="mt-2 font-sans text-sm leading-7 text-body">Holiday home Olive je komforan apartman površine 50 m², kapaciteta od 2 do 4 osobe. Raspolaže sa dvije odvojene spavaće sobe, od kojih svaka ima bračni krevet. Posebno je izdvojen dnevni boravak sa potpuno opremljenom kuhinjom, kao i kupatilo. Gostima su na raspolaganju TV, internet i dva klima uređaja. Apartman ima poseban ulaz, terasu, prostrano dvorište u hladu maslina sa vanjskim roštiljem i obezbjeđen parking, što ga čini odličnim izborom za parove, porodice i duži boravak.</p>
@@ -226,7 +248,7 @@
             </ul>
           </article>
           <article class="group reveal block">
-            <img src="assets/img/apartman-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Opis fotografije – Holiday home Lavande]" class="img-muted w-full">
+            <img src="assets/img/apartman-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Dnevna soba i kuhinja – Holiday home Lavande" class="img-muted w-full">
             <h3 class="mt-[5px] font-sans text-lg text-black">Holiday home Lavande</h3>
             <p class="font-sans text-sm font-bold text-ink">60 m² · 2–4 osobe</p>
             <p class="mt-2 font-sans text-sm leading-7 text-body">Holiday home Lavande je prostran apartman od 60 m², namijenjen za 2 do 4 osobe. Sastoji se od jedne velike sobe sa bračnim krevetom i sofom, dnevnog boravka sa velikom ugaonom garniturom na razvlačenje, kupatila i potpuno opremljene kuhinje. Gostima su na raspolaganju TV, internet i dva klima uređaja. Apartman ima poseban ulaz, terasu i prostrano dvorište u hladu maslina, sa vanjskim roštiljem, idealno za odmor i druženje. Moderan i funkcionalan raspored pruža gostima privatnost i udobnost tokom cijelog boravka.</p>
@@ -240,7 +262,7 @@
             </ul>
           </article>
           <article class="group reveal block">
-            <img src="assets/img/apartman-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="[Opis fotografije – Holiday home Lemoni]" class="img-muted w-full">
+            <img src="assets/img/apartman-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Kuhinja – Holiday home Lemoni" class="img-muted w-full">
             <h3 class="mt-[5px] font-sans text-lg text-black">Holiday home Lemoni</h3>
             <p class="font-sans text-sm font-bold text-ink">60 m² · 2–4 osobe</p>
             <p class="mt-2 font-sans text-sm leading-7 text-body">Holiday home Lemoni je prostran apartman od 60 m², namijenjen za 2 do 4 osobe. Sastoji se od jedne velike sobe sa bračnim krevetom i sofom, dnevnog boravka sa velikom ugaonom garniturom na razvlačenje, kupatila i potpuno opremljene kuhinje. Gostima su na raspolaganju TV, internet i dva klima uređaja. Apartman ima poseban ulaz, terasu i prostrano dvorište u hladu maslina, sa vanjskim roštiljem, idealno za odmor i druženje. Moderan i funkcionalan raspored pruža gostima privatnost i udobnost tokom cijelog boravka.</p>
@@ -328,7 +350,7 @@
           <a href="assets/img/gallery-12.jpg" class="group block overflow-hidden" data-lightbox>
             <img src="assets/img/thumb-12.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 12]" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-13.jpg" class="group block overflow-hidden" data-lightbox>
+          <a href="assets/img/gallery-13.jpg" class="group hidden md:block overflow-hidden" data-lightbox>
             <img src="assets/img/thumb-13.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 13]" class="img-muted aspect-square w-full object-cover">
           </a>
           <a href="assets/img/gallery-14.jpg" class="group block overflow-hidden" data-lightbox>
@@ -347,10 +369,10 @@
           <div class="reveal text-center md:pr-[50px] md:text-left">
             <h2 class="mb-[30px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">Mediteranski ambijent među maslinama</h2>
             <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora, strogog centra grada i svih važnih sadržaja.</p>
-            <a href="#apartmani" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-60 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
+            <a href="#apartmani" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-60 md:text-lg"><span>Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
           <div class="reveal md:p-[10px] md:pl-[60px]">
-            <img src="assets/img/foto2.jpg" width="1240" height="827" loading="lazy" decoding="async" alt="[Opis]" class="w-full">
+            <img src="assets/img/foto2.jpg" width="1240" height="827" loading="lazy" decoding="async" alt="Dvorište sa terasom u hladu vinove loze" class="w-full">
           </div>
         </div>
       </div>
@@ -362,7 +384,7 @@
         <div class="grid gap-6 md:grid-cols-2 md:gap-10">
           <article class="reveal bg-white p-4 md:p-[60px]">
             <h3 class="mb-5 font-display text-[23px] leading-10 text-ink">[Naslov utiska]</h3>
-            <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="5 od 5 zvezdica">★★★★★</div>
+            <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="5 od 5 zvjezdica">★★★★★</div>
             <p class="font-sans text-base italic leading-8 text-body">[Citat gosta – 2 do 4 rečenice. Koristiti samo prave recenzije uz dozvolu gosta.]</p>
             <div class="mt-6 flex items-center gap-4">
               <img src="assets/img/avatar.png" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
@@ -371,7 +393,7 @@
           </article>
           <article class="reveal bg-white p-4 md:p-[60px]">
             <h3 class="mb-5 font-display text-[23px] leading-10 text-ink">[Naslov utiska]</h3>
-            <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="5 od 5 zvezdica">★★★★★</div>
+            <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="5 od 5 zvjezdica">★★★★★</div>
             <p class="font-sans text-base italic leading-8 text-body">[Citat gosta – 2 do 4 rečenice.]</p>
             <div class="mt-6 flex items-center gap-4">
               <img src="assets/img/avatar.png" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
@@ -388,10 +410,10 @@
           <div class="reveal p-[30px] text-center text-white md:py-[67px] md:pl-[50px] md:pr-[35px] md:text-left">
             <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-white md:text-[30px]">Za kraći i duži boravak</h2>
             <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">Blizina mora, strogog centra grada i svih važnih sadržaja čini apartmane odličnim izborom kako za kraći, tako i za duži boravak.</p>
-            <a href="#plaze" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-70 md:text-lg"><span data-i18n="btn.more">Saznaj više</span> <span aria-hidden="true">→</span></a>
+            <a href="#plaze" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-70 md:text-lg"><span>Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
           <div class="reveal p-5 md:p-0">
-            <img src="assets/img/foto3.jpg" width="2500" height="1667" loading="lazy" decoding="async" alt="[Opis]"
+            <img src="assets/img/foto3.jpg" width="1240" height="827" loading="lazy" decoding="async" alt="Dnevni boravak sa kuhinjom"
                  class="w-full object-cover md:ml-[50px] md:-my-[50px] md:h-[415px] md:w-[calc(100%-50px)] md:pt-[78px]">
           </div>
         </div>
@@ -544,21 +566,36 @@
             
             <div>
               <label for="inq-checkin" class="mb-1 block font-sans text-sm font-bold">Dolazak *</label>
-              <input type="date" id="inq-checkin" name="checkin" required class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600">
+              <input type="date" id="inq-checkin" name="checkin" lang="sr" required class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600">
               <p id="inq-checkin-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="inq-checkin"></p>
             </div>
             
             <div>
               <label for="inq-checkout" class="mb-1 block font-sans text-sm font-bold">Odlazak *</label>
-              <input type="date" id="inq-checkout" name="checkout" required class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600">
+              <input type="date" id="inq-checkout" name="checkout" lang="sr" required class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600">
               <p id="inq-checkout-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="inq-checkout"></p>
             </div>
             <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#243528] md:col-span-2 md:-mt-2" aria-live="polite"></p>
             
             <div>
-              <label for="inq-guests" class="mb-1 block font-sans text-sm font-bold">Broj gostiju *</label>
+              <label for="inq-guests" class="mb-1 block font-sans text-sm font-bold">Odrasli *</label>
               <input type="number" id="inq-guests" name="guests" min="1" max="8" step="1" value="2" inputmode="numeric" required class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600">
               <p id="inq-guests-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="inq-guests"></p>
+            </div>
+            
+            <div>
+              <label for="inq-children" class="mb-1 block font-sans text-sm font-bold">Djeca</label>
+              <input type="number" id="inq-children" name="children" min="0" max="7" step="1" value="0" inputmode="numeric" class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600">
+              <p id="inq-children-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="inq-children"></p>
+            </div>
+            
+            <div id="inq-ages-wrap" hidden>
+              <label for="inq-ages" class="mb-1 block font-sans text-sm font-bold">Uzrast djece (npr. 3, 7)</label>
+              <input type="text" id="inq-ages" name="ages" maxlength="60" autocomplete="off" class="min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600">
+              <p id="inq-ages-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="inq-ages"></p>
+            </div>
+            <div id="inq-crib-wrap" class="self-center" hidden>
+              <label class="inline-flex items-center gap-3 font-sans text-base"><input type="checkbox" id="inq-crib" name="crib" class="h-4 w-4 accent-ink"> Treba mi krevetac za bebu</label>
             </div>
             
             <div>
@@ -592,7 +629,7 @@
           </div>
 
           <div class="mt-6 text-center md:text-left">
-            <button type="submit" id="inquiry-submit" data-i18n="btn.send" class="w-full bg-ink px-10 py-5 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal disabled:cursor-wait disabled:opacity-60 md:w-auto md:px-[90px]">Pošalji upit</button>
+            <button type="submit" id="inquiry-submit" class="w-full bg-ink px-10 py-5 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal disabled:cursor-wait disabled:opacity-60 md:w-auto md:px-[90px]">Pošalji upit</button>
           </div>
           <p id="inquiry-status" class="mt-4 hidden font-sans text-base" role="status" aria-live="polite"></p>
         </form>
@@ -623,46 +660,46 @@
       <div class="grid gap-10 text-center md:grid-cols-[minmax(0,22rem)_auto_auto_auto] md:justify-between md:gap-x-10 md:text-left">
         <div>
           <img src="assets/img/logo.png" width="288" height="288" alt="Tivat Garden Homes" loading="lazy" class="mx-auto mb-5 h-28 w-28 md:mx-0">
-          <h2 data-i18n="footer.about" class="mb-4 font-display text-[26px] text-white">O nama</h2>
+          <h2 class="mb-4 font-display text-[26px] text-white">O nama</h2>
           <p class="font-sans text-sm leading-7 text-white/80">Holiday home Olive, Lavande i Lemoni nalaze se na odličnoj lokaciji u Tivtu. Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora i strogog centra grada.</p>
           <p class="mt-3 font-sans text-sm leading-7 text-white/80">Bonići I bb, Tivat, Crna Gora<br><a href="tel:+38269506646" class="hover:text-white">+382 69 506 646</a></p>
         </div>
         <ul class="font-sans text-sm leading-8 text-white/80">
-          <li><a href="#top" data-i18n="nav.home" class="hover:text-white">Početna</a></li>
-          <li><a href="#apartmani" data-i18n="nav.stay" class="hover:text-white">Apartmani</a></li>
-          <li><a href="#cijene" data-i18n="nav.prices" class="hover:text-white">Cijene</a></li>
-          <li><a href="#galerija" data-i18n="nav.gallery" class="hover:text-white">Galerija</a></li>
+          <li><a href="#top" class="hover:text-white">Početna</a></li>
+          <li><a href="#apartmani" class="hover:text-white">Apartmani</a></li>
+          <li><a href="#cijene" class="hover:text-white">Cijene</a></li>
+          <li><a href="#galerija" class="hover:text-white">Galerija</a></li>
         </ul>
         <ul class="font-sans text-sm leading-8 text-white/80">
-          <li><a href="#plaze" data-i18n="nav.beaches" class="hover:text-white">Plaže</a></li>
-          <li><a href="#znamenitosti" data-i18n="nav.sights" class="hover:text-white">Znamenitosti</a></li>
-          <li><a href="#hrana" data-i18n="nav.food" class="hover:text-white">Hrana</a></li>
-          <li><a href="#kontakt" data-i18n="nav.contact" class="hover:text-white">Kontakt</a></li>
+          <li><a href="#plaze" class="hover:text-white">Plaže</a></li>
+          <li><a href="#znamenitosti" class="hover:text-white">Znamenitosti</a></li>
+          <li><a href="#hrana" class="hover:text-white">Hrana</a></li>
+          <li><a href="#kontakt" class="hover:text-white">Kontakt</a></li>
         </ul>
         <div class="flex flex-col items-center gap-4 md:items-start">
-          <h2 data-i18n="footer.follow" class="font-display text-[26px] text-white">Pratite nas</h2>
+          <h2 class="font-display text-[26px] text-white">Pratite nas</h2>
           <a href="https://instagram.com/[INSTAGRAM]" target="_blank" rel="noopener" aria-label="Instagram" class="flex h-9 w-9 items-center justify-center rounded-[10%] bg-[#2A3D2F] hover:opacity-90"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg></a>
-          <a href="#rezervacija" data-i18n="btn.book" class="bg-white px-8 py-3 font-sans text-sm font-bold uppercase text-ink transition hover:bg-mist">Rezerviši</a>
+          <a href="#dostupnost-anchor" data-book class="bg-white px-8 py-3 font-sans text-sm font-bold uppercase text-ink transition hover:bg-mist">Rezerviši</a>
         </div>
       </div>
     </div>
 
     <div class="border-t border-white/10">
       <div class="container flex max-w-page flex-col items-center justify-between gap-2 py-5 font-sans text-sm text-white/70 md:flex-row">
-        <a href="politika-privatnosti.html" data-i18n="footer.privacy" class="hover:text-white">Politika privatnosti</a>
+        <a href="politika-privatnosti.html" class="hover:text-white">Politika privatnosti</a>
         <p>© <span data-year>2026</span> Tivat Garden Homes. Sva prava zadržana.</p>
       </div>
     </div>
   </footer>
 
   <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Galerija" tabindex="-1">
-    <button id="lb-close" type="button" class="absolute right-5 top-5 p-2 text-4xl leading-none text-white" data-i18n-aria="btn.close" aria-label="Zatvori">×</button>
-    <button id="lb-prev" type="button" class="absolute left-4 p-2 text-5xl text-white" data-i18n-aria="btn.prev" aria-label="Prethodna">‹</button>
+    <button id="lb-close" type="button" class="absolute right-5 top-5 p-2 text-4xl leading-none text-white" aria-label="Zatvori">×</button>
+    <button id="lb-prev" type="button" class="absolute left-4 p-2 text-5xl text-white" aria-label="Prethodna">‹</button>
     <img id="lb-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] select-none object-contain">
-    <button id="lb-next" type="button" class="absolute right-4 p-2 text-5xl text-white" data-i18n-aria="btn.next" aria-label="Sledeća">›</button>
+    <button id="lb-next" type="button" class="absolute right-4 p-2 text-5xl text-white" aria-label="Sledeća">›</button>
   </div>
 
-  <a id="scroll-up" href="#top" data-i18n-aria="btn.top" aria-label="Na vrh"
+  <a id="scroll-up" href="#top" aria-label="Na vrh"
      class="fixed bottom-5 right-5 z-40 hidden h-11 w-11 items-center justify-center bg-ink text-white hover:bg-charcoal"><span aria-hidden="true">↑</span></a>
   </div>
   <!-- /build:app -->

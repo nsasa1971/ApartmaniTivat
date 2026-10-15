@@ -3,8 +3,13 @@
 //  Čist modul bez DOM-a – koristi ga i browser (main.js) i build skripta
 //  (scripts/build-meta.mjs) koja ga upisuje u index.html radi SEO-a.
 // ============================================================
-import * as c from './content.js';
-import { t, languages } from './i18n.js';
+import * as base from './content.js';
+import { localizedContent } from './content.i18n.js';
+import { t, languages, setLang, getLang } from './i18n.js';
+import { weekdays } from './availability.js';
+
+// sadržaj na trenutnom jeziku (postavlja ga renderApp)
+let c = base;
 
 export const esc = (v) =>
   String(v ?? '')
@@ -23,14 +28,14 @@ export const hash = (s) => {
   return (h >>> 0).toString(36);
 };
 
-const BOOK_HREF = '#rezervacija';
+// "Rezerviši" vodi na kalendar dostupnosti (ako nije dostupan, main.js skroluje na formu za upit)
+const BOOK_HREF = '#dostupnost-anchor';
 const arrow = '<span aria-hidden="true">→</span>';
 
 const igIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg>`;
 const calIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>`;
 const guestsIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg>`;
 
-const i = (key, tag = '') => `data-i18n="${key}"${tag}`;
 
 // ---------- Navigacija ----------
 export function navItems() {
@@ -47,13 +52,36 @@ export function navItems() {
   ];
 }
 
-const langButtons = (cls) =>
-  languages
-    .map(
-      (l) =>
-        `<button type="button" data-lang="${l.code}" aria-pressed="${l.code === 'sr'}" lang="${l.code}" title="${esc(l.name)}" class="${cls}">${l.label}</button>`
-    )
-    .join('');
+const flagSvg = (code, uid) => {
+  const body = {
+    rs: '<rect width="24" height="16" fill="#C6363C"/><rect y="5.33" width="24" height="10.67" fill="#0C4076"/><rect y="10.67" width="24" height="5.33" fill="#fff"/>',
+    ru: '<rect width="24" height="16" fill="#fff"/><rect y="5.33" width="24" height="10.67" fill="#0039A6"/><rect y="10.67" width="24" height="5.33" fill="#D52B1E"/>',
+    gb: `<clipPath id="fc-${uid}"><rect width="24" height="16"/></clipPath><g clip-path="url(#fc-${uid})"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" stroke-width="1.6"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="3.2"/></g>`,
+  }[code];
+  return `<svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true">${body}</svg>`;
+};
+const flagBox = (code, uid) => `<span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15">${flagSvg(code, uid)}</span>`;
+
+/** Padajuća lista jezika sa zastavama (otvara/zatvara je main.js). */
+const langMenu = () => {
+  const cur = languages.find((l) => l.code === getLang()) ?? languages[0];
+  return `
+        <div class="relative" data-lang-menu>
+          <button type="button" id="lang-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-list" aria-label="${esc(t('aria.language'))}: ${esc(cur.name)}"
+                  class="flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-white px-3 font-sans text-sm transition hover:border-ink/40">
+            ${flagBox(cur.flag, 'cur')}
+            <span class="hidden sm:inline">${cur.label}</span>
+            <svg class="h-3 w-3 text-ink/60" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>
+          </button>
+          <ul id="lang-list" role="listbox" aria-label="${esc(t('aria.language'))}" class="absolute right-0 z-[60] mt-2 hidden w-48 overflow-hidden rounded-xl border border-ink/10 bg-white py-1 shadow-xl">
+            ${languages
+              .map(
+                (l) => `<li role="presentation"><button type="button" role="option" data-lang="${l.code}" lang="${l.code}" aria-selected="${l.code === cur.code}" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold">${flagBox(l.flag, l.code)}<span>${esc(l.name)}</span></button></li>`
+              )
+              .join('\n            ')}
+          </ul>
+        </div>`;
+};
 
 const instagram = (cls) =>
   `<a href="${esc(c.social.instagram)}" target="_blank" rel="noopener" aria-label="Instagram" class="${cls}">${igIcon}</a>`;
@@ -68,30 +96,25 @@ function header() {
         <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-20 w-auto md:h-24 lg:h-20 xl:h-24">
       </a>
 
-      <nav class="hidden lg:block" aria-label="Glavna navigacija">
+      <nav class="hidden lg:block" aria-label="${esc(t('aria.mainNav'))}">
         <ul class="flex items-center">
-          ${nav.map((n) => `<li><a href="${n.href}" ${i(n.key)} class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[13px]">${t(n.key)}</a></li>`).join('\n          ')}
+          ${nav.map((n) => `<li><a href="${n.href}" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[5px] xl:px-[9px] min-[1400px]:px-[13px]">${t(n.key)}</a></li>`).join('\n          ')}
         </ul>
       </nav>
 
-      <div class="flex items-center gap-4 lg:gap-3 xl:gap-4">
-        <div class="hidden items-center lg:flex" role="group" data-i18n-aria="aria.language" aria-label="${t('aria.language')}">
-          ${langButtons('px-2 py-1 font-sans text-sm hover:opacity-60 aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4')}
-        </div>
+      <div class="flex items-center gap-2 sm:gap-4 lg:gap-3 xl:gap-4">
+        ${langMenu()}
         ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#2A3D2F] text-white hover:opacity-90 sm:flex lg:hidden xl:flex')}
-        <a href="${BOOK_HREF}" ${i('btn.book')} class="bg-ink px-6 py-3 font-sans text-sm font-bold uppercase tracking-wide text-white transition hover:bg-charcoal">${t('btn.book')}</a>
-        <button id="menu-toggle" type="button" class="lg:hidden" data-i18n-aria="aria.menu" aria-label="${t('aria.menu')}" aria-expanded="false" aria-controls="mobile-menu">
+        <a href="${BOOK_HREF}" data-book class="bg-ink px-3 py-3 font-sans text-xs font-bold uppercase tracking-wide sm:px-6 sm:text-sm text-white transition hover:bg-charcoal">${t('btn.book')}</a>
+        <button id="menu-toggle" type="button" class="lg:hidden" aria-label="${t('aria.menu')}" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         </button>
       </div>
     </div>
 
-    <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="Mobilna navigacija">
+    <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="${esc(t('aria.mobileNav'))}">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
-        ${nav.map((n) => `<li><a href="${n.href}" ${i(n.key)} class="block py-3">${t(n.key)}</a></li>`).join('\n        ')}
-        <li class="flex items-center gap-1 py-2" role="group" data-i18n-aria="aria.language" aria-label="${t('aria.language')}">
-          ${langButtons('px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4')}
-        </li>
+        ${nav.map((n) => `<li><a href="${n.href}" class="block py-3">${t(n.key)}</a></li>`).join('\n        ')}
       </ul>
     </nav>
   </header>`;
@@ -100,57 +123,62 @@ function header() {
 // ---------- Hero + booking traka ----------
 function hero() {
   const h = c.hero;
-  const boxCls = 'flex min-w-0 flex-col justify-center rounded-2xl border border-ink/10 bg-white px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:border-ink/25';
+  const boxCls = 'flex min-w-0 flex-col justify-center rounded-2xl border border-white/60 bg-white/75 px-4 py-2.5 transition focus-within:border-forest focus-within:ring-2 focus-within:ring-forest/25 hover:bg-white/90';
   const labelCls = 'flex items-center gap-2 text-[11px] font-bold uppercase leading-4 tracking-[.14em] text-forest';
-  const field = (id, label, key) => `
+  const field = (id, key) => `
             <label class="${boxCls}">
-              <span class="${labelCls}">${calIcon}<span ${i(key)}>${t(key)}</span></span>
-              <input type="date" name="${id}" id="${id}" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
+              <span class="${labelCls}">${calIcon}<span>${t(key)}</span></span>
+              <input type="date" name="${id}" id="${id}" lang="${getLang()}" class="mt-1 w-full bg-transparent text-base font-bold text-ink outline-none" required>
             </label>`;
-  const stepBtn = 'flex h-8 w-8 items-center justify-center rounded-full bg-mist text-lg leading-none text-ink transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest';
+  const stepBtn = 'flex h-8 w-8 items-center justify-center rounded-full bg-white text-lg leading-none text-ink shadow-sm transition hover:bg-forest hover:text-white focus-visible:ring-2 focus-visible:ring-forest';
+  const stepper = (name, key, value) => `
+            <div class="${boxCls}" role="group" aria-labelledby="${name}-label">
+              <span id="${name}-label" class="${labelCls}">${guestsIcon}<span>${t(key)}</span></span>
+              <span class="mt-1 flex items-center justify-between gap-3">
+                <button type="button" data-step="${name}" data-dir="-1" class="${stepBtn}" aria-label="${esc(t(key))} – ${esc(t('booking.fewer'))}">−</button>
+                <output id="${name}-output" class="min-w-[1.5ch] text-center text-base font-bold" aria-live="polite">${value}</output>
+                <button type="button" data-step="${name}" data-dir="1" class="${stepBtn}" aria-label="${esc(t(key))} – ${esc(t('booking.more'))}">+</button>
+              </span>
+              <input type="hidden" name="${name}" id="${name}" value="${value}">
+            </div>`;
   return `
-    <section class="relative flex min-h-[250px] items-center py-12 md:min-h-[320px] md:pb-[130px] md:pt-[100px]">
-      <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" class="absolute inset-0 overflow-hidden">
+    <section class="relative flex min-h-[calc(100svh-96px)] items-center py-12 md:min-h-[calc(100svh-112px)] md:py-16 lg:min-h-[calc(100svh-96px)] xl:min-h-[calc(100svh-112px)]">
+      <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" data-aria-slide="${esc(t('aria.slide', { n: '{n}', m: '{m}' }))}" class="absolute inset-0 overflow-hidden">
         <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
       </div>
-      <div class="absolute inset-0 bg-[#1F2F25]/65 md:bg-transparent md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
-      <div data-hero-dots class="absolute left-1/2 top-4 z-10 flex -translate-x-1/2 gap-3 md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="Slike"></div>
+      <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,40,31,.38)_0%,rgba(26,40,31,.5)_100%)] md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
+      <div data-hero-dots class="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-3 md:bottom-auto md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="${esc(t('aria.slides'))}"></div>
 
       <div class="container relative max-w-page">
-        <div class="max-w-3xl text-center text-white [text-shadow:0_1px_4px_rgba(0,0,0,.45)] md:pl-3 md:text-left">
+        <div class="max-w-3xl text-center text-white [text-shadow:0_1px_6px_rgba(0,0,0,.55)] md:pl-3 md:text-left">
           <span class="mb-[30px] ml-10 hidden h-24 w-px bg-white/70 md:block" aria-hidden="true"></span>
           <p class="mb-3 text-lg md:text-xl">${esc(h.subtitle)}</p>
           <h1 class="mb-6 whitespace-nowrap font-display text-[clamp(30px,8.6vw,76px)] leading-[1.15] tracking-[1px] text-white">${esc(h.title)}</h1>
-          <p class="max-w-xl text-base md:text-xl">${esc(h.text)}</p>
+          <p class="mx-auto max-w-xl text-base md:mx-0 md:text-xl">${esc(h.text)}</p>
         </div>
 
-        <!-- Booking traka: popunjava formu za upit (#rezervacija) -->
-        <form id="booking-form" class="mt-10 max-w-[980px] rounded-3xl border border-white/50 bg-white/90 p-3 text-ink shadow-[0_24px_60px_-18px_rgba(0,0,0,.55)] backdrop-blur-md md:p-4" aria-label="Pretraga termina" novalidate>
-          <div class="grid gap-3 md:grid-cols-[1fr_1fr_1fr_auto]">
-            ${field('checkin', 'Dolazak', 'booking.checkin')}
-            ${field('checkout', 'Odlazak', 'booking.checkout')}
-
-            <div class="${boxCls}" role="group" aria-labelledby="guests-label">
-              <span id="guests-label" class="${labelCls}">${guestsIcon}<span ${i('booking.guests')}>${t('booking.guests')}</span></span>
-              <span class="mt-1 flex items-center justify-between gap-3">
-                <button type="button" data-guests="-1" class="${stepBtn}" aria-label="Manje gostiju">−</button>
-                <output id="guests-output" class="min-w-[1.5ch] text-center text-base font-bold" aria-live="polite">${c.config.defaultGuests}</output>
-                <button type="button" data-guests="1" class="${stepBtn}" aria-label="Više gostiju">+</button>
-              </span>
-              <input type="hidden" name="guests" id="guests" value="${c.config.defaultGuests}">
-            </div>
-
-            <button type="submit" class="flex min-h-[56px] items-center justify-center gap-2 rounded-2xl bg-btn px-8 font-sans text-base font-bold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-ink md:min-w-[170px]"><span ${i('btn.search')}>${t('btn.search')}</span>${arrow}</button>
+        <!-- Booking traka (samo desktop): popunjava formu za upit (#rezervacija) -->
+        <form id="booking-form" class="mt-10 hidden max-w-[1040px] rounded-3xl border border-white/40 bg-white/50 p-3 text-ink shadow-[0_24px_60px_-18px_rgba(0,0,0,.55)] backdrop-blur-xl md:block md:p-4" aria-label="${esc(t('aria.search'))}" novalidate>
+          <div class="grid gap-3 md:grid-cols-[1.2fr_1.2fr_1fr_1fr_auto]">
+            ${field('checkin', 'booking.checkin')}
+            ${field('checkout', 'booking.checkout')}
+            ${stepper('adults', 'booking.adults', c.config.defaultGuests)}
+            ${stepper('children', 'booking.children', 0)}
+            <button type="submit" class="flex min-h-[56px] items-center justify-center gap-2 rounded-2xl bg-btn px-8 font-sans text-base font-bold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-ink md:min-w-[150px]"><span>${t('btn.search')}</span>${arrow}</button>
+          </div>
+          <div id="strip-extra" class="mt-3 hidden flex-wrap items-center gap-x-6 gap-y-3 rounded-2xl border border-white/60 bg-white/60 px-4 py-3">
+            <div id="strip-ages" class="flex flex-wrap items-center gap-3"></div>
+            <label class="inline-flex items-center gap-2 font-sans text-sm font-bold text-ink"><input type="checkbox" id="strip-crib" class="h-4 w-4 accent-forest"> ${t('booking.crib')}</label>
           </div>
           <p id="booking-range" class="hidden px-2 pt-2 text-sm font-bold text-forest" aria-live="polite"></p>
-          <p id="booking-error" class="hidden px-2 pt-2 text-sm text-red-600" role="alert"></p>
+          <p id="booking-error" class="hidden px-2 pt-2 text-sm text-red-700" role="alert"></p>
         </form>
       </div>
     </section>`;
 }
 
 const moreLink = (href, cls) =>
-  `<a href="${esc(href)}" class="${cls}"><span ${i('btn.more')}>${t('btn.more')}</span> ${arrow}</a>`;
+  `<a href="${esc(href)}" class="${cls}"><span>${t('btn.more')}</span> ${arrow}</a>`;
 
 // ---------- Uvod ----------
 function intro() {
@@ -238,7 +266,7 @@ function gallery() {
         <div class="grid grid-cols-2 gap-0 md:grid-cols-3" data-gallery>
           ${c.gallery
             .map(
-              (g) => `<a href="${esc(g.full)}" class="group block overflow-hidden" data-lightbox>
+              (g) => `<a href="${esc(g.full)}" class="group ${g.full.endsWith('gallery-13.jpg') ? 'hidden md:block' : 'block'} overflow-hidden" data-lightbox>
             <img src="${esc(g.thumb)}" width="394" height="394" loading="lazy" decoding="async" alt="${esc(g.alt)}" class="img-muted aspect-square w-full object-cover">
           </a>`
             )
@@ -279,7 +307,7 @@ function reviews() {
             .map(
               (r) => `<article class="reveal bg-white p-4 md:p-[60px]">
             <h3 class="mb-5 font-display text-[23px] leading-10 text-ink">${esc(r.title)}</h3>
-            <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="${r.rating} od 5 zvezdica">${'★'.repeat(r.rating)}</div>
+            <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="${esc(t('aria.stars', { n: r.rating }))}">${'★'.repeat(r.rating)}</div>
             <p class="font-sans text-base italic leading-8 text-body">${esc(r.text)}</p>
             <div class="mt-6 flex items-center gap-4">
               <img src="${esc(r.avatar)}" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
@@ -365,7 +393,7 @@ const digits = (v) => String(v).replace(/[^\d]/g, '');
 export function contactLinks() {
   const k = c.contact;
   return [
-    { id: 'phone', label: 'Telefon', value: k.phoneDisplay || k.phone, href: `tel:${String(k.phone).replace(/[^\d+]/g, '')}` },
+    { id: 'phone', label: t('contact.phone'), value: k.phoneDisplay || k.phone, href: `tel:${String(k.phone).replace(/[^\d+]/g, '')}` },
     { id: 'email', label: 'Email', value: k.email, href: `mailto:${k.email}` },
     { id: 'whatsapp', label: 'WhatsApp', value: k.whatsapp, href: `https://wa.me/${digits(k.whatsapp)}` },
     { id: 'viber', label: 'Viber', value: k.viber, href: `viber://chat?number=%2B${digits(k.viber)}` },
@@ -384,7 +412,7 @@ function availabilitySection() {
         <h2 id="dostupnost-title" class="mb-4 font-display text-[30px] leading-tight text-[#1F2F25]">${esc(a.title)}</h2>
         <p class="mx-auto mb-8 max-w-xl font-sans text-lg">${esc(a.text)}</p>
         <div class="mx-auto max-w-md bg-white p-4 md:p-6">
-          <div class="flex gap-2" role="group" aria-label="Apartman">
+          <div class="flex gap-2" role="group" aria-label="${esc(t('aria.apartment'))}">
             ${c.apartments
               .map(
                 (ap, i) => `<button type="button" data-avail-apt="${esc(ap.id)}" aria-pressed="${i === 0}" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(ap.name)}</button>`
@@ -392,21 +420,21 @@ function availabilitySection() {
               .join('')}
           </div>
           <div class="mt-4 flex items-center justify-between">
-            <button type="button" data-avail-month="-1" aria-label="Prethodni mjesec" class="h-11 w-11 border border-ink text-2xl disabled:opacity-30">‹</button>
+            <button type="button" data-avail-month="-1" aria-label="${esc(t('aria.prevMonth'))}" class="h-11 w-11 border border-ink text-2xl disabled:opacity-30">‹</button>
             <h3 id="avail-month" class="font-display text-[22px] capitalize" aria-live="polite"></h3>
-            <button type="button" data-avail-month="1" aria-label="Sljedeći mjesec" class="h-11 w-11 border border-ink text-2xl">›</button>
+            <button type="button" data-avail-month="1" aria-label="${esc(t('aria.nextMonth'))}" class="h-11 w-11 border border-ink text-2xl">›</button>
           </div>
           <div class="mt-3 grid grid-cols-7 gap-px text-center font-sans text-xs font-bold text-body" aria-hidden="true">
-            ${['Pon', 'Uto', 'Sri', 'Čet', 'Pet', 'Sub', 'Ned'].map((d) => `<div>${d}</div>`).join('')}
+            ${weekdays().map((d) => `<div>${d}</div>`).join('')}
           </div>
           <div id="avail-grid" class="mt-1 grid grid-cols-7 gap-px bg-line"></div>
           <p class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-sm">
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 border border-line bg-white"></span>Slobodno</span>
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-charcoal"></span>Zauzeto</span>
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#34493A]"></span>Vaš izbor</span>
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 border border-line bg-white"></span>${t('avail.free')}</span>
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-charcoal"></span>${t('avail.taken')}</span>
+            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#34493A]"></span>${t('avail.yours')}</span>
           </p>
           <p id="avail-msg" class="mt-3 min-h-6 font-sans text-sm" role="status" aria-live="polite"></p>
-          <button type="button" id="avail-send" class="mt-2 hidden w-full bg-ink px-6 py-4 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal">Pošalji upit za ovaj termin</button>
+          <button type="button" id="avail-send" class="mt-2 hidden w-full bg-ink px-6 py-4 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal">${t('btn.sendRange')}</button>
         </div>
       </div>
     </section>`;
@@ -416,6 +444,7 @@ function availabilitySection() {
 function reservation() {
   const b = c.booking;
   const { minGuests, maxGuests, defaultGuests } = c.config;
+  const maxChildren = maxGuests - 1;
   const inputCls =
     'min-h-[50px] w-full border border-midtone bg-white px-4 py-3 font-sans text-base text-ink placeholder:text-shadow focus:border-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-[#34493A] aria-[invalid=true]:border-red-600';
   const field = (id, label, control, extra = '') => `
@@ -430,58 +459,63 @@ function reservation() {
       <p class="mx-auto mb-6 max-w-xl font-sans text-lg">${esc(b.text)}</p>
 
       <div class="mt-10 grid gap-12 md:grid-cols-[2fr_1fr] md:gap-16">
-        <form id="inquiry-form" class="relative text-left" novalidate aria-label="Forma za upit">
+        <form id="inquiry-form" class="relative text-left" novalidate aria-label="${esc(t('aria.inquiryForm'))}">
           <div class="grid gap-5 md:grid-cols-2">
-            ${field('fullname', 'Ime i prezime *', `<input type="text" id="fullname" name="fullname" autocomplete="name" required class="${inputCls}">`)}
-            ${field('email', 'Email *', `<input type="email" id="email" name="email" autocomplete="email" required class="${inputCls}">`)}
-            ${field('phone', 'Telefon', `<input type="tel" id="phone" name="phone" autocomplete="tel" class="${inputCls}">`)}
+            ${field('fullname', t('f.name'), `<input type="text" id="fullname" name="fullname" autocomplete="name" required class="${inputCls}">`)}
+            ${field('email', t('f.email'), `<input type="email" id="email" name="email" autocomplete="email" required class="${inputCls}">`)}
+            ${field('phone', t('f.phone'), `<input type="tel" id="phone" name="phone" autocomplete="tel" class="${inputCls}">`)}
             <fieldset class="font-sans">
-              <legend class="mb-1 block text-sm font-bold">Dostupan/na sam i na</legend>
+              <legend class="mb-1 block text-sm font-bold">${t('f.messengers')}</legend>
               <div class="flex gap-6 py-3 text-base">
                 <label class="inline-flex items-center gap-2"><input type="checkbox" name="messengers" value="WhatsApp" class="h-4 w-4 accent-ink"> WhatsApp</label>
                 <label class="inline-flex items-center gap-2"><input type="checkbox" name="messengers" value="Viber" class="h-4 w-4 accent-ink"> Viber</label>
               </div>
             </fieldset>
-            ${field('inq-checkin', 'Dolazak *', `<input type="date" id="inq-checkin" name="checkin" required class="${inputCls}">`)}
-            ${field('inq-checkout', 'Odlazak *', `<input type="date" id="inq-checkout" name="checkout" required class="${inputCls}">`)}
+            ${field('inq-checkin', t('f.checkin'), `<input type="date" id="inq-checkin" name="checkin" lang="${getLang()}" required class="${inputCls}">`)}
+            ${field('inq-checkout', t('f.checkout'), `<input type="date" id="inq-checkout" name="checkout" lang="${getLang()}" required class="${inputCls}">`)}
             <p id="inq-range" class="hidden font-sans text-sm font-bold text-[#243528] md:col-span-2 md:-mt-2" aria-live="polite"></p>
-            ${field('inq-guests', 'Broj gostiju *', `<input type="number" id="inq-guests" name="guests" min="${minGuests}" max="${maxGuests}" step="1" value="${defaultGuests}" inputmode="numeric" required class="${inputCls}">`)}
+            ${field('inq-guests', t('f.adults'), `<input type="number" id="inq-guests" name="guests" min="1" max="${maxGuests}" step="1" value="${defaultGuests}" inputmode="numeric" required class="${inputCls}">`)}
+            ${field('inq-children', t('f.children'), `<input type="number" id="inq-children" name="children" min="0" max="${maxChildren}" step="1" value="0" inputmode="numeric" class="${inputCls}">`)}
+            ${field('inq-ages', t('f.ages'), `<input type="text" id="inq-ages" name="ages" maxlength="60" autocomplete="off" class="${inputCls}">`, ' id="inq-ages-wrap" hidden')}
+            <div id="inq-crib-wrap" class="self-center" hidden>
+              <label class="inline-flex items-center gap-3 font-sans text-base"><input type="checkbox" id="inq-crib" name="crib" class="h-4 w-4 accent-ink"> ${t('f.crib')}</label>
+            </div>
             ${field(
               'apartment',
-              'Apartman',
+              t('f.apartment'),
               `<select id="apartment" name="apartment" class="${inputCls}">
-                <option value="">Bez preferencije</option>
+                <option value="">${t('f.noPref')}</option>
                 ${c.apartments.map((a) => `<option value="${esc(a.id)}">${esc(a.name)}</option>`).join('\n                ')}
               </select>`
             )}
           </div>
 
           <div class="mt-5">
-            <label for="message" class="mb-1 block font-sans text-sm font-bold">Poruka</label>
+            <label for="message" class="mb-1 block font-sans text-sm font-bold">${t('f.message')}</label>
             <textarea id="message" name="message" rows="5" class="${inputCls}"></textarea>
           </div>
 
           <div class="mt-5">
             <label class="flex items-start gap-3 font-sans text-sm leading-6">
               <input type="checkbox" id="consent" name="consent" required class="mt-1.5 h-4 w-4 shrink-0 accent-ink" aria-describedby="consent-error">
-              <span>Saglasan/na sam sa <a href="${esc(b.privacyHref)}" target="_blank" rel="noopener" class="underline hover:opacity-60">politikom privatnosti</a> i obradom podataka radi odgovora na upit. *</span>
+              <span>${esc(t('f.consent', { link: '\u0000' })).replace('\u0000', `<a href="${esc(b.privacyHref)}" target="_blank" rel="noopener" class="underline hover:opacity-60">${esc(t('f.privacyLink'))}</a>`)}</span>
             </label>
             <p id="consent-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="consent"></p>
           </div>
 
           <!-- Zaštita od botova: honeypot (ljudi ga ne vide) -->
           <div class="absolute -left-[9999px] h-0 w-0 overflow-hidden" aria-hidden="true">
-            <label>Ne popunjavati <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            <label>${t('f.honeypot')} <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
           </div>
 
           <div class="mt-6 text-center md:text-left">
-            <button type="submit" id="inquiry-submit" ${i('btn.send')} class="w-full bg-ink px-10 py-5 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal disabled:cursor-wait disabled:opacity-60 md:w-auto md:px-[90px]">${t('btn.send')}</button>
+            <button type="submit" id="inquiry-submit" class="w-full bg-ink px-10 py-5 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal disabled:cursor-wait disabled:opacity-60 md:w-auto md:px-[90px]">${t('btn.send')}</button>
           </div>
           <p id="inquiry-status" class="mt-4 hidden font-sans text-base" role="status" aria-live="polite"></p>
         </form>
 
-        <aside class="text-center md:text-left" aria-label="Direktni kontakt">
-          <h3 class="mb-4 font-display text-[23px] leading-10 text-ink">Direktni kontakt</h3>
+        <aside class="text-center md:text-left" aria-label="${esc(t('aria.directContact'))}">
+          <h3 class="mb-4 font-display text-[23px] leading-10 text-ink">${t('contact.direct')}</h3>
           <ul class="space-y-1 font-sans text-base" data-contacts>
             ${contactLinks()
               .map((k) =>
@@ -490,7 +524,7 @@ function reservation() {
                   : `<li><span class="font-bold">${k.label}:</span> <a href="${esc(k.href)}"${k.id === 'whatsapp' ? ' target="_blank" rel="noopener"' : ''} class="underline hover:opacity-60">${esc(k.value)}</a></li>`
               )
               .join('\n            ')}
-            <li><span class="font-bold">Adresa:</span> ${
+            <li><span class="font-bold">${t('contact.address')}:</span> ${
               c.contact.mapUrl
                 ? `<a href="${esc(c.contact.mapUrl)}" target="_blank" rel="noopener" class="underline hover:opacity-60">${esc(fullAddress())}</a>`
                 : esc(fullAddress())
@@ -504,8 +538,8 @@ function reservation() {
 // ---------- Mapa ----------
 function map() {
   return `
-    <section aria-label="Lokacija" class="relative z-[1]">
-      <iframe title="Mapa – ${esc(c.contact.city)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+    <section aria-label="${esc(t('aria.location'))}" class="relative z-[1]">
+      <iframe title="${esc(t('map.title', { city: c.contact.city }))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               class="block h-[440px] w-full border-0 md:h-[440px]"
               src="https://www.google.com/maps?q=${encodeURIComponent(c.contact.lat && c.contact.lng ? `${c.contact.lat},${c.contact.lng}` : c.contact.mapQuery)}&z=17&output=embed"></iframe>
     </section>`;
@@ -517,7 +551,7 @@ function footer() {
   const half = Math.ceil(nav.length / 2);
   const list = (items) =>
     `<ul class="font-sans text-sm leading-8 text-white/80">
-          ${items.map((n) => `<li><a href="${n.href}" ${i(n.key)} class="hover:text-white">${t(n.key)}</a></li>`).join('\n          ')}
+          ${items.map((n) => `<li><a href="${n.href}" class="hover:text-white">${t(n.key)}</a></li>`).join('\n          ')}
         </ul>`;
   return `
   <footer id="kontakt" class="bg-night text-white">
@@ -525,7 +559,7 @@ function footer() {
       <div class="grid gap-10 text-center md:grid-cols-[minmax(0,22rem)_auto_auto_auto] md:justify-between md:gap-x-10 md:text-left">
         <div>
           <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" loading="lazy" class="mx-auto mb-5 h-28 w-28 md:mx-0">
-          <h2 ${i('footer.about')} class="mb-4 font-display text-[26px] text-white">${t('footer.about')}</h2>
+          <h2 class="mb-4 font-display text-[26px] text-white">${t('footer.about')}</h2>
           <p class="font-sans text-sm leading-7 text-white/80">${esc(c.footer.about)}</p>
           <p class="mt-3 font-sans text-sm leading-7 text-white/80">${esc(fullAddress())}${
             c.contact.phone
@@ -536,17 +570,17 @@ function footer() {
         ${list(nav.slice(0, half))}
         ${list(nav.slice(half))}
         <div class="flex flex-col items-center gap-4 md:items-start">
-          <h2 ${i('footer.follow')} class="font-display text-[26px] text-white">${t('footer.follow')}</h2>
+          <h2 class="font-display text-[26px] text-white">${t('footer.follow')}</h2>
           ${instagram('flex h-9 w-9 items-center justify-center rounded-[10%] bg-[#2A3D2F] hover:opacity-90')}
-          <a href="${BOOK_HREF}" ${i('btn.book')} class="bg-white px-8 py-3 font-sans text-sm font-bold uppercase text-ink transition hover:bg-mist">${t('btn.book')}</a>
+          <a href="${BOOK_HREF}" data-book class="bg-white px-8 py-3 font-sans text-sm font-bold uppercase text-ink transition hover:bg-mist">${t('btn.book')}</a>
         </div>
       </div>
     </div>
 
     <div class="border-t border-white/10">
       <div class="container flex max-w-page flex-col items-center justify-between gap-2 py-5 font-sans text-sm text-white/70 md:flex-row">
-        <a href="${esc(c.footer.privacyHref)}" ${i('footer.privacy')} class="hover:text-white">${t('footer.privacy')}</a>
-        <p>© <span data-year>${new Date().getFullYear()}</span> ${esc(c.site.brand)}. Sva prava zadržana.</p>
+        <a href="${esc(c.footer.privacyHref)}" class="hover:text-white">${t('footer.privacy')}</a>
+        <p>© <span data-year>${new Date().getFullYear()}</span> ${esc(c.site.brand)}. ${t('footer.rights')}</p>
       </div>
     </div>
   </footer>`;
@@ -556,20 +590,22 @@ function footer() {
 function overlays() {
   return `
   <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Galerija" tabindex="-1">
-    <button id="lb-close" type="button" class="absolute right-5 top-5 p-2 text-4xl leading-none text-white" data-i18n-aria="btn.close" aria-label="${t('btn.close')}">×</button>
-    <button id="lb-prev" type="button" class="absolute left-4 p-2 text-5xl text-white" data-i18n-aria="btn.prev" aria-label="${t('btn.prev')}">‹</button>
+    <button id="lb-close" type="button" class="absolute right-5 top-5 p-2 text-4xl leading-none text-white" aria-label="${t('btn.close')}">×</button>
+    <button id="lb-prev" type="button" class="absolute left-4 p-2 text-5xl text-white" aria-label="${t('btn.prev')}">‹</button>
     <img id="lb-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] select-none object-contain">
-    <button id="lb-next" type="button" class="absolute right-4 p-2 text-5xl text-white" data-i18n-aria="btn.next" aria-label="${t('btn.next')}">›</button>
+    <button id="lb-next" type="button" class="absolute right-4 p-2 text-5xl text-white" aria-label="${t('btn.next')}">›</button>
   </div>
 
-  <a id="scroll-up" href="#top" data-i18n-aria="btn.top" aria-label="${t('btn.top')}"
+  <a id="scroll-up" href="#top" aria-label="${t('btn.top')}"
      class="fixed bottom-5 right-5 z-40 hidden h-11 w-11 items-center justify-center bg-ink text-white hover:bg-charcoal"><span aria-hidden="true">↑</span></a>`;
 }
 
-/** Kompletan sadržaj <div id="app"> (default jezik = sr). */
-export function renderApp() {
+/** Kompletan sadržaj <div id="app"> na traženom jeziku (default sr). */
+export function renderApp(lang = 'sr') {
+  setLang(lang);
+  c = localizedContent(lang);
   return `
-  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
+  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">${t('aria.skip')}</a>
 ${header()}
 
   <main id="main">

@@ -40,6 +40,14 @@ Sve na jednom mestu: **`assets/js/content.js`**
 
 Tekstovi u uglastim zagradama `[...]` su placeholderi. Meni, dugmad i oznake na tri jezika (sr/en/ru) su u **`assets/js/i18n.js`** (prevedeni su samo navigacija i dugmad; ostali tekstovi ostaju na jeziku iz `content.js`). Tekst politike privatnosti: `politika-privatnosti.html`.
 
+## Jezici (srpski, engleski, ruski)
+
+- Izbor jezika je padajuća lista sa zastavama u zaglavlju; izbor se pamti u pregledaču, a promjena osvježava stranicu.
+- Srpski tekstovi sekcija su u `assets/js/content.js`, a prevodi (en, ru) u `assets/js/content.i18n.js` – istom strukturom, samo polja koja se prevode. Ono što nije prevedeno ostaje na srpskom.
+- Dugmad, navigacija, labele i poruke forme su u `assets/js/i18n.js` (`'kljuc': [srpski, engleski, ruski]`).
+- Kad mijenjaš tekst u `content.js`, promijeni ga i u `content.i18n.js`. Test `npm test` provjerava da liste u prevodima imaju isti broj stavki.
+- Forma za upit i dalje šalje email vlasnici na srpskom; dopisuje se jezik sajta, broj odraslih, djece, uzrast i krevetac.
+
 ## Slike
 
 Stavljaju se u `assets/img/`. Tačna imena i dimenzije su u [`assets/img/README.md`](assets/img/README.md).
