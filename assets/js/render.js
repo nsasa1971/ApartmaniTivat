@@ -67,7 +67,7 @@ const flagBox = (code, uid) => `<span class="block h-4 w-6 shrink-0 overflow-hid
 const langMenu = () => {
   const cur = languages.find((l) => l.code === getLang()) ?? languages[0];
   return `
-        <div class="relative" data-lang-menu>
+        <div class="relative hidden lg:block" data-lang-menu>
           <button type="button" id="lang-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-list" aria-label="${esc(t('aria.language'))}: ${esc(cur.name)}"
                   class="flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-white px-3 font-sans text-sm transition hover:border-ink/40">
             ${flagBox(cur.flag, 'cur')}
@@ -106,7 +106,7 @@ function header() {
       <div class="flex items-center gap-2 sm:gap-4 lg:gap-3 xl:gap-4">
         ${langMenu()}
         ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#2A3D2F] text-white hover:opacity-90 sm:flex lg:hidden xl:flex')}
-        <a href="${BOOK_HREF}" data-book class="bg-ink px-3 py-3 font-sans text-xs font-bold uppercase tracking-wide sm:px-6 sm:text-sm text-white transition hover:bg-charcoal">${t('btn.book')}</a>
+        <a href="${BOOK_HREF}" data-book class="bg-ink px-5 py-3 font-sans text-sm font-bold uppercase tracking-wide sm:px-6 text-white transition hover:bg-charcoal">${t('btn.book')}</a>
         <button id="menu-toggle" type="button" class="lg:hidden" aria-label="${t('aria.menu')}" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
         </button>
@@ -116,6 +116,14 @@ function header() {
     <nav id="mobile-menu" class="hidden border-t border-line bg-white lg:hidden" aria-label="${esc(t('aria.mobileNav'))}">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
         ${nav.map((n) => `<li><a href="${n.href}" class="block py-3">${t(n.key)}</a></li>`).join('\n        ')}
+        <li class="flex items-center gap-1 py-2" role="group" aria-label="${esc(t('aria.language'))}">
+          ${languages
+            .map(
+              (l) =>
+                `<button type="button" data-lang="${l.code}" aria-pressed="${l.code === getLang()}" lang="${l.code}" title="${esc(l.name)}" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">${l.label}</button>`
+            )
+            .join('')}
+        </li>
       </ul>
     </nav>
   </header>`;

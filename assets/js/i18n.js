@@ -167,7 +167,7 @@ export const t = (key, vars, lang = current) => {
 export function applyLanguage(lang, root = document) {
   const code = setLang(lang);
   document.documentElement.lang = LANG_TAGS[code] ?? code;
-  root.querySelectorAll('[data-lang]').forEach((btn) => {
+  root.querySelectorAll('[data-lang][aria-pressed]').forEach((btn) => {
     btn.setAttribute('aria-pressed', String(btn.dataset.lang === code));
   });
   return code;
