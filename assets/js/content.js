@@ -219,7 +219,7 @@ export const beaches = {
   title: 'Plaže koje vrijedi posjetiti',
   items: [
     beach(1, 'Kalardovo', 'Kalardovo je udaljeno oko 2 km od apartmana, blizu aerodroma i Ostrva cvijeća. Pješčana je i duga oko 250 m. Plitko more, uobičajeni plažni mobilijar i brojni prateći objekti čine je idealnom za porodice sa malom djecom. Spada u izletničke plaže jer u blizini nema smještajnih objekata. Do nje ne ide autobuski prevoz, pa je potreban sopstveni ili iznajmljeni automobil ili taksi. Ispred plaže je obezbijeđen parking.'),
-    beach(2, 'Plavi horizonti', 'Pješčana plaža u zaštićenoj uvali na poluostrvu Luštica, poznata po bistrom moru.'),
+    beach(2, 'Plavi horizonti', 'Najveća i najznačajnija plaža u tivatskoj oblasti. Nalazi se na dnu uvale Pržno, koja se smatra jednom od najljepših u ovom dijelu Jadrana. Plaža je pješčana, duga 350 m i prekrivena sitnim pijeskom koji se smatra ljekovitim, naročito za reumatska oboljenja. Pijesak se pruža daleko u plitkom moru, pa je ovo idealno odredište za djecu i porodični odmor. Pored same plaže nalaze se borova šuma i maslinjaci, tako da kupači pod njihovim krošnjama nalaze prirodnu hladovinu. Ovaj predio ima najveći broj sunčanih sati tokom godine. Kupalište je potpuno uređeno, sa tuševima i toaletima, a u blizini se nalaze brojni ugostiteljski objekti, sportski tereni i parking.'),
     beach(3, 'Jaz', 'Prostrana plaža kod Budve sa šljunkom i pijeskom, poznata po živoj atmosferi i vodenim sportovima.'),
     beach(4, 'Plaža Župa', 'Nalazi se u uvali neposredno pred ulaz u Tivat s južne strane. Riječ je o maloj pješčanoj plaži dužine oko 70 m. Pored same plaže nalazi se gusta borova šuma koja gostima omogućava da uživaju u prirodnoj hladovini.'),
   ],
