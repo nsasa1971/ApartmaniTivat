@@ -57,7 +57,7 @@ function mount(section, map) {
           : isEnd
             ? 'bg-white text-ink ring-2 ring-inset ring-[#34493A] font-bold'
             : taken
-              ? 'bg-charcoal text-white'
+              ? 'bg-[#E0D9C8] text-[#8A8574] line-through'
               : past
                 ? 'bg-white text-midtone'
                 : 'bg-white text-ink hover:bg-mist';
