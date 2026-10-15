@@ -34,8 +34,8 @@ const arrow = '<span aria-hidden="true">→</span>';
 
 const igIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 7.2A4.8 4.8 0 1 0 12 16.8 4.8 4.8 0 0 0 12 7.2Zm0 7.9a3.1 3.1 0 1 1 0-6.2 3.1 3.1 0 0 1 0 6.2ZM17.2 5.6a1.1 1.1 0 1 0 0 2.2 1.1 1.1 0 0 0 0-2.2Z"/><path d="M16 2H8a6 6 0 0 0-6 6v8a6 6 0 0 0 6 6h8a6 6 0 0 0 6-6V8a6 6 0 0 0-6-6Zm4 14a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v8Z"/></svg>`;
 const calIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4.5" width="18" height="16" rx="3"/><path d="M3 9.5h18M8 3v3M16 3v3"/></svg>`;
-const areaIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4H4v5M15 20h5v-5M4 4l6 6M20 20l-6-6"/></svg>`;
-const acIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9M9.5 4.5 12 6.5l2.5-2M9.5 19.5 12 17.5l2.5 2"/></svg>`;
+const areaIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V5a1 1 0 0 1 1-1h4M15 4h4a1 1 0 0 1 1 1v4M20 15v4a1 1 0 0 1-1 1h-4M9 20H5a1 1 0 0 1-1-1v-4"/><rect x="8.5" y="8.5" width="7" height="7" rx="1"/></svg>`;
+const acIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="8" rx="2"/><path d="M6.5 9h11M8 15.5v2.5M12 15.5v4M16 15.5v2.5"/></svg>`;
 const wifiIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5a11 11 0 0 1 15 0M7.5 12.8a6.5 6.5 0 0 1 9 0M10.3 16a2.3 2.3 0 0 1 3.4 0"/><circle cx="12" cy="19" r=".6" fill="currentColor"/></svg>`;
 const tvIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`;
 const parkingIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 16.5V8h3.2a2.6 2.6 0 0 1 0 5.2H10"/></svg>`;
@@ -236,7 +236,7 @@ function apartments() {
               (ap) => `<article class="group reveal block">
             <img src="${esc(ap.image.src)}" width="${ap.image.width}" height="${ap.image.height}" loading="lazy" decoding="async" alt="${esc(ap.image.alt)}" class="img-muted w-full">
             <h3 class="mt-5 font-sans text-xl font-bold text-ink">${esc(ap.fullName ?? ap.name)}</h3>
-            <ul class="mt-3 flex flex-wrap gap-2">
+            <ul class="mt-4 grid grid-cols-3 gap-2">
               ${[
                 [areaIcon, ap.area],
                 [guestsIcon, ap.guests],
@@ -245,7 +245,12 @@ function apartments() {
                 [tvIcon, t('apt.tv')],
                 [parkingIcon, t('apt.parking')],
               ]
-                .map(([icon, label]) => `<li class="inline-flex items-center gap-1.5 rounded-full bg-mist px-3 py-1 font-sans text-sm text-ink">${icon}<span>${esc(label)}</span></li>`)
+                .map(
+                  ([icon, label]) => `<li class="flex h-[72px] flex-col items-center justify-center gap-1.5 rounded-xl bg-mist px-1 text-center font-sans text-[13px] leading-tight text-ink">
+                <span class="flex h-6 w-6 items-center justify-center text-forest [&>svg]:h-6 [&>svg]:w-6">${icon.replace('stroke-width="1.6"', 'stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"')}</span>
+                <span>${esc(label)}</span>
+              </li>`
+                )
                 .join('\n              ')}
             </ul>
             <p class="mt-4 font-sans text-sm leading-7 text-body">${esc(ap.summary)}</p>
