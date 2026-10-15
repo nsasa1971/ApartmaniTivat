@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin/
 
-Sitemap: https://[VAŠ-DOMEN]/sitemap.xml
+Sitemap: https://apartmanigardentivat.netlify.app/sitemap.xml
