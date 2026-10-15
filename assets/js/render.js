@@ -325,6 +325,10 @@ const cards = (items) =>
             <img src="${esc(p.image.src)}" width="${p.image.width}" height="${p.image.height}" loading="lazy" decoding="async" alt="${esc(p.image.alt)}" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">${esc(p.name)}</p>${
               p.desc ? `\n            <p class="font-sans text-sm leading-7 text-body">${esc(p.desc)}</p>` : ''
+            }${
+              p.highlights?.length
+                ? `\n            <ul class="mt-2 list-disc pl-5 font-sans text-sm leading-7 text-body">${p.highlights.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`
+                : ''
             }`;
       return p.link
         ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" class="group reveal block">${inner}\n          </a>`
