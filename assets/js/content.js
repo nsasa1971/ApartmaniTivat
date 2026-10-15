@@ -60,7 +60,7 @@ export const contact = {
 };
 
 export const social = {
-  instagram: 'https://instagram.com/[INSTAGRAM]',
+  instagram: 'https://www.instagram.com/olive_lavande_lemoni_holiday/',
 };
 
 // ---------- Hero ----------
