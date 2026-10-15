@@ -221,6 +221,7 @@ export const beaches = {
     beach(1, 'Kalardovo', 'Kalardovo je udaljeno oko 2 km od apartmana, blizu aerodroma i Ostrva cvijeća. Pješčana je i duga oko 250 m. Plitko more, uobičajeni plažni mobilijar i brojni prateći objekti čine je idealnom za porodice sa malom djecom. Spada u izletničke plaže jer u blizini nema smještajnih objekata. Do nje ne ide autobuski prevoz, pa je potreban sopstveni ili iznajmljeni automobil ili taksi. Ispred plaže je obezbijeđen parking.'),
     beach(2, 'Plavi horizonti', 'Pješčana plaža u zaštićenoj uvali na poluostrvu Luštica, poznata po bistrom moru.'),
     beach(3, 'Jaz', 'Prostrana plaža kod Budve sa šljunkom i pijeskom, poznata po živoj atmosferi i vodenim sportovima.'),
+    beach(4, 'Plaža Župa', 'Nalazi se u uvali neposredno pred ulaz u Tivat s južne strane. Riječ je o maloj pješčanoj plaži dužine oko 70 m. Pored same plaže nalazi se gusta borova šuma koja gostima omogućava da uživaju u prirodnoj hladovini.'),
   ],
 };
 

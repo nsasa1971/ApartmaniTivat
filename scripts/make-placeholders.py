@@ -34,7 +34,7 @@ make('foto3.jpg', 2500, 1667, '#9C9F9B', '#ffffff', 'FOTO 3')
 for i in range(1, 7):
     make(f'gallery-{i}.jpg', 1240, 827, '#555754', '#ffffff', f'GALERIJA {i}')
     make(f'thumb-{i}.jpg', 394, 394, '#9C9F9B', '#ffffff', str(i))
-for i in range(1, 4):
+for i in range(1, 5):
     make(f'beach-{i}.jpg', 1024, 768, '#9C9F9B', '#ffffff', f'PLAZA {i}')
 for i in range(1, 4):
     make(f'apartman-{i}.jpg', 1024, 768, '#9C9F9B', '#ffffff', f'APARTMAN {i}')
