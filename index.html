@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="sr">
+<html lang="sr-Latn-ME" data-img="webp">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://apartmanigardentivat.netlify.app/assets/img/og.jpg">
   <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
+  <link rel="preload" href="assets/img/hero-mobile.webp" as="image" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" href="assets/img/hero.webp" as="image" media="(min-width: 768px)" fetchpriority="high">
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -89,8 +91,6 @@
   <!-- Fontovi su self-hostovani (assets/fonts), @font-face je u src/input.css -->
   <link rel="preload" href="assets/fonts/spinnaker-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/lato-400-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/img/hero-mobile.jpg" as="image" media="(max-width: 767px)" fetchpriority="high">
-  <link rel="preload" href="assets/img/hero.jpg" as="image" media="(min-width: 768px)" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="modulepreload" href="assets/js/main.js">
   <noscript><style>.reveal{opacity:1;transform:none}</style></noscript>
@@ -99,13 +99,13 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="ro96e0">
+  <div id="app" data-hash="guq9d9">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
     <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
       <a href="#top" class="shrink-0" aria-label="Tivat Garden Homes">
-        <img src="assets/img/logo.png" width="288" height="288" alt="Tivat Garden Homes" class="h-20 w-auto md:h-24 lg:h-20 xl:h-24">
+        <img src="assets/img/logo.webp" width="288" height="288" alt="Tivat Garden Homes" class="h-20 w-auto md:h-24 lg:h-20 xl:h-24">
       </a>
 
       <nav class="hidden lg:block" aria-label="Glavna navigacija">
@@ -132,12 +132,12 @@
         <div class="relative hidden lg:block" data-lang-menu>
           <button type="button" id="lang-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-list" aria-label="Jezik: Crnogorski"
                   class="flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-white px-3 font-sans text-sm transition hover:border-ink/40">
-            <span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><img src="assets/img/flag-me.png" width="24" height="16" alt="" class="h-4 w-6 object-cover"></span>
+            <span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><img src="assets/img/flag-me.webp" width="24" height="16" alt="Crnogorski" aria-hidden="true" class="h-4 w-6 object-cover"></span>
             <span class="hidden sm:inline">CG</span>
             <svg class="h-3 w-3 text-ink/60" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg>
           </button>
           <ul id="lang-list" role="listbox" aria-label="Jezik" class="absolute right-0 z-[60] mt-2 hidden w-48 overflow-hidden rounded-xl border border-ink/10 bg-white py-1 shadow-xl">
-            <li role="presentation"><button type="button" role="option" data-lang="sr" lang="sr" aria-selected="true" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold"><span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><img src="assets/img/flag-me.png" width="24" height="16" alt="" class="h-4 w-6 object-cover"></span><span>Crnogorski</span></button></li>
+            <li role="presentation"><button type="button" role="option" data-lang="sr" lang="sr" aria-selected="true" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold"><span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><img src="assets/img/flag-me.webp" width="24" height="16" alt="Crnogorski" aria-hidden="true" class="h-4 w-6 object-cover"></span><span>Crnogorski</span></button></li>
             <li role="presentation"><button type="button" role="option" data-lang="en" lang="en" aria-selected="false" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold"><span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true"><clipPath id="fc-en"><rect width="24" height="16"/></clipPath><g clip-path="url(#fc-en)"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" stroke-width="1.6"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="3.2"/></g></svg></span><span>English</span></button></li>
             <li role="presentation"><button type="button" role="option" data-lang="ru" lang="ru" aria-selected="false" class="flex w-full items-center gap-3 px-4 py-2.5 text-left font-sans text-sm hover:bg-mist aria-selected:font-bold"><span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15"><svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true"><rect width="24" height="16" fill="#fff"/><rect y="5.33" width="24" height="10.67" fill="#0039A6"/><rect y="10.67" width="24" height="5.33" fill="#D52B1E"/></svg></span><span>Русский</span></button></li>
           </ul>
@@ -171,9 +171,9 @@
     <div id="top"></div>
 
     <section class="relative flex min-h-[calc(100svh-96px)] items-center py-12 md:min-h-[calc(100svh-112px)] md:py-16 lg:min-h-[calc(100svh-96px)] xl:min-h-[calc(100svh-112px)]">
-      <div data-hero data-slides="[&quot;assets/img/gallery-13.jpg&quot;,&quot;assets/img/gallery-17.jpg&quot;,&quot;assets/img/gallery-18.jpg&quot;]" data-aria-slide="Slika {n} od {m}" class="absolute inset-0 isolate overflow-hidden">
-        <picture><source media="(max-width: 767px)" srcset="assets/img/hero-mobile.jpg">
-          <img data-hero-slide src="assets/img/hero.jpg" width="1920" height="900" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+      <div data-hero data-slides="[&quot;assets/img/gallery-13.webp&quot;,&quot;assets/img/gallery-17.webp&quot;,&quot;assets/img/gallery-18.webp&quot;]" data-aria-slide="Slika {n} od {m}" class="absolute inset-0 isolate overflow-hidden">
+        <picture><source media="(max-width: 767px)" srcset="assets/img/hero-mobile.webp">
+          <img data-hero-slide src="assets/img/hero.webp" width="1920" height="900" alt="Pogled na more i obalu Tivta među maslinama" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
         </picture>
       </div>
       <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,40,31,.38)_0%,rgba(26,40,31,.5)_100%)] md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
@@ -242,7 +242,7 @@
       <div class="container max-w-page">
         <div class="grid items-center md:grid-cols-2">
           <div class="reveal order-2 md:order-1 md:mb-[-130px] md:mt-[130px]">
-            <img src="assets/img/foto1.jpg" width="605" height="806" loading="lazy" decoding="async" alt="Porto Montenegro u Tivtu"
+            <img src="assets/img/foto1.webp" width="605" height="806" loading="lazy" decoding="async" alt="Porto Montenegro u Tivtu"
                  class="mx-auto w-[70%] md:mx-0 md:mr-[50px] md:w-[calc(100%-50px)]">
           </div>
           <div class="order-1 mb-6 text-center md:order-2 md:mb-0 md:pl-[50px] md:pt-20 md:text-left">
@@ -260,7 +260,7 @@
         <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#1F2F25]">Apartmani</h2>
         <div class="grid gap-6 md:grid-cols-3">
           <article class="group reveal block">
-            <img src="assets/img/apartman-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Dnevna soba – Holiday home Olive" class="img-muted w-full">
+            <img src="assets/img/apartman-1.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Dnevna soba – Holiday home Olive" class="img-muted w-full">
             
             <h3 class="mt-5 font-sans text-xl font-bold text-ink">Holiday home Olive</h3>
             <ul class="mt-4 grid grid-cols-3 gap-2">
@@ -300,7 +300,7 @@
             </ul>
           </article>
           <article class="group reveal block">
-            <img src="assets/img/apartman-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Dnevna soba i kuhinja – Holiday home Lavande" class="img-muted w-full">
+            <img src="assets/img/apartman-2.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Dnevna soba i kuhinja – Holiday home Lavande" class="img-muted w-full">
             
             <h3 class="mt-5 font-sans text-xl font-bold text-ink">Holiday home Lavande</h3>
             <ul class="mt-4 grid grid-cols-3 gap-2">
@@ -340,7 +340,7 @@
             </ul>
           </article>
           <article class="group reveal block">
-            <img src="assets/img/apartman-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Kuhinja – Holiday home Lemoni" class="img-muted w-full">
+            <img src="assets/img/apartman-3.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Kuhinja – Holiday home Lemoni" class="img-muted w-full">
             
             <h3 class="mt-5 font-sans text-xl font-bold text-ink">Holiday home Lemoni</h3>
             <ul class="mt-4 grid grid-cols-3 gap-2">
@@ -418,50 +418,50 @@
     <section id="galerija" class="md:pt-0">
       <div class="container max-w-page">
         <div class="grid grid-cols-2 gap-0 md:grid-cols-3" data-gallery>
-          <a href="assets/img/gallery-1.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-1.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 1]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-1.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-1.webp" width="394" height="394" loading="lazy" decoding="async" alt="Dnevna soba sa ugaonom garniturom i trpezarijskim stolom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-2.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-2.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 2]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-2.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-2.webp" width="394" height="394" loading="lazy" decoding="async" alt="Kupatilo sa tuš kabinom i okruglim osvijetljenim ogledalom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-3.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-3.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 3]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-3.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-3.webp" width="394" height="394" loading="lazy" decoding="async" alt="Spavaća soba sa bračnim krevetom i sofom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-4.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-4.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 4]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-4.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-4.webp" width="394" height="394" loading="lazy" decoding="async" alt="Dnevna soba sa TV-om, trpezarijskim stolom i radnim stolom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-5.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-5.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 5]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-5.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-5.webp" width="394" height="394" loading="lazy" decoding="async" alt="Kupatilo sa okruglim ogledalom i kamenim umivaonikom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-6.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-6.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 6]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-6.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-6.webp" width="394" height="394" loading="lazy" decoding="async" alt="Spavaća soba sa dva kreveta" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-7.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-7.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 7]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-7.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-7.webp" width="394" height="394" loading="lazy" decoding="async" alt="Dnevna soba sa kuhinjom i sofom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-8.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-8.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 8]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-8.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-8.webp" width="394" height="394" loading="lazy" decoding="async" alt="Kupatilo sa bijelim umivaonikom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-9.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-9.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 9]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-9.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-9.webp" width="394" height="394" loading="lazy" decoding="async" alt="Spavaća soba sa bračnim krevetom" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-10.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-10.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 10]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-10.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-10.webp" width="394" height="394" loading="lazy" decoding="async" alt="Spavaća soba sa krevetom pored prozora" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-11.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-11.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 11]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-11.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-11.webp" width="394" height="394" loading="lazy" decoding="async" alt="Terasa sa lozom i drvenim stolom u dvorištu" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-12.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-12.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 12]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-12.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-12.webp" width="394" height="394" loading="lazy" decoding="async" alt="Ulaz u apartman i maslina u dvorištu" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-13.jpg" class="group hidden md:block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-13.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 13]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-13.webp" class="group hidden md:block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-13.webp" width="394" height="394" loading="lazy" decoding="async" alt="Pogled na more i oleandar u zalasku sunca" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-14.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-14.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 14]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-14.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-14.webp" width="394" height="394" loading="lazy" decoding="async" alt="Korpa sa grožđem i vinom u maslinjaku" class="img-muted aspect-square w-full object-cover">
           </a>
-          <a href="assets/img/gallery-15.jpg" class="group block overflow-hidden" data-lightbox>
-            <img src="assets/img/thumb-15.jpg" width="394" height="394" loading="lazy" decoding="async" alt="[Opis 15]" class="img-muted aspect-square w-full object-cover">
+          <a href="assets/img/gallery-15.webp" class="group block overflow-hidden" data-lightbox>
+            <img src="assets/img/thumb-15.webp" width="394" height="394" loading="lazy" decoding="async" alt="Vanjski dio apartmana sa stazom i dvorištem" class="img-muted aspect-square w-full object-cover">
           </a>
         </div>
       </div>
@@ -476,7 +476,7 @@
             <a href="#apartmani" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-60 md:text-lg"><span>Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
           <div class="reveal md:p-[10px] md:pl-[60px]">
-            <img src="assets/img/foto2.jpg" width="1240" height="827" loading="lazy" decoding="async" alt="Dvorište sa terasom u hladu vinove loze" class="w-full">
+            <img src="assets/img/foto2.webp" width="1240" height="827" loading="lazy" decoding="async" alt="Dvorište sa terasom u hladu vinove loze" class="w-full">
           </div>
         </div>
       </div>
@@ -491,7 +491,7 @@
             <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="5 od 5 zvjezdica">★★★★★</div>
             <p class="font-sans text-base italic leading-8 text-body">Desetka! Boravak u ovom smještaju bio je jedno od najboljih iskustava koja smo ikada imali. Smještaj je u stvarnosti još ljepši nego na slikama – besprijekorno čist, moderan i na odličnoj lokaciji. Pažnja posvećena detaljima je nevjerovatna, od udobnosti kreveta do sitnica koje boravak čine prijatnim. Domaćini su nas dočekali izuzetno toplo i učinili da se osjećamo kao kod kuće. Iskrena preporuka svima koji traže savršen odmor!</p>
             <div class="mt-auto flex items-center gap-4 pt-6">
-              <img src="assets/img/avatar-1.png" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
+              <img src="assets/img/avatar-1.webp" width="48" height="48" loading="lazy" decoding="async" alt="Sasa Nikolic" class="h-12 w-12 rounded-full object-cover">
               <span class="min-w-0">
                 <span class="block font-display text-[22px] leading-7 text-ink">Sasa Nikolic</span>
                 <a href="https://maps.app.goo.gl/iFh2TooFZ2Z1pUmX8" target="_blank" rel="noopener" class="font-sans text-sm text-body underline hover:opacity-60">Recenzija sa Google Maps-a</a>
@@ -503,7 +503,7 @@
             <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="5 od 5 zvjezdica">★★★★★</div>
             <p class="font-sans text-base italic leading-8 text-body">Ako volite da se osjećate kao kod kuće, ali na odmoru, ovo je pravo mjesto. Veliki, novi i čist apartman, pun sitnica poput dekoracije, opremljena kuhinja spremna za pripremu obroka, udobni kreveti i još mnogo toga… Ukratko – potpuno preporučujemo ovo mjesto.</p>
             <div class="mt-auto flex items-center gap-4 pt-6">
-              <img src="assets/img/avatar-2.png" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
+              <img src="assets/img/avatar-2.webp" width="48" height="48" loading="lazy" decoding="async" alt="Shamai Keidar" class="h-12 w-12 rounded-full object-cover">
               <span class="min-w-0">
                 <span class="block font-display text-[22px] leading-7 text-ink">Shamai Keidar</span>
                 <a href="https://maps.app.goo.gl/Gyu7YP66JkcsRpAZ8" target="_blank" rel="noopener" class="font-sans text-sm text-body underline hover:opacity-60">Recenzija sa Google Maps-a</a>
@@ -515,7 +515,7 @@
             <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="5 od 5 zvjezdica">★★★★★</div>
             <p class="font-sans text-base italic leading-8 text-body">Prelijep apartman i veoma ljubazni domaćini, niko neće požaliti što je bio gost ovih dobrih ljudi.</p>
             <div class="mt-auto flex items-center gap-4 pt-6">
-              <img src="assets/img/avatar-3.png" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
+              <img src="assets/img/avatar-3.webp" width="48" height="48" loading="lazy" decoding="async" alt="Losmi Losmic" class="h-12 w-12 rounded-full object-cover">
               <span class="min-w-0">
                 <span class="block font-display text-[22px] leading-7 text-ink">Losmi Losmic</span>
                 <a href="https://maps.app.goo.gl/geiKQ2PBEDsXqkeVA" target="_blank" rel="noopener" class="font-sans text-sm text-body underline hover:opacity-60">Recenzija sa Google Maps-a</a>
@@ -535,7 +535,7 @@
             <a href="#plaze" class="inline-flex items-center gap-3 font-sans text-base hover:opacity-70 md:text-lg"><span>Saznaj više</span> <span aria-hidden="true">→</span></a>
           </div>
           <div class="reveal p-5 md:p-0">
-            <img src="assets/img/foto3.jpg" width="1240" height="827" loading="lazy" decoding="async" alt="Dnevni boravak sa kuhinjom"
+            <img src="assets/img/foto3.webp" width="1240" height="827" loading="lazy" decoding="async" alt="Dnevni boravak sa kuhinjom"
                  class="w-full object-cover md:ml-[50px] md:-my-[50px] md:h-[415px] md:w-[calc(100%-50px)] md:pt-[78px]">
           </div>
         </div>
@@ -547,22 +547,22 @@
         <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#1F2F25]">Plaže koje vrijedi posjetiti</h2>
         <div class="grid gap-6 md:grid-cols-2">
           <div class="group reveal block">
-            <img src="assets/img/beach-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Kalardovo" class="img-muted w-full">
+            <img src="assets/img/beach-1.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Kalardovo" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Kalardovo</p>
             <p class="font-sans text-sm leading-7 text-body">Kalardovo je izletnička plaža udaljena oko 2 km od apartmana, u blizini aerodroma i Ostrva cvijeća. Plaža je pješčana i duga oko 250 m. Zahvaljujući plitkom moru, uobičajenom plažnom mobilijaru i brojnim pratećim objektima, idealna je za porodice sa malom djecom. U njenoj blizini nema smještajnih objekata, pa se dolazi isključivo radi kupanja i odmora na moru. Do nje ne ide autobuski prevoz, već je potreban sopstveni ili iznajmljeni automobil ili taksi. Ispred plaže je obezbijeđen parking, tako da je dolazak autom jednostavan.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/beach-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Plavi horizonti" class="img-muted w-full">
+            <img src="assets/img/beach-2.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Plavi horizonti" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Plavi horizonti</p>
             <p class="font-sans text-sm leading-7 text-body">Najveća i najznačajnija plaža u tivatskoj oblasti. Nalazi se na dnu uvale Pržno, koja se smatra jednom od najljepših u ovom dijelu Jadrana. Plaža je pješčana, duga 350 m i prekrivena sitnim pijeskom koji se smatra ljekovitim, naročito za reumatska oboljenja. Pijesak se pruža daleko u plitkom moru, pa je ovo idealno odredište za djecu i porodični odmor. Pored same plaže nalaze se borova šuma i maslinjaci, tako da kupači pod njihovim krošnjama nalaze prirodnu hladovinu. Ovaj predio ima najveći broj sunčanih sati tokom godine. Kupalište je potpuno uređeno, sa tuševima i toaletima, a u blizini se nalaze brojni ugostiteljski objekti, sportski tereni i parking.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/beach-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Jaz" class="img-muted w-full">
+            <img src="assets/img/beach-3.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Jaz" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Jaz</p>
             <p class="font-sans text-sm leading-7 text-body">Jaz je jedna od najpopularnijih plaža u Crnoj Gori, a turistički vodič „Lonely Planet“ svrstao ju je među 10 najboljih plaža u Evropi. Nalazi se 3 km zapadno od Budve i duga je oko 800 m, podijeljena na dva dijela. Manja plaža je šljunkovita (oko 300 m), a veća pješčana (oko 500 m). Kod šljunkovite plaže nalazi se auto-kamp velikog kapaciteta. Veća plaža je okružena velikim brojem barova i kafića, a tokom ljeta na njoj se održavaju brojni koncerti i manifestacije.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/beach-4.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Plaža Župa" class="img-muted w-full">
+            <img src="assets/img/beach-4.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Plaža Župa" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Plaža Župa</p>
             <p class="font-sans text-sm leading-7 text-body">Plaža Župa nalazi se u uvali neposredno pred ulaz u Tivat s južne strane. Riječ je o maloj pješčanoj plaži dužine oko 70 m, smještenoj u mirnoj uvali. Pored same plaže nalazi se gusta borova šuma koja gostima omogućava da uživaju u prirodnoj hladovini čak i tokom najtoplijih dana. Zbog skromnih dimenzija i zelenog okruženja pogodna je za opuštanje u prirodnom ambijentu.</p>
           </div>
@@ -571,19 +571,19 @@
           <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#1F2F25]">Znamenitosti u okolini</h2>
           <div class="grid gap-6 md:grid-cols-3">
           <div class="group reveal flex flex-col">
-            <img src="assets/img/sight-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Tivat" class="img-muted w-full">
+            <img src="assets/img/sight-1.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Tivat" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Tivat</p>
             <p class="font-sans text-sm leading-7 text-body">Tivat je najmirniji grad u zalivu, idealan za spor tempo odmora. Šetnica uz more vodi pored plaža, kafića i restorana, a marina Porto Montenegro, sa jahtama i elegantnim šetalištem, okuplja goste iz cijelog svijeta. Za ljubitelje prirode tu su Solila, zaštićeno stanište ptica, i Ostrvo cvijeća pored obale.</p>
             <ul class="mt-auto list-disc pl-5 pt-2 font-sans text-sm leading-7 text-body"><li>Porto Montenegro i njegovo šetalište</li><li>Šetalište uz more i gradski park</li><li>Solila (ornitološki rezervat)</li><li>Ostrvo cvijeća</li></ul>
           </div>
           <div class="group reveal flex flex-col">
-            <img src="assets/img/sight-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Kotor" class="img-muted w-full">
+            <img src="assets/img/sight-2.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Kotor" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Kotor</p>
             <p class="font-sans text-sm leading-7 text-body">Stari grad Kotor smješten je ispod strmih planina na kraju zaliva i spada među najbolje očuvane srednjovjekovne gradove Mediterana. Uske kamene ulice, trgovi i crkve čuvaju vijekove istorije, a katedrala Svetog Tripuna dominira centrom. Za najljepši pogled na zaliv popnite se na tvrđavu Sveti Ivan iznad grada, najbolje u ranim jutarnjim ili poslijepodnevnim satima.</p>
             <ul class="mt-auto list-disc pl-5 pt-2 font-sans text-sm leading-7 text-body"><li>Stari grad Kotor (UNESCO)</li><li>Katedrala Svetog Tripuna</li><li>Bedemi i tvrđava Sveti Ivan</li><li>Šetnja uz zaliv</li><li>Vožnja od apartmana: oko 15 minuta</li></ul>
           </div>
           <div class="group reveal flex flex-col">
-            <img src="assets/img/sight-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Budva" class="img-muted w-full">
+            <img src="assets/img/sight-3.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Budva" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Budva</p>
             <p class="font-sans text-sm leading-7 text-body">Budva spaja istoriju i zabavu: Stari grad sa kamenim ulicama i Citadelom smješten je na poluostrvu uz more, a oko njega se redaju plaže poput Mogrena i Slovenske plaže. Uveče grad oživi kafićima, restoranima i muzikom. Iz Budve se lako stiže do Svetog Stefana, čuvenog ostrva-hotela, koje se najljepše vidi sa vidikovca iznad njega.</p>
             <ul class="mt-auto list-disc pl-5 pt-2 font-sans text-sm leading-7 text-body"><li>Stari grad i Citadela</li><li>Plaže Mogren i Slovenska plaža</li><li>Šetalište uz more i večernji život</li><li>Pogled na Sveti Stefan</li><li>Vožnja od apartmana: oko 30 minuta</li></ul>
@@ -595,27 +595,27 @@
           <p class="mx-auto mb-12 max-w-xl text-center font-sans text-base text-body">Crnogorsko primorje poznato je po jednostavnoj mediteranskoj kuhinji zasnovanoj na svježoj ribi, maslinovom ulju i domaćim specijalitetima.</p>
           <div class="grid gap-6 md:grid-cols-3">
           <div class="group reveal block">
-            <img src="assets/img/food-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Riba na žaru" class="img-muted w-full">
+            <img src="assets/img/food-1.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Riba na žaru" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Riba na žaru</p>
             <p class="font-sans text-sm leading-7 text-body">Svježa riba pečena na žaru, uz maslinovo ulje i limun.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/food-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Crni rižoto" class="img-muted w-full">
+            <img src="assets/img/food-2.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Crni rižoto" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Crni rižoto</p>
             <p class="font-sans text-sm leading-7 text-body">Rižoto od sipe, tamne boje od sipinog mastila, čest izbor na primorju.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/food-3.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Brudet" class="img-muted w-full">
+            <img src="assets/img/food-3.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Brudet" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Brudet</p>
             <p class="font-sans text-sm leading-7 text-body">Tradicionalno jelo od ribe krčkane u sosu od paradajza i maslinovog ulja.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/food-4.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Pršut i sir" class="img-muted w-full">
+            <img src="assets/img/food-4.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Pršut i sir" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Pršut i sir</p>
             <p class="font-sans text-sm leading-7 text-body">Domaći pršut i sir, klasična hladna zakuska uz čašu vina.</p>
           </div>
           <div class="group reveal block">
-            <img src="assets/img/food-5.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Maslinovo ulje i masline" class="img-muted w-full">
+            <img src="assets/img/food-5.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Maslinovo ulje i masline" class="img-muted w-full">
             <p class="mt-[5px] font-sans text-lg text-black">Maslinovo ulje i masline</p>
             <p class="font-sans text-sm leading-7 text-body">Masline i maslinovo ulje su osnova mediteranske trpeze.</p>
           </div>
@@ -629,19 +629,19 @@
         <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#1F2F25]">Savjeti za boravak u Tivtu</h2>
         <div class="grid gap-6 md:grid-cols-3">
           <article class="group reveal flex flex-col">
-            <a href="/blog/najljepse-plaze-u-blizini-tivta.html" class="block overflow-hidden"><img src="assets/img/beach-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Plaža Plavi horizonti" class="img-muted w-full"></a>
+            <a href="/blog/najljepse-plaze-u-blizini-tivta.html" class="block overflow-hidden"><img src="assets/img/beach-2.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Plaža Plavi horizonti" class="img-muted w-full"></a>
             <h3 class="mt-5 font-sans text-xl font-bold leading-snug text-ink"><a href="/blog/najljepse-plaze-u-blizini-tivta.html" class="hover:opacity-70">Najljepše plaže u blizini Tivta: vodič za goste apartmana</a></h3>
             <p class="mt-2 font-sans text-sm leading-7 text-body">Pješčane plaže za porodice, hladovina pod borovima i poznata plaža kod Budve: pregled četiri plaže koje vrijedi posjetiti.</p>
             <a href="/blog/najljepse-plaze-u-blizini-tivta.html" class="mt-3 font-sans text-sm font-bold text-ink hover:opacity-70">Pročitaj članak <span aria-hidden="true">→</span></a>
           </article>
           <article class="group reveal flex flex-col">
-            <a href="/blog/kotor-izlet-iz-tivta.html" class="block overflow-hidden"><img src="assets/img/sight-2.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Kotor i Bokokotorski zaliv" class="img-muted w-full"></a>
+            <a href="/blog/kotor-izlet-iz-tivta.html" class="block overflow-hidden"><img src="assets/img/sight-2.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Kotor i Bokokotorski zaliv" class="img-muted w-full"></a>
             <h3 class="mt-5 font-sans text-xl font-bold leading-snug text-ink"><a href="/blog/kotor-izlet-iz-tivta.html" class="hover:opacity-70">Kotor kao jednodnevni izlet iz Tivta: šta vidjeti i kada ići</a></h3>
             <p class="mt-2 font-sans text-sm leading-7 text-body">Srednjovjekovni grad pod zaštitom UNESCO-a, oko 15 minuta vožnje od naših apartmana.</p>
             <a href="/blog/kotor-izlet-iz-tivta.html" class="mt-3 font-sans text-sm font-bold text-ink hover:opacity-70">Pročitaj članak <span aria-hidden="true">→</span></a>
           </article>
           <article class="group reveal flex flex-col">
-            <a href="/blog/tivat-porto-montenegro-solila.html" class="block overflow-hidden"><img src="assets/img/sight-1.jpg" width="1024" height="768" loading="lazy" decoding="async" alt="Porto Montenegro u Tivtu" class="img-muted w-full"></a>
+            <a href="/blog/tivat-porto-montenegro-solila.html" class="block overflow-hidden"><img src="assets/img/sight-1.webp" width="1024" height="768" loading="lazy" decoding="async" alt="Porto Montenegro u Tivtu" class="img-muted w-full"></a>
             <h3 class="mt-5 font-sans text-xl font-bold leading-snug text-ink"><a href="/blog/tivat-porto-montenegro-solila.html" class="hover:opacity-70">Tivat bez žurbe: Porto Montenegro, šetnica i Solila</a></h3>
             <p class="mt-2 font-sans text-sm leading-7 text-body">Najmirniji grad u zalivu: marina sa jahtama, šetnica uz more i zaštićeno stanište ptica.</p>
             <a href="/blog/tivat-porto-montenegro-solila.html" class="mt-3 font-sans text-sm font-bold text-ink hover:opacity-70">Pročitaj članak <span aria-hidden="true">→</span></a>
@@ -815,7 +815,7 @@
     <div class="container max-w-page py-16">
       <div class="grid gap-10 text-center md:grid-cols-[minmax(0,22rem)_auto_auto_auto] md:justify-between md:gap-x-10 md:text-left">
         <div>
-          <img src="assets/img/logo.png" width="288" height="288" alt="Tivat Garden Homes" loading="lazy" class="mx-auto mb-5 h-28 w-28 md:mx-0">
+          <img src="assets/img/logo.webp" width="288" height="288" alt="Tivat Garden Homes" loading="lazy" class="mx-auto mb-5 h-28 w-28 md:mx-0">
           <h2 class="mb-4 font-display text-[26px] text-white">O nama</h2>
           <p class="font-sans text-sm leading-7 text-white/80">Holiday home Olive, Lavande i Lemoni nalaze se na odličnoj lokaciji u Tivtu. Apartmani pružaju miran i prijatan mediteranski ambijent okružen maslinama, uz blizinu mora i strogog centra grada.</p>
           <p class="mt-3 font-sans text-sm leading-7 text-white/80">Bonići I bb, Tivat, Crna Gora<br><a href="tel:+38269506646" class="hover:text-white">+382 69 506 646</a><br><a href="tel:+38263216588" class="hover:text-white">+382 63 216 588</a><br><a href="mailto:baukbiljana@gmail.com" class="hover:text-white">baukbiljana@gmail.com</a></p>
@@ -852,7 +852,7 @@
   <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Galerija" tabindex="-1">
     <button id="lb-close" type="button" class="absolute right-5 top-5 p-2 text-4xl leading-none text-white" aria-label="Zatvori">×</button>
     <button id="lb-prev" type="button" class="absolute left-4 p-2 text-5xl text-white" aria-label="Prethodna">‹</button>
-    <img id="lb-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] select-none object-contain">
+    <img id="lb-img" src="" alt="Galerija" class="max-h-[90vh] max-w-[90vw] select-none object-contain">
     <button id="lb-next" type="button" class="absolute right-4 p-2 text-5xl text-white" aria-label="Sljedeća">›</button>
   </div>
 

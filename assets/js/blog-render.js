@@ -6,7 +6,7 @@
 import * as c from './content.js';
 import { posts, blog, blogLangs, blogIndexPath, postPath, homeHref } from './blog-content.js';
 import { t, languages } from './i18n.js';
-import { esc } from './render.js';
+import { esc, toWebp } from './render.js';
 
 const HTML_LANG = { sr: 'sr-Latn-ME', en: 'en', ru: 'ru' };
 const DATE_LOCALE = { sr: 'sr-Latn', en: 'en-GB', ru: 'ru-RU' };
@@ -114,11 +114,11 @@ ${JSON.stringify(jsonLd, null, 2).replace(/</g, '\\u003c')}
   </script>
 </head>
 <body class="bg-white antialiased">
-${header}
+${toWebp(header)}
   <main id="main">
-${main}
+${toWebp(main)}
   </main>
-${footer}
+${toWebp(footer)}
 </body>
 </html>
 `;

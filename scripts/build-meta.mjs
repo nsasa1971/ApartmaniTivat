@@ -10,12 +10,36 @@ import { mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import * as c from '../assets/js/content.js';
-import { renderApp, hash, esc, isPlaceholder } from '../assets/js/render.js';
+import { renderApp, hash, esc, isPlaceholder, setImageFormat, toWebp } from '../assets/js/render.js';
 import { posts, blogLangs, blogIndexPath, postPath } from '../assets/js/blog-content.js';
 import { renderBlogIndexPage, renderPostPage } from '../assets/js/blog-render.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const file = (p) => path.join(root, p);
+
+// ---------- WebP: uz svaku JPG/PNG sliku pravi se .webp (manji fajlovi, brži sajt) ----------
+// JPG/PNG ostaju glavni (izvorni) fajlovi; .webp se ne šalje u git, nego se pravi pri svakom buildu.
+// Ako konverzija ne uspije (npr. nema sharp), sajt ostaje na JPG/PNG.
+const KEEP = /(^|\/)(og|favicon|icon-\d+)\.(jpe?g|png)$/i; // dijeljenje linkova i ikone aplikacije ostaju kakvi jesu
+const SKIP = new Set(['hero.jpeg']); // veliki izvorni fajl koji sajt ne koristi
+async function makeWebp() {
+  try {
+    const { readdir } = await import('node:fs/promises');
+    const sharp = (await import('sharp')).default;
+    const dir = file('assets/img');
+    const files = (await readdir(dir, { recursive: true }))
+      .map((f) => path.join(dir, f))
+      .filter((f) => /\.(jpe?g|png)$/i.test(f) && !KEEP.test(f) && !SKIP.has(path.basename(f)));
+    await Promise.all(files.map((f) => sharp(f).webp({ quality: 80, alphaQuality: 90, effort: 5 }).toFile(f.replace(/\.(jpe?g|png)$/i, '.webp'))));
+    console.log(`✓ WebP: ${files.length} slika`);
+    return true;
+  } catch (e) {
+    console.warn(`⚠  WebP nije napravljen (${e.message}) – sajt koristi JPG/PNG.`);
+    return false;
+  }
+}
+const webpOk = await makeWebp();
+setImageFormat(webpOk ? 'webp' : null);
 
 const base = c.site.url.replace(/\/+$/, '');
 const abs = (p) => `${base}/${p.replace(/^\/+/, '')}`;
@@ -70,6 +94,8 @@ const head = `<title>${esc(c.site.title)}</title>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${esc(abs(c.site.ogImage))}">
   <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
+  <link rel="preload" href="${esc(toWebp(c.hero.mobileSrc))}" as="image" media="(max-width: 767px)" fetchpriority="high">
+  <link rel="preload" href="${esc(toWebp(c.hero.image.src))}" as="image" media="(min-width: 768px)" fetchpriority="high">
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
@@ -86,6 +112,7 @@ const replaceBlock = (html, name, inner) => {
 
 let html = await readFile(file('index.html'), 'utf8');
 const app = renderApp();
+html = html.replace(/<html[^>]*>/, `<html lang="sr-Latn-ME"${webpOk ? ' data-img="webp"' : ''}>`);
 html = replaceBlock(html, 'head', `  ${head}`);
 html = replaceBlock(html, 'app', `  <div id="app" data-hash="${hash(app)}">${app}  </div>`);
 await writeFile(file('index.html'), html);

@@ -58,6 +58,14 @@ Apartman bez fotografija jednostavno nema galeriju. Ponovno pokretanje zamjenjuj
 - Početna prikazuje tri najnovija članka (sekcija "Savjeti"), a footer ima link na blog.
 - Činjenice u člancima (vrijeme vožnje, opisi plaža i znamenitosti) preuzete su iz sadržaja sajta; prije objave ih pregleda vlasnik.
 
+## WebP slike (automatski)
+
+`npm run build` uz svaku JPG/PNG sliku u `assets/img/` pravi `.webp` (manji fajlovi, brži sajt) i prebacuje sajt na njih. U git se i dalje šalju samo JPG/PNG (izvorni) fajlovi, a `.webp` se pravi pri svakom buildu (i na Netlify-ju); fajlovi `*.webp` su u `.gitignore`.
+
+- Radni tok sa slikama se ne mijenja: i dalje stavljaš `beach-1.jpg`, `foto1.jpg`... u `assets/img/`.
+- Izuzeci koji ostaju JPG/PNG: `og.jpg` (slika za dijeljenje linkova), `favicon.png` i ikone aplikacije.
+- Ako pravljenje WebP-a ne uspije (npr. nema `sharp`), build to javi upozorenjem i sajt ostaje na JPG/PNG.
+
 ## Jezici (crnogorski, engleski, ruski)
 
 - Izbor jezika je padajuća lista sa zastavama u zaglavlju; izbor se pamti u pregledaču, a promjena osvježava stranicu.

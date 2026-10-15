@@ -9,3 +9,6 @@ dist/
 # Originalne fotografije i izlaz skripte za slike (ne ide u git)
 originals/
 optimized/
+
+# .webp slike pravi `npm run build` iz JPG/PNG (ne ide u git)
+assets/img/**/*.webp
