@@ -110,11 +110,11 @@ function hero() {
             </label>`;
   return `
     <section class="relative flex min-h-[250px] items-center py-12 md:min-h-[320px] md:pb-[130px] md:pt-[100px]">
-      <img src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover">
-      <div class="absolute inset-0 bg-[linear-gradient(112deg,#404040FA_100%,transparent_100%)] md:bg-[linear-gradient(90deg,#404040FA_2%,#F2295B00_42%)]"></div>
+      <img src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+      <div class="absolute inset-0 bg-[#404040]/70 md:bg-transparent md:bg-[linear-gradient(90deg,#404040FA_2%,#F2295B00_42%)]"></div>
 
       <div class="container relative max-w-page">
-        <div class="max-w-xl text-center text-white md:pl-3 md:pr-[70px] md:text-left">
+        <div class="max-w-xl text-center text-white [text-shadow:0_1px_4px_rgba(0,0,0,.45)] md:pl-3 md:pr-[70px] md:text-left md:[text-shadow:none]">
           <span class="mb-[30px] ml-10 hidden h-24 w-px bg-white/70 md:block" aria-hidden="true"></span>
           <p class="mb-4 text-lg md:text-xl">${esc(h.subtitle)}</p>
           <h1 class="mb-[30px] font-display text-[46px] leading-[65px] tracking-[1px] text-white md:text-[54px]">${esc(h.title)}</h1>
