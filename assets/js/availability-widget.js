@@ -112,4 +112,7 @@ function mount(section, map) {
 
   section.classList.remove('hidden');
   render();
+  // kad gost dolazi sa linka (npr. sa bloga) na #dostupnost-anchor, ostani na kalendaru:
+  // dio ispod ne smije da "povuče" pregled na formu za upit kad se kalendar pojavi
+  if (window.location.hash === '#dostupnost-anchor') document.getElementById('dostupnost-anchor')?.scrollIntoView();
 }

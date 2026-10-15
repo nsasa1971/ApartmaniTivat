@@ -590,7 +590,7 @@ function reservation() {
               <p id="${id}-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="${id}"></p>
             </div>`;
   return `
-    <section id="rezervacija" class="container max-w-page pb-12 text-center">
+    <section id="rezervacija" class="container max-w-page pb-12 text-center [overflow-anchor:none]">
       <h2 class="mb-4 font-display text-[30px] md:text-[46px]">${esc(b.title)}</h2>
       <p class="mx-auto mb-6 max-w-xl font-sans text-lg">${esc(b.text)}</p>
 
@@ -674,7 +674,7 @@ function reservation() {
 // ---------- Mapa ----------
 function map() {
   return `
-    <section aria-label="${esc(t('aria.location'))}" class="relative z-[1]">
+    <section aria-label="${esc(t('aria.location'))}" class="relative z-[1] [overflow-anchor:none]">
       <iframe title="${esc(t('map.title', { city: c.contact.city }))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               class="block h-[440px] w-full border-0 md:h-[440px]"
               src="https://www.google.com/maps?q=${encodeURIComponent(c.contact.lat && c.contact.lng ? `${c.contact.lat},${c.contact.lng}` : c.contact.mapQuery)}&z=17&output=embed"></iframe>
@@ -690,7 +690,7 @@ function footer() {
           ${items.map((n) => `<li><a href="${n.href}" class="hover:text-white">${t(n.key)}</a></li>`).join('\n          ')}
         </ul>`;
   return `
-  <footer id="kontakt" class="bg-night text-white">
+  <footer id="kontakt" class="bg-night text-white [overflow-anchor:none]">
     <div class="container max-w-page py-16">
       <div class="grid gap-10 text-center md:grid-cols-[minmax(0,22rem)_auto_auto_auto] md:justify-between md:gap-x-10 md:text-left">
         <div>
