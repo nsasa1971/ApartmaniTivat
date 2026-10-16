@@ -298,11 +298,21 @@ export function initHero() {
   first.style.transition = fadeStyle;
 
   // ----- efekat vode -----
-  const water = reduceMotion ? null : createWater(section, root);
-  if (water) {
+  // WebGL (kontekst, shaderi, teksture) pravi se tek poslije učitavanja stranice, da ne opterećuje prvi prikaz;
+  // do tada je običan slider, a prva slika je odmah vidljiva
+  let water = null;
+  const initWater = () => {
+    if (reduceMotion || water) return;
+    water = createWater(section, root);
+    if (!water) return;
     water.wake = () => schedule();
     window.addEventListener('pagehide', () => water.hide());
-  }
+    slides.forEach((s) => water.prepare(s));
+    if (first.complete && first.naturalWidth) {
+      schedule();
+      render(performance.now());
+    }
+  };
   const posX = () => (desktop.matches ? 0.5 : 0.68);
 
   const ease = (x) => x * x * (3 - 2 * x);
@@ -422,7 +432,11 @@ export function initHero() {
       restart();
     });
   // dodatne slike se učitavaju tek kad je stranica učitana i mirna, da ne usporavaju prvu sliku (LCP) i interakciju
-  const afterLoad = () => setTimeout(loadSlides, 1200);
+  const afterLoad = () =>
+    setTimeout(() => {
+      initWater();
+      loadSlides();
+    }, 1200);
   if (document.readyState === 'complete') afterLoad();
   else window.addEventListener('load', afterLoad, { once: true });
 
