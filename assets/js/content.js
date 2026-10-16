@@ -10,10 +10,8 @@ import { apartmentPhotos } from './apartment-photos.js';
 // ---------- Osnovne informacije o sajtu (koriste se i za SEO/meta) ----------
 export const site = {
   brand: 'Tivat Garden Homes',
-  // Planirani domen: apartmanigardentivat.com
-  // TODO: kad se domen poveže, ovde upiši 'https://apartmanigardentivat.com' (bez završne kose crte)
-  // i dodaj CNAME fajl (vidi README). Do tada ostaje placeholder.
-  url: 'https://apartmanigardentivat.netlify.app', // adresa sajta (za pregled linka na Viber/WhatsApp, canonical, sitemap)
+  // Glavni domen (HTTPS na Netlify-ju; www preusmjerava na glavni domen). Bez završne kose crte.
+  url: 'https://apartmanigardentivat.com', // adresa sajta (za pregled linka na Viber/WhatsApp, canonical, sitemap)
   title: 'Tivat Garden Homes – Apartmani u Tivtu',
   description:
     'Holiday home Olive, Lavande i Lemoni u Tivtu: mediteranski ambijent među maslinama, plaža oko 300 m, Porto Montenegro oko 1 km. Pošaljite upit za boravak.',
