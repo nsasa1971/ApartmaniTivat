@@ -85,8 +85,16 @@ const setMenu = (open) => {
   mobileMenu.classList.toggle('hidden', !open);
   menuBtn.setAttribute('aria-expanded', String(open));
   document.documentElement.classList.toggle('overflow-hidden', open);
-  document.body.classList.toggle('overflow-hidden', open); // iOS Safari traži i body
+  // body se NE zaključava: overflow na body i html odjednom lomi position:sticky pa zaglavlje (i meni) ostane gore kad je stranica skrolovana
 };
+// iOS Safari ignoriše overflow na html: prevlačenje van menija ne smije da lista stranicu
+document.addEventListener(
+  'touchmove',
+  (e) => {
+    if (menuBtn.getAttribute('aria-expanded') === 'true' && !mobileMenu.contains(e.target)) e.preventDefault();
+  },
+  { passive: false }
+);
 const closeMenu = () => setMenu(false);
 menuBtn.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
 window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) closeMenu(); });
