@@ -69,10 +69,11 @@ export const social = {
 
 // ---------- Hero ----------
 export const hero = {
-  image: { src: 'assets/img/hero-1.jpg', width: 1920, height: 900, alt: 'Zalazak sunca nad Tivatskim zalivom i jedrilice' },
+  image: { src: 'assets/img/hero.jpg', width: 1920, height: 900, alt: 'Pogled na more i obalu Tivta među maslinama' },
   mobileSrc: 'assets/img/hero-mobile.jpg', // oštra uspravna verzija iz većeg originala (telefoni)
   // Slider: prva je `image`, ostale se učitavaju iza nje (slika koja ne postoji se preskoči).
   slides: [
+    'assets/img/hero-1.jpg',
     'assets/img/hero-2.jpg',
     'assets/img/hero-3.jpg',
     'assets/img/gallery-13.jpg',
