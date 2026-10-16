@@ -75,8 +75,8 @@ export const hero = {
   slides: [
     { src: 'assets/img/hero-1.jpg', mobileSrc: 'assets/img/hero-1-m.jpg' }, // mobileSrc = uspravni isječak za telefone
     { src: 'assets/img/hero-2.jpg', mobileSrc: 'assets/img/hero-2-m.jpg' },
-    'assets/img/hero-3.jpg',
-    'assets/img/gallery-13.jpg',
+    { src: 'assets/img/hero-3.jpg', mobileSrc: 'assets/img/hero-3-m.jpg' },
+    { src: 'assets/img/hero-4.jpg', mobileSrc: 'assets/img/hero-4-m.jpg' },
   ],
   subtitle: 'Apartmani u Tivtu',
   title: 'Tivat Garden Homes',
