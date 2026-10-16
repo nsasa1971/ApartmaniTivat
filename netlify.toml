@@ -5,6 +5,79 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Stari članci koji su zamijenjeni novim (isti sadržaj bi pretraživači tretirali kao duplikat)
+[[redirects]]
+  from = "/blog/najljepse-plaze-u-blizini-tivta.html"
+  to = "/blog/plaze-lustica-i-tivatski-zaliv.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/best-beaches-near-tivat.html"
+  to = "/en/blog/beaches-around-tivat-and-lustica.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ru/blog/luchshie-plyazhi-okolo-tivata.html"
+  to = "/ru/blog/plyazhi-tivata-i-lushtitsy.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/sta-jesti-na-crnogorskom-primorju.html"
+  to = "/blog/ukusi-boke-sta-probati-u-tivtu.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/what-to-eat-on-the-montenegrin-coast.html"
+  to = "/en/blog/tastes-of-boka-what-to-try-in-tivat.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ru/blog/chto-poprobovat-na-chernogorskom-poberezhe.html"
+  to = "/ru/blog/vkusy-boki-chto-poprobovat-v-tivate.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/kotor-izlet-iz-tivta.html"
+  to = "/blog/vodic-kotor.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/day-trip-to-kotor-from-tivat.html"
+  to = "/en/blog/kotor-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ru/blog/poezdka-v-kotor-iz-tivata.html"
+  to = "/ru/blog/gid-po-kotoru.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/blog/tivat-porto-montenegro-solila.html"
+  to = "/blog/vodic-tivat.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/en/blog/tivat-porto-montenegro-and-solila.html"
+  to = "/en/blog/tivat-guide.html"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/ru/blog/tivat-porto-montenegro-solila.html"
+  to = "/ru/blog/gid-po-tivatu.html"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
