@@ -1,10 +1,11 @@
 // ============================================================
 //  Javni sajt: sekcija "Dostupnost". Čita samo kolekciju `availability` (datumi).
 //  Firebase SDK se učitava lazy – tek kad je sekcija blizu viewporta.
+//  Podaci se prate uživo (onSnapshot) dok je sekcija blizu ekrana i tab je vidljiv; inače se listener odjavljuje.
 //  Ako Firebase nije podešen ili ne odgovori, sekcija ostaje sakrivena i sajt radi normalno.
 // ============================================================
 import { isFirebaseConfigured } from './firebase-config.js';
-import { loadAvailability } from './availability-data.js';
+import { watchAvailability } from './availability-data.js';
 import { apartments } from './content.js';
 import { t } from './i18n.js';
 import { monthGrid, monthLabel, shiftMonth, todayLocal, addDays, isRangeFree, formatRange, bookedDaySet } from './availability.js';
@@ -15,17 +16,46 @@ export function initAvailability() {
   const anchor = document.getElementById('dostupnost-anchor');
   if (!section || !anchor || !isFirebaseConfigured()) return;
 
-  const io = new IntersectionObserver(
-    async (entries) => {
-      if (!entries.some((e) => e.isIntersecting)) return;
+  let watch = null; // aktivno praćenje
+  let view = null; // { update(map) } – kad je kalendar prikazan
+  let inView = false;
+  let failed = false;
+
+  const start = async () => {
+    if (watch || failed) return;
+    const w = (watch = watchAvailability((map) => view?.update(map)));
+    const map = await w.ready;
+    if (watch !== w) return; // u međuvremenu zaustavljeno
+    if (!map) {
+      if (view) { // greška pri ponovnom povezivanju: ostaje prikaz posljednjih podataka
+        watch = null;
+        return;
+      }
+      // kalendar nije dostupan: sekcija se uklanja (sajt radi normalno bez nje)
+      failed = true;
+      watch = null;
+      section.classList.add('hidden');
       io.disconnect();
-      const map = await loadAvailability();
-      if (map) mount(section, map);
-      else section.classList.add('hidden'); // kalendar nije dostupan: sekcija se uklanja (sajt radi normalno bez nje)
+      return;
+    }
+    view ??= mount(section, map);
+  };
+  const stop = () => {
+    watch?.stop();
+    watch = null;
+  };
+  const sync = () => (inView && !document.hidden ? start() : stop());
+
+  const io = new IntersectionObserver(
+    (entries) => {
+      inView = entries[entries.length - 1].isIntersecting;
+      sync();
     },
     { rootMargin: '600px' }
   );
-  io.observe(anchor);
+  io.observe(section);
+  document.addEventListener('visibilitychange', sync);
+  window.addEventListener('pagehide', stop);
 }
 
 function mount(section, map) {
@@ -111,6 +141,19 @@ function mount(section, map) {
     }
   });
 
+  // nove podatke (uživo) upisujemo u kalendar; izabrani termin koji je u međuvremenu zauzet se poništava
+  const update = (next) => {
+    map = next;
+    if (state.from) {
+      const booked = bookedDaySet(map.get(state.apt) ?? []);
+      if (booked.has(state.from) || (state.to && !isRangeFree(map, state.apt, state.from, state.to))) {
+        state.from = state.to = null;
+        say(t('avail.notFree'));
+      }
+    }
+    render();
+  };
+
   section.classList.remove('hidden');
   section.querySelector('#avail-loading')?.remove();
   section.querySelector('#avail-body').classList.remove('hidden');
@@ -118,4 +161,5 @@ function mount(section, map) {
   // kad gost dolazi sa linka (npr. sa bloga) na #dostupnost-anchor, ostani na kalendaru:
   // dio ispod ne smije da "povuče" pregled na formu za upit kad se kalendar pojavi
   if (window.location.hash === '#dostupnost-anchor') document.getElementById('dostupnost-anchor')?.scrollIntoView();
+  return { update };
 }
