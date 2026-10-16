@@ -31,7 +31,7 @@ async function makeWebp() {
     const files = (await readdir(dir, { recursive: true }))
       .map((f) => path.join(dir, f))
       .filter((f) => /\.(jpe?g|png)$/i.test(f) && !KEEP.test(f) && !SKIP.has(path.basename(f)));
-    await Promise.all(files.map((f) => sharp(f).webp({ quality: 80, alphaQuality: 90, effort: 5 }).toFile(f.replace(/\.(jpe?g|png)$/i, '.webp'))));
+    await Promise.all(files.map((f) => sharp(f).webp({ quality: 76, alphaQuality: 90, effort: 5 }).toFile(f.replace(/\.(jpe?g|png)$/i, '.webp'))));
     console.log(`✓ WebP: ${files.length} slika`);
     return true;
   } catch (e) {
@@ -99,8 +99,8 @@ const head = `<title>${esc(c.site.title)}</title>
   <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
   <link rel="preload" href="${esc(toWebp(c.hero.mobileSrc))}" as="image" media="(max-width: 767px)" fetchpriority="high">
   <link rel="preload" href="${esc(toWebp(c.hero.image.src))}" as="image" media="(min-width: 768px)" fetchpriority="high">
-  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
   <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/img/favicon.png" sizes="64x64" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
   <script type="application/ld+json">
@@ -114,10 +114,40 @@ const replaceBlock = (html, name, inner) => {
   return html.replace(re, (_, a, b) => `${a}\n${inner}\n  ${b}`);
 };
 
+// JS: jedan minifikovan fajl umjesto ~12 modula (manje zahtjeva i bajtova); Firebase se i dalje učitava lazy sa CDN-a
+// Početna ne čita tekstove članaka (samo naslove, opise i slike za 3 kartice), pa se `body` izbacuje iz paketa.
+const stripBlogBodies = {
+  name: 'strip-blog-bodies',
+  setup(build) {
+    build.onLoad({ filter: /blog-content\.js$/ }, async (args) => {
+      const src = await readFile(args.path, 'utf8');
+      const out = src.replace(/\n {6}body: \[\n[\s\S]*?\n {6}\],/g, '\n      body: [],');
+      if (/\n {8}\['(p|h2|h3|ul)'/.test(out)) throw new Error('strip-blog-bodies: tijelo članka nije uklonjeno');
+      return { contents: out, loader: 'js' };
+    });
+  },
+};
+await (await import('esbuild')).build({
+  plugins: [stripBlogBodies],
+  entryPoints: [file('assets/js/main.js')],
+  outfile: file('assets/js/app.min.js'),
+  bundle: true,
+  minify: true,
+  format: 'esm',
+  target: 'es2020',
+  legalComments: 'none',
+  charset: 'utf8',
+  logLevel: 'warning',
+});
+
+// CSS: ugrađen u <head> (bez render-blocking zahtjeva); putanje fontova su relativne na stranicu
+const css = (await readFile(file('assets/css/style.css'), 'utf8')).replaceAll('../fonts/', 'assets/fonts/').replace(/\/\*[\s\S]*?\*\//g, '');
+
 let html = await readFile(file('index.html'), 'utf8');
 const app = renderApp();
 html = html.replace(/<html[^>]*>/, `<html lang="sr-Latn-ME"${webpOk ? ' data-img="webp"' : ''}>`);
 html = replaceBlock(html, 'head', `  ${head}`);
+html = replaceBlock(html, 'css', `  <style>${css}</style>`);
 html = replaceBlock(html, 'app', `  <div id="app" data-hash="${hash(app)}">${app}  </div>`);
 await writeFile(file('index.html'), html);
 

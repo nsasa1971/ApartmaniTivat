@@ -411,15 +411,20 @@ export function initHero() {
       img.src = src;
     });
 
-  Promise.all(extra.map(loadExtra)).then((imgs) => {
-    imgs.filter(Boolean).forEach((img) => {
-      slides.push(img);
-      root.insertBefore(img, root.querySelector('canvas'));
-      water?.prepare(img); // tekstura se šalje na grafičku unaprijed, da prelaz ne zastane
+  const loadSlides = () =>
+    Promise.all(extra.map(loadExtra)).then((imgs) => {
+      imgs.filter(Boolean).forEach((img) => {
+        slides.push(img);
+        root.insertBefore(img, root.querySelector('canvas'));
+        water?.prepare(img); // tekstura se šalje na grafičku unaprijed, da prelaz ne zastane
+      });
+      buildDots();
+      restart();
     });
-    buildDots();
-    restart();
-  });
+  // dodatne slike se učitavaju tek kad je stranica učitana i mirna, da ne usporavaju prvu sliku (LCP) i interakciju
+  const afterLoad = () => setTimeout(loadSlides, 1200);
+  if (document.readyState === 'complete') afterLoad();
+  else window.addEventListener('load', afterLoad, { once: true });
 
   // prvi frame čim je prva slika spremna
   const start = () => { water?.prepare(first); buildDots(); schedule(); if (water) render(performance.now()); };
