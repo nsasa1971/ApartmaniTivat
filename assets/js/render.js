@@ -7,6 +7,7 @@ import * as base from './content.js';
 import { localizedContent } from './content.i18n.js';
 import { t, languages, setLang, getLang } from './i18n.js';
 import { weekdays } from './availability.js';
+import { isFirebaseConfigured } from './firebase-config.js';
 import { posts, blogIndexPath, postPath } from './blog-content.js';
 
 // sadržaj na trenutnom jeziku (postavlja ga renderApp)
@@ -553,11 +554,12 @@ function availabilitySection() {
   const a = c.availability;
   return `
     <div id="dostupnost-anchor" aria-hidden="true"></div>
-    <section id="${esc(a.id)}" class="hidden bg-mist py-[50px] md:py-[100px]" aria-labelledby="dostupnost-title">
+    <section id="${esc(a.id)}" class="${isFirebaseConfigured() ? '' : 'hidden '}bg-mist py-[50px] md:py-[100px]" aria-labelledby="dostupnost-title">
       <div class="container max-w-page text-center">
         <h2 id="dostupnost-title" class="mb-4 font-display text-[30px] leading-tight text-[#1F2F25]">${esc(a.title)}</h2>
         <p class="mx-auto mb-8 max-w-xl font-sans text-lg">${esc(a.text)}</p>
-        <div class="mx-auto max-w-md bg-white p-4 md:p-6">
+        <p id="avail-loading" class="mx-auto max-w-md bg-white p-8 font-sans text-base text-body" role="status">${t('avail.loading')}</p>
+        <div id="avail-body" class="mx-auto hidden max-w-md bg-white p-4 md:p-6">
           <div class="flex gap-2" role="group" aria-label="${esc(t('aria.apartment'))}">
             ${c.apartments
               .map(
@@ -606,7 +608,7 @@ function reservation() {
             </div>`;
   return `
     <section id="rezervacija" class="container max-w-page pb-12 text-center [overflow-anchor:none]">
-      <h2 class="mb-4 font-display text-[30px] md:text-[46px]">${esc(b.title)}</h2>
+      <h2 class="mb-4 font-display text-[30px] leading-tight md:text-[46px]">${esc(b.title)}</h2>
       <p class="mx-auto mb-6 max-w-xl font-sans text-lg">${esc(b.text)}</p>
 
       <div class="mt-10 grid gap-12 md:grid-cols-[2fr_1fr] md:gap-16">

@@ -85,6 +85,7 @@ const T = {
   'map.title': ['Mapa – {city}', 'Map – {city}', 'Карта – {city}'],
 
   // kalendar dostupnosti
+  'avail.loading': ['Učitavanje kalendara…', 'Loading the calendar…', 'Загрузка календаря…'],
   'avail.free': ['Slobodno', 'Available', 'Свободно'],
   'avail.taken': ['Zauzeto', 'Booked', 'Занято'],
   'avail.yours': ['Vaš izbor', 'Your choice', 'Ваш выбор'],
