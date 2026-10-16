@@ -32,7 +32,7 @@ const syncDate = (input) => {
   if (!d) return;
   const has = isValidISO(input.value);
   d.textContent = has ? formatDateLong(input.value) : t('f.pickDate');
-  d.classList.toggle('opacity-60', !has);
+  d.classList.toggle('opacity-70', !has); // 70%: kontrast ≥ 4,5:1 na bijeloj podlozi
 };
 const syncDates = () => $$('input[data-date]').forEach(syncDate);
 function initDateInputs() {

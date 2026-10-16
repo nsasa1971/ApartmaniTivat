@@ -339,7 +339,7 @@ export function initHero() {
   const paintDots = () => {
     dots.forEach((d, k) => {
       d.setAttribute('aria-current', String(k === index));
-      d.style.background = k === index ? '#fff' : 'rgba(255,255,255,.35)';
+      d.firstElementChild.style.background = k === index ? '#fff' : 'rgba(255,255,255,.35)';
     });
   };
 
@@ -386,7 +386,9 @@ export function initHero() {
       const b = document.createElement('button');
       b.type = 'button';
       b.setAttribute('aria-label', (root.dataset.ariaSlide || 'Slika {n} od {m}').replace('{n}', k + 1).replace('{m}', slides.length));
-      b.className = 'h-2.5 w-2.5 rounded-full border border-white/80 transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-white';
+      // dugme je 24×24 px (dovoljno za dodir), a vidljiva tačka ostaje 10 px
+      b.className = 'flex h-6 w-6 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-white';
+      b.innerHTML = '<span class="block h-2.5 w-2.5 rounded-full border border-white/80 transition-colors"></span>';
       b.addEventListener('click', () => show(k));
       dotsBox.appendChild(b);
       dots.push(b);
