@@ -6,7 +6,7 @@ Preporuka: JPG kvalitet ~75–82 (ili WebP uz izmenu ekstenzije u `assets/js/con
 | Fajl | Dimenzije | Gde se koristi |
 |---|---|---|
 | `hero.jpg` | 1920×900 | Hero sekcija (pozadina) |
-| `foto1.jpg` | 605×806 | Uvodna sekcija (slika koja preklapa sekciju) |
+| `intro.jpg` | 605×806 | Uvodna sekcija (slika koja preklapa sekciju) |
 | `gallery-1.jpg` … `gallery-6.jpg` | 1240×827 | Galerija – velika slika u lightbox-u |
 | `thumb-1.jpg` … `thumb-6.jpg` | 394×394 | Galerija – umanjena slika (kvadrat) |
 | `foto2.jpg` | 1240×827 | Sekcija tekst + slika |
