@@ -395,8 +395,9 @@ export function initHero() {
   };
 
   // ostale slike: dodaju se tek kad se učitaju (nedostajuća se preskaču)
-  const loadExtra = (src) =>
+  const loadExtra = (item) =>
     new Promise((resolve) => {
+      const src = typeof item === 'string' ? item : (!desktop.matches && item.mobileSrc) || item.src; // telefon: uspravni isječak ako postoji
       const img = new Image();
       img.alt = '';
       img.decoding = 'async';

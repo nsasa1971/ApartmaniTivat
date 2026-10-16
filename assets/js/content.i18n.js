@@ -43,7 +43,7 @@ export const translations = {
     },
     contact: { countryName: 'Montenegro' },
     hero: {
-      image: { alt: 'Sunset over the Bay of Tivat with sailing boats' },
+      image: { alt: 'View of the sea and the coast of Tivat among olive trees' },
       subtitle: 'Apartments in Tivat',
       text: 'Apartments Olive, Lavande and Lemoni are in a great location in Tivat, in a peaceful Mediterranean setting surrounded by olive trees.',
     },
@@ -229,7 +229,7 @@ export const translations = {
     },
     contact: { countryName: 'Черногория' },
     hero: {
-      image: { alt: 'Закат над Тиватским заливом и парусные лодки' },
+      image: { alt: 'Вид на море и побережье Тивата среди олив' },
       subtitle: 'Апартаменты в Тивате',
       text: 'Апартаменты Olive, Lavande и Lemoni расположены в отличном месте в Тивате, в тихой средиземноморской обстановке среди оливковых деревьев.',
     },
