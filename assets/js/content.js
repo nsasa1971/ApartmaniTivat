@@ -278,7 +278,7 @@ export const extraSections = {
     items: [
       {
         name: 'Tivat',
-        desc: 'Tivat je najmirniji grad u zalivu, idealan za spor tempo odmora. Šetnica uz more vodi pored plaža, kafića i restorana, a marina Porto Montenegro, sa jahtama i elegantnim šetalištem, okuplja goste iz cijelog svijeta. Za ljubitelje prirode tu su Solila, zaštićeno stanište ptica, i Ostrvo cvijeća pored obale.',
+        desc: 'Tivat je najmirniji grad u zalivu, idealan za spor tempo odmora. Šetalište uz more vodi pored plaža, kafića i restorana, a marina Porto Montenegro, sa jahtama i elegantnim šetalištem, okuplja goste iz cijelog svijeta. Za ljubitelje prirode tu su Solila, zaštićeno stanište ptica, i Ostrvo cvijeća pored obale.',
         highlights: [
           'Porto Montenegro i njegovo šetalište',
           'Šetalište uz more i gradski park',
@@ -325,7 +325,7 @@ export const extraSections = {
     id: 'hrana',
     title: 'Mediteranska kuhinja',
     intro:
-      'Crnogorsko primorje poznato je po jednostavnoj, zdravoj i ukusnoj mediteranskoj kuhinji koja se vjekovima oslanja na darove mora i zaleđa. Svježa riba tek izvađena iz mreža, mirisno domaće maslinovo ulje, zreo limun, bijeli luk i začinsko bilje poput ruzmarina i peršuna čine osnovu svakog autentičnog bokeškog obroka. U našim konobama i restoranima hrana nije samo obrok, već način života: lagana, aromatična i stvorena za dugo uživanje uz čašu dobrog domaćeg vina.',
+      'Crnogorsko primorje poznato je po jednostavnoj, zdravoj i ukusnoj mediteranskoj kuhinji koja se vjekovima oslanja na darove mora i zaleđa. Svježa riba tek izvađena iz mreža, mirisno domaće maslinovo ulje, zreo limun, bijeli luk i začinsko bilje poput ruzmarina i peršuna čine osnovu svakog autentičnog bokeljskog obroka. U našim konobama i restoranima hrana nije samo obrok, već način života: lagana, aromatična i stvorena za dugo uživanje uz čašu dobrog domaćeg vina.',
     items: [
       {
         name: 'Riba na žaru (gradele)',
@@ -335,7 +335,7 @@ export const extraSections = {
       },
       {
         name: 'Crni rižoto',
-        desc: 'Crni rižoto od sipe predstavlja apsolutni klasik bokeških i primorskih jelovnika. Prepoznatljiva, intenzivna crna boja i dubok miris mora potiču od prirodnog mastila koje sipa ispušta. Pirinač se lagano krčka sa komadićima sočnog mesa sipe, bijelim lukom, maslinovim uljem i kapljicom crnogorskog bijelog vina, sve dok ne postane kremast i pun morskih ukusa. Jelo se tradicionalno poslužuje uz nekoliko kapi limunovog soka i malo struganog tvrdog sira.',
+        desc: 'Crni rižoto od sipe predstavlja apsolutni klasik bokeljskih i primorskih jelovnika. Prepoznatljiva, intenzivna crna boja i dubok miris mora potiču od prirodnog mastila koje sipa ispušta. Pirinač se lagano krčka sa komadićima sočnog mesa sipe, bijelim lukom, maslinovim uljem i kapljicom crnogorskog bijelog vina, sve dok ne postane kremast i pun morskih ukusa. Jelo se tradicionalno poslužuje uz nekoliko kapi limunovog soka i malo struganog tvrdog sira.',
         image: { src: 'assets/img/food-2.jpg', width: 1024, height: 768, alt: 'Crni rižoto' },
         link: '',
       },

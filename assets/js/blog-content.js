@@ -88,12 +88,12 @@ export const posts = [
     sr: {
       slug: 'ukusi-boke-sta-probati-u-tivtu',
       title: 'Vodič kroz ukuse Boke: šta i gdje probati tokom boravka u Tivtu',
-      description: 'Riba na žaru, crni rižoto, brudet, mušule na buzaru i njeguški pršut: koja tradicionalna jela naručiti u bokeškim konobama i kako do savršene večere.',
+      description: 'Riba na žaru, crni rižoto, brudet, mušule na buzaru i njeguški pršut: koja tradicionalna jela naručiti u bokeljskim konobama i kako do savršene večere.',
       excerpt: 'Doživite Boku Kotorsku kroz njenu autentičnu hranu: koja jela naručiti u lokalnim konobama i kako izgleda savršeno gastronomsko veče na moru.',
-      imageAlt: 'Tradicionalna bokeška jela',
+      imageAlt: 'Tradicionalna bokeljska jela',
       body: [
-        ['p', 'Boravak na crnogorskom primorju nije potpun bez uživanja u mediteranskoj trpezi. Bokeška kuhinja vjekovima je spajala darove Jadrana sa tradicijom zaleđa, stvarajući jednostavna, ali nezaboravna jela pripremljena na maslinovom ulju, sa svježim začinskim biljem i bijelim lukom. Evo šta obavezno morate staviti na svoju gastro listu.'],
-        ['h2', 'Morske delicije u bokeškim konobama'],
+        ['p', 'Boravak na crnogorskom primorju nije potpun bez uživanja u mediteranskoj trpezi. Bokeljska kuhinja vjekovima je spajala darove Jadrana sa tradicijom zaleđa, stvarajući jednostavna, ali nezaboravna jela pripremljena na maslinovom ulju, sa svježim začinskim biljem i bijelim lukom. Evo šta obavezno morate staviti na svoju gastro listu.'],
+        ['h2', 'Morske delicije u bokeljskim konobama'],
         ['p', 'Naručite ribu na žaru (orada, brancin ili zubatac) koja se poslužuje uz tradicionalnu blitvu i krtolu prelivenu domaćim maslinovim uljem. Ne propustite crni rižoto od sipe i tradicionalni ribarski brudet koji se polako krčka uz domaće bijelo vino i servira sa palentom.'],
         ['h2', 'Mušule na buzaru'],
         ['p', 'U samom zalivu nalaze se brojna uzgajališta školjki. Svježe dagnje (mušule) spremljene na bijelu buzaru (bijelo vino, bijeli luk, peršun i maslinovo ulje) predstavljaju najautentičniji ukus mora. Uz toplo domaće pecivo kojim ćete pokupiti saft, ovo jelo je pravi praznik za nepca.'],
