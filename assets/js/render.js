@@ -742,9 +742,9 @@ function footer() {
     </div>
 
     <div class="border-t border-white/10">
-      <div class="container flex max-w-page flex-col items-center justify-between gap-2 py-5 font-sans text-sm text-white/70 md:flex-row">
+      <div class="container flex max-w-page flex-col items-center justify-between gap-2 pb-20 pt-5 text-center font-sans text-sm text-white/70 md:flex-row md:pb-5 md:text-left">
         <a href="${esc(c.footer.privacyHref)}" class="hover:text-white">${t('footer.privacy')}</a>
-        <p>© <span data-year>${new Date().getFullYear()}</span> ${esc(c.site.brand)}. ${t('footer.rights')} · Designed by <a href="tel:+381646758050" class="underline hover:no-underline">Sasha</a></p>
+        <p>© <span data-year>${new Date().getFullYear()}</span> ${esc(c.site.brand)}. ${t('footer.rights')}<span class="hidden md:inline"> · </span><span class="block md:inline">Designed by <a href="tel:+381646758050" class="underline hover:no-underline">Sasha</a></span></p>
       </div>
     </div>
   </footer>`;
