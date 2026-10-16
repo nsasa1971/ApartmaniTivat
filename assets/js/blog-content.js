@@ -335,6 +335,13 @@ export const posts = [
   },
 ];
 
+// ---------- vodiči za znamenitosti (tekst je u guides-content.js; ovdje samo putanje, da početna ne učitava duge tekstove) ----------
+export const guideSlugs = {
+  tivat: { sr: 'vodic-tivat', en: 'tivat-guide', ru: 'gid-po-tivatu' },
+  kotor: { sr: 'vodic-kotor', en: 'kotor-guide', ru: 'gid-po-kotoru' },
+  budva: { sr: 'vodic-budva', en: 'budva-guide', ru: 'gid-po-budve' },
+};
+
 // ---------- putanje ----------
 const PREFIX = { sr: '', en: '/en', ru: '/ru' };
 export const blogLangs = ['sr', 'en', 'ru'];
@@ -342,3 +349,4 @@ export const blogIndexPath = (lang) => `${PREFIX[lang] ?? ''}/blog/`;
 export const postPath = (post, lang) => `${PREFIX[lang] ?? ''}/blog/${post[lang].slug}.html`;
 /** Početna stranica na izabranom jeziku (jezik se prenosi parametrom ?lang=). */
 export const homeHref = (lang, hash = '') => `/${lang === 'sr' ? '' : `?lang=${lang}`}${hash}`;
+export const guidePath = (id, lang) => `${PREFIX[lang] ?? ''}/blog/${guideSlugs[id][lang]}.html`;

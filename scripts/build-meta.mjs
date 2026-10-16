@@ -11,7 +11,8 @@ import { fileURLToPath } from 'node:url';
 import path from 'node:path';
 import * as c from '../assets/js/content.js';
 import { renderApp, hash, esc, isPlaceholder, setImageFormat, toWebp } from '../assets/js/render.js';
-import { posts, blogLangs, blogIndexPath, postPath } from '../assets/js/blog-content.js';
+import { blogLangs, blogIndexPath, postPath } from '../assets/js/blog-content.js';
+import { allPosts as posts } from '../assets/js/guides-content.js';
 import { renderBlogIndexPage, renderPostPage } from '../assets/js/blog-render.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
