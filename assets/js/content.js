@@ -325,35 +325,35 @@ export const extraSections = {
     id: 'hrana',
     title: 'Mediteranska kuhinja',
     intro:
-      'Crnogorsko primorje poznato je po jednostavnoj mediteranskoj kuhinji zasnovanoj na svježoj ribi, maslinovom ulju i domaćim specijalitetima.',
+      'Crnogorsko primorje poznato je po jednostavnoj, zdravoj i ukusnoj mediteranskoj kuhinji koja se vjekovima oslanja na darove mora i zaleđa. Svježa riba tek izvađena iz mreža, mirisno domaće maslinovo ulje, zreo limun, bijeli luk i začinsko bilje poput ruzmarina i peršuna čine osnovu svakog autentičnog bokeškog obroka. U našim konobama i restoranima hrana nije samo obrok, već način života: lagana, aromatična i stvorena za dugo uživanje uz čašu dobrog domaćeg vina.',
     items: [
       {
-        name: 'Riba na žaru',
-        desc: 'Svježa riba pečena na žaru, uz maslinovo ulje i limun.',
+        name: 'Riba na žaru (gradele)',
+        desc: 'Nema ničeg iskrenijeg na primorju od svježe morske ribe spremljene na tradicionalnim gradelama. Bilo da se radi o oradi, brancinu, zubatcu ili škrpini, priprema je jednostavna, a ukus savršen: riba se peče na umjerenom žaru od drveta, uz stalno premazivanje grančicom ruzmarina umočenom u ekstra djevičansko maslinovo ulje. Poslužuje se topla, prelivena marinadom od sitno sjeckanog bijelog luka, peršuna i maslinovog ulja, uz nezaobilaznu krišku limuna i prilog od kuvane blitve i krtule (krompira).',
         image: { src: 'assets/img/food-1.jpg', width: 1024, height: 768, alt: 'Riba na žaru' },
         link: '',
       },
       {
         name: 'Crni rižoto',
-        desc: 'Rižoto od sipe, tamne boje od sipinog mastila, čest izbor na primorju.',
+        desc: 'Crni rižoto od sipe predstavlja apsolutni klasik bokeških i primorskih jelovnika. Prepoznatljiva, intenzivna crna boja i dubok miris mora potiču od prirodnog mastila koje sipa ispušta. Pirinač se lagano krčka sa komadićima sočnog mesa sipe, bijelim lukom, maslinovim uljem i kapljicom crnogorskog bijelog vina, sve dok ne postane kremast i pun morskih ukusa. Jelo se tradicionalno poslužuje uz nekoliko kapi limunovog soka i malo struganog tvrdog sira.',
         image: { src: 'assets/img/food-2.jpg', width: 1024, height: 768, alt: 'Crni rižoto' },
         link: '',
       },
       {
         name: 'Brudet',
-        desc: 'Tradicionalno jelo od ribe krčkane u sosu od paradajza i maslinovog ulja.',
+        desc: 'Brudet (ili brodet) je staro ribarsko jelo koje u sebi nosi čitavu filozofiju primorskog kuvanja. Nastao kao obrok koji su ribari spremali na brodu od više vrsta morske ribe (poput škarpine, grdobine, ugora ili orade), brudet se polako krčka u gustom saftu od zrelog paradajza, crnog i bijelog luka, maslinovog ulja i vina. Posebna tajna pravog brudeta je u tome što se tokom kuvanja ne miješa varjačom, već se šerpa samo povremeno blago protrese kako bi komadi ribe ostali cijeli. Najčešće se servira uz toplu palentu (kačamak) koja savršeno upija bogati saft.',
         image: { src: 'assets/img/food-3.jpg', width: 1024, height: 768, alt: 'Brudet' },
         link: '',
       },
       {
         name: 'Pršut i sir',
-        desc: 'Domaći pršut i sir, klasična hladna zakuska uz čašu vina.',
+        desc: 'Neizostavna hladna zakuska i najljepša dobrodošlica u svakom domu u Boki jeste kombinacija autentičnih ukusa iz crnogorskog krša: njeguški pršut i zreli domaći sir. Sušen na čistom planinskom vazduhu đe se sudaraju morska i planinska struja, pršut ima specifičnu aromu dima bukovog drveta i prepoznatljivu teksturu koja se topi u ustima. Uz njega se služe punomasni polutvrdi njeguški sir, zreli sir iz ulja ili domaći kozji sir, domaći hljeb i domaće masline, savršeno za početak večere uz čašu crnogorskog Vranca.',
         image: { src: 'assets/img/food-4.jpg', width: 1024, height: 768, alt: 'Pršut i sir' },
         link: '',
       },
       {
         name: 'Maslinovo ulje i masline',
-        desc: 'Masline i maslinovo ulje su osnova mediteranske trpeze.',
+        desc: 'Maslina je sveto drvo primorja i vjekovni simbol mira i dugovječnosti, a maslinovo ulje temelj svake mediteranske trpeze. Duž zaliva i poluostrva Luštica nalaze se vjekovni maslinjaci od čijih se plodova, tradicionalnim hladnim cijeđenjem, dobija gusto, zlatno-zeleno ekstra djevičansko ulje bogatog, blago pikantnog ukusa. Domaće soljene i marinirane masline, poslužene uz malo aromatičnog bilja i domaći hljeb umočen u ulje, pružaju najčistiji ukus Mediterana u svom najjednostavnijem obliku.',
         image: { src: 'assets/img/food-5.jpg', width: 1024, height: 768, alt: 'Maslinovo ulje i masline' },
         link: '',
       },
