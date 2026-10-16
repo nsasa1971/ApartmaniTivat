@@ -126,7 +126,7 @@ Dashboard za vlasnicu: kalendar po apartmanu, rezervacije, sanduče upita sa saj
 4. **Build → Firestore Database → Create database** → izaberite lokaciju (npr. `eur3 (europe-west)`) i *production mode*.
 5. **Project settings (zupčanik) → General → Your apps → `</>` (Web)** → registrujte aplikaciju (Hosting nije potreban) i kopirajte `firebaseConfig`.
 6. Upišite te vrijednosti u `assets/js/firebase-config.js` (već upisano za projekat `apartmani-tivat`). Web konfiguracija je javna po dizajnu; nikada u repo ne stavljajte service account ključ.
-7. **Authentication → Settings → Authorized domains** → dodajte domen sajta (npr. `apartmanigardentivat.netlify.app` i `apartmanigardentivat.com`).
+7. **Authentication → Settings → Authorized domains** → dodajte domen sajta (`apartmanigardentivat.com`, a po potrebi i `apartmanigardentivat.netlify.app` dok postoji).
 
 ### 2. Pravila (Firestore → Rules)
 
@@ -180,7 +180,7 @@ Aplikacija radi i bez interneta (ljuska se kešira, a Firestore čuva podatke u 
 
 ## Deploy (Netlify)
 
-`netlify.toml` je podešen: build komanda `npm run build:site`, objavljuje se samo folder `dist/` (index, stranica politike, `assets`, `data`, sitemap, robots, manifest). U Netlify-u ne treba ništa ručno podešavati osim da production grana bude `main`. Domen: Netlify → Domain management → Add a domain, a `site.url` u `content.js` postaviti na isti domen.
+`netlify.toml` je podešen: build komanda `npm run build:site`, objavljuje se samo folder `dist/` (index, stranica politike, `assets`, `data`, sitemap, robots, manifest). U Netlify-u ne treba ništa ručno podešavati osim da production grana bude `main`. Domen: sajt je objavljen na **https://apartmanigardentivat.com** (Netlify → Domain management; `www` preusmjerava na glavni domen), a isti domen je upisan u `site.url` u `content.js` (canonical, Open Graph, JSON-LD, sitemap i robots uzimaju adresu odatle; poslije izmjene pokrenuti `npm run build`).
 
 ## Deploy (GitHub Pages, alternativa)
 
