@@ -1,4 +1,4 @@
-import { renderApp, hash } from './render.js';
+import { renderApp, hash, setImageFormat } from './render.js';
 import { defaultLang, applyLanguage, languages } from './i18n.js';
 import { localizedContent } from './content.i18n.js';
 import { initBooking } from './booking.js';
@@ -27,6 +27,8 @@ if (qLang && supported.includes(qLang)) {
 const saved = storage.get('lang');
 const lang = saved && supported.includes(saved) ? saved : defaultLang;
 
+// build upisuje data-img="webp" kad su napravljene .webp slike; isti format mora i ovdje da bi HTML bio identičan prerenderovanom
+setImageFormat(document.documentElement.dataset.img);
 const app = $('#app');
 const html = renderApp(lang);
 if (lang !== defaultLang || app.dataset.hash !== hash(html)) app.innerHTML = html;

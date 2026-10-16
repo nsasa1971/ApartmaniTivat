@@ -30,6 +30,19 @@ export const hash = (s) => {
 };
 
 // "Rezerviši" vodi na kalendar dostupnosti (ako nije dostupan, main.js skroluje na formu za upit)
+// ---------- WebP: build pravi .webp pored svake JPG/PNG slike; ovdje se putanje u gotovom HTML-u prebacuju na njih ----------
+let imageFormat = null;
+export const setImageFormat = (f) => {
+  imageFormat = f === 'webp' ? 'webp' : null;
+};
+// ostaju u originalnom formatu: slika za dijeljenje linkova, favicon i ikone aplikacije
+const KEEP_FORMAT = /(^|\/)(og|favicon|icon-\d+)\.(jpe?g|png)$/i;
+/** Zamjenjuje assets/img/*.jpg|png sa .webp (ako je WebP uključen). */
+export const toWebp = (html) =>
+  imageFormat
+    ? html.replace(/(assets\/img\/[A-Za-z0-9_./$\-{}]*?)\.(jpe?g|png)(?![A-Za-z0-9_./$-])/gi, (m, p, ext) => (KEEP_FORMAT.test(`${p}.${ext}`) ? m : `${p}.webp`))
+    : html;
+
 const BOOK_HREF = '#dostupnost-anchor';
 const arrow = '<span aria-hidden="true">→</span>';
 
@@ -40,6 +53,7 @@ const acIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="cur
 const wifiIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5a11 11 0 0 1 15 0M7.5 12.8a6.5 6.5 0 0 1 9 0M10.3 16a2.3 2.3 0 0 1 3.4 0"/><circle cx="12" cy="19" r=".6" fill="currentColor"/></svg>`;
 const tvIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`;
 const parkingIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 16.5V8h3.2a2.6 2.6 0 0 1 0 5.2H10"/></svg>`;
+const clockIcon = `<svg class="h-5 w-5 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
 const guestsIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg>`;
 
 
@@ -74,7 +88,7 @@ const flagSvg = (code, uid) => {
     ru: '<rect width="24" height="16" fill="#fff"/><rect y="5.33" width="24" height="10.67" fill="#0039A6"/><rect y="10.67" width="24" height="5.33" fill="#D52B1E"/>',
     gb: `<clipPath id="fc-${uid}"><rect width="24" height="16"/></clipPath><g clip-path="url(#fc-${uid})"><rect width="24" height="16" fill="#012169"/><path d="M0 0 24 16M24 0 0 16" stroke="#fff" stroke-width="3.2"/><path d="M0 0 24 16M24 0 0 16" stroke="#C8102E" stroke-width="1.6"/><path d="M12 0v16M0 8h24" stroke="#fff" stroke-width="5.2"/><path d="M12 0v16M0 8h24" stroke="#C8102E" stroke-width="3.2"/></g>`,
   }[code];
-  if (code === 'me') return '<img src="assets/img/flag-me.png" width="24" height="16" alt="" class="h-4 w-6 object-cover">'; // prava zastava (slika)
+  if (code === 'me') return `<img src="assets/img/flag-me.png" width="24" height="16" alt="${esc(languages.find((l) => l.flag === 'me')?.name ?? '')}" aria-hidden="true" class="h-4 w-6 object-cover">`; // prava zastava (slika)
   return `<svg class="h-4 w-6" viewBox="0 0 24 16" aria-hidden="true">${body}</svg>`;
 };
 const flagBox = (code, uid) => `<span class="block h-4 w-6 shrink-0 overflow-hidden rounded-[3px] ring-1 ring-black/15">${flagSvg(code, uid)}</span>`;
@@ -192,7 +206,7 @@ function hero() {
     <section class="relative flex min-h-[calc(100svh-96px)] items-center py-12 md:min-h-[calc(100svh-112px)] md:py-16 lg:min-h-[calc(100svh-96px)] xl:min-h-[calc(100svh-112px)]">
       <div data-hero data-slides="${esc(JSON.stringify(h.slides || []))}" data-aria-slide="${esc(t('aria.slide', { n: '{n}', m: '{m}' }))}" class="absolute inset-0 isolate overflow-hidden">
         <picture>${h.mobileSrc ? `<source media="(max-width: 767px)" srcset="${esc(h.mobileSrc)}">` : ''}
-          <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
+          <img data-hero-slide src="${esc(h.image.src)}" width="${h.image.width}" height="${h.image.height}" alt="${esc(h.image.alt ?? '')}" loading="eager" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover object-[68%_50%] md:object-center">
         </picture>
       </div>
       <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,40,31,.38)_0%,rgba(26,40,31,.5)_100%)] md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
@@ -348,6 +362,7 @@ function pricing() {
             .join('\n          ')}
         </div>
         <p class="mt-8 font-sans text-base text-ink">${esc(p.basis)}</p>
+        <p class="mt-2 inline-flex items-center gap-2 font-sans text-base font-bold text-ink">${clockIcon}${esc(p.checkInfo)}</p>
         <ul class="mx-auto mt-4 max-w-2xl font-sans text-base text-ink">
           ${p.discounts.map((d) => `<li>${esc(d)}</li>`).join('\n          ')}
         </ul>
@@ -409,7 +424,7 @@ function reviews() {
             <div class="mb-3 flex gap-1 text-[#F4CC4C]" role="img" aria-label="${esc(t('aria.stars', { n: r.rating }))}">${'★'.repeat(r.rating)}</div>
             <p class="font-sans text-base italic leading-8 text-body">${esc(r.text)}</p>
             <div class="mt-auto flex items-center gap-4 pt-6">
-              <img src="${esc(r.avatar)}" width="48" height="48" loading="lazy" decoding="async" alt="" class="h-12 w-12 rounded-full object-cover">
+              <img src="${esc(r.avatar)}" width="48" height="48" loading="lazy" decoding="async" alt="${esc(r.name)}" class="h-12 w-12 rounded-full object-cover">
               <span class="min-w-0">
                 <span class="block font-display text-[22px] leading-7 text-ink">${esc(r.name)}</span>${
                   r.source
@@ -734,7 +749,7 @@ function overlays() {
   <div id="lightbox" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/90 p-4" role="dialog" aria-modal="true" aria-label="Galerija" tabindex="-1">
     <button id="lb-close" type="button" class="absolute right-5 top-5 p-2 text-4xl leading-none text-white" aria-label="${t('btn.close')}">×</button>
     <button id="lb-prev" type="button" class="absolute left-4 p-2 text-5xl text-white" aria-label="${t('btn.prev')}">‹</button>
-    <img id="lb-img" src="" alt="" class="max-h-[90vh] max-w-[90vw] select-none object-contain">
+    <img id="lb-img" src="" alt="${esc(t('aria.gallery'))}" class="max-h-[90vh] max-w-[90vw] select-none object-contain">
     <button id="lb-next" type="button" class="absolute right-4 p-2 text-5xl text-white" aria-label="${t('btn.next')}">›</button>
   </div>
 
@@ -746,7 +761,7 @@ function overlays() {
 export function renderApp(lang = 'sr') {
   setLang(lang);
   c = localizedContent(lang);
-  return `
+  return toWebp(`
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">${t('aria.skip')}</a>
 ${header()}
 
@@ -769,5 +784,5 @@ ${map()}
 
 ${footer()}
 ${overlays()}
-`;
+`);
 }

@@ -28,6 +28,8 @@ export const config = {
   minGuests: 1,
   maxGuests: 8,
   defaultGuests: 2,
+  checkIn: '14:00', // prijava od (koristi se i u podacima za Google)
+  checkOut: '10:00', // odjava do
 
   // Slanje forme za upit. Ako nije podešeno, forma koristi `mailto:` fallback.
   //  - Formspree:  provider: 'formspree', endpoint: 'https://formspree.io/f/xxxxxxxx'
@@ -67,7 +69,7 @@ export const social = {
 
 // ---------- Hero ----------
 export const hero = {
-  image: { src: 'assets/img/hero.jpg', width: 1920, height: 900 },
+  image: { src: 'assets/img/hero.jpg', width: 1920, height: 900, alt: 'Pogled na more i obalu Tivta među maslinama' },
   mobileSrc: 'assets/img/hero-mobile.jpg', // oštra uspravna verzija iz većeg originala (telefoni)
   // Slider: prva je `image`, ostale se učitavaju iza nje (slika koja ne postoji se preskoči).
   slides: [
@@ -167,6 +169,7 @@ export const pricing = {
     { label: 'Novogodišnji praznici', note: '31.12., 01.01. i 02.01.', price: '120 €', unit: 'po danu' },
   ],
   basis: 'Cijene važe po apartmanu.',
+  checkInfo: 'Prijava (check-in) od 14:00 h, odjava (check-out) do 10:00 h.',
   discounts: [
     'Za boravak od 10 dana i više moguć je popust od 10%.',
     'Za boravak od mjesec dana moguća je povoljnija cijena, popust do 20%.',
@@ -179,7 +182,23 @@ export const pricing = {
 // Broj slika: promijeni GALLERY_COUNT i pokreni `npm run gallery` sa istim brojem slika.
 // Opise (alt) upiši u galleryAlts po redoslijedu slika, npr. 'Dnevna soba – Holiday home Olive'.
 const GALLERY_COUNT = 15;
-const galleryAlts = [];
+const galleryAlts = [
+  'Dnevna soba sa ugaonom garniturom i trpezarijskim stolom',
+  'Kupatilo sa tuš kabinom i okruglim osvijetljenim ogledalom',
+  'Spavaća soba sa bračnim krevetom i sofom',
+  'Dnevna soba sa TV-om, trpezarijskim stolom i radnim stolom',
+  'Kupatilo sa okruglim ogledalom i kamenim umivaonikom',
+  'Spavaća soba sa dva kreveta',
+  'Dnevna soba sa kuhinjom i sofom',
+  'Kupatilo sa bijelim umivaonikom',
+  'Spavaća soba sa bračnim krevetom',
+  'Spavaća soba sa krevetom pored prozora',
+  'Terasa sa lozom i drvenim stolom u dvorištu',
+  'Ulaz u apartman i maslina u dvorištu',
+  'Pogled na more i oleandar u zalasku sunca',
+  'Korpa sa grožđem i vinom u maslinjaku',
+  'Vanjski dio apartmana sa stazom i dvorištem',
+];
 export const gallery = Array.from({ length: GALLERY_COUNT }, (_, i) => i + 1).map((n) => ({
   full: `assets/img/gallery-${n}.jpg`,
   thumb: `assets/img/thumb-${n}.jpg`,
