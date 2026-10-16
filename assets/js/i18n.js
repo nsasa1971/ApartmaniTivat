@@ -109,6 +109,7 @@ const T = {
   'nav.blog': ['Savjeti', 'Tips', 'Советы'],
   'nav.around': ['Okolina', 'Around Tivat', 'Окрестности'],
   'blog.title': ['Savjeti za boravak u Tivtu', 'Travel tips for Tivat', 'Советы для отдыха в Тивате'],
+  'sights.guide': ['Cijeli vodič', 'Full guide', 'Полный гид'],
   'blog.read': ['Pročitaj članak', 'Read article', 'Читать статью'],
   'blog.all': ['Svi članci', 'All articles', 'Все статьи'],
   'blog.related': ['Pročitajte i', 'Read next', 'Читайте также'],

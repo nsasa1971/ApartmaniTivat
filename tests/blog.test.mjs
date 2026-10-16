@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { posts, blog, blogLangs, postPath, blogIndexPath } from '../assets/js/blog-content.js';
+import { blog, blogLangs, postPath, blogIndexPath } from '../assets/js/blog-content.js';
+import { allPosts as posts } from '../assets/js/guides-content.js';
 import { renderPostPage, renderBlogIndexPage } from '../assets/js/blog-render.js';
 
 const BASE = 'https://example.test';

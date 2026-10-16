@@ -287,6 +287,7 @@ export const extraSections = {
         ],
         image: { src: 'assets/img/sight-1.jpg', width: 1024, height: 768, alt: 'Tivat' },
         link: '',
+        guide: 'tivat',
       },
       {
         name: 'Kotor',
@@ -300,6 +301,7 @@ export const extraSections = {
         ],
         image: { src: 'assets/img/sight-2.jpg', width: 1024, height: 768, alt: 'Kotor' },
         link: '',
+        guide: 'kotor',
       },
       {
         name: 'Budva',
@@ -313,6 +315,7 @@ export const extraSections = {
         ],
         image: { src: 'assets/img/sight-3.jpg', width: 1024, height: 768, alt: 'Budva' },
         link: '',
+        guide: 'budva',
       },
     ],
   },

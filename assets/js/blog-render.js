@@ -4,7 +4,8 @@
 //  Stranice su obični HTML (bez JavaScripta) radi brzine i SEO-a; stil je isti kao na sajtu.
 // ============================================================
 import * as c from './content.js';
-import { posts, blog, blogLangs, blogIndexPath, postPath, homeHref } from './blog-content.js';
+import { blog, blogLangs, blogIndexPath, postPath, homeHref } from './blog-content.js';
+import { allPosts as posts } from './guides-content.js';
 import { t, languages } from './i18n.js';
 import { esc, toWebp } from './render.js';
 
@@ -29,6 +30,7 @@ function renderBlocks(blocks) {
   return blocks
     .map(([type, val]) => {
       if (type === 'h2') return `<h2 class="mb-3 mt-10 font-display text-[26px] leading-tight text-ink md:text-[30px]">${esc(val)}</h2>`;
+      if (type === 'h3') return `<h3 class="mb-2 mt-6 font-sans text-xl font-bold leading-snug text-ink">${esc(val)}</h3>`;
       if (type === 'ul') return `<ul class="mb-4 list-disc space-y-1 pl-6">${val.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
       return `<p class="mb-4">${esc(val)}</p>`;
     })

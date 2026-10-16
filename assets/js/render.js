@@ -8,7 +8,7 @@ import { localizedContent } from './content.i18n.js';
 import { t, languages, setLang, getLang } from './i18n.js';
 import { weekdays } from './availability.js';
 import { isFirebaseConfigured } from './firebase-config.js';
-import { posts, blogIndexPath, postPath } from './blog-content.js';
+import { posts, blogIndexPath, postPath, guidePath } from './blog-content.js';
 
 // sadržaj na trenutnom jeziku (postavlja ga renderApp)
 let c = base;
@@ -475,8 +475,12 @@ const cards = (items) =>
               p.highlights?.length
                 ? `\n            <ul class="mt-auto list-disc pl-5 pt-2 font-sans text-sm leading-7 text-body">${p.highlights.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`
                 : ''
+            }${
+              p.guide
+                ? `\n            <a href="${guidePath(p.guide, getLang())}" class="mt-3 inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:opacity-70">${t('sights.guide')} <span aria-hidden="true">→</span></a>`
+                : ''
             }`;
-      const layout = p.highlights?.length ? 'flex flex-col' : 'block';
+      const layout = p.highlights?.length || p.guide ? 'flex flex-col' : 'block';
       return p.link
         ? `<a href="${esc(p.link)}" target="_blank" rel="noopener" class="group reveal ${layout}">${inner}\n          </a>`
         : `<div class="group reveal ${layout}">${inner}\n          </div>`;
