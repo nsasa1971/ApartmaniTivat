@@ -14,7 +14,7 @@ const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
 const prefersReducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // ---------- poruke: prevodi su u i18n.js (ključevi m.*) ----------
-const m = (key, vars) => t(`m.${key}`, vars);
+const msg = (key, vars) => t(`m.${key}`, vars);
 
 /** Da li je termin slobodan? Bez apartmana: dovoljno je da je slobodan bar jedan. Ako kalendar nije dostupan, ne blokira. */
 async function isTermFree(apartmentId, from, to) {
@@ -127,8 +127,8 @@ function initStrip(inquiry) {
     errorEl.classList.add('hidden');
 
     if (!checkin.value || !checkout.value) return showError(t('booking.pickDates'));
-    if (checkout.value <= checkin.value) return showError(m('checkoutOrder'));
-    if (!(await isTermFree('', checkin.value, checkout.value))) return showError(m('notFree'));
+    if (checkout.value <= checkin.value) return showError(msg('checkoutOrder'));
+    if (!(await isTermFree('', checkin.value, checkout.value))) return showError(msg('notFree'));
 
     // Bez spoljnog sajta: prenesi izbor u formu za upit i skroluj do nje
     if (inquiry) {
@@ -213,23 +213,23 @@ function initInquiry() {
   function validate() {
     const err = {};
     const v = (n) => el[n].value.trim();
-    if (!v('fullname')) err.fullname = m('fullname');
-    if (!v('email')) err.email = m('emailEmpty');
-    else if (!EMAIL_RE.test(v('email'))) err.email = m('emailBad');
-    if (v('phone') && !PHONE_RE.test(v('phone'))) err.phone = m('phoneBad');
+    if (!v('fullname')) err.fullname = msg('fullname');
+    if (!v('email')) err.email = msg('emailEmpty');
+    else if (!EMAIL_RE.test(v('email'))) err.email = msg('emailBad');
+    if (v('phone') && !PHONE_RE.test(v('phone'))) err.phone = msg('phoneBad');
 
     const ci = el.checkin.value;
     const co = el.checkout.value;
-    if (!ci) err.checkin = m('checkinEmpty');
-    else if (ci < todayLocal()) err.checkin = m('checkinPast');
-    if (!co) err.checkout = m('checkoutEmpty');
-    else if (ci && co <= ci) err.checkout = m('checkoutOrder');
+    if (!ci) err.checkin = msg('checkinEmpty');
+    else if (ci < todayLocal()) err.checkin = msg('checkinPast');
+    if (!co) err.checkout = msg('checkoutEmpty');
+    else if (ci && co <= ci) err.checkout = msg('checkoutOrder');
 
     const adults = Number(el.guests.value);
     const kids = Number(el.children.value || 0);
     if (!Number.isInteger(adults) || !Number.isInteger(kids) || adults < config.minGuests || kids < 0 || adults + kids > config.maxGuests)
-      err.guests = m('guests', { min: config.minGuests, max: config.maxGuests });
-    if (!el.consent.checked) err.consent = m('consent');
+      err.guests = msg('guests', { min: config.minGuests, max: config.maxGuests });
+    if (!el.consent.checked) err.consent = msg('consent');
     return err;
   }
 
@@ -336,7 +336,7 @@ function initInquiry() {
 
     // honeypot: botovi popunjavaju skriveno polje – lažna potvrda, ništa se ne šalje
     if (el.website.value) {
-      showStatus(m('success'), 'ok');
+      showStatus(msg('success'), 'ok');
       return form.reset();
     }
 
@@ -351,7 +351,7 @@ function initInquiry() {
 
     // vremenska zaštita: previše brzo slanje
     if (Date.now() - startedAt < config.form.minFillSeconds * 1000) {
-      showStatus(m('tooFast'), 'error');
+      showStatus(msg('tooFast'), 'error');
       return;
     }
 
@@ -360,30 +360,30 @@ function initInquiry() {
 
     // termin mora biti slobodan (kalendar iz Firestore-a; ako nije dostupan, ne blokira)
     submitBtn.disabled = true;
-    showStatus(m('sending'), 'info');
+    showStatus(msg('sending'), 'info');
     const free = await isTermFree(data.apartmentId, data.checkin, data.checkout);
     submitBtn.disabled = false;
     if (!free) {
       statusEl.classList.add('hidden');
-      setError('checkout', m('notFree'));
+      setError('checkout', msg('notFree'));
       el.checkout.focus();
       return;
     }
 
     if (m === 'mailto') {
       if (isPlaceholder(contact.email)) {
-        showStatus(m('noTarget'), 'error');
+        showStatus(msg('noTarget'), 'error');
         return;
       }
       saveInquiry(forDb(data)).catch((err) => console.warn('Upit nije upisan u bazu:', err.message));
-      showStatus(m('mailto', { email: contact.email }), 'ok');
+      showStatus(msg('mailto', { email: contact.email }), 'ok');
       window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject(data))}&body=${encodeURIComponent(summary(data))}`;
       return;
     }
 
     submitBtn.disabled = true;
     submitBtn.setAttribute('aria-busy', 'true');
-    showStatus(m('sending'), 'info');
+    showStatus(msg('sending'), 'info');
     try {
       // email (Formspree) i upis u Firestore (sanduče upita u /admin) idu paralelno;
       // dovoljno je da uspije jedan od njih – upit je stigao do vlasnice
@@ -391,14 +391,14 @@ function initInquiry() {
       if (mailRes.status === 'rejected') console.warn('Formspree nije uspio:', mailRes.reason);
       if (dbRes.status === 'rejected') console.warn('Upis upita u bazu nije uspio:', dbRes.reason);
       if (mailRes.status === 'rejected' && !(dbRes.status === 'fulfilled' && dbRes.value === true)) throw mailRes.reason;
-      showStatus(m('success'), 'ok');
+      showStatus(msg('success'), 'ok');
       form.reset();
       el.guests.value = config.defaultGuests;
       toggleChildren();
       showErrors({});
     } catch (error) {
       console.error('Slanje forme nije uspelo:', error);
-      showStatus(m('failed'), 'error');
+      showStatus(msg('failed'), 'error');
     } finally {
       submitBtn.disabled = false;
       submitBtn.removeAttribute('aria-busy');
