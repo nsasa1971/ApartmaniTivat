@@ -143,13 +143,13 @@ export const posts = [
   {
     id: 'izlet-njegusi',
     date: '2026-10-16',
-    image: { src: 'assets/img/sight-2.jpg', width: 1024, height: 768 },
+    image: { src: 'assets/img/beach-1.jpg', width: 1024, height: 768 },
     sr: {
       slug: 'izlet-njegusi-i-lovcen-iz-tivta',
       title: 'Jednodnevni izlet iz Tivta: vožnja kotorskim serpentinama i selo Njeguši',
       description: 'Uspon uz 25 serpentina, selo Njeguši, Mauzolej na Jezerskom vrhu i povratak preko Cetinja ili Budve: plan jednodnevnog izleta autom iz Tivta.',
       excerpt: 'Odvezite se spektakularnim putem uz 25 serpentina do Lovćena, uživajte u pogledu koji oduzima dah i probajte najbolji pršut na Balkanu.',
-      imageAlt: 'Pogled na Bokokotorski zaliv sa kotorskih serpentina',
+      imageAlt: 'Pogled na zaliv i planine u okolini Tivta',
       body: [
         ['p', 'Jedna od najvećih prednosti boravka u Tivtu jeste njegova centralna pozicija: sve ljepote crnogorskog primorja i zaleđa nalaze vam se na dohvat ruke. Ako poželite dan ispunjen planinskim vazduhom, istorijom i nevjerovatnim vidikovcima, ova tura automobilom je apsolutni favorit naših gostiju.'],
         ['h2', 'Kotorske serpentine (stari austrougarski put)'],
@@ -169,7 +169,7 @@ export const posts = [
       title: 'A day trip from Tivat: driving the Kotor serpentines and the village of Njeguši',
       description: 'The climb up 25 hairpin bends, the village of Njeguši, the Mausoleum on Jezerski Vrh and a return via Cetinje or Budva: a one-day car trip plan from Tivat.',
       excerpt: 'Drive the spectacular road up 25 hairpin bends to Lovćen, enjoy breathtaking views and taste the best prosciutto in the Balkans.',
-      imageAlt: 'View of the Bay of Kotor from the Kotor serpentines',
+      imageAlt: 'View of the bay and mountains around Tivat',
       body: [
         ['p', 'One of the biggest advantages of staying in Tivat is its central position: all the beauties of the Montenegrin coast and hinterland are within easy reach. If you want a day filled with mountain air, history and incredible viewpoints, this car tour is an absolute favourite of our guests.'],
         ['h2', 'The Kotor serpentines (the old Austro-Hungarian road)'],
@@ -189,7 +189,7 @@ export const posts = [
       title: 'Поездка на один день из Тивата: которские серпантины и деревня Негуши',
       description: 'Подъём по 25 серпантинам, деревня Негуши, мавзолей на Езерском пике и возвращение через Цетине или Будву: план поездки на машине на один день из Тивата.',
       excerpt: 'Проедьте по захватывающей дороге с 25 серпантинами к Ловчену, насладитесь видами, от которых захватывает дух, и попробуйте лучший прошутто на Балканах.',
-      imageAlt: 'Вид на Бококоторский залив с которских серпантинов',
+      imageAlt: 'Вид на залив и горы вокруг Тивата',
       body: [
         ['p', 'Одно из главных преимуществ отдыха в Тивате — его центральное положение: все красоты черногорского побережья и внутренних земель находятся рядом. Если хочется дня, наполненного горным воздухом, историей и невероятными смотровыми площадками, эта поездка на машине — абсолютный фаворит наших гостей.'],
         ['h2', 'Которские серпантины (старая австро-венгерская дорога)'],
@@ -208,13 +208,13 @@ export const posts = [
   {
     id: 'porodice',
     date: '2026-10-19',
-    image: { src: 'assets/img/beach-1.jpg', width: 1024, height: 768 },
+    image: { src: 'assets/img/blog-yard.jpg', width: 1024, height: 768 },
     sr: {
       slug: 'porodicni-odmor-u-tivtu',
       title: 'Porodični odmor u Tivtu: savjeti za roditelje sa malom djecom',
       description: 'Plitka pješčana plaža, hladovina, dvorište i krevetac za bebu na zahtjev: kako isplanirati odmor u Tivtu sa djecom.',
       excerpt: 'Plaže sa plitkim morem, apartmani sa dvorištem među maslinama i krevetac za bebu na zahtjev.',
-      imageAlt: 'Plaža Kalardovo',
+      imageAlt: 'Dvorište među maslinama kod apartmana',
       body: [
         ['p', 'Odmor sa malom djecom traži malo planiranja: sigurno more, hlad, mjesto za igru i udobnost kao kod kuće. Evo na šta da obratite pažnju u Tivtu.'],
         ['h2', 'Plaže za djecu'],
@@ -232,7 +232,7 @@ export const posts = [
       title: 'A family holiday in Tivat: tips for parents with small children',
       description: 'A shallow sandy beach, shade, a yard and a baby crib on request: how to plan a holiday in Tivat with children.',
       excerpt: 'Beaches with shallow water, apartments with a yard among olive trees and a baby crib on request.',
-      imageAlt: 'Kalardovo beach',
+      imageAlt: 'The yard among olive trees at the apartments',
       body: [
         ['p', 'A holiday with small children takes a little planning: safe water, shade, a place to play and the comfort of home. Here is what to look for in Tivat.'],
         ['h2', 'Beaches for children'],
@@ -250,7 +250,7 @@ export const posts = [
       title: 'Семейный отдых в Тивате: советы родителям с маленькими детьми',
       description: 'Мелкий песчаный пляж, тень, двор и детская кроватка по запросу: как спланировать отдых в Тивате с детьми.',
       excerpt: 'Пляжи с мелким морем, апартаменты со двором среди олив и детская кроватка по запросу.',
-      imageAlt: 'Пляж Калардово',
+      imageAlt: 'Двор среди олив у апартаментов',
       body: [
         ['p', 'Отдых с маленькими детьми требует небольшого планирования: безопасное море, тень, место для игр и домашний комфорт. Вот на что обратить внимание в Тивате.'],
         ['h2', 'Пляжи для детей'],
@@ -267,13 +267,13 @@ export const posts = [
   {
     id: 'sta-ponijeti',
     date: '2026-10-16',
-    image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768 },
+    image: { src: 'assets/img/blog-terrace.jpg', width: 1024, height: 768 },
     sr: {
       slug: 'sta-ponijeti-na-ljetovanje-u-tivtu',
       title: 'Šta ponijeti na ljetovanje u Tivtu: lista za cijelu porodicu',
       description: 'Kupaći, obuća za vodu, zaštita od sunca, laka jakna za izlete i stvari za djecu: praktična lista šta spakovati za odmor u Tivtu i Boki Kotorskoj.',
       excerpt: 'Šta spakovati za ljetovanje u Tivtu: od obuće za šljunkovite plaže do lagane jakne za izlet u planine, uz posebnu listu za djecu.',
-      imageAlt: 'Pakovanje za ljetovanje u Tivtu',
+      imageAlt: 'Terasa apartmana sa stolom i vinom',
       body: [
         ['p', 'Tivat je mjesto za koje se ne treba posebno opremati: more je na pet minuta hoda, prodavnice su blizu, a apartmani imaju potpuno opremljenu kuhinju i sve za svakodnevni boravak. Ipak, nekoliko stvari će vam odmor učiniti ugodnijim. Evo liste koju preporučujemo našim gostima.'],
         ['h2', 'Za plažu i more'],
@@ -293,7 +293,7 @@ export const posts = [
       title: 'What to pack for a holiday in Tivat: a checklist for the whole family',
       description: 'Swimwear, water shoes, sun protection, a light jacket for trips and things for the kids: a practical packing list for a holiday in Tivat and the Bay of Kotor.',
       excerpt: 'What to pack for a holiday in Tivat: from shoes for pebbly beaches to a light jacket for a trip to the mountains, with a special list for children.',
-      imageAlt: 'Packing for a holiday in Tivat',
+      imageAlt: 'Apartment terrace with a table and wine',
       body: [
         ['p', 'Tivat is a place you do not need to equip yourself for specially: the sea is five minutes away, the shops are close and the apartments have a fully equipped kitchen and everything for daily life. Still, a few things will make your holiday more pleasant. Here is the list we recommend to our guests.'],
         ['h2', 'For the beach and the sea'],
@@ -313,7 +313,7 @@ export const posts = [
       title: 'Что взять на отдых в Тиват: список для всей семьи',
       description: 'Купальники, обувь для воды, защита от солнца, лёгкая куртка для поездок и вещи для детей: практичный список для отдыха в Тивате и Бококоторском заливе.',
       excerpt: 'Что взять на отдых в Тивате: от обуви для галечных пляжей до лёгкой куртки для поездки в горы, плюс отдельный список для детей.',
-      imageAlt: 'Сборы на отдых в Тивате',
+      imageAlt: 'Терраса апартаментов со столом и вином',
       body: [
         ['p', 'В Тиват не нужно собираться особенным образом: море в пяти минутах, магазины рядом, а в апартаментах есть полностью оборудованная кухня и всё для повседневной жизни. Тем не менее несколько вещей сделают отдых приятнее. Вот список, который мы рекомендуем нашим гостям.'],
         ['h2', 'Для пляжа и моря'],
@@ -403,7 +403,7 @@ export const posts = [
   {
     id: 'kako-doci',
     date: '2026-10-16',
-    image: { src: 'assets/img/sight-1.jpg', width: 1024, height: 768 },
+    image: { src: 'assets/img/blog-door.jpg', width: 1024, height: 768 },
     sr: {
       slug: 'kako-doci-do-tivta-aerodrom-i-autom',
       title: 'Kako doći do Tivta: aerodrom, autom ili autobusom',
@@ -468,7 +468,7 @@ export const posts = [
   {
     id: 'solila-priroda',
     date: '2026-10-16',
-    image: { src: 'assets/img/beach-2.jpg', width: 1024, height: 768 },
+    image: { src: 'assets/img/blog-pomegranate.jpg', width: 1024, height: 768 },
     sr: {
       slug: 'solila-i-ostrvo-cvijeca-priroda-u-tivtu',
       title: 'Solila i Ostrvo cvijeća: priroda i posmatranje ptica u Tivtu',
