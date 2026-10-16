@@ -8,6 +8,7 @@ import { $, $$, esc, toast, confirmDialog } from './ui.js';
 import * as store from './store.js';
 import { renderCalendar } from './calendar.js';
 import { openBookingForm } from './booking-form.js';
+import { openConfirmation } from './confirmation.js';
 import { renderBookings, renderInquiries, newInquiryCount } from './lists.js';
 import { toJSON, toCSV, download, stamp } from './backup.js';
 
@@ -212,7 +213,17 @@ async function onViewClick(e) {
   else if (d.day) bookingFormFor(null, { apartmentId: state.aptId, from: d.day, to: addDays(d.day, 1) });
   else if (d.booking) bookingFormFor(state.bookings.find((b) => b.id === d.booking));
   else if (d.new !== undefined) bookingFormFor(null, { apartmentId: '' });
-  else if (d.block) {
+  else if (d.confirmBk || d.confirmInq) {
+    const q = d.confirmInq ? state.inquiries.find((x) => x.id === d.confirmInq) : null;
+    // za prihvaćen upit koristi se rezervacija (datumi su možda izmijenjeni pri prihvatanju), a ako je nema – sam upit
+    const b = d.confirmBk ? state.bookings.find((x) => x.id === d.confirmBk) : state.bookings.find((x) => x.id === q?.bookingId) ?? q;
+    if (!b) return;
+    const apt = state.apartments.find((a) => a.id === b.apartmentId);
+    openConfirmation(
+      { guestName: b.guestName, apartmentName: apt?.naziv ?? b.apartmentId, from: b.from, to: b.to, guests: b.guests, price: b.price },
+      { email: b.email, phone: b.phone }
+    );
+  } else if (d.block) {
     try { feedback(await store.setBlockedOnBooking(d.block, true), 'Označeno kao blokirano na Bookingu.'); }
     catch (err) { console.error(err); toast('Izmjena nije uspjela.', 'error'); }
   } else if (d.accept) {

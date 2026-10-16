@@ -21,6 +21,7 @@ const bookingCard = (b, apartments) => {
         ${warn ? '<span class="mt-2 inline-block bg-red-600 px-2 py-0.5 font-sans text-xs font-bold text-white">Nije blokirano na Bookingu</span>' : ''}
       </button>
       ${warn ? `<div class="border-t border-line px-4 pb-3 pt-2"><button type="button" data-block="${esc(b.id)}" class="min-h-11 w-full bg-[#053133] px-4 font-sans text-sm font-bold text-white">Označi kao blokirano na Bookingu</button></div>` : ''}
+      ${b.source === 'direct' && (b.email || b.phone) ? `<div class="border-t border-line px-4 pb-3 pt-2"><button type="button" data-confirm-bk="${esc(b.id)}" class="min-h-11 w-full border border-ink px-4 font-sans text-sm font-bold">Pošalji potvrdu gostu</button></div>` : ''}
     </li>`;
 };
 
@@ -70,6 +71,9 @@ const inquiryCard = (q, apartments) => {
       <a href="https://wa.me/${digits(q.phone)}" target="_blank" rel="noopener" class="flex min-h-11 items-center border border-ink px-4 font-sans text-sm font-bold">WhatsApp</a>` : ''}
       <a href="mailto:${esc(q.email)}" class="flex min-h-11 items-center border border-ink px-4 font-sans text-sm font-bold">Email</a>
     </div>`;
+  const confirm = q.status === 'accepted' && (q.email || q.phone)
+    ? `<div class="mt-3"><button type="button" data-confirm-inq="${esc(q.id)}" class="min-h-12 w-full border border-ink px-4 font-sans text-base font-bold">Pošalji potvrdu gostu</button></div>`
+    : '';
   const actions =
     q.status === 'new'
       ? `<div class="mt-3 grid grid-cols-2 gap-2">
@@ -88,7 +92,7 @@ const inquiryCard = (q, apartments) => {
       <p class="font-sans text-sm">${q.apartmentId ? esc(aptName(apartments, q.apartmentId)) : 'Bez preferencije apartmana'}</p>
       <p class="font-sans text-sm">${esc(q.email)}${q.phone ? ' · ' + esc(q.phone) : ''}${q.messengers ? ' · ' + esc(q.messengers) : ''}</p>
       ${q.message ? `<p class="mt-2 whitespace-pre-line border-l-4 border-line pl-3 font-sans text-sm">${esc(q.message)}</p>` : ''}
-      ${contact}${actions}
+      ${contact}${actions}${confirm}
     </li>`;
 };
 
