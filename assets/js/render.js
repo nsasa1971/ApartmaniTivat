@@ -123,7 +123,7 @@ function header() {
   const nav = navTree();
   return `
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
-    <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
+    <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
       <a href="#top" class="shrink-0" aria-label="${esc(c.site.brand)}">
         <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-20 w-auto md:h-24 lg:h-20 xl:h-24">
       </a>
@@ -307,7 +307,7 @@ function apartments() {
     <section id="${esc(a.id)}" class="py-[50px] md:pb-[100px] md:pt-0">
       <div class="container max-w-page">
         <h2 class="mb-12 text-center font-display text-[30px] leading-tight text-[#1F2F25]">${esc(a.title)}</h2>
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="grid gap-6 md:grid-cols-3 md:gap-8 lg:gap-12">
           ${c.apartments
             .map(
               (ap) => `<article class="group reveal block">

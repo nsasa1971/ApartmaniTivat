@@ -44,7 +44,7 @@ function page({ lang, base, title, description, path, alternates, image, ogType 
   const homeUrl = homeHref(lang);
   const header = `
   <header class="sticky top-0 z-50 bg-white shadow-sm">
-    <div class="mx-auto flex max-w-[1240px] items-center justify-between gap-4 px-4 py-2">
+    <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-2">
       <a href="${homeUrl}" class="shrink-0" aria-label="${esc(c.site.brand)}"><img src="/${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-16 w-auto md:h-20"></a>
       <nav class="hidden items-center gap-7 font-sans text-base md:flex" aria-label="${esc(tr('aria.mainNav', lang))}">
         <a href="${homeUrl}" class="hover:opacity-60">${tr('blog.home', lang)}</a>
