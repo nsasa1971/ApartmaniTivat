@@ -73,8 +73,8 @@ export const hero = {
   mobileSrc: 'assets/img/hero-mobile.jpg', // oštra uspravna verzija iz većeg originala (telefoni)
   // Slider: prva je `image`, ostale se učitavaju iza nje (slika koja ne postoji se preskoči).
   slides: [
-    'assets/img/hero-1.jpg',
-    'assets/img/hero-2.jpg',
+    { src: 'assets/img/hero-1.jpg', mobileSrc: 'assets/img/hero-1-m.jpg' }, // mobileSrc = uspravni isječak za telefone
+    { src: 'assets/img/hero-2.jpg', mobileSrc: 'assets/img/hero-2-m.jpg' },
     'assets/img/hero-3.jpg',
     'assets/img/gallery-13.jpg',
   ],
