@@ -47,16 +47,16 @@ function page({ lang, base, title, description, path, alternates, image, ogType 
     <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-2">
       <a href="${homeUrl}" class="shrink-0" aria-label="${esc(c.site.brand)}"><img src="/${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-16 w-auto md:h-20"></a>
       <nav class="hidden items-center gap-7 font-sans text-base md:flex" aria-label="${esc(tr('aria.mainNav', lang))}">
-        <a href="${homeUrl}" class="hover:opacity-60">${tr('blog.home', lang)}</a>
-        <a href="${homeHref(lang, '#apartmani')}" class="hover:opacity-60">${tr('blog.stay', lang)}</a>
-        <a href="${blogIndexPath(lang)}" class="font-bold hover:opacity-60">${tr('nav.blog', lang)}</a>
+        <a href="${homeUrl}" class="hover:underline">${tr('blog.home', lang)}</a>
+        <a href="${homeHref(lang, '#apartmani')}" class="hover:underline">${tr('blog.stay', lang)}</a>
+        <a href="${blogIndexPath(lang)}" class="font-bold hover:underline">${tr('nav.blog', lang)}</a>
       </nav>
       <div class="flex items-center gap-3">
         <div class="flex items-center font-sans text-sm" role="group" aria-label="${esc(tr('aria.language', lang))}">
           ${languages
             .map(
               (l) =>
-                `<a href="${alternates[l.code]}" hreflang="${HTML_LANG[l.code]}" lang="${HTML_LANG[l.code]}" title="${esc(l.name)}" ${l.code === lang ? 'aria-current="true"' : ''} class="px-2 py-1 hover:opacity-60 ${l.code === lang ? 'font-bold underline underline-offset-4' : ''}">${l.label}</a>`
+                `<a href="${alternates[l.code]}" hreflang="${HTML_LANG[l.code]}" lang="${HTML_LANG[l.code]}" title="${esc(l.name)}" ${l.code === lang ? 'aria-current="true"' : ''} class="px-2 py-1 hover:no-underline ${l.code === lang ? 'font-bold underline underline-offset-4' : ''}">${l.label}</a>`
             )
             .join('')}
         </div>
@@ -132,9 +132,9 @@ const card = (post, lang) => `
           <a href="${postPath(post, lang)}" class="block overflow-hidden">
             <img src="/${esc(post.image.src)}" width="${post.image.width}" height="${post.image.height}" loading="lazy" decoding="async" alt="${esc(post[lang].imageAlt)}" class="aspect-[4/3] w-full object-cover transition duration-500 group-hover:scale-[1.03]">
           </a>
-          <h2 class="mt-4 font-display text-[22px] leading-snug text-ink"><a href="${postPath(post, lang)}" class="hover:opacity-70">${esc(post[lang].title)}</a></h2>
+          <h2 class="mt-4 font-display text-[22px] leading-snug text-ink"><a href="${postPath(post, lang)}" class="hover:underline">${esc(post[lang].title)}</a></h2>
           <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(post[lang].excerpt)}</p>
-          <a href="${postPath(post, lang)}" class="mt-3 inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:opacity-70">${tr('blog.read', lang)} <span aria-hidden="true">→</span></a>
+          <a href="${postPath(post, lang)}" class="mt-3 inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:underline">${tr('blog.read', lang)} <span aria-hidden="true">→</span></a>
         </article>`;
 
 /** Spisak članaka: /blog/, /en/blog/, /ru/blog/ */
@@ -178,7 +178,7 @@ export function renderPostPage(post, lang, base) {
   const main = `
     <article class="container max-w-[860px] py-10 md:py-14">
       <nav class="mb-6 font-sans text-sm text-body" aria-label="breadcrumb">
-        <a href="${blogIndexPath(lang)}" class="underline hover:opacity-60">${esc(tr('nav.blog', lang))}</a> <span aria-hidden="true">/</span> <span>${esc(p.title)}</span>
+        <a href="${blogIndexPath(lang)}" class="underline hover:no-underline">${esc(tr('nav.blog', lang))}</a> <span aria-hidden="true">/</span> <span>${esc(p.title)}</span>
       </nav>
       <h1 class="font-display text-[30px] leading-tight text-ink md:text-[44px]">${esc(p.title)}</h1>
       <p class="mb-8 mt-3 font-sans text-sm text-body"><time datetime="${post.date}">${esc(fmtDate(post.date, lang))}</time></p>

@@ -99,7 +99,7 @@ const langMenu = () => {
   const cur = languages.find((l) => l.code === getLang()) ?? languages[0];
   return `
         <div class="relative hidden lg:block" data-lang-menu>
-          <button type="button" id="lang-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-list" aria-label="${esc(t('aria.language'))}: ${esc(cur.name)}"
+          <button type="button" id="lang-toggle" aria-haspopup="listbox" aria-expanded="false" aria-controls="lang-list" aria-label="${esc(cur.label)}, ${esc(t('aria.language'))}: ${esc(cur.name)}"
                   class="flex h-11 items-center gap-2 rounded-full border border-ink/15 bg-white px-3 font-sans text-sm transition hover:border-ink/40">
             ${flagBox(cur.flag, 'cur')}
             <span class="hidden sm:inline">${cur.label}</span>
@@ -134,12 +134,12 @@ function header() {
             .map((n) =>
               n.children
                 ? `<li class="group relative" data-nav-menu>
-            <button type="button" aria-haspopup="true" aria-expanded="false" class="inline-flex items-center gap-1 px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">${t(n.key)}<svg class="h-3 w-3 text-ink/60" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg></button>
+            <button type="button" aria-haspopup="true" aria-expanded="false" class="inline-flex items-center gap-1 px-[13px] py-[11px] hover:underline lg:px-[9px] xl:px-[13px]">${t(n.key)}<svg class="h-3 w-3 text-ink/60" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m2.5 4.5 3.5 3.5 3.5-3.5"/></svg></button>
             <ul class="absolute left-0 top-full z-[60] hidden min-w-[200px] overflow-hidden rounded-xl border border-ink/10 bg-white py-1 shadow-xl group-focus-within:block group-hover:block">
               ${n.children.map((ch) => `<li><a href="${ch.href}" class="block px-5 py-2.5 font-sans text-base hover:bg-mist">${t(ch.key)}</a></li>`).join('\n              ')}
             </ul>
           </li>`
-                : `<li><a href="${n.href}" class="px-[13px] py-[11px] hover:opacity-60 lg:px-[9px] xl:px-[13px]">${t(n.key)}</a></li>`
+                : `<li><a href="${n.href}" class="px-[13px] py-[11px] hover:underline lg:px-[9px] xl:px-[13px]">${t(n.key)}</a></li>`
             )
             .join('\n          ')}
         </ul>
@@ -165,14 +165,14 @@ function header() {
               : `<li><a href="${n.href}" class="block py-2.5">${t(n.key)}</a></li>`
           )
           .join('\n        ')}
-        <li class="flex items-center gap-1 py-2" role="group" aria-label="${esc(t('aria.language'))}">
+        <li class="py-2"><div class="flex items-center gap-1" role="group" aria-label="${esc(t('aria.language'))}">
           ${languages
             .map(
               (l) =>
                 `<button type="button" data-lang="${l.code}" aria-pressed="${l.code === getLang()}" lang="${l.code}" title="${esc(l.name)}" class="px-3 py-2 font-sans text-sm aria-pressed:font-bold aria-pressed:underline aria-pressed:underline-offset-4">${l.label}</button>`
             )
             .join('')}
-        </li>
+        </div></li>
       </ul>
     </nav>
   </header>`;
@@ -210,7 +210,7 @@ function hero() {
         </picture>
       </div>
       <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(26,40,31,.38)_0%,rgba(26,40,31,.5)_100%)] md:bg-[linear-gradient(90deg,rgba(26,40,31,.88)_0%,rgba(26,40,31,.6)_45%,rgba(26,40,31,0)_80%)]"></div>
-      <div data-hero-dots class="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 gap-3 md:bottom-auto md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="${esc(t('aria.slides'))}"></div>
+      <div data-hero-dots class="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 gap-0 md:bottom-auto md:left-auto md:right-8 md:top-1/2 md:-translate-y-1/2 md:translate-x-0 md:flex-col" role="group" aria-label="${esc(t('aria.slides'))}"></div>
 
       <div class="container relative max-w-page">
         <div class="max-w-3xl text-center text-white [text-shadow:0_1px_6px_rgba(0,0,0,.55)] md:pl-3 md:text-left">
@@ -260,7 +260,7 @@ function intro() {
               .split('\n\n')
               .map((t, i, all) => `<p class="${i === all.length - 1 ? 'mb-[30px]' : 'mb-4'} font-sans text-sm leading-loose text-ink md:text-lg">${esc(t)}</p>`)
               .join('\n            ')}
-            ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg')}
+            ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base text-ink hover:underline md:text-lg')}
           </div>
         </div>
       </div>
@@ -275,7 +275,7 @@ function aptGallery(ap) {
   const rest = photos.length - shown.length;
   const alt = (i) => t('apt.photo', { name: ap.fullName ?? ap.name, n: i + 1 });
   const link = (p, i, inner, cls) =>
-    `<a href="${esc(p.full)}" data-lightbox data-group="${esc(ap.id)}" data-alt="${esc(alt(i))}" class="${cls}" aria-label="${esc(i === shown.length - 1 && rest > 0 ? t('apt.photosAll', { n: photos.length }) : alt(i))}">${inner}</a>`;
+    `<a href="${esc(p.full)}" data-lightbox data-group="${esc(ap.id)}" data-alt="${esc(alt(i))}" class="${cls}" aria-label="${esc(i === shown.length - 1 && rest > 0 ? `+${rest} – ${t('apt.photosAll', { n: photos.length })}` : alt(i))}">${inner}</a>`;
   return `
             <ul class="mt-2 grid grid-cols-4 gap-2">
               ${shown
@@ -401,7 +401,7 @@ function feature() {
           <div class="reveal text-center md:pr-[50px] md:text-left">
             <h2 class="mb-[30px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">${esc(s.title)}</h2>
             <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">${esc(s.text)}</p>
-            ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base hover:opacity-60 md:text-lg')}
+            ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base hover:underline md:text-lg')}
           </div>
           <div class="reveal md:p-[10px] md:pl-[60px]">
             <img src="${esc(s.image.src)}" width="${s.image.width}" height="${s.image.height}" loading="lazy" decoding="async" alt="${esc(s.image.alt)}" class="w-full">
@@ -430,7 +430,7 @@ function reviews() {
               <span class="min-w-0">
                 <span class="block font-display text-[22px] leading-7 text-ink">${esc(r.name)}</span>${
                   r.source
-                    ? `\n                <a href="${esc(r.source)}" target="_blank" rel="noopener" class="font-sans text-sm text-body underline hover:opacity-60">${esc(t('review.source'))}</a>`
+                    ? `\n                <a href="${esc(r.source)}" target="_blank" rel="noopener" class="font-sans text-sm text-body underline hover:no-underline">${esc(t('review.source'))}</a>`
                     : ''
                 }
               </span>
@@ -453,7 +453,7 @@ function dark() {
           <div class="reveal p-[30px] text-center text-white md:py-[67px] md:pl-[50px] md:pr-[35px] md:text-left">
             <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-white md:text-[30px]">${esc(s.title)}</h2>
             <p class="mb-[30px] font-sans text-sm leading-loose md:text-lg">${esc(s.text)}</p>
-            ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base hover:opacity-70 md:text-lg')}
+            ${moreLink(s.href, 'inline-flex items-center gap-3 font-sans text-base hover:underline md:text-lg')}
           </div>
           <div class="reveal p-5 md:p-0">
             <img src="${esc(s.image.src)}" width="${s.image.width}" height="${s.image.height}" loading="lazy" decoding="async" alt="${esc(s.image.alt)}"
@@ -478,7 +478,7 @@ const cards = (items) =>
                 : ''
             }${
               p.guide
-                ? `\n            <a href="${guidePath(p.guide, getLang())}" class="mt-3 inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:opacity-70">${t('sights.guide')} <span aria-hidden="true">→</span></a>`
+                ? `\n            <a href="${guidePath(p.guide, getLang())}" class="mt-3 inline-flex items-center gap-2 font-sans text-sm font-bold text-ink hover:underline">${t('sights.guide')} <span aria-hidden="true">→</span></a>`
                 : ''
             }`;
       const layout = p.highlights?.length || p.guide ? 'flex flex-col' : 'block';
@@ -542,14 +542,14 @@ function blogSection() {
             .map(
               (p) => `<article class="group reveal flex flex-col">
             <a href="${postPath(p, lang)}" class="block overflow-hidden"><img src="${esc(p.image.src)}" width="${p.image.width}" height="${p.image.height}" loading="lazy" decoding="async" alt="${esc(p[lang].imageAlt)}" class="img-muted w-full"></a>
-            <h3 class="mt-5 font-sans text-xl font-bold leading-snug text-ink"><a href="${postPath(p, lang)}" class="hover:opacity-70">${esc(p[lang].title)}</a></h3>
+            <h3 class="mt-5 font-sans text-xl font-bold leading-snug text-ink"><a href="${postPath(p, lang)}" class="hover:underline">${esc(p[lang].title)}</a></h3>
             <p class="mt-2 font-sans text-sm leading-7 text-body">${esc(p[lang].excerpt)}</p>
-            <a href="${postPath(p, lang)}" class="mt-3 font-sans text-sm font-bold text-ink hover:opacity-70">${t('blog.read')} ${arrow}</a>
+            <a href="${postPath(p, lang)}" class="mt-3 font-sans text-sm font-bold text-ink hover:underline">${t('blog.read')} ${arrow}</a>
           </article>`
             )
             .join('\n          ')}
         </div>
-        <p class="mt-10 text-center"><a href="${blogIndexPath(lang)}" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:opacity-60 md:text-lg">${t('blog.all')} ${arrow}</a></p>
+        <p class="mt-10 text-center"><a href="${blogIndexPath(lang)}" class="inline-flex items-center gap-3 font-sans text-base text-ink hover:underline md:text-lg">${t('blog.all')} ${arrow}</a></p>
       </div>
     </section>`;
 }
@@ -656,7 +656,7 @@ function reservation() {
           <div class="mt-5">
             <label class="flex items-start gap-3 font-sans text-sm leading-6">
               <input type="checkbox" id="consent" name="consent" required class="mt-1.5 h-4 w-4 shrink-0 accent-ink" aria-describedby="consent-error">
-              <span>${esc(t('f.consent', { link: '\u0000' })).replace('\u0000', `<a href="${esc(b.privacyHref)}" target="_blank" rel="noopener" class="underline hover:opacity-60">${esc(t('f.privacyLink'))}</a>`)}</span>
+              <span>${esc(t('f.consent', { link: '\u0000' })).replace('\u0000', `<a href="${esc(b.privacyHref)}" target="_blank" rel="noopener" class="underline hover:no-underline">${esc(t('f.privacyLink'))}</a>`)}</span>
             </label>
             <p id="consent-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="consent"></p>
           </div>
@@ -679,12 +679,12 @@ function reservation() {
               .map((k) =>
                 isPlaceholder(k.value)
                   ? `<li><span class="font-bold">${k.label}:</span> ${esc(k.value)}</li>`
-                  : `<li><span class="font-bold">${k.label}:</span> <a href="${esc(k.href)}"${k.id === 'whatsapp' ? ' target="_blank" rel="noopener"' : ''} class="underline hover:opacity-60">${esc(k.value)}</a></li>`
+                  : `<li><span class="font-bold">${k.label}:</span> <a href="${esc(k.href)}"${k.id === 'whatsapp' ? ' target="_blank" rel="noopener"' : ''} class="underline hover:no-underline">${esc(k.value)}</a></li>`
               )
               .join('\n            ')}
             <li><span class="font-bold">${t('contact.address')}:</span> ${
               c.contact.mapUrl
-                ? `<a href="${esc(c.contact.mapUrl)}" target="_blank" rel="noopener" class="underline hover:opacity-60">${esc(fullAddress())}</a>`
+                ? `<a href="${esc(c.contact.mapUrl)}" target="_blank" rel="noopener" class="underline hover:no-underline">${esc(fullAddress())}</a>`
                 : esc(fullAddress())
             }</li>
           </ul>
@@ -758,10 +758,7 @@ function overlays() {
     <button id="lb-prev" type="button" class="absolute left-4 p-2 text-5xl text-white" aria-label="${t('btn.prev')}">‹</button>
     <img id="lb-img" src="" alt="${esc(t('aria.gallery'))}" class="max-h-[90vh] max-w-[90vw] select-none object-contain">
     <button id="lb-next" type="button" class="absolute right-4 p-2 text-5xl text-white" aria-label="${t('btn.next')}">›</button>
-  </div>
-
-  <a id="scroll-up" href="#top" aria-label="${t('btn.top')}"
-     class="fixed bottom-5 right-5 z-40 hidden h-11 w-11 items-center justify-center bg-ink text-white hover:bg-charcoal"><span aria-hidden="true">↑</span></a>`;
+  </div>`;
 }
 
 /** Kompletan sadržaj <div id="app"> na traženom jeziku (default sr). */
@@ -787,6 +784,8 @@ ${blogSection()}
 ${availabilitySection()}
 ${reservation()}
 ${map()}
+  <a id="scroll-up" href="#top" aria-label="${t('btn.top')}"
+     class="fixed bottom-5 right-5 z-40 hidden h-11 w-11 items-center justify-center bg-ink text-white hover:bg-charcoal"><span aria-hidden="true">↑</span></a>
   </main>
 
 ${footer()}
