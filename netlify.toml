@@ -5,6 +5,10 @@
 [build.environment]
   NODE_VERSION = "22"
 
+# Funkcije (uvoz zauzetih termina sa Booking.com-a: /api/booking-ical)
+[functions]
+  directory = "netlify/functions"
+
 # Stari članci koji su zamijenjeni novim (isti sadržaj bi pretraživači tretirali kao duplikat)
 [[redirects]]
   from = "/blog/najljepse-plaze-u-blizini-tivta.html"

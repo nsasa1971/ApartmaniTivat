@@ -3,9 +3,11 @@
 //  Ako Firebase nije podešen ili nije dostupan, vraća null i sajt radi bez kalendara.
 //    - watchAvailability(): uživo (onSnapshot), za kalendar dostupnosti; stop() odjavljuje listener
 //    - loadAvailability():  jednokratno, uvijek sa servera (bez keša), za provjeru termina pri slanju upita
+//  Termini sa Booking.com-a (iCal, Netlify funkcija /api/booking-ical) se spajaju sa terminima iz Firebase-a.
+//  Ako funkcija nije dostupna (npr. nije podešena), kalendar radi samo sa Firebase terminima.
 // ============================================================
 import { isFirebaseConfigured, firestore } from './firebase-client.js';
-import { todayLocal } from './availability.js';
+import { todayLocal, isValidISO } from './availability.js';
 
 const withTimeout = (p, ms) =>
   Promise.race([p, new Promise((_, rej) => setTimeout(() => rej(new Error('timeout')), ms))]);
@@ -21,6 +23,37 @@ const toMap = (snap) => {
   return map;
 };
 
+const EXTERNAL_URL = '/api/booking-ical';
+const EXTERNAL_REFRESH_MS = 5 * 60 * 1000; // funkcija kešira 10 min, pa češće nema smisla
+
+let lastExternal = new Map();
+
+/** Zauzeti termini sa Booking.com-a: Map apartmentId → [{from, to}]. Greška = posljednji poznati podaci. */
+export async function loadExternalAvailability() {
+  try {
+    const res = await withTimeout(fetch(EXTERNAL_URL, { headers: { Accept: 'application/json' } }), 5000);
+    if (!res.ok) return lastExternal;
+    const data = await res.json();
+    const map = new Map();
+    for (const [id, ranges] of Object.entries(data.apartments ?? {})) {
+      const ok = ranges.filter((r) => isValidISO(r.from) && isValidISO(r.to) && r.to > r.from);
+      if (ok.length) map.set(id, ok);
+    }
+    // apartman čiji je iCal privremeno nedostupan zadržava prethodne podatke
+    for (const id of data.failed ?? []) if (lastExternal.has(id) && !map.has(id)) map.set(id, lastExternal.get(id));
+    return (lastExternal = map);
+  } catch {
+    return lastExternal;
+  }
+}
+
+/** Spaja dvije mape termina (unija po apartmanu). */
+export const mergeAvailability = (a, b) => {
+  const out = new Map();
+  for (const m of [a, b]) for (const [id, ranges] of m) out.set(id, [...(out.get(id) ?? []), ...ranges]);
+  return out;
+};
+
 const upcoming = ({ collection, query, where, db }) => query(collection(db, 'availability'), where('to', '>=', todayLocal()));
 
 let inflight;
@@ -31,7 +64,8 @@ export function loadAvailability() {
   return (inflight ??= withTimeout(
     (async () => {
       const fs = await firestore();
-      return toMap(await fs.getDocs(upcoming(fs)));
+      const [snap, external] = await Promise.all([fs.getDocs(upcoming(fs)), loadExternalAvailability()]);
+      return mergeAvailability(toMap(snap), external);
     })(),
     8000
   )
@@ -53,22 +87,35 @@ export function watchAvailability(onChange) {
   if (!isFirebaseConfigured()) return { ready: Promise.resolve(null), stop() {} };
   let stopped = false;
   let unsubscribe = null;
+  let refreshTimer = null;
+  let own = null; // posljednji podaci iz Firebase-a
+  let external = lastExternal; // posljednji podaci sa Booking.com-a
+  const emit = () => own && !stopped && onChange(mergeAvailability(own, external));
   const stop = () => {
     stopped = true;
     unsubscribe?.();
     unsubscribe = null;
+    clearInterval(refreshTimer);
+  };
+  const refreshExternal = async () => {
+    const next = await loadExternalAvailability();
+    if (stopped) return;
+    external = next;
+    emit();
   };
   const ready = withTimeout(
     new Promise((resolve, reject) => {
       firestore()
         .then((fs) => {
           if (stopped) return resolve(null);
+          refreshExternal();
+          refreshTimer = setInterval(refreshExternal, EXTERNAL_REFRESH_MS);
           unsubscribe = fs.onSnapshot(
             upcoming(fs),
             (snap) => {
-              const map = toMap(snap);
-              resolve(map);
-              if (!stopped) onChange(map);
+              own = toMap(snap);
+              resolve(mergeAvailability(own, external));
+              emit();
             },
             (e) => {
               console.warn('Dostupnost (uživo) nije dostupna:', e.message);
