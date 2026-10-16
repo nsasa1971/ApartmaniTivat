@@ -119,6 +119,7 @@ const lavandaLemoniFeatures = [
 export const apartments = [
   {
     id: 'olive',
+    plant: { src: 'assets/img/plant-olive.png', width: 97, height: 160 }, // biljka ispred naziva (maslina, lavanda, limun)
     name: 'Olive', // kratki naziv: forma, select, kalendar, admin
     fullName: 'Holiday home Olive', // puni naziv: samo u opisima na sajtu
     area: '50 m²',
@@ -138,6 +139,7 @@ export const apartments = [
   },
   {
     id: 'lavanda',
+    plant: { src: 'assets/img/plant-lavanda.png', width: 67, height: 160 }, // biljka ispred naziva (maslina, lavanda, limun)
     name: 'Lavande', // kratki naziv: forma, select, kalendar, admin
     fullName: 'Holiday home Lavande', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
@@ -149,6 +151,7 @@ export const apartments = [
   },
   {
     id: 'lemoni',
+    plant: { src: 'assets/img/plant-lemoni.png', width: 121, height: 160 }, // biljka ispred naziva (maslina, lavanda, limun)
     name: 'Lemoni', // kratki naziv: forma, select, kalendar, admin
     fullName: 'Holiday home Lemoni', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
