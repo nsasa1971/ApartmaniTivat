@@ -607,7 +607,7 @@ function reservation() {
               <p id="${id}-error" class="hidden pt-1 font-sans text-sm text-red-600" data-error-for="${id}"></p>
             </div>`;
   return `
-    <section id="rezervacija" class="container max-w-page pb-12 text-center [overflow-anchor:none]">
+    <section id="rezervacija" class="container max-w-page pb-12 pt-14 text-center md:pt-24 [overflow-anchor:none]">
       <h2 class="mb-4 font-display text-[30px] leading-tight md:text-[46px]">${esc(b.title)}</h2>
       <p class="mx-auto mb-6 max-w-xl font-sans text-lg">${esc(b.text)}</p>
 
