@@ -21,6 +21,7 @@ export function initAvailability() {
       io.disconnect();
       const map = await loadAvailability();
       if (map) mount(section, map);
+      else section.classList.add('hidden'); // kalendar nije dostupan: sekcija se uklanja (sajt radi normalno bez nje)
     },
     { rootMargin: '600px' }
   );
@@ -111,6 +112,8 @@ function mount(section, map) {
   });
 
   section.classList.remove('hidden');
+  section.querySelector('#avail-loading')?.remove();
+  section.querySelector('#avail-body').classList.remove('hidden');
   render();
   // kad gost dolazi sa linka (npr. sa bloga) na #dostupnost-anchor, ostani na kalendaru:
   // dio ispod ne smije da "povuče" pregled na formu za upit kad se kalendar pojavi

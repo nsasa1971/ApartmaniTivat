@@ -101,7 +101,7 @@
 <body class="bg-white antialiased">
   <!-- Sadržaj generiše assets/js/render.js iz assets/js/content.js (prerender: npm run build) -->
   <!-- build:app -->
-  <div id="app" data-hash="cwe48p">
+  <div id="app" data-hash="16eubdf">
   <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:z-[200] focus:bg-white focus:px-4 focus:py-2">Preskoči na sadržaj</a>
 
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
@@ -655,11 +655,12 @@
     </section>
 
     <div id="dostupnost-anchor" aria-hidden="true"></div>
-    <section id="dostupnost" class="hidden bg-mist py-[50px] md:py-[100px]" aria-labelledby="dostupnost-title">
+    <section id="dostupnost" class="bg-mist py-[50px] md:py-[100px]" aria-labelledby="dostupnost-title">
       <div class="container max-w-page text-center">
         <h2 id="dostupnost-title" class="mb-4 font-display text-[30px] leading-tight text-[#1F2F25]">Dostupnost</h2>
         <p class="mx-auto mb-8 max-w-xl font-sans text-lg">Izaberite apartman i datume dolaska i odlaska da vidite koji su termini slobodni, pa pošaljite upit.</p>
-        <div class="mx-auto max-w-md bg-white p-4 md:p-6">
+        <p id="avail-loading" class="mx-auto max-w-md bg-white p-8 font-sans text-base text-body" role="status">Učitavanje kalendara…</p>
+        <div id="avail-body" class="mx-auto hidden max-w-md bg-white p-4 md:p-6">
           <div class="flex gap-2" role="group" aria-label="Apartman">
             <button type="button" data-avail-apt="olive" aria-pressed="true" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">Olive</button><button type="button" data-avail-apt="lavanda" aria-pressed="false" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">Lavande</button><button type="button" data-avail-apt="lemoni" aria-pressed="false" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">Lemoni</button>
           </div>
@@ -684,7 +685,7 @@
     </section>
 
     <section id="rezervacija" class="container max-w-page pb-12 text-center [overflow-anchor:none]">
-      <h2 class="mb-4 font-display text-[30px] md:text-[46px]">Pošaljite upit za rezervaciju</h2>
+      <h2 class="mb-4 font-display text-[30px] leading-tight md:text-[46px]">Pošaljite upit za rezervaciju</h2>
       <p class="mx-auto mb-6 max-w-xl font-sans text-lg">Izaberite termin, broj gostiju i apartman, a mi ćemo vam se javiti.</p>
 
       <div class="mt-10 grid gap-12 md:grid-cols-[2fr_1fr] md:gap-16">
