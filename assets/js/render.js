@@ -147,7 +147,7 @@ function header() {
 
       <div class="flex items-center gap-2 sm:gap-4 lg:gap-3 xl:gap-4">
         ${langMenu()}
-        ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#2A3D2F] text-white hover:opacity-90 sm:flex lg:hidden xl:flex')}
+        ${instagram('hidden h-9 w-9 items-center justify-center rounded-[10%] bg-[#2A3D2F] text-white hover:opacity-90 sm:flex lg:hidden')}
         <a href="${BOOK_HREF}" data-book class="bg-ink px-5 py-3 font-sans text-sm font-bold uppercase tracking-wide sm:px-6 text-white transition hover:bg-charcoal">${t('btn.book')}</a>
         <button id="menu-toggle" type="button" class="lg:hidden" aria-label="${t('aria.menu')}" aria-expanded="false" aria-controls="mobile-menu">
           <svg class="h-7 w-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
