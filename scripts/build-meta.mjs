@@ -20,7 +20,7 @@ const file = (p) => path.join(root, p);
 // ---------- WebP: uz svaku JPG/PNG sliku pravi se .webp (manji fajlovi, brži sajt) ----------
 // JPG/PNG ostaju glavni (izvorni) fajlovi; .webp se ne šalje u git, nego se pravi pri svakom buildu.
 // Ako konverzija ne uspije (npr. nema sharp), sajt ostaje na JPG/PNG.
-const KEEP = /(^|\/)(og|favicon|icon-\d+)\.(jpe?g|png)$/i; // dijeljenje linkova i ikone aplikacije ostaju kakvi jesu
+const KEEP = /(^|\/)(og|favicon(-\d+)?|apple-touch-icon|icon-\d+)\.(jpe?g|png)$/i; // dijeljenje linkova i ikone aplikacije ostaju kakvi jesu
 const SKIP = new Set(['hero.jpeg']); // veliki izvorni fajl koji sajt ne koristi
 async function makeWebp() {
   try {
@@ -98,8 +98,9 @@ const head = `<title>${esc(c.site.title)}</title>
   <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
   <link rel="preload" href="${esc(toWebp(c.hero.mobileSrc))}" as="image" media="(max-width: 767px)" fetchpriority="high">
   <link rel="preload" href="${esc(toWebp(c.hero.image.src))}" as="image" media="(min-width: 768px)" fetchpriority="high">
-  <link rel="icon" href="assets/img/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/img/icon-192.png">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="manifest" href="manifest.webmanifest">
   <script type="application/ld+json">
 ${ld}

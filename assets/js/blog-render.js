@@ -104,8 +104,9 @@ function page({ lang, base, title, description, path, alternates, image, ogType 
   <meta property="og:image:height" content="${image.height}">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="${esc(ogImage)}">
-  <link rel="icon" href="/assets/img/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/img/icon-192.png">
+  <link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
   <link rel="preload" href="/assets/fonts/spinnaker-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/lato-400-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/assets/css/style.css">
