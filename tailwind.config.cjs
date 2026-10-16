@@ -22,7 +22,7 @@ module.exports = {
         display: ['Spinnaker', 'sans-serif'],
         sans: ['Lato', 'sans-serif'],
       },
-      maxWidth: { page: '1140px' },
+      maxWidth: { page: '1280px' },
     },
   },
   plugins: [],
