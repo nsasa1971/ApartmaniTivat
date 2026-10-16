@@ -313,7 +313,9 @@ function apartments() {
               (ap) => `<article class="group reveal block">
             <img src="${esc(ap.image.src)}" width="${ap.image.width}" height="${ap.image.height}" loading="lazy" decoding="async" alt="${esc(ap.image.alt)}" class="img-muted w-full">
             ${aptGallery(ap)}
-            <h3 class="mt-5 font-sans text-xl font-bold text-ink">${esc(ap.fullName ?? ap.name)}</h3>
+            <h3 class="mt-5 flex items-center gap-3 font-sans text-xl font-bold text-ink">${
+              ap.plant ? `<img src="${esc(ap.plant.src)}" width="${ap.plant.width}" height="${ap.plant.height}" alt="" loading="lazy" decoding="async" class="h-12 w-auto shrink-0">` : ''
+            }<span>${esc(ap.fullName ?? ap.name)}</span></h3>
             <ul class="mt-4 grid grid-cols-3 gap-2">
               ${[
                 [areaIcon, ap.area],
