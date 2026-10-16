@@ -79,7 +79,7 @@ function page({ lang, base, title, description, path, alternates, image, ogType 
         <li><a href="/politika-privatnosti.html" class="hover:text-white">${tr('footer.privacy', lang)}</a></li>
       </ul>
     </div>
-    <div class="border-t border-white/10 py-4 text-center font-sans text-sm text-white/70">© ${new Date().getFullYear()} ${esc(c.site.brand)}. ${tr('footer.rights', lang)}</div>
+    <div class="border-t border-white/10 py-4 text-center font-sans text-sm text-white/70">© ${new Date().getFullYear()} ${esc(c.site.brand)}. ${tr('footer.rights', lang)} · Designed by <a href="tel:+381646758050" class="underline hover:no-underline">Sasha</a></div>
   </footer>`;
   const hreflangs = blogLangs
     .map((l) => `<link rel="alternate" hreflang="${HTML_LANG[l]}" href="${esc(abs(base, alternates[l]))}">`)

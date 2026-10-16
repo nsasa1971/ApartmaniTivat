@@ -744,7 +744,7 @@ function footer() {
     <div class="border-t border-white/10">
       <div class="container flex max-w-page flex-col items-center justify-between gap-2 py-5 font-sans text-sm text-white/70 md:flex-row">
         <a href="${esc(c.footer.privacyHref)}" class="hover:text-white">${t('footer.privacy')}</a>
-        <p>© <span data-year>${new Date().getFullYear()}</span> ${esc(c.site.brand)}. ${t('footer.rights')}</p>
+        <p>© <span data-year>${new Date().getFullYear()}</span> ${esc(c.site.brand)}. ${t('footer.rights')} · Designed by <a href="tel:+381646758050" class="underline hover:no-underline">Sasha</a></p>
       </div>
     </div>
   </footer>`;
