@@ -81,7 +81,7 @@ export const hero = {
   text: 'Apartmani Olive, Lavande i Lemoni nalaze se na odličnoj lokaciji u Tivtu, u mirnom mediteranskom ambijentu okruženom maslinama.',
 };
 
-export const logo = { src: 'assets/img/logo.png', width: 288, height: 288 };
+export const logo = { src: 'assets/img/logo.png', small: 'assets/img/logo-224.png', width: 288, height: 288 }; // small: za zaglavlje i podnožje (prikazuje se 80–112 px)
 
 // ---------- Uvodna sekcija (slika preklapa sekciju) ----------
 export const intro = {

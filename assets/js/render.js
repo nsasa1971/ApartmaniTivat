@@ -125,7 +125,7 @@ function header() {
   <header id="header" class="sticky top-0 z-50 bg-white transition-shadow">
     <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-6 px-4 py-2 lg:gap-3 xl:gap-6">
       <a href="#top" class="shrink-0" aria-label="${esc(c.site.brand)}">
-        <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-20 w-auto md:h-24 lg:h-20 xl:h-24">
+        <img src="${esc(c.logo.small)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-20 w-auto md:h-24 lg:h-20 xl:h-24">
       </a>
 
       <nav class="hidden lg:block" aria-label="${esc(t('aria.mainNav'))}">
@@ -716,7 +716,7 @@ function footer() {
     <div class="container max-w-page py-16">
       <div class="grid gap-10 text-center md:grid-cols-[minmax(0,22rem)_auto_auto_auto] md:justify-between md:gap-x-10 md:text-left">
         <div>
-          <img src="${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" loading="lazy" class="mx-auto mb-5 h-28 w-28 md:mx-0">
+          <img src="${esc(c.logo.small)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" loading="lazy" class="mx-auto mb-5 h-28 w-28 md:mx-0">
           <h2 class="mb-4 font-display text-[26px] text-white">${t('footer.about')}</h2>
           <p class="font-sans text-sm leading-7 text-white/80">${esc(c.footer.about)}</p>
           <p class="mt-3 font-sans text-sm leading-7 text-white/80">${esc(fullAddress())}${

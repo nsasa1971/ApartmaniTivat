@@ -45,7 +45,7 @@ function page({ lang, base, title, description, path, alternates, image, ogType 
   const header = `
   <header class="sticky top-0 z-50 bg-white shadow-sm">
     <div class="mx-auto flex max-w-[1440px] items-center justify-between gap-4 px-4 py-2">
-      <a href="${homeUrl}" class="shrink-0" aria-label="${esc(c.site.brand)}"><img src="/${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-16 w-auto md:h-20"></a>
+      <a href="${homeUrl}" class="shrink-0" aria-label="${esc(c.site.brand)}"><img src="/${esc(c.logo.small)}" width="${c.logo.width}" height="${c.logo.height}" alt="${esc(c.site.brand)}" class="h-16 w-auto md:h-20"></a>
       <nav class="hidden items-center gap-7 font-sans text-base md:flex" aria-label="${esc(tr('aria.mainNav', lang))}">
         <a href="${homeUrl}" class="hover:underline">${tr('blog.home', lang)}</a>
         <a href="${homeHref(lang, '#apartmani')}" class="hover:underline">${tr('blog.stay', lang)}</a>
@@ -68,7 +68,7 @@ function page({ lang, base, title, description, path, alternates, image, ogType 
   <footer class="mt-16 bg-night text-white">
     <div class="container flex max-w-page flex-col items-center gap-6 py-12 text-center md:flex-row md:items-start md:justify-between md:text-left">
       <div class="flex flex-col items-center gap-4 md:flex-row md:items-start">
-        <img src="/${esc(c.logo.src)}" width="${c.logo.width}" height="${c.logo.height}" alt="" loading="lazy" class="h-24 w-24">
+        <img src="/${esc(c.logo.small)}" width="${c.logo.width}" height="${c.logo.height}" alt="" loading="lazy" class="h-24 w-24">
         <p class="font-sans text-sm leading-7 text-white/80"><strong class="text-base text-white">${esc(c.site.brand)}</strong><br>${esc(
           [c.contact.address, c.contact.city, lang === 'sr' ? c.contact.countryName : { en: 'Montenegro', ru: 'Черногория' }[lang]].join(', ')
         )}<br>${phones().join('<br>')}${c.contact.email && !/\[.*\]/.test(c.contact.email) ? `<br><a href="mailto:${esc(c.contact.email)}" class="hover:text-white">${esc(c.contact.email)}</a>` : ''}</p>

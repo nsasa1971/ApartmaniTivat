@@ -12,3 +12,6 @@ optimized/
 
 # .webp slike pravi `npm run build` iz JPG/PNG (ne ide u git)
 assets/img/**/*.webp
+
+# JS paket pravi `npm run build` (esbuild)
+assets/js/app.min.js
