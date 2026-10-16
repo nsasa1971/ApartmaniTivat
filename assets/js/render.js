@@ -53,6 +53,7 @@ const acIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="cur
 const wifiIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 9.5a11 11 0 0 1 15 0M7.5 12.8a6.5 6.5 0 0 1 9 0M10.3 16a2.3 2.3 0 0 1 3.4 0"/><circle cx="12" cy="19" r=".6" fill="currentColor"/></svg>`;
 const tvIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="12" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`;
 const parkingIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M10 16.5V8h3.2a2.6 2.6 0 0 1 0 5.2H10"/></svg>`;
+const clockIcon = `<svg class="h-5 w-5 text-forest" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>`;
 const guestsIcon = `<svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c0-3.6 2.9-6 6.5-6s6.5 2.4 6.5 6M16 4.8a3.5 3.5 0 0 1 0 6.4M18 14.3c2.2.7 3.5 2.6 3.5 5.7"/></svg>`;
 
 
@@ -361,6 +362,7 @@ function pricing() {
             .join('\n          ')}
         </div>
         <p class="mt-8 font-sans text-base text-ink">${esc(p.basis)}</p>
+        <p class="mt-2 inline-flex items-center gap-2 font-sans text-base font-bold text-ink">${clockIcon}${esc(p.checkInfo)}</p>
         <ul class="mx-auto mt-4 max-w-2xl font-sans text-base text-ink">
           ${p.discounts.map((d) => `<li>${esc(d)}</li>`).join('\n          ')}
         </ul>

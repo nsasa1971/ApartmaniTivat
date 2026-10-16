@@ -57,6 +57,8 @@ const jsonLd = {
   url: `${base}/`,
   image: abs(c.site.ogImage),
   telephone: nonPlaceholder(c.contact.phone),
+  checkinTime: c.config.checkIn,
+  checkoutTime: c.config.checkOut,
   email: nonPlaceholder(c.contact.email),
   address: {
     '@type': 'PostalAddress',

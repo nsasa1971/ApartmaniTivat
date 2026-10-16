@@ -90,6 +90,7 @@ export const translations = {
         { label: 'New Year holidays', note: '31 Dec, 1 Jan and 2 Jan', unit: 'per day' },
       ],
       basis: 'Prices are per apartment.',
+      checkInfo: 'Check-in from 14:00, check-out by 10:00.',
       discounts: [
         'A 10% discount is possible for stays of 10 days or more.',
         'For a stay of a month, a better price is possible, with a discount of up to 20%.',
@@ -275,6 +276,7 @@ export const translations = {
         { label: 'Новогодние праздники', note: '31 декабря, 1 и 2 января', unit: 'в сутки' },
       ],
       basis: 'Цены указаны за апартамент.',
+      checkInfo: 'Заезд с 14:00, выезд до 10:00.',
       discounts: [
         'При проживании от 10 суток возможна скидка 10%.',
         'При проживании в течение месяца возможна более выгодная цена — скидка до 20%.',

@@ -28,6 +28,8 @@ export const config = {
   minGuests: 1,
   maxGuests: 8,
   defaultGuests: 2,
+  checkIn: '14:00', // prijava od (koristi se i u podacima za Google)
+  checkOut: '10:00', // odjava do
 
   // Slanje forme za upit. Ako nije podešeno, forma koristi `mailto:` fallback.
   //  - Formspree:  provider: 'formspree', endpoint: 'https://formspree.io/f/xxxxxxxx'
@@ -167,6 +169,7 @@ export const pricing = {
     { label: 'Novogodišnji praznici', note: '31.12., 01.01. i 02.01.', price: '120 €', unit: 'po danu' },
   ],
   basis: 'Cijene važe po apartmanu.',
+  checkInfo: 'Prijava (check-in) od 14:00 h, odjava (check-out) do 10:00 h.',
   discounts: [
     'Za boravak od 10 dana i više moguć je popust od 10%.',
     'Za boravak od mjesec dana moguća je povoljnija cijena, popust do 20%.',
