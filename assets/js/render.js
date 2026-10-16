@@ -154,7 +154,7 @@ function header() {
       </div>
     </div>
 
-    <nav id="mobile-menu" class="hidden max-h-[calc(100svh-96px)] overflow-y-auto border-t border-line bg-white lg:hidden" aria-label="${esc(t('aria.mobileNav'))}">
+    <nav id="mobile-menu" class="hidden max-h-[calc(100svh-96px)] overflow-y-auto overscroll-contain border-t border-line bg-white lg:hidden" aria-label="${esc(t('aria.mobileNav'))}">
       <ul class="mx-auto max-w-page divide-y divide-line px-4">
         ${nav
           .map((n) =>
@@ -252,7 +252,7 @@ function intro() {
         <div class="grid items-center md:grid-cols-2">
           <div class="reveal order-2 md:order-1 md:mb-[-130px] md:mt-[130px]">
             <img src="${esc(s.image.src)}" width="${s.image.width}" height="${s.image.height}" loading="lazy" decoding="async" alt="${esc(s.image.alt)}"
-                 class="mx-auto w-[70%] md:mx-0 md:mr-[50px] md:w-[calc(100%-50px)]">
+                 class="w-full md:mx-0 md:mr-[50px] md:w-[calc(100%-50px)]">
           </div>
           <div class="order-1 mb-6 text-center md:order-2 md:mb-0 md:pl-[50px] md:pt-20 md:text-left">
             <h2 class="mb-[25px] font-display text-[25px] leading-[39px] text-ink md:text-[30px]">${esc(s.title)}</h2>

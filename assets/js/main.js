@@ -80,14 +80,16 @@ const onScroll = () => {
 window.addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
-const closeMenu = () => {
-  mobileMenu.classList.add('hidden');
-  menuBtn.setAttribute('aria-expanded', 'false');
-};
-menuBtn.addEventListener('click', () => {
-  const open = mobileMenu.classList.toggle('hidden') === false;
+// dok je meni otvoren, stranica ispod se ne skroluje (inače prevlačenje prsta preko menija lista sajt)
+const setMenu = (open) => {
+  mobileMenu.classList.toggle('hidden', !open);
   menuBtn.setAttribute('aria-expanded', String(open));
-});
+  document.documentElement.classList.toggle('overflow-hidden', open);
+  document.body.classList.toggle('overflow-hidden', open); // iOS Safari traži i body
+};
+const closeMenu = () => setMenu(false);
+menuBtn.addEventListener('click', () => setMenu(mobileMenu.classList.contains('hidden')));
+window.matchMedia('(min-width: 1024px)').addEventListener('change', (e) => { if (e.matches) closeMenu(); });
 $$('#mobile-menu a').forEach((a) => a.addEventListener('click', closeMenu));
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
