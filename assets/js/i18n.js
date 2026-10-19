@@ -82,6 +82,7 @@ const T = {
   'contact.direct': ['Direktni kontakt', 'Direct contact', 'Прямой контакт'],
   'contact.phone': ['Telefon', 'Phone', 'Телефон'],
   'contact.address': ['Adresa', 'Address', 'Адрес'],
+  'map.directions': ['Putanja do apartmana', 'Get directions', 'Построить маршрут'],
   'map.title': ['Mapa – {city}', 'Map – {city}', 'Карта – {city}'],
 
   // kalendar dostupnosti

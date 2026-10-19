@@ -8,7 +8,7 @@ test('potvrda: sadrži sve podatke na sva tri jezika', () => {
   for (const lang of ['sr', 'en', 'ru']) {
     const { subject, body } = buildConfirmation(lang, b);
     assert.ok(subject.includes('Tivat Garden Homes'), lang);
-    for (const s of ['Ivan Petrović', 'Lavande', '14:00', '10:00', '360 €', 'Bonići', 'baukbiljana@gmail.com', 'maps.app.goo.gl']) assert.ok(body.includes(s), `${lang}: ${s}`);
+    for (const s of ['Ivan Petrović', 'Lavande', '14:00', '10:00', '360 €', 'Bonići', 'baukbiljana@gmail.com', 'google.com/maps/search']) assert.ok(body.includes(s), `${lang}: ${s}`);
   }
   assert.match(buildConfirmation('sr', b).body, /3 noći/);
   assert.match(buildConfirmation('en', b).body, /3 nights/);
