@@ -58,7 +58,9 @@ export const contact = {
   // Tačna lokacija apartmana (iz Google Maps linka koji je dao vlasnik; Plus code CPC6+PJ)
   lat: 42.4217772,
   lng: 18.7115365,
-  mapUrl: 'https://maps.app.goo.gl/cu2iycnPNwBE63Pe6',
+  // Linkovi po koordinatama (kratki link maps.app.goo.gl je u aplikaciji Mape otvarao praznu karticu bez putanje)
+  mapUrl: 'https://www.google.com/maps/search/?api=1&query=42.4217772,18.7115365', // prikaz mjesta (pin + kartica sa dugmetom „Putanja“)
+  directionsUrl: 'https://www.google.com/maps/dir/?api=1&destination=42.4217772,18.7115365&travelmode=driving', // putanja od trenutne lokacije do apartmana
 };
 
 export const social = {

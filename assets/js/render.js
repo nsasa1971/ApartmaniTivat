@@ -700,6 +700,7 @@ function map() {
       <iframe title="${esc(t('map.title', { city: c.contact.city }))}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
               class="block h-[440px] w-full border-0 md:h-[440px]"
               src="https://www.google.com/maps?q=${encodeURIComponent(c.contact.lat && c.contact.lng ? `${c.contact.lat},${c.contact.lng}` : c.contact.mapQuery)}&z=17&output=embed"></iframe>
+      <a href="${esc(c.contact.directionsUrl)}" target="_blank" rel="noopener" class="absolute bottom-6 left-1/2 inline-flex min-h-12 whitespace-nowrap -translate-x-1/2 items-center gap-2 bg-ink px-6 py-3 font-sans text-sm font-bold uppercase tracking-wide text-white shadow-lg transition hover:bg-charcoal">${t('map.directions')} <span aria-hidden="true">→</span></a>
     </section>`;
 }
 
