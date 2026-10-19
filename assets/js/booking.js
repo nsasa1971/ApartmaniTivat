@@ -128,23 +128,40 @@ function initStrip(inquiry) {
 
     if (!checkin.value || !checkout.value) return showError(t('booking.pickDates'));
     if (checkout.value <= checkin.value) return showError(msg('checkoutOrder'));
-    if (!(await isTermFree('', checkin.value, checkout.value))) return showError(msg('notFree'));
-
-    // Bez spoljnog sajta: prenesi izbor u formu za upit i skroluj do nje
-    if (inquiry) {
-      inquiry.fill({
-        checkin: checkin.value,
-        checkout: checkout.value,
-        adults: state.adults,
-        children: state.children,
-        ages: state.ages,
-        crib: state.children > 0 && crib.checked,
-      });
+    const detail = {
+      from: checkin.value,
+      to: checkout.value,
+      adults: state.adults,
+      children: state.children,
+      ages: [...state.ages],
+      crib: state.children > 0 && crib.checked,
+    };
+    // kalendar dostupnosti je prikazan: pretraga otvara sekciju "Dostupnost" (kartice sa statusom i cijenom za izabrane datume)
+    const calendar = $('#dostupnost');
+    if (calendar && !calendar.classList.contains('hidden')) {
+      window.dispatchEvent(new CustomEvent('tgh:search', { detail }));
+      return;
     }
-    const target = $('#rezervacija');
-    target?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-    inquiry?.form.elements.fullname.focus({ preventScroll: true });
+    // kalendar nije dostupan (npr. Firebase nije podešen): stari tok – provjera termina i prelazak na formu za upit
+    if (!(await isTermFree('', checkin.value, checkout.value))) return showError(msg('notFree'));
+    fillInquiry(inquiry, detail);
   });
+}
+
+/** Popunjava formu za upit podacima pretrage i skroluje do nje. */
+function fillInquiry(inquiry, d, apartmentId) {
+  if (!inquiry) return;
+  inquiry.fill({
+    ...(apartmentId !== undefined ? { apartmentId } : {}),
+    checkin: d.from,
+    checkout: d.to,
+    adults: d.adults,
+    children: d.children,
+    ages: d.ages,
+    crib: d.crib,
+  });
+  $('#rezervacija')?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  inquiry.form.elements.fullname.focus({ preventScroll: true });
 }
 
 // ============ FORMA ZA UPIT ============
@@ -435,10 +452,9 @@ export function initBooking() {
   ['#booking-form', '#inquiry-form'].forEach((sel) => $(sel)?.addEventListener('focusin', () => loadAvailability(), { once: true }));
   // izbor termina u kalendaru dostupnosti (availability-widget.js) popunjava formu za upit
   window.addEventListener('tgh:select-range', (e) => {
-    if (!inquiry) return;
-    const { apartmentId, from, to } = e.detail;
-    inquiry.fill({ apartmentId, checkin: from, checkout: to });
-    $('#rezervacija')?.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
-    inquiry.form.elements.fullname.focus({ preventScroll: true });
+    const { apartmentId, from, to, adults, children, ages, crib } = e.detail;
+    fillInquiry(inquiry, { from, to, adults, children, ages, crib }, apartmentId);
   });
+  // kalendar se nije mogao učitati: pretraga ide direktno na formu za upit
+  window.addEventListener('tgh:search-fallback', (e) => fillInquiry(inquiry, e.detail));
 }

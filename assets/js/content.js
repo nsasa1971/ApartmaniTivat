@@ -124,6 +124,7 @@ export const apartments = [
     fullName: 'Holiday home Olive', // puni naziv: samo u opisima na sajtu
     area: '50 m²',
     guests: '2–4 osobe',
+    capacity: 4, // najveći broj gostiju (koristi se za pretragu termina)
     summary:
       'Holiday home Olive je komforan apartman površine 50 m², kapaciteta od 2 do 4 osobe. Raspolaže sa dvije odvojene spavaće sobe, od kojih svaka ima bračni krevet. Posebno je izdvojen dnevni boravak sa potpuno opremljenom kuhinjom, kao i kupatilo. Gostima su na raspolaganju TV, internet i dva klima uređaja. Apartman ima poseban ulaz, terasu, prostrano dvorište u hladu maslina sa vanjskim roštiljem i obezbjeđen parking, što ga čini odličnim izborom za parove, porodice i duži boravak.',
     features: [
@@ -144,6 +145,7 @@ export const apartments = [
     fullName: 'Holiday home Lavande', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
     guests: '2–4 osobe',
+    capacity: 4, // najveći broj gostiju (koristi se za pretragu termina)
     summary: lavandaLemoniText('Lavande'),
     features: lavandaLemoniFeatures,
     image: { src: 'assets/img/apartman-2.jpg', width: 1024, height: 768, alt: 'Dnevna soba i kuhinja – Holiday home Lavande' },
@@ -156,6 +158,7 @@ export const apartments = [
     fullName: 'Holiday home Lemoni', // puni naziv: samo u opisima na sajtu
     area: '60 m²',
     guests: '2–4 osobe',
+    capacity: 4, // najveći broj gostiju (koristi se za pretragu termina)
     summary: lavandaLemoniText('Lemoni'),
     features: lavandaLemoniFeatures,
     image: { src: 'assets/img/apartman-3.jpg', width: 1024, height: 768, alt: 'Kuhinja – Holiday home Lemoni' },
@@ -164,13 +167,27 @@ export const apartments = [
 ];
 
 // ---------- Cijene ----------
+// Cijene i sezone: JEDINO MJESTO (prikaz u sekciji „Cijene“ i okvirna cijena u pretrazi termina čitaju odavde).
+// Sezona se računa po noćenju (noć = datum dolaska do dana prije odlaska). `from` i `to` su MM-DD, OBA UKLJUČENA;
+// ako je `from` kasnije od `to`, period prelazi preko nove godine.
+export const rates = {
+  base: 100, // € po noći van sezone
+  seasons: [
+    { price: 120, from: '06-01', to: '09-01' }, // „Od 01.06. do 01.09.“ (oba datuma uključena)
+    { price: 120, from: '12-31', to: '01-02' }, // novogodišnji praznici: 31.12., 01.01. i 02.01.
+  ],
+  // Popusti su u tekstu samo „mogući“ (10% od 10 dana, do 20% za mjesec dana), pa se ne računaju u cijenu;
+  // od ovoliko noćenja pretraga samo dodaje napomenu da je popust moguć.
+  discountNoticeNights: 10,
+};
+
 export const pricing = {
   id: 'cijene',
   title: 'Cijene i pogodnosti',
   items: [
-    { label: 'Van glavne sezone', note: '', price: '100 €', unit: 'po danu' },
-    { label: 'Od 01.06. do 01.09.', note: '', price: '120 €', unit: 'po danu' },
-    { label: 'Novogodišnji praznici', note: '31.12., 01.01. i 02.01.', price: '120 €', unit: 'po danu' },
+    { label: 'Van glavne sezone', note: '', price: `${rates.base} €`, unit: 'po danu' },
+    { label: 'Od 01.06. do 01.09.', note: '', price: `${rates.seasons[0].price} €`, unit: 'po danu' },
+    { label: 'Novogodišnji praznici', note: '31.12., 01.01. i 02.01.', price: `${rates.seasons[1].price} €`, unit: 'po danu' },
   ],
   basis: 'Cijene važe po apartmanu.',
   checkInfo: 'Prijava (check-in) od 14:00 h, odjava (check-out) do 10:00 h.',
