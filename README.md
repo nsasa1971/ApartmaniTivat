@@ -50,6 +50,16 @@ Svaki apartman može imati svoju galeriju: 4 sličice ispod glavne slike kartice
 
 Apartman bez fotografija jednostavno nema galeriju. Ponovno pokretanje zamjenjuje slike samo za apartmane čiji je podfolder u folderu.
 
+## Pretraga termina i okvirna cijena
+
+Kad posjetilac u hero traci izabere datume i klikne „Pretraži“, sajt otvara sekciju „Dostupnost“: kalendari sva tri apartmana (mjesec dolaska i naredni, do tri mjeseca), izabrani period označen bojom „Vaš izbor“ i tri kartice sa statusom za te datume. Slobodna kartica ima okvirnu cijenu i dugme „Pošalji upit“ koje popunjava formu za upit.
+
+- **Cijene i sezone** su na jednom mjestu: `rates` u `assets/js/content.js` (osnovna cijena po noći, sezone sa `from`/`to` u formatu `MM-DD`, oba datuma uključena, i prag od kog se dodaje napomena o mogućem popustu). Sekcija „Cijene“ i okvirna cijena u pretrazi čitaju odatle.
+- Računa se **po noćenju** (noć = datum dolaska do dana prije odlaska); boravak koji prelazi granicu sezone je zbir noćenja po cijenama svoje sezone.
+- **Popusti** (10% od 10 dana, do 20% za mjesec dana) se ne računaju u cijenu jer su u tekstu samo „mogući“; od `discountNoticeNights` noćenja kartica samo dodaje napomenu.
+- **Kapacitet** je `capacity` kod svakog apartmana u `content.js`; ako je gostiju više, umjesto dugmeta stoji napomena sa kontaktom.
+- Status (slobodno/zauzeto) dolazi iz kolekcije `availability` (uživo, `onSnapshot`) i termina sa Bookinga; dan odlaska je slobodan dan.
+
 ## Blog / savjeti (SEO)
 
 - Članci su u `assets/js/blog-content.js` (crnogorski, engleski, ruski; blokovi `['p', ...]`, `['h2', ...]`, `['ul', [...]]`). Svaki članak ima svoju stranicu po jeziku: `/blog/<slug>.html`, `/en/blog/<slug>.html`, `/ru/blog/<slug>.html`, uz spisak na `/blog/`, `/en/blog/` i `/ru/blog/`.

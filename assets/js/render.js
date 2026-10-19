@@ -6,7 +6,6 @@
 import * as base from './content.js';
 import { localizedContent } from './content.i18n.js';
 import { t, languages, setLang, getLang } from './i18n.js';
-import { weekdays } from './availability.js';
 import { isFirebaseConfigured } from './firebase-config.js';
 import { posts, blogIndexPath, postPath, guidePath } from './blog-content.js';
 
@@ -564,30 +563,29 @@ function availabilitySection() {
         <h2 id="dostupnost-title" class="mb-4 font-display text-[30px] leading-tight text-[#1F2F25]">${esc(a.title)}</h2>
         <p class="mx-auto mb-8 max-w-xl font-sans text-lg">${esc(a.text)}</p>
         <p id="avail-loading" class="mx-auto max-w-md bg-white p-8 font-sans text-base text-body" role="status">${t('avail.loading')}</p>
-        <div id="avail-body" class="mx-auto hidden max-w-md bg-white p-4 md:p-6">
-          <div class="flex gap-2" role="group" aria-label="${esc(t('aria.apartment'))}">
-            ${c.apartments
-              .map(
-                (ap, i) => `<button type="button" data-avail-apt="${esc(ap.id)}" aria-pressed="${i === 0}" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(ap.name)}</button>`
-              )
-              .join('')}
+        <div id="avail-body" class="hidden">
+          <div id="avail-results" class="mb-8 hidden text-left" aria-live="polite"></div>
+          <div class="bg-white p-4 md:p-6">
+            <div class="flex gap-2 md:hidden" role="group" aria-label="${esc(t('aria.apartment'))}">
+              ${c.apartments
+                .map(
+                  (ap, i) => `<button type="button" data-avail-apt="${esc(ap.id)}" aria-pressed="${i === 0}" class="min-h-11 flex-1 border border-ink px-2 font-sans text-sm font-bold aria-pressed:bg-ink aria-pressed:text-white">${esc(ap.name)}</button>`
+                )
+                .join('')}
+            </div>
+            <div class="mt-4 flex items-center justify-between md:mt-0">
+              <button type="button" data-avail-month="-1" aria-label="${esc(t('aria.prevMonth'))}" class="h-11 w-11 border border-ink text-2xl disabled:opacity-30">‹</button>
+              <p id="avail-month" class="font-display text-[20px] capitalize md:text-[22px]" aria-live="polite"></p>
+              <button type="button" data-avail-month="1" aria-label="${esc(t('aria.nextMonth'))}" class="h-11 w-11 border border-ink text-2xl">›</button>
+            </div>
+            <div id="avail-cals" class="mt-4 grid gap-8 md:grid-cols-3 md:gap-6"></div>
+            <p class="mt-5 flex flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-sm">
+              <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 border border-line bg-white"></span>${t('avail.free')}</span>
+              <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#E0D9C8]"></span>${t('avail.taken')}</span>
+              <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#34493A]"></span>${t('avail.yours')}</span>
+            </p>
+            <p id="avail-msg" class="mt-3 min-h-6 font-sans text-sm" role="status" aria-live="polite">${t('avail.hint')}</p>
           </div>
-          <div class="mt-4 flex items-center justify-between">
-            <button type="button" data-avail-month="-1" aria-label="${esc(t('aria.prevMonth'))}" class="h-11 w-11 border border-ink text-2xl disabled:opacity-30">‹</button>
-            <h3 id="avail-month" class="font-display text-[22px] capitalize" aria-live="polite"></h3>
-            <button type="button" data-avail-month="1" aria-label="${esc(t('aria.nextMonth'))}" class="h-11 w-11 border border-ink text-2xl">›</button>
-          </div>
-          <div class="mt-3 grid grid-cols-7 gap-px text-center font-sans text-xs font-bold text-body" aria-hidden="true">
-            ${weekdays().map((d) => `<div>${d}</div>`).join('')}
-          </div>
-          <div id="avail-grid" class="mt-1 grid grid-cols-7 gap-px bg-line"></div>
-          <p class="mt-3 flex flex-wrap justify-center gap-x-4 gap-y-1 font-sans text-sm">
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 border border-line bg-white"></span>${t('avail.free')}</span>
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#E0D9C8]"></span>${t('avail.taken')}</span>
-            <span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 bg-[#34493A]"></span>${t('avail.yours')}</span>
-          </p>
-          <p id="avail-msg" class="mt-3 min-h-6 font-sans text-sm" role="status" aria-live="polite"></p>
-          <button type="button" id="avail-send" class="mt-2 hidden w-full bg-ink px-6 py-4 font-sans text-sm font-bold uppercase text-white transition hover:bg-charcoal">${t('btn.sendRange')}</button>
         </div>
       </div>
     </section>`;
