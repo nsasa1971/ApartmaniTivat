@@ -99,10 +99,12 @@ const head = `<title>${esc(c.site.title)}</title>
   <script>try{var l=localStorage.getItem('lang');if(l&&l!=='sr'){document.documentElement.classList.add('lang-pending');setTimeout(function(){document.documentElement.classList.remove('lang-pending')},3500)}}catch(e){}</script>
   <link rel="preload" href="${esc(toWebp(c.hero.mobileSrc))}" as="image" media="(max-width: 767px)" fetchpriority="high">
   <link rel="preload" href="${esc(toWebp(c.hero.image.src))}" as="image" media="(min-width: 768px)" fetchpriority="high">
-  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="assets/img/favicon.png" sizes="64x64" type="image/png">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="/assets/img/favicon.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicon-96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
   <script type="application/ld+json">
 ${ld}
   </script>`;
@@ -160,8 +162,8 @@ const manifest = {
   background_color: '#ffffff',
   theme_color: c.site.themeColor,
   icons: [
-    { src: 'assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
-    { src: 'assets/img/icon-512.png', sizes: '512x512', type: 'image/png' },
+    { src: '/assets/img/icon-192.png', sizes: '192x192', type: 'image/png' },
+    { src: '/assets/img/icon-512.png', sizes: '512x512', type: 'image/png' },
   ],
 };
 await writeFile(file('manifest.webmanifest'), JSON.stringify(manifest, null, 2) + '\n');
