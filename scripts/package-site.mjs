@@ -3,7 +3,7 @@ import { cpSync, rmSync, mkdirSync, existsSync } from 'node:fs';
 
 rmSync('dist', { recursive: true, force: true });
 mkdirSync('dist');
-for (const f of ['index.html', 'politika-privatnosti.html', 'manifest.webmanifest', 'robots.txt', 'sitemap.xml', 'CNAME']) {
+for (const f of ['index.html', 'politika-privatnosti.html', 'manifest.webmanifest', 'favicon.ico', 'robots.txt', 'sitemap.xml', 'CNAME']) {
   if (existsSync(f)) cpSync(f, `dist/${f}`);
 }
 for (const d of ['assets', 'admin', 'blog', 'en', 'ru']) if (existsSync(d)) cpSync(d, `dist/${d}`, { recursive: true });
