@@ -192,6 +192,25 @@ Aplikacija radi i bez interneta (ljuska se kešira, a Firestore čuva podatke u 
 
 `netlify.toml` je podešen: build komanda `npm run build:site`, objavljuje se samo folder `dist/` (index, stranica politike, `assets`, `data`, sitemap, robots, manifest). U Netlify-u ne treba ništa ručno podešavati osim da production grana bude `main`. Domen: sajt je objavljen na **https://apartmanigardentivat.com** (Netlify → Domain management; `www` preusmjerava na glavni domen), a isti domen je upisan u `site.url` u `content.js` (canonical, Open Graph, JSON-LD, sitemap i robots uzimaju adresu odatle; poslije izmjene pokrenuti `npm run build`).
 
+## Uvoz zauzetih termina sa Booking.com-a (iCal)
+
+Kalendar dostupnosti na sajtu automatski prikazuje i termine zauzete preko Booking.com-a.
+
+- Netlify funkcija `netlify/functions/booking-ical.mjs` (adresa `/api/booking-ical`) čita iCal kalendare sa Bookinga i vraća **samo datume** (nikakva imena ni drugi podaci). Odgovor se kešira na CDN-u 10 minuta, pa Booking dobija malo zahtjeva bez obzira na broj posjetilaca.
+- Sajt (`assets/js/availability-data.js`) spaja te termine sa terminima iz Firebase-a (admin) i osvježava ih svakih 5 minuta dok je kalendar na ekranu. Ako funkcija nije podešena ili Booking ne odgovori, kalendar radi samo sa Firebase terminima.
+
+### Podešavanje (jednom)
+
+1. U Booking.com administraciji (extranet) za svaki apartman otvori kalendar i opciju sinhronizacije kalendara (**Sync calendars / Calendar sync**; naziv se može razlikovati) i kopiraj **link za izvoz** (iCal, završava sa `.ics` ili sadrži `ical`). Taj link je tajna: ko ga ima, vidi zauzete datume.
+2. U Netlify-u: **Site configuration → Environment variables** dodaj tri promjenljive (vrijednost = link iz koraka 1, mora početi sa `https://`):
+   - `BOOKING_ICAL_OLIVE`
+   - `BOOKING_ICAL_LAVANDA`
+   - `BOOKING_ICAL_LEMONI`
+3. **Deploys → Trigger deploy** (promjenljive se čitaju pri sljedećem deploy-u).
+4. Provjera: otvori `https://apartmanigardentivat.com/api/booking-ical` – treba da vidiš JSON sa zauzetim terminima po apartmanu (`failed` lista treba da je prazna). Apartman bez podešenog linka se jednostavno preskače.
+
+Napomene: Booking sam osvježava svoj iCal sa zakašnjenjem (od nekoliko minuta do nekoliko sati), pa novu Booking rezervaciju sajt vidi tek kad je Booking izvezi. Termini rezervisani direktno (admin) i dalje se zatvaraju na Bookingu ručno (crvena oznaka u adminu). Rezervaciju sa Bookinga koju ste već ručno unijeli u admin nije potrebno brisati: isti datumi se samo spoje.
+
 ## Deploy (GitHub Pages, alternativa)
 
 Workflow `.github/workflows/deploy.yml` na svaki push na `main` pokreće `npm ci && npm run build` i objavljuje sajt na GitHub Pages.
