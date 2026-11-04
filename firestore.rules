@@ -11,11 +11,10 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     // ---------- pomoćne funkcije ----------
-    // Lista UID-ova koji imaju pristup administraciji (Firebase konzola → Authentication → Users → "User UID").
-    // Za dodatnu vlasnicu dodaj još jedan UID u listu, odvojen zarezom:
-    //   return ['PTsPq8QOzFa1VUN9A5ekLPHzK6I3', 'UID_DRUGE_VLASNICE'];
+       // Lista UID-ova koji imaju pristup administraciji (Firebase konzola → Authentication → Users → "User UID").
+    // Za dodatnu vlasnicu dodaj još jedan UID u listu, odvojen zarezom.
     function ownerUids() {
-      return ['PTsPq8QOzFa1VUN9A5ekLPHzK6I3']; // test korisnik
+      return ['PTsPq8QOzFa1VUN9A5ekLPHzK6I3', '9maSJSxjyyfWU57dnQgLe7QAMOw1'];
     }
 
     function isOwner() {
