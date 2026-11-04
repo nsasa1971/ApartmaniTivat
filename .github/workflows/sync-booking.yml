@@ -1,0 +1,45 @@
+name: Sinhronizacija Booking kalendara
+
+# Svakih 30 minuta (GitHub može kasniti nekoliko minuta) i ručno: Actions → ovaj workflow → Run workflow.
+# Ručno pokretanje ima opciju „dry run": samo ispiše šta bi uradilo, bez upisa u bazu.
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (samo ispiši, ne upisuj u bazu)'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sync-booking
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --no-audit --no-fund
+      - name: Sinhronizacija
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          BOOKING_ICAL_OLIVE: ${{ secrets.BOOKING_ICAL_OLIVE }}
+          BOOKING_ICAL_LAVANDA: ${{ secrets.BOOKING_ICAL_LAVANDA }}
+          BOOKING_ICAL_LEMONI: ${{ secrets.BOOKING_ICAL_LEMONI }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          if [ "$DRY_RUN" = "true" ]; then
+            node scripts/sync-booking.mjs --dry-run
+          else
+            node scripts/sync-booking.mjs
+          fi

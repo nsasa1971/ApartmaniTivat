@@ -188,6 +188,39 @@ Aplikacija radi i bez interneta (ljuska se kešira, a Firestore čuva podatke u 
   npx firebase-tools@13 emulators:exec --only firestore --project tgh-rules-test "node --test tests/rules/*.test.mjs"
   ```
 
+## Sinhronizacija Booking.com kalendara (iCal)
+
+Zauzeti termini sa Bookinga se automatski upisuju u kolekciju `availability`, pa su vidljivi na javnom kalendaru sajta i (drugom bojom, samo za čitanje) u adminu. Sinhronizaciju radi skripta `scripts/sync-booking.mjs`, koju GitHub Actions (`.github/workflows/sync-booking.yml`) pokreće svakih 30 minuta. Ne utiče na sajt: paketi `node-ical` i `firebase-admin` su samo dev zavisnosti.
+
+**Pravila rada**
+- Svaki događaj iz feeda je zauzet period; dan odlaska je slobodan (DTEND je isključiv, kao i u ostatku aplikacije).
+- Upisuju se samo datumi (`apartmentId`, `from`, `to`, `bookingId`, `source: 'booking'`), ID dokumenta je `booking-ical-{apartman}-{od}-{do}`.
+- Brišu se samo dokumenti sa `source === 'booking'` kojih više nema u feedu tog apartmana. Rezervacije sa sajta i ručni unosi se nikad ne dodiruju.
+- Ako preuzimanje ili parsiranje feeda ne uspije (greška mreže, status različit od 200, sadržaj nije VCALENDAR), taj apartman se preskače i postojeći Booking blokovi ostaju. Greška se upisuje u log i u status.
+- Status se upisuje u `meta/bookingSync` (`lastSuccessAt`, `lastError`, broj blokova po apartmanu). Admin prikazuje „Booking sinhronizovan prije X min“ i upozorava ako je prošlo više od 3 sata ili postoji greška.
+
+**1. Servisni nalog i tajne (jednom)**
+1. Firebase konzola → Project settings → Service accounts → *Generate new private key*. Cijeli preuzeti JSON fajl je vrijednost tajne `FIREBASE_SERVICE_ACCOUNT`. Fajl ne ide u repozitorijum.
+2. Booking Extranet → *Rates & Availability* → *Sync calendars* → *Export calendar* (za svaki apartman posebno) → kopirajte iCal link.
+3. GitHub repozitorijum → Settings → Secrets and variables → Actions → *New repository secret*. Napravite četiri tajne:
+
+| Tajna | Vrijednost |
+| --- | --- |
+| `FIREBASE_SERVICE_ACCOUNT` | cijeli JSON servisnog naloga |
+| `BOOKING_ICAL_OLIVE` | iCal link za Olive |
+| `BOOKING_ICAL_LAVANDA` | iCal link za Lavande |
+| `BOOKING_ICAL_LEMONI` | iCal link za Lemoni |
+
+4. Objavite pravila (`firestore.rules`) u Firebase konzoli: dodato je samo pravilo za `meta` (čita vlasnica, niko ne piše sa klijenta). Bez toga admin ne vidi status, ali blokovi se svejedno prikazuju.
+
+**2. Testiranje**
+1. Dry-run (ništa se ne upisuje): GitHub → Actions → *Sinhronizacija Booking kalendara* → *Run workflow* sa uključenom opcijom *Dry run*. U logu se vide blokovi iz feeda i šta bi bilo dodato ili obrisano.
+2. Pravi upis: isto, sa isključenim *Dry run*. Posle toga provjerite kalendar na sajtu i u `/admin`.
+3. Lokalno: `FIREBASE_SERVICE_ACCOUNT='...' BOOKING_ICAL_OLIVE='...' BOOKING_ICAL_LAVANDA='...' BOOKING_ICAL_LEMONI='...' node scripts/sync-booking.mjs --dry-run`. Bez `FIREBASE_SERVICE_ACCOUNT` dry-run samo parsira feedove.
+4. Testovi parsera: `npm test` (`tests/booking-ical.test.mjs`).
+
+**Zakazani workflow i neaktivnost.** Zakazano pokretanje radi samo na glavnoj grani (`main`), pa počinje tek kad se ovaj kod spoji. Ako je repozitorijum javan, GitHub automatski gasi zakazane workflow-e kad 60 dana nema aktivnosti u repozitorijumu (commitova). Tada se sinhronizacija prestane pokretati, a admin upozori da je prošlo više od 3 sata. Ponovo se uključuje u Actions → *Sinhronizacija Booking kalendara* → *Enable workflow* (ili bilo kojim novim commit-om na `main`).
+
 ## Deploy (Netlify)
 
 `netlify.toml` je podešen: build komanda `npm run build:site`, objavljuje se samo folder `dist/` (index, stranica politike, `assets`, `data`, sitemap, robots, manifest). U Netlify-u ne treba ništa ručno podešavati osim da production grana bude `main`. Domen: sajt je objavljen na **https://apartmanigardentivat.com** (Netlify → Domain management; `www` preusmjerava na glavni domen), a isti domen je upisan u `site.url` u `content.js` (canonical, Open Graph, JSON-LD, sitemap i robots uzimaju adresu odatle; poslije izmjene pokrenuti `npm run build`).
@@ -221,6 +254,7 @@ src/input.css              # Tailwind direktive + @font-face + custom CSS
 tailwind.config.cjs        # paleta, fontovi, container
 scripts/build-meta.mjs     # SEO, prerender, manifest, robots, sitemap
 scripts/make-placeholders.py  # generiše placeholder slike
+scripts/sync-booking.mjs   # Booking iCal → Firestore availability (GitHub Actions)
 assets/js/                 # content, i18n, render, main, booking, lightbox
 assets/fonts, assets/img   # lokalni fontovi (Spinnaker, Lato) i slike
 admin/                     # administracija za vlasnicu (PWA, Firebase)

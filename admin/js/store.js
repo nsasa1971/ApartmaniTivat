@@ -81,6 +81,20 @@ export async function subscribeBookings(next, error) {
   const { db, collection, onSnapshot } = await dbp();
   return onSnapshot(collection(db, 'bookings'), (snap) => next(snap.docs.map((d) => ({ id: d.id, ...d.data() }))), error);
 }
+/** Termini sa Bookinga koje upisuje scripts/sync-booking.mjs (availability, source === 'booking'). */
+export async function subscribeBookingBlocks(next, error) {
+  const { db, collection, query, where, onSnapshot } = await dbp();
+  return onSnapshot(
+    query(collection(db, 'availability'), where('source', '==', 'booking')),
+    (snap) => next(snap.docs.map((d) => ({ id: d.id, ...d.data() }))),
+    error
+  );
+}
+/** Status sinhronizacije (meta/bookingSync); null ako dokument još ne postoji. */
+export async function subscribeBookingSync(next, error) {
+  const { db, doc, onSnapshot } = await dbp();
+  return onSnapshot(doc(db, 'meta', 'bookingSync'), (snap) => next(snap.exists() ? snap.data() : null), error);
+}
 export async function subscribeInquiries(next, error) {
   const { db, collection, query, orderBy, onSnapshot } = await dbp();
   return onSnapshot(

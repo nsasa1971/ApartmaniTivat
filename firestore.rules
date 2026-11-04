@@ -51,6 +51,12 @@ service cloud.firestore {
       allow delete: if isOwner();
     }
 
+    // ---------- status sinhronizacije sa Bookingom: čita vlasnica, piše samo skripta (Admin SDK zaobilazi pravila) ----------
+    match /meta/{docId} {
+      allow read: if isOwner();
+      allow write: if false;
+    }
+
     // ---------- upiti sa sajta: javno SAMO create (strogo validirano), ostalo vlasnica ----------
     match /inquiries/{id} {
       allow create: if request.resource.data.keys().hasOnly(

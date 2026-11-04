@@ -1,6 +1,6 @@
 // Service worker za /admin: offline ljuska aplikacije.
 // Podaci (rezervacije) se čuvaju u Firestore offline kešu (IndexedDB), a ne ovdje.
-const VERSION = 'v2';
+const VERSION = 'v3';
 const SHELL = `tgh-admin-shell-${VERSION}`;
 const RUNTIME = `tgh-admin-runtime-${VERSION}`;
 
@@ -14,6 +14,7 @@ const SHELL_FILES = [
   'js/apartments.js',
   'js/ui.js',
   'js/store.js',
+  'js/booking-sync.js',
   'js/calendar.js',
   'js/booking-form.js',
   'js/lists.js',
