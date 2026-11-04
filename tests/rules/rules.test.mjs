@@ -119,3 +119,15 @@ test('nepoznate kolekcije su zatvorene', async () => {
   await assertFails(getDoc(doc(anon(), 'nesto/1')));
   await assertFails(setDoc(doc(owner(), 'nesto/1'), { a: 1 }));
 });
+
+test('meta: čita samo vlasnica, niko ne piše sa klijenta', async () => {
+  await env.withSecurityRulesDisabled((c) => setDoc(doc(c.firestore(), 'meta/bookingSync'), { lastError: null }));
+  await assertFails(getDoc(doc(anon(), 'meta/bookingSync')));
+  await assertFails(getDoc(doc(other(), 'meta/bookingSync')));
+  await assertSucceeds(getDoc(doc(owner(), 'meta/bookingSync')));
+  await assertSucceeds(getDoc(doc(owner2(), 'meta/bookingSync')));
+  await assertFails(setDoc(doc(owner(), 'meta/bookingSync'), { lastError: 'x' }));
+  await assertFails(updateDoc(doc(owner(), 'meta/bookingSync'), { lastError: 'x' }));
+  await assertFails(deleteDoc(doc(owner(), 'meta/bookingSync')));
+  await assertFails(setDoc(doc(anon(), 'meta/bookingSync'), { lastError: 'x' }));
+});

@@ -11,12 +11,16 @@ import { openBookingForm } from './booking-form.js';
 import { openConfirmation } from './confirmation.js';
 import { renderBookings, renderInquiries, newInquiryCount } from './lists.js';
 import { toJSON, toCSV, download, stamp } from './backup.js';
+import { visibleBlocks, syncStatus, renderSyncStatus, blocksAsRanges } from './booking-sync.js';
 
 const now = new Date();
 const state = {
   user: null,
   apartments: DEFAULT_APARTMENTS,
   bookings: [],
+  blocks: [], // termini sa Bookinga (availability, source === 'booking'), bez duplikata ručnih rezervacija
+  rawBlocks: [],
+  sync: null, // meta/bookingSync
   inquiries: [],
   tab: 'calendar',
   aptId: DEFAULT_APARTMENTS[0].id,
@@ -98,6 +102,7 @@ function showMain() {
       </div>
     </header>
     <div id="data-error" class="hidden mx-auto max-w-2xl bg-red-50 px-4 py-3 font-sans text-sm text-red-800" role="alert"></div>
+    <div id="sync-status" class="mx-auto max-w-2xl"></div>
     <main id="view" class="mx-auto max-w-2xl px-4 pb-28 pt-4"></main>
     <nav class="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-white" aria-label="Glavna navigacija">
       <ul class="mx-auto grid max-w-2xl grid-cols-4">
@@ -143,12 +148,20 @@ function render() {
   err.textContent = state.dataError ?? '';
   err.classList.toggle('hidden', !state.dataError);
 
+  state.blocks = visibleBlocks(state.rawBlocks, state.bookings);
+  updateSyncStatus();
   const today = todayLocal();
   if (state.tab === 'calendar') view.innerHTML = renderCalendar({ ...state, today });
   else if (state.tab === 'bookings') view.innerHTML = renderBookings({ ...state, today });
   else if (state.tab === 'inquiries') view.innerHTML = renderInquiries(state);
   else view.innerHTML = renderMore();
 }
+
+function updateSyncStatus() {
+  const box = $('#sync-status');
+  if (box) box.innerHTML = renderSyncStatus(syncStatus(state.sync, Date.now(), state.apartments));
+}
+setInterval(updateSyncStatus, 60000); // „prije X min“ se osvježava i bez promjene podataka
 
 function renderMore() {
   const ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
@@ -185,7 +198,7 @@ function bookingFormFor(booking, prefill = {}, extra = {}) {
     prefill,
     title: extra.title,
     apartments: state.apartments,
-    bookings: state.bookings,
+    bookings: [...state.bookings, ...blocksAsRanges(state.blocks)], // termini sa Bookinga se računaju kao zauzeti
     onSave: async (data) => {
       const r = await store.saveBooking(data, { id: booking?.id ?? null, inquiryId: extra.inquiryId ?? null });
       feedback(r.state, extra.inquiryId ? 'Upit je prihvaćen, a termin je upisan i zauzet na sajtu.' : 'Rezervacija je sačuvana.');
@@ -267,12 +280,18 @@ async function startData() {
   stopData();
   state.apartments = await store.ensureApartments();
   unsubs.push(await store.subscribeBookings((list) => ((state.bookings = list), (state.dataError = null), render()), dataErr));
+  // Booking blokovi i status su dopuna: ako ne mogu da se učitaju (npr. pravila za `meta` još nisu objavljena), admin radi dalje
+  unsubs.push(await store.subscribeBookingBlocks((list) => ((state.rawBlocks = list), render()), (e) => console.warn('Booking blokovi:', e.message)));
+  unsubs.push(await store.subscribeBookingSync((meta) => ((state.sync = meta), updateSyncStatus()), (e) => console.warn('Booking status:', e.message)));
   unsubs.push(await store.subscribeInquiries((list) => ((state.inquiries = list), render()), dataErr));
 }
 function stopData() {
   unsubs.forEach((u) => u());
   unsubs = [];
   state.bookings = [];
+  state.rawBlocks = [];
+  state.blocks = [];
+  state.sync = null;
   state.inquiries = [];
 }
 

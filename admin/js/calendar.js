@@ -3,9 +3,14 @@ import { WEEKDAYS, monthGrid, monthLabel } from '../../assets/js/availability.js
 import { SOURCES } from './apartments.js';
 import { esc } from './ui.js';
 
-export function renderCalendar({ apartments, bookings, aptId, month, today }) {
+// blokovi sa Bookinga (automatska sinhronizacija): samo za čitanje, druga boja i oznaka „Booking“
+const BLOCK = { label: 'Booking (sinhronizovano)', cls: 'bg-[#1f4e9c] text-white' };
+
+export function renderCalendar({ apartments, bookings, blocks = [], aptId, month, today }) {
   const mine = bookings.filter((b) => b.apartmentId === aptId);
   const findBooking = (iso) => mine.find((b) => b.from <= iso && iso < b.to);
+  const mineBlocks = blocks.filter((k) => k.apartmentId === aptId);
+  const findBlock = (iso) => mineBlocks.find((k) => k.from <= iso && iso < k.to);
 
   const tabs = apartments
     .map(
@@ -22,6 +27,12 @@ export function renderCalendar({ apartments, bookings, aptId, month, today }) {
       const day = Number(iso.slice(8));
       const isToday = iso === today;
       const ring = isToday ? ' ring-2 ring-inset ring-[#0E878C]' : '';
+      if (!b && findBlock(iso)) {
+        return `<div role="img" aria-label="${day}. zauzeto na Bookingu (sinhronizovano, samo za čitanje)"
+          class="flex aspect-square min-h-11 flex-col items-center justify-center font-sans text-base font-bold ${BLOCK.cls}${ring}">
+          <span>${day}</span><span class="text-[9px] font-normal leading-none" aria-hidden="true">Booking</span>
+        </div>`;
+      }
       if (!b) {
         return `<button type="button" data-day="${iso}" aria-label="${day}. slobodno, dodaj rezervaciju"
           class="flex aspect-square min-h-11 items-center justify-center border border-line bg-white font-sans text-base text-ink${ring}">${day}</button>`;
@@ -36,7 +47,7 @@ export function renderCalendar({ apartments, bookings, aptId, month, today }) {
     })
     .join('');
 
-  const legend = Object.values(SOURCES)
+  const legend = [...Object.values(SOURCES), ...(blocks.length ? [BLOCK] : [])]
     .map((s) => `<span class="inline-flex items-center gap-1"><span class="inline-block h-4 w-4 ${s.cls}"></span>${s.label}</span>`)
     .join('');
 
